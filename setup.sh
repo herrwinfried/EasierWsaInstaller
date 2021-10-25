@@ -65,8 +65,8 @@ mkdir /mnt/c/wsaproject
 cd /mnt/c/wsaproject && pwd
 
 git clone https://github.com/ADeltaX/WSAGAScript
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/powershell.ps1
-pwd
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/powershell.ps1 -O powershell.ps1
+
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $white"
 read tr
 pwd
