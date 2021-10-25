@@ -7,12 +7,15 @@ https://youtu.be/q_yd7DohKQA
 # Things to do before installation
 
 - Windows 11
-- [Ubuntu WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6)
+- [Ubuntu WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6) You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu
 - [OpenGapps](https://opengapps.org/)
 - WSA msixbundle file
 
 ## **Virtual Machine Platform must be active.**
-> Open windows terminal as administrator. You can easily enable it by typing the following command. You should have enabled Ubuntu WSL when you installed it.
+
+> You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu
+
+> Open windows terminal as administrator. You can easily enable it by typing the following command. You should have enabled Ubuntu WSL when you installed it. 
 ```
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
