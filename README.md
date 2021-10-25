@@ -30,7 +30,7 @@ Place the downloaded opengapps and wsa file in the 'C:\wsaproject' directory as 
 
 Ubuntu:
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
 ```
 
 In Other Distros:
