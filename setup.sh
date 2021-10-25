@@ -25,35 +25,41 @@ if ! [ -x "$(command -v unzip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (unzip) $white"
 sudo apt install -y unzip lzip
-fi 
+else 
 echo "$red I couldn't find the unzip package. That's why I canceled the transaction. $white"
 exit 1
 fi
+fi
+
 if ! [ -x "$(command -v lzip)" ]; then
 if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it... (lzip) $white"
+echo "$green I found a missing package, I'm installing it... (unzip) $white"
 sudo apt install -y unzip lzip
-fi 
+else 
 echo "$red I couldn't find the lzip package. That's why I canceled the transaction. $white"
 exit 1
-fi 
+fi
+fi
+
 if ! [ -x "$(command -v git)" ]; then
 if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it...(git) $white"
+echo "$green I found a missing package, I'm installing it... (git) $white"
 sudo apt install -y git wget
-fi 
+else 
 echo "$red I couldn't find the git package. That's why I canceled the transaction. $white"
 exit 1
-fi 
+fi
+fi
 
 if ! [ -x "$(command -v wget)" ]; then
 if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it...(wget) $white"
-sudo apt install -y wget
-fi 
+echo "$green I found a missing package, I'm installing it... (wget) $white"
+sudo apt install -y git wget
+else 
 echo "$red I couldn't find the wget package. That's why I canceled the transaction. $white"
 exit 1
-fi 
+fi
+fi
 
 mkdir /mnt/c/wsaproject
 cd /mnt/c/wsaproject && pwd
@@ -61,7 +67,7 @@ cd /mnt/c/wsaproject && pwd
 git clone https://github.com/ADeltaX/WSAGAScript
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/powershell.ps1
 pwd
-echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white"
+echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $white"
 read tr
 pwd
 mv open_gapps-x86_64-11.0*.zip WSAGAScript/#GAPPS/
