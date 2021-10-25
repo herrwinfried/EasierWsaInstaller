@@ -3,8 +3,8 @@ ADB won't load. You need to install [platform-tools](https://developer.android.c
 # Things to do before installation
 
 - Windows 11
-- Ubuntu WSL
-- OpenGapps
+- [Ubuntu WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6)
+- [OpenGapps](https://opengapps.org/)
 - WSA msixbundle file
 
 ## **Virtual Machine Platform must be active.**
@@ -19,6 +19,13 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 __**IF YOU ARE USING WINDOWS TERMINAL, "Windows Powershell" MUST BE SELECTED. IT IS MORE LIKELY TO GET AN ERROR WITH POWERSHELL 7.**__
 __**In normal use, you should prefer windows terminal instead of Powershell 7.**__
+
+## Putting WSA and opengapps in the right place
+
+Place the downloaded opengapps and wsa file in the 'C:\wsaproject' directory as in the picture. Please do not play with filenames, it may prevent script execution.
+
+![image](https://user-images.githubusercontent.com/52379312/138757705-8c89a573-71b2-40a0-b296-f87b666c0649.png)
+
 ## You need to run the script on Ubuntu(or WSL Linux Distro).
 
 Ubuntu:
