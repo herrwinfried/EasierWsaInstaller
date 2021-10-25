@@ -13,12 +13,12 @@ https://youtu.be/q_yd7DohKQA
 
 ## **Virtual Machine Platform must be active.**
 
-> You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu
-
 > Open windows terminal as administrator. You can easily enable it by typing the following command. You should have enabled Ubuntu WSL when you installed it. 
 ```
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
+
+> You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu
 
 ## Developer Mode must be turned on.
 > Settings > Privacy & security > For Developers > Developer Mode
