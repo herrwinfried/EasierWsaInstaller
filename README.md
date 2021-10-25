@@ -1,5 +1,9 @@
 I created my project just to make it easy for you to install. It provides further simplification of installation using Project named "[WSAGAScript](https://github.com/ADeltaX/WSAGAScript)".
 ADB won't load. You need to install [platform-tools](https://developer.android.com/studio/releases/platform-tools) yourself.
+
+## An amateur video showing the installation
+https://youtu.be/q_yd7DohKQA
+
 # Things to do before installation
 
 - Windows 11
