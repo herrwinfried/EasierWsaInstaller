@@ -1,6 +1,6 @@
 I created my project just to make it easy for you to install. It provides further simplification of installation using Project named "[WSAGAScript](https://github.com/ADeltaX/WSAGAScript)".
 ADB won't load. You need to install [platform-tools](https://developer.android.com/studio/releases/platform-tools) yourself.
-**This script will provide you with experimental WSA. Do it to the best of your knowledge.**
+**This script will provide you with experimental WSA. Do it to the best of your knowledge. Also, you won't be getting any updates. (MS Store)**
 
 ## An amateur video showing the installation
 
