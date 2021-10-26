@@ -1,7 +1,11 @@
 I created my project just to make it easy for you to install. It provides further simplification of installation using Project named "[WSAGAScript](https://github.com/ADeltaX/WSAGAScript)".
 ADB won't load. You need to install [platform-tools](https://developer.android.com/studio/releases/platform-tools) yourself.
+**This script will provide you with experimental WSA. Do it to the best of your knowledge.**
 
 ## An amateur video showing the installation
+
+[![q_yd7DohKQA](https://img.youtube.com/vi/q_yd7DohKQA/0.jpg)](https://www.youtube.com/watch?v=q_yd7DohKQA)
+
 https://youtu.be/q_yd7DohKQA
 
 # Things to do before installation
@@ -26,6 +30,8 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 __**IF YOU ARE USING WINDOWS TERMINAL, "Windows Powershell" MUST BE SELECTED. IT IS MORE LIKELY TO GET AN ERROR WITH POWERSHELL 7.**__
 __**In normal use, you should prefer windows terminal instead of Powershell 7.**__
+
+If there is a WSA installed, you need to uninstall it. 
 
 ## Putting WSA and opengapps in the right place
 
