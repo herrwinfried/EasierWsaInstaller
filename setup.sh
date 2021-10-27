@@ -83,7 +83,7 @@ mv *.img ../../WSAGAScript/#IMAGES/
 cd ../..
 cd WSAGAScript 
 
-sed -ie 's+Root="/mnt/c/GappsWSA"+Root="/mnt/c/wsaproject/WSAGAScript"+i' VARIABLES.sh
+sed -ie 's+Root="$(pwd)"+Root="/mnt/c/wsaproject/WSAGAScript"+i' VARIABLES.sh
 
 sudo ./extract_gapps_pico.sh && sudo ./extend_and_mount_images.sh && sudo ./apply.sh && sudo ./unmount_images.sh
 
