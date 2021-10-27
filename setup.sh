@@ -20,7 +20,6 @@ if [[ $EUID -ne 0 ]]; then
    echo "$red You have to start it as SuperUser $white" 
    exit 1
 fi
-
 if ! [ -x "$(command -v unzip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (unzip) $white"
