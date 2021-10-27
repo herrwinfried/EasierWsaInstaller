@@ -45,6 +45,11 @@ Ubuntu:
 ```
 cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
 ```
+OpenSUSE Tumbleweed:
+> It cannot be said that it was officially successful, I just found the necessary packages. But it didn't give me a problem.
+```
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+```
 
 In Other Distros:
 Be sure to install the following packages before running, as you have to install the missing packages yourself.
@@ -53,6 +58,7 @@ Packages that need to install their own script and WSAGAScript
 - `lzip` (WSAGAScript)
 - `git` (own script)
 - `wget` (own script)
+- `curl` (own script)
 
 and may require a few more unknown and basic packages.
 ```
