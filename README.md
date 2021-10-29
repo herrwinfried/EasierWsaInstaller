@@ -2,6 +2,8 @@ I created my project just to make it easy for you to install. It provides furthe
 ADB won't load. You need to install [platform-tools](https://developer.android.com/studio/releases/platform-tools) yourself.
 **This script will provide you with experimental WSA. Do it to the best of your knowledge. Also, you won't be getting any updates. (MS Store)**
 
+**This script will not work if you are using ARM only for 64 bit systems for now.**
+
 ## An amateur video showing the installation
 
 [![q_yd7DohKQA](https://img.youtube.com/vi/q_yd7DohKQA/0.jpg)](https://www.youtube.com/watch?v=q_yd7DohKQA)
