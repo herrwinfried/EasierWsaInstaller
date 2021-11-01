@@ -65,7 +65,7 @@ and may require a few more unknown and basic packages.
 ```
 cd ~ && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
 ```
-Go To "What to do after installation"
+[Go To "What to do after installation"](https://github.com/herrwinfried/wsa-script/tree/main#what-to-do-after-installation)
 
 ## BETA [arm64] You need to run the script on Ubuntu(or WSL Linux Distro).
 
@@ -93,7 +93,7 @@ and may require a few more unknown and basic packages.
 ```
 cd ~ && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup_arm.sh -O setup_arm.sh && sudo chmod +x ./setup_arm.sh && sudo ./setup_arm.sh
 ```
-Go To "What to do after installation"
+[Go To "What to do after installation"](https://github.com/herrwinfried/wsa-script/tree/main#what-to-do-after-installation)
 
 ## What to do after installation
 
