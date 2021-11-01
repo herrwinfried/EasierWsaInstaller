@@ -14,7 +14,7 @@ https://youtu.be/q_yd7DohKQA
 
 - Windows 11
 - [Ubuntu WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6) **You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu**
-- [OpenGapps](https://opengapps.org/)
+- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/main/opengapps.md)
 - [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/main/wsamsixbundle.md)
 
 ## **Virtual Machine Platform must be active.**
