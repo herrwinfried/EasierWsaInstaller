@@ -40,6 +40,11 @@ If there is a WSA installed, you need to uninstall it.
 Place the downloaded opengapps and wsa file in the 'C:\wsaproject' directory as in the picture. Please do not play with filenames, it may prevent script execution.
 
 ![image](https://user-images.githubusercontent.com/52379312/138757705-8c89a573-71b2-40a0-b296-f87b666c0649.png)
+
+If you are using regular **64 bit(amd64)** [click here.](#64-bit-you-need-to-run-the-script-on-ubuntuor-wsl-linux-distro)
+
+If you are using **Arm64** [click here.](#beta-arm64-you-need-to-run-the-script-on-ubuntuor-wsl-linux-distro)
+
 ## [64 Bit] You need to run the script on Ubuntu(or WSL Linux Distro).
 
 Ubuntu:
