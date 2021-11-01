@@ -13,9 +13,9 @@ https://youtu.be/q_yd7DohKQA
 # Things to do before installation
 
 - Windows 11
-- [Ubuntu WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6) You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu
+- [Ubuntu WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6) **You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu**
 - [OpenGapps](https://opengapps.org/)
-- WSA msixbundle file
+- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/main/wsamsixbundle.md)
 
 ## **Virtual Machine Platform must be active.**
 
