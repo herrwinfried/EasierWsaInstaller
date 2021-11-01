@@ -2,7 +2,7 @@ I created my project just to make it easy for you to install. It provides furthe
 ADB won't load. You need to install [platform-tools](https://developer.android.com/studio/releases/platform-tools) yourself.
 **This script will provide you with experimental WSA. Do it to the best of your knowledge. Also, you won't be getting any updates. (MS Store)**
 
-**This script will not work if you are using ARM only for 64 bit systems for now.**
+> **I added a new script for arm, but I couldn't test whether it works fully, don't forget to give feedback as I don't have a device.**
 
 ## An amateur video showing the installation
 
@@ -14,12 +14,12 @@ https://youtu.be/q_yd7DohKQA
 
 - Windows 11
 - [Ubuntu WSL](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6) **You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu**
-- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/main/opengapps.md)
-- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/main/wsamsixbundle.md)
+- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/main/docs/opengapps.md)
+- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/main/docs/wsamsixbundle.md)
 
 ## **Virtual Machine Platform must be active.**
 
-> Open windows terminal as administrator. You can easily enable it by typing the following command. You should have enabled Ubuntu WSL when you installed it. 
+> Open windows terminal as administrator. You can easily enable it by typing the following command. You should have enabled Ubuntu WSL when you installed it.
 ```
 dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 ```
@@ -40,8 +40,7 @@ If there is a WSA installed, you need to uninstall it.
 Place the downloaded opengapps and wsa file in the 'C:\wsaproject' directory as in the picture. Please do not play with filenames, it may prevent script execution.
 
 ![image](https://user-images.githubusercontent.com/52379312/138757705-8c89a573-71b2-40a0-b296-f87b666c0649.png)
-
-## You need to run the script on Ubuntu(or WSL Linux Distro).
+## [64 Bit] You need to run the script on Ubuntu(or WSL Linux Distro).
 
 Ubuntu:
 ```
@@ -66,6 +65,34 @@ and may require a few more unknown and basic packages.
 ```
 cd ~ && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
 ```
+Go To "What to do after installation"
+
+## BETA [arm64] You need to run the script on Ubuntu(or WSL Linux Distro).
+
+Ubuntu:
+```
+cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup_arm.sh -O setup_arm.sh && sudo chmod +x ./setup_arm.sh && sudo ./setup_arm.sh
+```
+OpenSUSE Tumbleweed:
+> It cannot be said that it was officially successful, I just found the necessary packages. But it didn't give me a problem.
+```
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup_arm.sh && sudo chmod +x ./setup_arm.sh && sudo ./setup_arm.sh
+```
+
+In Other Distros:
+Be sure to install the following packages before running, as you have to install the missing packages yourself.
+Packages that need to install their own script and WSAGAScript
+- `unzip` (WSAGAScript)
+- `lzip` (WSAGAScript)
+- `git` (own script)
+- `wget` (own script)
+- `curl` (own script)
+
+and may require a few more unknown and basic packages.
+```
+cd ~ && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup_arm.sh -O setup_arm.sh && sudo chmod +x ./setup_arm.sh && sudo ./setup_arm.sh
+```
+Go To "What to do after installation"
 
 ## What to do after installation
 

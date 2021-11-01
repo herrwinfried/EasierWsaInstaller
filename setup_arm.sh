@@ -1,5 +1,4 @@
 #!/bin/bash
-
 ### Fonts
 termcols=$(tput cols)
 bold="$(tput bold)"
@@ -74,7 +73,8 @@ mv open_gapps-x86_64-11.0*.zip WSAGAScript/#GAPPS/
 
 unzip -o Microsoft*WindowsSubsystemForAndroid*.Msixbundle -d microsoftwsa && cd microsoftwsa
 
-unzip -o WsaPackage_*_x64_*.msix -d wsa && cd wsa
+
+unzip -o WsaPackage_*_ARM64_*.msix -d wsa && cd wsa
 
 rm -rf '[Content_Types].xml' AppxBlockMap.xml AppxSignature.p7x AppxMetadata
 
@@ -85,10 +85,13 @@ cd WSAGAScript
 
 sed -ie 's+Root="$(pwd)"+Root="/mnt/c/wsaproject/WSAGAScript"+i' VARIABLES.sh
 
+sed -ie 's+Architecture="x64"+Architecture="arm64"+i' VARIABLES.sh
+
 sudo ./extract_gapps_pico.sh && sudo ./extend_and_mount_images.sh && sudo ./apply.sh && sudo ./unmount_images.sh
 
 mv \#IMAGES/*img ../microsoftwsa/wsa/
 
-rm ../microsoftwsa/wsa/Tools/kernel && cp misc/kernel-x86_64 ../microsoftwsa/wsa/Tools/kernel
+rm ../microsoftwsa/wsa/Tools/kernel && cp misc/kernel-arm64 ../microsoftwsa/wsa/Tools/kernel
+echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
 
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
