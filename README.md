@@ -76,7 +76,7 @@ cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip
 OpenSUSE Tumbleweed:
 > It cannot be said that it was officially successful, I just found the necessary packages. But it didn't give me a problem.
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup_arm.sh && sudo chmod +x ./setup_arm.sh && sudo ./setup_arm.sh
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup_arm.sh -O setup_arm.sh && sudo chmod +x ./setup_arm.sh && sudo ./setup_arm.sh
 ```
 
 In Other Distros:
