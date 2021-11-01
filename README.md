@@ -93,5 +93,4 @@ cd 'C:\wsaproject\microsoftwsa\wsa'
 ```
 Add-AppxPackage -Register .\AppxManifest.xml
 ```
-
-**[See here for google play account login problem.](https://github.com/ADeltaX/WSAGAScript#root-access)**
+> In the past, it was necessary to connect adb and do something additional for google play, it is not needed anymore.
