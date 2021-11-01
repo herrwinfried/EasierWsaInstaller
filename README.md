@@ -6,9 +6,9 @@ ADB won't load. You need to install [platform-tools](https://developer.android.c
 
 ## An amateur video showing the installation
 
-[![q_yd7DohKQA](https://img.youtube.com/vi/q_yd7DohKQA/0.jpg)](https://www.youtube.com/watch?v=q_yd7DohKQA)
+[![q_yd7DohKQA](https://img.youtube.com/vi/NAEF_S1JTFk/0.jpg)](https://www.youtube.com/watch?v=NAEF_S1JTFk)
 
-https://youtu.be/q_yd7DohKQA
+https://youtu.be/NAEF_S1JTFk
 
 # Things to do before installation
 
