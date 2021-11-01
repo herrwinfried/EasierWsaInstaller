@@ -1,6 +1,6 @@
 # WSA .msixbundle file
 
-## Download
+### Download
 
 first we go to https://store.rg-adguard.net/ linked page and do a few steps.
 
