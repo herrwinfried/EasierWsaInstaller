@@ -3,8 +3,7 @@ This script combines only powershell and bash scripts. __You have to download op
 
 ## What you need to do before running a powershell script
 
-Run as Administrator Powershell.
-Or Install manually. I talked about it below.
+Run as Administrator Windows Terminal -> Windows Powershell.
 
 ```
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
