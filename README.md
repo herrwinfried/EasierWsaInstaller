@@ -41,6 +41,8 @@ Place the downloaded opengapps and wsa file in the 'C:\wsaproject' directory as 
 
 ![image](https://user-images.githubusercontent.com/52379312/138757705-8c89a573-71b2-40a0-b296-f87b666c0649.png)
 
+[I combined all the commands written in powershell and bash(only ubuntu and opensuse tumbleweed). Click if you want to browse.](https://github.com/herrwinfried/wsa-script/blob/main/docs/automatic.md)
+
 If you are using regular **64 bit(amd64)** [click here.](#64-bit-you-need-to-run-the-script-on-ubuntuor-wsl-linux-distro)
 
 If you are using **Arm64** [click here.](#beta-arm64-you-need-to-run-the-script-on-ubuntuor-wsl-linux-distro)

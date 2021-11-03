@@ -72,9 +72,10 @@ read tr
 pwd
 mv open_gapps-x86_64-11.0*.zip WSAGAScript/#GAPPS/
 
-unzip -o Microsoft*WindowsSubsystemForAndroid*.Msixbundle -d microsoftwsa && cd microsoftwsa
-
-unzip -o WsaPackage_*_x64_*.msix -d wsa && cd wsa
+unzip -o Microsoft*WindowsSubsystemForAndroid*.Msixbundle -d microsoftwsa && cd microsoftwsa 
+unzip -o WsaPackage_*_x64_*.msix -d wsa
+find . -maxdepth 1 ! -name "WsaPackage_*_x64_*.msix" ! -name "wsa" ! -name . -exec rm -r {} \;
+cd wsa
 
 rm -rf '[Content_Types].xml' AppxBlockMap.xml AppxSignature.p7x AppxMetadata
 
