@@ -21,6 +21,7 @@ cd "C:\wsaproject"
 }
 elseif ($Arch -eq 'Arm64') {
     Write-Host -Object 'Running 64-bit ARM PowerShell';
+    Write-Host "BETA SCRIPT"
     dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
     Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
 Pause
