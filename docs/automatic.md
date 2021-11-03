@@ -19,11 +19,11 @@ Set-ExecutionPolicy -ExecutionPolicy Restricted
 ## Ubuntu
 
 ```
-Invoke-WebRequest https://raw.githubusercontent.com/herrwinfried/wsa-script/main/automatic-ubuntu.ps1 -OutFile $HOME\Downloads\Scripts\automatic-ubuntu.ps1 && .\automatic-ubuntu.ps1
+Invoke-WebRequest https://raw.githubusercontent.com/herrwinfried/wsa-script/main/automatic-ubuntu.ps1 -OutFile $HOME\Downloads\automatic-ubuntu.ps1 && .\automatic-ubuntu.ps1
 ```
 
 ## openSUSE Tumbleweed
 
 ```
-Invoke-WebRequest https://raw.githubusercontent.com/herrwinfried/wsa-script/main/automatic-opensusetw.ps1 -OutFile $HOME\Downloads\Scripts\automatic-opensusetw.ps1 && .\automatic-opensusetw.ps1
+Invoke-WebRequest https://raw.githubusercontent.com/herrwinfried/wsa-script/main/automatic-opensusetw.ps1 -OutFile $HOME\Downloads\automatic-opensusetw.ps1 && cd $HOME\Downloads && .\automatic-opensusetw.ps1
 ```
