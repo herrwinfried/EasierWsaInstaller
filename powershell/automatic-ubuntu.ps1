@@ -9,6 +9,10 @@ param(
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $wsaint $gappsint $vmcint " -Verb RunAs; exit }
 
+echo $wsa $gapps $vmc
+
+echo $wsaint $gappsint $vmcint
+
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
 
 if ($Arch -eq 'x86') {
