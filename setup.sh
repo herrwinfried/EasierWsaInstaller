@@ -93,7 +93,7 @@ pip3 install BeautifulSoup4
 pip3 install wget
 #pip3
 fi
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
 chmod +x ./wsa.py && python3 ./wsa.py
 
 mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
@@ -104,7 +104,7 @@ fi
 fi
 
 if [[ $1 == "--gapps" ]] || [[ $2 == "--gapps" ]] || [[ $3 == "--gapps" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps.py -O opengapps.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps.py -O opengapps.py
 
 rm -rf open_gapps-$gappsarch-*.zip
 
@@ -117,9 +117,9 @@ fi
 cd /mnt/c/wsaproject && pwd
 git clone https://github.com/herrwinfried/WSAGAScript
 if [[$1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell1.ps1 -O powershell.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell1.ps1 -O powershell.ps1
 else
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell.ps1 -O powershell.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell.ps1 -O powershell.ps1
 fi
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
