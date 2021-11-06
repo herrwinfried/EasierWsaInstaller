@@ -116,8 +116,11 @@ fi
 ########
 cd /mnt/c/wsaproject && pwd
 git clone https://github.com/herrwinfried/WSAGAScript
+if [[$1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]]; then
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell1.ps1 -O powershell.ps1
+else
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell.ps1 -O powershell.ps1
-
+fi
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
 ##
@@ -149,9 +152,10 @@ sudo ./extract_gapps_pico.sh && sudo ./extend_and_mount_images.sh && sudo ./appl
 
 mv \#IMAGES/*img ../microsoftwsa/wsa/
 
-rm ../microsoftwsa/wsa/Tools/kernel && cp misc/kernel-$mskernel ../microsoftwsa/wsa/Tools/kernel
+sudo rm ../microsoftwsa/wsa/Tools/kernel && cp misc/kernel-$mskernel ../microsoftwsa/wsa/Tools/kernel
 
+sudo rm -rf /mnt/c/wsa/$msarch
 sudo mkdir /mnt/c/wsa/$msarch
 
-mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
+sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"

@@ -116,7 +116,7 @@ fi
 ########
 cd /mnt/c/wsaproject && pwd
 git clone https://github.com/herrwinfried/WSAGAScript
-if [[$1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--gapps" ]]; then
+if [[$1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]]; then
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell1.ps1 -O powershell.ps1
 else
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell.ps1 -O powershell.ps1
