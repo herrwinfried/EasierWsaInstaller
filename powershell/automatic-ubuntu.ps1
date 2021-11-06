@@ -9,7 +9,7 @@ param(
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $wsaint $gappsint $vmcint " -Verb RunAs; exit }
 
-$Arch = (Get-Process -Id $PID).StartInfo.EnvironmentVariables["PROCESSOR_ARCHITECTURE"];
+$Arch = ($env:PROCESSOR_ARCHITECTURE)
 
 if ($Arch -eq 'x86') {
     Write-Host -Object 'Running 32-bit PowerShell';
