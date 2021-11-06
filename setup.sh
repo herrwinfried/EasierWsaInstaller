@@ -60,23 +60,79 @@ echo "$red I couldn't find the wget package. That's why I canceled the transacti
 exit 1
 fi
 fi
+if ! [ -x "$(command -v python3)" ]; then
+if [ -x "$(command -v apt)" ]; then
+echo "$green I found a missing package, I'm installing it... (python3) $white"
+sudo apt install -y python3.8 python3-pip
+else 
+echo "$red I couldn't find the python3 package. That's why I canceled the transaction. $white"
+exit 1
+fi
+fi
+if ! [ -x "$(command -v pip3)" ]; then
+if [ -x "$(command -v apt)" ]; then
+echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
+sudo apt install -y python3.8 python3-pip
+else 
+echo "$red I couldn't find the python3-pip package. That's why I canceled the transaction. $white"
+exit 1
+fi
+fi
+
+gappsarch=x86_64
+msarch=x64
+mskernel=x86_64
+
 
 mkdir /mnt/c/wsaproject
-cd /mnt/c/wsaproject && pwd
 
-git clone https://github.com/WSA-Community/WSAGAScript
+if [[ $1 == "--wsa" ]] || [[ $2 == "--wsa" ]] || [[ $3 == "--gapps" ]]; then
+if [[ -x "$(command -v python3)" ]]; then
+if [[ -x "$(command -v pip3)" ]]; then
+pip3 install BeautifulSoup4
+pip3 install wget
+#pip3
+fi
+chmod +x ./wsa.py && python3 ./wsa.py
+
+mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+
+#py3
+fi
+###-yes-py
+fi
+
+if [[ $1 == "--gapps" ]] || [[ $2 == "--gapps" ]] || [[ $3 == "--gapps" ]]; then
+rm -rf open_gapps-$gappsarch-*.zip
+
+chmod +x ./opengapps.py && python3 ./opengapps.py
+
+mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
+fi
+
+########
+cd /mnt/c/wsaproject && pwd
+git clone https://github.com/herrwinfried/WSAGAScript
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/powershell.ps1 -O powershell.ps1
 
+
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
+##
+if [[ $1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]]; then
+echo "Okey"
+else
 read tr
+fi
+##
 pwd
-mv open_gapps-x86_64-11.0*.zip WSAGAScript/#GAPPS/
+
+mv open_gapps-$gappsarch-11.0*.zip WSAGAScript/#GAPPS/
 
 unzip -o Microsoft*WindowsSubsystemForAndroid*.Msixbundle -d microsoftwsa && cd microsoftwsa 
-unzip -o WsaPackage_*_x64_*.msix -d wsa
-find . -maxdepth 1 ! -name "WsaPackage_*_x64_*.msix" ! -name "wsa" ! -name . -exec rm -r {} \;
-cd wsa
+unzip -o "WsaPackage_*_$msarch_*.msix" -d wsa
+find . -maxdepth 1 ! -name WsaPackage_*_\$msarch_*.msix ! -name "wsa" ! -name . -exec rm -r {} \;
 
+cd wsa
 rm -rf '[Content_Types].xml' AppxBlockMap.xml AppxSignature.p7x AppxMetadata
 
 mv *.img ../../WSAGAScript/#IMAGES/
@@ -90,6 +146,9 @@ sudo ./extract_gapps_pico.sh && sudo ./extend_and_mount_images.sh && sudo ./appl
 
 mv \#IMAGES/*img ../microsoftwsa/wsa/
 
-rm ../microsoftwsa/wsa/Tools/kernel && cp misc/kernel-x86_64 ../microsoftwsa/wsa/Tools/kernel
+rm ../microsoftwsa/wsa/Tools/kernel && cp misc/kernel-$mskernel ../microsoftwsa/wsa/Tools/kernel
 
+sudo mkdir /mnt/c/wsa/$msarch
+
+mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"

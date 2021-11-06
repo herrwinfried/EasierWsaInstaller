@@ -11,21 +11,23 @@ elseif ($Arch -eq 'Arm32') {
 }
 elseif ($Arch -eq 'amd64') {
     Write-Host -Object 'Running 64-bit PowerShell';
+    mkdir "C:\wsa"
+    mkdir "C:\wsaproject"
     dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
     Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
-Pause
 wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh"
-cd "C:\wsaproject"
+cd "C:\wsa\x64"
 .\powershell.ps1
 
 }
 elseif ($Arch -eq 'Arm64') {
     Write-Host -Object 'Running 64-bit ARM PowerShell';
+    mkdir "C:\wsa"
+    mkdir "C:\wsaproject"
     Write-Host "BETA SCRIPT"
     dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
     Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
-Pause
 wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh"
-cd "C:\wsaproject"
+cd "C:\wsa\ARM64"
 .\powershell.ps1
 }
