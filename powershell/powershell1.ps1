@@ -11,7 +11,6 @@ elseif ($Arch -eq 'Arm32') {
 }
 elseif ($Arch -eq 'amd64') {
     cd "C:\wsa\x64"
-    Import-Module -Name Appx -UseWIndowsPowershell
     Add-AppxPackage -Register .\AppxManifest.xml
     $PSVersionTable
 
@@ -19,7 +18,6 @@ elseif ($Arch -eq 'amd64') {
 elseif ($Arch -eq 'Arm64') {
     Write-Host "BETA SCRIPT"
     cd "C:\wsa\ARM64"
-    Import-Module -Name Appx -UseWIndowsPowershell
     Add-AppxPackage -Register .\AppxManifest.xml
     $PSVersionTable
 }

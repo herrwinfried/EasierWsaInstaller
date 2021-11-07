@@ -21,10 +21,33 @@ elseif ($Arch -eq 'Arm32') {
 }
 elseif ($Arch -eq 'amd64') {
     Write-Host -Object 'Running 64-bit PowerShell';
+    $wsafolder = 'C:\wsa'
+if (Test-Path -Path $wsafolder) {
+   Write-Host "I found folder named wsa."
+} else {
     mkdir "C:\wsa"
+}
+$wsaprojectfolderr = 'C:\wsaproject'
+if (Test-Path -Path $wsaprojectfolderr) {
+   Write-Host "I found folder named wsaproject."
+} else {
     mkdir "C:\wsaproject"
-    Remove-Item -Path C:\wsa\* -Force -Recurse
-    Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
+}
+
+$wsaprojectfolderr = 'C:\wsaproject\microsoftwsa'
+if (Test-Path -Path $wsaprojectfolderr) {
+   Write-Host "I found folder named microsoftwsa and delete."
+   Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
+} else {
+}
+$wsaprojectfolderr = 'C:\wsa\amd64'
+if (Test-Path -Path $wsaprojectfolderr) {
+   Write-Host "I found folder named wsa and delete."
+   Remove-Item -Path C:\wsa\amd64 -Force -Recurse
+} else {
+}
+    
+   
     if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         clear
@@ -54,10 +77,31 @@ cd "C:\wsa\x64"
 }
 elseif ($Arch -eq 'Arm64') {
     Write-Host -Object 'Running 64-bit ARM PowerShell';
+    $wsafolder = 'C:\wsa'
+if (Test-Path -Path $wsafolder) {
+   Write-Host "I found folder named wsa."
+} else {
     mkdir "C:\wsa"
+}
+$wsaprojectfolderr = 'C:\wsaproject'
+if (Test-Path -Path $wsaprojectfolderr) {
+   Write-Host "I found folder named wsaproject."
+} else {
     mkdir "C:\wsaproject"
-    Remove-Item -Path C:\wsa\* -Force -Recurse
-    Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
+}
+
+$wsaprojectfolderr = 'C:\wsaproject\microsoftwsa'
+if (Test-Path -Path $wsaprojectfolderr) {
+   Write-Host "I found folder named microsoftwsa and delete."
+   Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
+} else {
+}
+$wsaprojectfolderr = 'C:\wsa\arm64'
+if (Test-Path -Path $wsaprojectfolderr) {
+   Write-Host "I found folder named wsa and delete."
+   Remove-Item -Path C:\wsa\arm64 -Force -Recurse
+} else {
+}
     Write-Host "BETA SCRIPT"
     if ($vmc) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
