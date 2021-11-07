@@ -69,6 +69,7 @@ Packages that need to install their own script and WSAGAScript
 - `python3.8` (own script)
 - `python3-pip` (own script)
 
+
 and may require a few more unknown and basic packages.
 ```
 cd ~ && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/main/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
