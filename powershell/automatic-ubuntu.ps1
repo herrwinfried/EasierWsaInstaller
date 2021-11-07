@@ -23,6 +23,8 @@ elseif ($Arch -eq 'amd64') {
     Write-Host -Object 'Running 64-bit PowerShell';
     mkdir "C:\wsa"
     mkdir "C:\wsaproject"
+    Remove-Item -Path C:\wsa\* -Force -Recurse
+    Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
     if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         clear
@@ -54,6 +56,8 @@ elseif ($Arch -eq 'Arm64') {
     Write-Host -Object 'Running 64-bit ARM PowerShell';
     mkdir "C:\wsa"
     mkdir "C:\wsaproject"
+    Remove-Item -Path C:\wsa\* -Force -Recurse
+    Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
     Write-Host "BETA SCRIPT"
     if ($vmc) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
