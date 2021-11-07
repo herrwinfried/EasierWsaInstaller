@@ -10,14 +10,14 @@ elseif ($Arch -eq 'Arm32') {
     Write-Host -Object 'Sorry I dont support 32 bit.';
 }
 elseif ($Arch -eq 'amd64') {
-    cd "C:\wsa\x64"
+    Set-Location "C:\wsa\x64"
     Add-AppxPackage -Register .\AppxManifest.xml
     $PSVersionTable
 
 }
 elseif ($Arch -eq 'Arm64') {
     Write-Host "BETA SCRIPT"
-    cd "C:\wsa\ARM64"
+    Set-Location "C:\wsa\ARM64"
     Add-AppxPackage -Register .\AppxManifest.xml
     $PSVersionTable
 }
