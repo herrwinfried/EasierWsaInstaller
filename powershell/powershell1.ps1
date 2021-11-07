@@ -11,7 +11,6 @@ elseif ($Arch -eq 'Arm32') {
 }
 elseif ($Arch -eq 'amd64') {
     Set-Location "C:\wsa\x64"
-    pause
     Add-AppxPackage -Register .\AppxManifest.xml
     $PSVersionTable
 
