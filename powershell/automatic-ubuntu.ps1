@@ -25,6 +25,7 @@ elseif ($Arch -eq 'amd64') {
     mkdir "C:\wsaproject"
     if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+        clear
     }
     if ($wsaint -and $gappsint) {
         wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --all-okey"
@@ -41,6 +42,7 @@ elseif ($Arch -eq 'amd64') {
     {
         Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
         Pause
+        clear
         wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
     }
  
@@ -55,6 +57,7 @@ elseif ($Arch -eq 'Arm64') {
     Write-Host "BETA SCRIPT"
     if ($vmc) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+        clear
     }
     if ($wsa -and $gapps) {
         wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --all-okey"
@@ -71,9 +74,10 @@ elseif ($Arch -eq 'Arm64') {
     {
         Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
         Pause
+        clear
         wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --all-okey"
     }
-    
+
     cd "C:\wsa\ARM64"
 .\powershell.ps1
 }
