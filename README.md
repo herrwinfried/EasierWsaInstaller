@@ -6,6 +6,9 @@ Our project was written to aim to use [WSAGAScript](https://github.com/WSA-Commu
 
 > The ARM version is still beta, please give feedback when you encounter an error.
 
+## Information
+You can also install it with a graphical interface. [Click if you want to take a look](https://github.com/herrwinfried/wsa-gui#readme).
+
 ## An amateur video showing the installation
 
 [![q_yd7DohKQA](https://img.youtube.com/vi/NAEF_S1JTFk/0.jpg)](https://www.youtube.com/watch?v=NAEF_S1JTFk)
@@ -17,12 +20,12 @@ https://youtu.be/NAEF_S1JTFk
 - Windows 11
 - [Ubuntu](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6) or [openSUSE Tumbleweed](https://www.microsoft.com/en-us/p/opensuse-tumbleweed/9mssk2zxxn11)
 - [WSL](https://aka.ms/wslstorepage)
-- [Developer mode must be on](https://github.com/herrwinfried/wsa-gui/blob/main/docs/developermode.md)
-- [Active Virtual Machine Platform](https://github.com/herrwinfried/wsa-gui/blob/main/docs/vmp.md)
+- [Developer mode must be on](#developer-mode-must-be-turned-on)
+- [Active Virtual Machine Platform](#virtual-machine-platform-must-be-active)
 
-### **WSA and OpenGapps Download**
-- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/main/docs/opengapps.md)
-- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/main/docs/wsamsixbundle.md)
+## What needs to be created before starting the process
+- Create a folder named `wsaproject` under the `C` directory. (`C:\wsaproject`)
+- Create a folder named `wsa` under the `C` directory. (`C:\wsa`)
 
 ## Developer Mode must be turned on.
 > Settings > Privacy & security > For Developers > Developer Mode
@@ -40,14 +43,14 @@ __**In normal use, you should prefer windows terminal instead of Powershell 7.**
 > ```
 > You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu or openSUSE TumbleWeed
 
-[WSA and OpenGapps Click Here to download it yourself.]()
+[WSA and OpenGapps Click Here to download it yourself.](#you-need-to-run-the-script-on-ubuntuopensuse-tumbleweed-or-wsl-linux-distro)
 
-If you want it to happen automatically, keep reading.
+[If you want it to happen automatically, keep reading.](#you-need-to-run-the-script-on-ubuntuopensuse-tumbleweed-or-wsl-linux-distro-wsa-and-opengapps-install-automatically)
 
 # You need to run the script on Ubuntu/OpenSUSE TumbleWeed (or WSL Linux Distro). wsa and opengapps install automatically
 
-- [64 Bit(amd64)]()
-- [ARM64]()
+- [64 Bit(amd64)](#64-bit)
+- [ARM64](#arm64)
 
 ## 64 Bit
 
@@ -118,8 +121,13 @@ Packages that need to install their own script and WSAGAScript
 
 # You need to run the script on Ubuntu/OpenSUSE TumbleWeed (or WSL Linux Distro)
 
-- [64 Bit(amd64)]()
-- [ARM64]()
+### **WSA and OpenGapps Download**
+- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/main/docs/opengapps.md)
+- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/main/docs/wsamsixbundle.md)
+
+
+- [64 Bit(amd64)](#64-bit-1)
+- [ARM64](#arm64-1)
 
 ## 64 Bit
 
