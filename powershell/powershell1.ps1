@@ -1,6 +1,6 @@
 ﻿if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
-
+Import-Module -Name Appx -UseWIndowsPowershell
 if ($Arch -eq 'x86') {
     Write-Host -Object 'Running 32-bit PowerShell';
     Write-Host -Object 'Sorry I dont support 32 bit.';
