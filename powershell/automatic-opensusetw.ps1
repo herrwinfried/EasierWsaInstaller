@@ -67,7 +67,7 @@ if (Test-Path -Path $wsaprojectfolderr) {
          wsl -d openSUSE-Tumbleweed -e sudo sh -c "sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
     }
  
-Set-Location "C:\wsa\x64"
+    Set-Location "C:\wsaproject"
 .\powershell.ps1
 
 }
@@ -120,6 +120,6 @@ if (Test-Path -Path $wsaprojectfolderr) {
          wsl -d openSUSE-Tumbleweed -e sudo sh -c "sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --all-okey"
     }
     
-    Set-Location "C:\wsa\ARM64"
+    Set-Location "C:\wsaproject"
 .\powershell.ps1
 }
