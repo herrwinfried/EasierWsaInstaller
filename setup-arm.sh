@@ -91,6 +91,7 @@ if [[ -x "$(command -v python3)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 pip3 install BeautifulSoup4
 pip3 install wget
+pip3 install lxml
 #pip3
 fi
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
