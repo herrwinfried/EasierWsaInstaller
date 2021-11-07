@@ -1,5 +1,5 @@
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
-$Arch = (Get-Process -Id $PID).StartInfo.EnvironmentVariables["PROCESSOR_ARCHITECTURE"];
+$Arch = ($env:PROCESSOR_ARCHITECTURE)
 
 if ($Arch -eq 'x86') {
     Write-Host -Object 'Running 32-bit PowerShell';
@@ -11,6 +11,7 @@ elseif ($Arch -eq 'Arm32') {
 }
 elseif ($Arch -eq 'amd64') {
     cd "C:\wsa\x64"
+    Import-Module -Name Appx -UseWIndowsPowershell
     Add-AppxPackage -Register .\AppxManifest.xml
     $PSVersionTable
     pause
@@ -19,6 +20,7 @@ elseif ($Arch -eq 'amd64') {
 elseif ($Arch -eq 'Arm64') {
     Write-Host "BETA SCRIPT"
     cd "C:\wsa\ARM64"
+    Import-Module -Name Appx -UseWIndowsPowershell
     Add-AppxPackage -Register .\AppxManifest.xml
     $PSVersionTable
     pause
