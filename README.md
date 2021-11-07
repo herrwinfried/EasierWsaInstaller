@@ -8,6 +8,8 @@ Our project was written to aim to use [WSAGAScript](https://github.com/WSA-Commu
 
 ## Information
 You can also install it with a graphical interface. [Click if you want to take a look](https://github.com/herrwinfried/wsa-gui#readme).
+![image](https://user-images.githubusercontent.com/52379312/140661103-d5c4a0f8-9347-40f9-a739-4c7219cf6f96.png)
+
 
 ## An amateur video showing the installation
 
