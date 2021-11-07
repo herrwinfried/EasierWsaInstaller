@@ -125,7 +125,7 @@ fi
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
 ##
-if [[ $1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]]; then
+if [[ $1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]] || [[ $1 == "--okey" ]] || [[ $2 == "--okey" ]] || [[ $3 == "--okey" ]]; then
 echo "Okey"
 else
 read tr
