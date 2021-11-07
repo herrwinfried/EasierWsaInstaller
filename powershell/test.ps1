@@ -1,1 +1,0 @@
-.\powershell1.ps1

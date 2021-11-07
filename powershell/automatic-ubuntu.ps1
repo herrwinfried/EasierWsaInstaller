@@ -40,10 +40,10 @@ if (Test-Path -Path $wsaprojectfolderr) {
    Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
 } else {
 }
-$wsaprojectfolderr = 'C:\wsa\amd64'
+$wsaprojectfolderr = 'C:\wsa\x64'
 if (Test-Path -Path $wsaprojectfolderr) {
    Write-Host "I found folder named wsa and delete."
-   Remove-Item -Path C:\wsa\amd64 -Force -Recurse
+   Remove-Item -Path C:\wsa\x64 -Force -Recurse
 } else {
 }
     

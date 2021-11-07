@@ -40,10 +40,10 @@ if (Test-Path -Path $wsaprojectfolderr) {
    Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
 } else {
 }
-$wsaprojectfolderr = 'C:\wsa\amd64'
+$wsaprojectfolderr = 'C:\wsa\x64'
 if (Test-Path -Path $wsaprojectfolderr) {
    Write-Host "I found folder named wsa and delete."
-   Remove-Item -Path C:\wsa\amd64 -Force -Recurse
+   Remove-Item -Path C:\wsa\x64 -Force -Recurse
 } else {
 }
     if ($vmcint) {
@@ -67,7 +67,7 @@ if (Test-Path -Path $wsaprojectfolderr) {
          wsl -d openSUSE-Tumbleweed -e sudo sh -c "sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
     }
  
-cd "C:\wsa\x64"
+Set-Location "C:\wsa\x64"
 .\powershell.ps1
 
 }
