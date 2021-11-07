@@ -118,9 +118,9 @@ fi
 cd /mnt/c/wsaproject && pwd
 git clone https://github.com/herrwinfried/WSAGAScript
 if [[$1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell1.ps1 -O powershell.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell1.ps1 -O powershell.ps1
 else
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell.ps1 -O powershell.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell.ps1 -O powershell.ps1
 fi
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
 ##
