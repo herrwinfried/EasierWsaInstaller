@@ -124,9 +124,10 @@ Packages that need to install their own script and WSAGAScript
 # You need to run the script on Ubuntu/OpenSUSE TumbleWeed (or WSL Linux Distro)
 
 ### **WSA and OpenGapps Download**
-- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/main/docs/opengapps.md)
-- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/main/docs/wsamsixbundle.md)
+- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/1.0.1/docs/opengapps.md)
+- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/1.0.1/docs/wsamsixbundle.md)
 
+###
 
 - [64 Bit(amd64)](#64-bit-1)
 - [ARM64](#arm64-1)
