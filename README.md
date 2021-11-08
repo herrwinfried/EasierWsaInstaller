@@ -195,7 +195,7 @@ Packages that need to install their own script and WSAGAScript
 - `pip3` -> `wget` (own script)
 - `pip3` -> `lxml` (own script)
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
