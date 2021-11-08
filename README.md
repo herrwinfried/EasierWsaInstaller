@@ -216,9 +216,9 @@ Set-ExecutionPolicy -ExecutionPolicy Restricted
 ```
 
 or if you want to do it manually, start windows terminal administrator and type the following commands.
-
+> If you are using arm arm64. x64 if you are using intel or amd processor 64 bit. As the folder you will choose
 ```
-cd 'C:\wsaproject\microsoftwsa\wsa'
+cd 'C:\wsa\[x64/arm64]'
 ```
 
 ```
