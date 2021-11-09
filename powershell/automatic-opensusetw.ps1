@@ -46,8 +46,10 @@ if (Test-Path -Path $wsaprojectfolderr) {
    Remove-Item -Path C:\wsa\x64 -Force -Recurse
 } else {
 }
+Clear-Host
     if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+        Clear-Host
     }
     if ($wsaint -and $gappsint) {
          wsl -d openSUSE-Tumbleweed -e sudo sh -c "sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --all-okey"
@@ -64,6 +66,7 @@ if (Test-Path -Path $wsaprojectfolderr) {
     {
         Write-Host "Make sure you have openSUSE Tumbleweed installed or it could cause problems if things go wrong. If not, please close the window directly."
         Pause
+        Clear-Host
          wsl -d openSUSE-Tumbleweed -e sudo sh -c "sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
     }
  
@@ -98,9 +101,11 @@ if (Test-Path -Path $wsaprojectfolderr) {
    Remove-Item -Path C:\wsa\arm64 -Force -Recurse
 } else {
 }
+Clear-Host
     Write-Host "BETA SCRIPT"
     if ($vmc) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+        Clear-Host
     }
     if ($wsa -and $gapps) {
          wsl -d openSUSE-Tumbleweed -e sudo sh -c "sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --all-okey"
@@ -117,6 +122,7 @@ if (Test-Path -Path $wsaprojectfolderr) {
     {
         Write-Host "Make sure you have openSUSE Tumbleweed installed or it could cause problems if things go wrong. If not, please close the window directly."
         Pause
+        Clear-Host
          wsl -d openSUSE-Tumbleweed -e sudo sh -c "sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --all-okey"
     }
     

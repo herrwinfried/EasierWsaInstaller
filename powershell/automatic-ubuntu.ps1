@@ -47,7 +47,7 @@ if (Test-Path -Path $wsaprojectfolderr) {
 } else {
 }
     
-   
+Clear-Host
     if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         Clear-Host
@@ -102,6 +102,7 @@ if (Test-Path -Path $wsaprojectfolderr) {
    Remove-Item -Path C:\wsa\arm64 -Force -Recurse
 } else {
 }
+Clear-Host
     Write-Host "BETA SCRIPT"
     if ($vmc) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
