@@ -99,6 +99,8 @@ chmod +x ./wsa.py && python3 ./wsa.py
 rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
 mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 
+sudo rm -rf wsa.py
+
 #py3
 fi
 ###-yes-py
@@ -112,6 +114,8 @@ rm -rf /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip
 chmod +x ./opengapps.py && python3 ./opengapps.py
 
 mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
+
+sudo rm -rf opengapps.py
 fi
 
 ########
@@ -160,3 +164,5 @@ sudo mkdir /mnt/c/wsa/$msarch
 
 sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
+
+sudo rm -rf setup.sh
