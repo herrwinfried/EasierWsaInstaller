@@ -42,10 +42,10 @@ elseif ($Arch -eq 'amd64') {
        Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
     } else {
     }
-    $wsaprojectfolderr = 'C:\wsa\arm64'
+    $wsaprojectfolderr = 'C:\wsa\amd64'
     if (Test-Path -Path $wsaprojectfolderr) {
        Write-Host "I found folder named wsa and delete."
-       Remove-Item -Path C:\wsa\arm64 -Force -Recurse
+       Remove-Item -Path C:\wsa\amd64 -Force -Recurse
     } else {
     }
     Clear-Host
