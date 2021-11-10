@@ -94,13 +94,19 @@ pip3 install wget
 pip3 install lxml
 #pip3
 fi
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
+echo "$red Developer Sorry, does not support ARM. (WSATools)"
+function noarm {
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools1.py -O wsatools.py
+
 chmod +x ./wsatools.py && python3 ./wsatools.py
 
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools1.ps1 -O wsatools.ps1
+
+mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
+
 mv 54406Simizfo.WSATools*.Msixbundle /mnt/c/wsaproject/WSATools.Msixbundle
-
 sudo rm -rf wsatools.py
-
+}
 #py3
 fi
 ###-yes-py

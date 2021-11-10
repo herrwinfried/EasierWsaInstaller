@@ -75,7 +75,7 @@ elseif ($Arch -eq 'amd64') {
             if ( $wsatoolsint ) {
                 Clear-Host
                 Set-Location "C:\wsaproject"
-                add-appxpackage .\WSATools.Msixbundle
+               .\wsatools.ps1
             }
         }
         else {
@@ -155,7 +155,8 @@ Clear-Host
         }
         if ( $wsatoolsint ) {
             Clear-Host
-           Write-Host "Developer Sorry, it doesn't support ARM. (WSATools)"
+            Set-Location "C:\wsaproject"
+           .\wsatools.ps1
         }
     }
     else {
