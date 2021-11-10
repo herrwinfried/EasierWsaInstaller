@@ -1,16 +1,18 @@
 param(
 [bool]$wsa,
 [bool]$gapps,
-[bool]$vmc
+[bool]$vmc,
+[bool]$wsatools
 )
     $wsaint = [int][bool]::Parse($wsa)
     $gappsint = [int][bool]::Parse($gapps)
     $vmcint = [int][bool]::Parse($vmc)
+    $wsatoolsint = [int][bool]::Parse($wsatools)
 
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $wsaint $gappsint $vmcint " -Verb RunAs; exit }
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $wsaint $gappsint $vmcint $wsatoolsint " -Verb RunAs; exit }
 
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
-
+Import-Module -Name Appx -UseWIndowsPowershell
 if ($Arch -eq 'x86') {
     Write-Host -Object 'Running 32-bit PowerShell';
     Write-Host -Object 'Sorry I dont support 32 bit.';
@@ -70,6 +72,11 @@ Clear-Host
         Clear-Host
         wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
     }
+    if ( $wsatoolsint ) {
+        Clear-Host
+        Set-Location "C:\wsaproject"
+        add-appxpackage .\WSATools.Msixbundle
+    }
  
 Set-Location "C:\wsaproject"
 .\powershell.ps1
@@ -126,7 +133,11 @@ Clear-Host
         Clear-Host
         wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --all-okey"
     }
-
+    if ( $wsatoolsint ) {
+        Clear-Host
+        Set-Location "C:\wsaproject"
+        add-appxpackage .\WSATools.Msixbundle
+    }
     Set-Location "C:\wsaproject"
 .\powershell.ps1
 }

@@ -64,7 +64,7 @@ cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip
 
 ### **OpenSUSE Tumbleweed**
 ```
-sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -98,7 +98,7 @@ cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip
 ```
 ### **OpenSUSE Tumbleweed**
 ```
-sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -142,7 +142,7 @@ cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip
 
 ### **OpenSUSE Tumbleweed**
 ```
-sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -176,7 +176,7 @@ cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip
 [Go To "What to do after installation"](#what-to-do-after-installation)
 ### **OpenSUSE Tumbleweed**
 ```
-sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
