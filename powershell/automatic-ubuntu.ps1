@@ -73,7 +73,6 @@ Clear-Host
         wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
     }
     if ( $wsatoolsint ) {
-        Clear-Host
         Set-Location "C:\wsaproject"
         add-appxpackage .\WSATools.Msixbundle
     }
