@@ -53,7 +53,53 @@ elseif ($Arch -eq 'amd64') {
             dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
             Clear-Host
         }
-  
+        if ($wsatoolsint) {
+            if ($wsaint -and $gappsint) {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --wsatools --all-okey"
+            }
+            elseif ($wsaint)
+            {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --wsatools --all-okey"
+            }
+            elseif ($gappsint)
+            {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --gapps --wsatools --all-okey"
+            }
+            elseif (! $wsaint -or !$gappsint )
+            {
+                Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
+                Pause
+                Clear-Host
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsatools --all-okey"
+            }
+            if ( $wsatoolsint ) {
+                Clear-Host
+                Set-Location "C:\wsaproject"
+                add-appxpackage .\WSATools.Msixbundle
+            }
+        }
+        else {
+            if ($wsaint -and $gappsint) {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --all-okey"
+            }
+            elseif ($wsaint)
+            {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --all-okey"
+            }
+            elseif ($gappsint)
+            {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --gapps --all-okey"
+            }
+            elseif (! $wsaint -or !$gappsint )
+            {
+                Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
+                Pause
+                Clear-Host
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
+            }
+        }
+        Set-Location "C:\wsaproject"
+    .\powershell.ps1
     }
 
 elseif ($Arch -eq 'Arm64') {
@@ -86,7 +132,6 @@ Clear-Host
     Write-Host "BETA SCRIPT"
     if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-        Clear-Host
     }
     if ($wsatoolsint) {
         if ($wsaint -and $gappsint) {
