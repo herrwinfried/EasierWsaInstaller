@@ -93,6 +93,7 @@ pip3 install wget
 pip3 install lxml
 #pip3
 fi
+sudo rm -rf wsatools.py
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
 chmod +x ./wsatools.py && python3 ./wsatools.py
 
@@ -117,6 +118,7 @@ pip3 install wget
 pip3 install lxml
 #pip3
 fi
+sudo rm -rf wsa.py
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
 chmod +x ./wsa.py && python3 ./wsa.py
 rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
@@ -130,6 +132,7 @@ fi
 fi
 
 if [[ $1 == "--gapps" ]] || [[ $2 == "--gapps" ]] || [[ $3 == "--gapps" ]] || [[ $4 == "--gapps" ]]; then
+sudo rm -rf opengapps.py
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps.py -O opengapps.py
 
 rm -rf /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip
