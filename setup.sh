@@ -85,7 +85,7 @@ mskernel=x86_64
 
 
 mkdir /mnt/c/wsaproject
-if [[ $1 == "--wsatools" ]] || [[ $2 == "--wsatools" ]] || [[ $3 == "--wsatools"]] || $4 == "--wsatools"; then
+if [[ $1 == "--wsatools" ]] || [[ $2 == "--wsatools" ]] || [[ $3 == "--wsatools"]] || [[ $4 == "--wsatools" ]]; then
 if [[ -x "$(command -v python3)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 pip3 install BeautifulSoup4
@@ -105,7 +105,7 @@ fi
 ###-yes-py
 fi
 
-if [[ $1 == "--wsa" ]] || [[ $2 == "--wsa" ]] || [[ $3 == "--wsa"]] || $4 == "--wsa"; then
+if [[ $1 == "--wsa" ]] || [[ $2 == "--wsa" ]] || [[ $3 == "--wsa"]] || [[ $4 == "--wsa" ]]; then
 if [[ -x "$(command -v python3)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 pip3 install BeautifulSoup4
