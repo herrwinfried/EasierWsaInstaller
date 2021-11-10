@@ -96,7 +96,7 @@ pip3 install lxml
 fi
 echo "$red Developer Sorry, does not support ARM. (WSATools)"
 function noarm {
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools1.py -O wsatools.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
 
 chmod +x ./wsatools.py && python3 ./wsatools.py
 
