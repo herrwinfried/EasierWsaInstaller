@@ -85,8 +85,27 @@ mskernel=x86_64
 
 
 mkdir /mnt/c/wsaproject
+if [[ $1 == "--wsatools" ]] || [[ $2 == "--wsatools" ]] || [[ $3 == "--wsatools"]] || $4 == "--wsatools"; then
+if [[ -x "$(command -v python3)" ]]; then
+if [[ -x "$(command -v pip3)" ]]; then
+pip3 install BeautifulSoup4
+pip3 install wget
+pip3 install lxml
+#pip3
+fi
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
+chmod +x ./wsatools.py && python3 ./wsatools.py
 
-if [[ $1 == "--wsa" ]] || [[ $2 == "--wsa" ]] || [[ $3 == "--gapps" ]]; then
+mv 54406Simizfo.WSATools*.Msixbundle /mnt/c/wsaproject/WSATools.Msixbundle
+
+sudo rm -rf wsatools.py
+
+#py3
+fi
+###-yes-py
+fi
+
+if [[ $1 == "--wsa" ]] || [[ $2 == "--wsa" ]] || [[ $3 == "--wsa"]] || $4 == "--wsa"; then
 if [[ -x "$(command -v python3)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 pip3 install BeautifulSoup4
@@ -99,12 +118,14 @@ chmod +x ./wsa.py && python3 ./wsa.py
 rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
 mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 
+sudo rm -rf wsa.py
+
 #py3
 fi
 ###-yes-py
 fi
 
-if [[ $1 == "--gapps" ]] || [[ $2 == "--gapps" ]] || [[ $3 == "--gapps" ]]; then
+if [[ $1 == "--gapps" ]] || [[ $2 == "--gapps" ]] || [[ $3 == "--gapps" ]] || [[ $4 == "--gapps" ]]; then
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps.py -O opengapps.py
 
 rm -rf /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip
@@ -112,12 +133,14 @@ rm -rf /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip
 chmod +x ./opengapps.py && python3 ./opengapps.py
 
 mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
+
+sudo rm -rf opengapps.py
 fi
 
 ########
 cd /mnt/c/wsaproject && pwd
 git clone https://github.com/herrwinfried/WSAGAScript
-if [[ $1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]]; then
+if [[ $1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]] || [[ $4 == "--all-okey" ]]; then
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell1.ps1 -O powershell.ps1
 else
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell.ps1 -O powershell.ps1
@@ -125,7 +148,7 @@ fi
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
 ##
-if [[ $1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]] || [[ $1 == "--okey" ]] || [[ $2 == "--okey" ]] || [[ $3 == "--okey" ]]; then
+if [[ $1 == "--all-okey" ]] || [[ $2 == "--all-okey" ]] || [[ $3 == "--all-okey" ]] || [[ $4 == "--all-okey" ]] || [[ $1 == "--okey" ]] || [[ $2 == "--okey" ]] || [[ $3 == "--okey" ]] || [[ $4 == "--okey" ]]; then
 echo "Okey"
 else
 read tr
@@ -160,3 +183,5 @@ sudo mkdir /mnt/c/wsa/$msarch
 
 sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
+
+sudo rm -rf setup.sh
