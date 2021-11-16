@@ -1,5 +1,5 @@
 #!/bin/bash
-
+tempwsa=yes
 ### Fonts
 termcols=$(tput cols)
 bold="$(tput bold)"
@@ -121,12 +121,16 @@ pip3 install wget
 pip3 install lxml
 #pip3
 fi
+if [[ $tempwsa == "yes" ]]; then
+echo "$yellow This script is set as temporary WSA. So probably because there is a problem with a current WSA, the old version will be downloaded. $white"
+else
 sudo rm -rf wsa.py
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
 chmod +x ./wsa.py && python3 ./wsa.py
 rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
 mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 sudo rm -rf wsa.py
+fi
 #py3
 fi
 ###-yes-py
@@ -165,8 +169,14 @@ fi
 pwd
 
 mv open_gapps-$gappsarch-11.0*.zip WSAGAScript/#GAPPS/
-
-unzip -o Microsoft*WindowsSubsystemForAndroid*.Msixbundle -d microsoftwsa && cd microsoftwsa 
+if [[ $tempwsa == "yes" ]] && [[ $1 == "--wsa" ]] || [[ $2 == "--wsa" ]] || [[ $3 == "--wsa" ]] || [[ $4 == "--wsa" ]]; then
+mkdir microsoftwsa
+cd microsoftwsa
+echo "$yellow This script is set as temporary WSA. So probably because there is a problem with a current WSA, the old version will be downloaded. $white"
+wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_ARM64_Release-Nightly.msix
+else
+unzip -o Microsoft*WindowsSubsystemForAndroid*.Msixbundle -d microsoftwsa && cd microsoftwsa
+fi
 unzip -o "WsaPackage_*_$msarch_*.msix" -d wsa
 find . -maxdepth 1 ! -name WsaPackage_*_\$msarch_*.msix ! -name "wsa" ! -name . -exec rm -r {} \;
 
