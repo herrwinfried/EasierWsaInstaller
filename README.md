@@ -2,6 +2,9 @@
 Our project was written to aim to use [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) more easily. Due to the smooth running of the project and issues that may arise against the WSAGAScript update in the future. WSAGAScript is forked. ([You can navigate to the forked project here](https://github.com/herrwinfried/WSAGAScript))
 
 ## Important Information
+
+**It works for WSA version 1.7xx. And if you download WSA with script, it will offer you 1.7xx, not 1.8xx. Since 1.8xx is the problem. 1.7xx is downloading.**
+
 **You need to delete the pre-installed WSA. You cannot get updates from Microsoft Store after installing WSA.**
 
 > The ARM version is still beta, please give feedback when you encounter an error.
