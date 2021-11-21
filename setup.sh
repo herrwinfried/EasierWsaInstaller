@@ -321,7 +321,7 @@ sudo rm -rf wsa.py
 
 #wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell.ps1 -O powershell.ps1
 #echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
-fi
+
 #py3
 fi
 echo "$green FINISH $white"
