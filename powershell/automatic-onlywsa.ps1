@@ -9,7 +9,6 @@ param(
     $vmcint = [int][bool]::Parse($vmc)
     $wsatoolsint = [int][bool]::Parse($wsatools)
 Write-Host "$wsatoolsint $wsaint $vmcint $selectos"
-pause
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $vmcint $wsatoolsint" -Verb RunAs; exit }
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
@@ -57,12 +56,12 @@ if ( $selectos -eq "openSUSE-Tumbleweed") {
     if ($wsa)
     {
         Clear-Host
-        wsl -d ubuntu -e sudo sh -c "cd /tmp/ && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --all-okey"
+        wsl -d openSUSE-Tumbleweed -e sudo sh -c "cd /tmp/ && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --all-okey"
 }
 elseif ($wsaint -and $wsatoolsint) {
     
         Clear-Host
-        wsl -d ubuntu -e sudo sh -c "cd /tmp/ && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --all-okey"
+        wsl -d openSUSE-Tumbleweed -e sudo sh -c "cd /tmp/ && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --all-okey"
 }
 
 }
@@ -102,12 +101,12 @@ Clear-Host
         if ($wsa)
         {
             Clear-Host
-            wsl -d ubuntu -e sudo sh -c "cd /tmp/ && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --all-okey"
+            wsl -d openSUSE-Tumbleweed -e sudo sh -c "cd /tmp/ && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --all-okey"
     }
     elseif ($wsaint -and $wsatoolsint) {
         
             Clear-Host
-            wsl -d ubuntu -e sudo sh -c "cd /tmp/ && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --all-okey"
+            wsl -d openSUSE-Tumbleweed -e sudo sh -c "cd /tmp/ && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --all-okey"
     }
     
     }
