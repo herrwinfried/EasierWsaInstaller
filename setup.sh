@@ -27,9 +27,7 @@ echo "$green I found a missing package, I'm installing it... (unzip) $white"
 sudo apt install -y unzip lzip
 elif [ -x "$(command -v zypper)" ]; then
 echo "$green I found a missing package, I'm installing it... (unzip) $white"
-sudo zypper install -y unzip lzip
-else 
-fi 
+else
 echo "$red I couldn't find the unzip package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -39,11 +37,7 @@ if ! [ -x "$(command -v lzip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (lzip) $white"
 sudo apt install -y unzip lzip
-elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (lzip) $white"
-sudo zypper install -y unzip lzip
-else 
-fi
+else
 echo "$red I couldn't find the lzip package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -53,11 +47,7 @@ if ! [ -x "$(command -v e2fsck)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (e2fsck) $white"
 sudo apt install -y e2fsprogs
-elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (e2fsck) $white"
-sudo zypper install -y ue2fsprogs
-else 
-fi
+else
 echo "$red I couldn't find the e2fsck package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -67,11 +57,7 @@ if ! [ -x "$(command -v resize2fs)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (resize2fs) $white"
 sudo apt install -y e2fsprogs
-elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (resize2fs) $white"
-sudo zypper install -y ue2fsprogs
-else 
-fi
+else
 echo "$red I couldn't find the resize2fs package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -81,11 +67,7 @@ if ! [ -x "$(command -v git)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (git) $white"
 sudo apt install -y git wget
-elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (git) $white"
-sudo zypper install -y git wget
-else 
-fi
+else
 echo "$red I couldn't find the git package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -95,11 +77,7 @@ if ! [ -x "$(command -v wget)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (wget) $white"
 sudo apt install -y git wget
-elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (wget) $white"
-sudo zypper install -y git wget
 else 
-fi
 echo "$red I couldn't find the wget package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -108,11 +86,7 @@ if ! [ -x "$(command -v python3)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (python3) $white"
 sudo apt install -y python3.8 python3-pip
-elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3) $white"
-sudo zypper install -y python38 python38-pip
-else 
-fi
+else
 echo "$red I couldn't find the python3 package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -121,11 +95,7 @@ if ! [ -x "$(command -v pip3)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
 sudo apt install -y python3.8 python3-pip
-elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
-sudo zypper install -y python38 python38-pip
 else 
-fi
 echo "$red I couldn't find the python3-pip package. That's why I canceled the transaction. $white"
 exit 1
 fi
