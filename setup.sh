@@ -169,7 +169,7 @@ okey=true;
     shift 1;
 done
 echo $yellow WSADownload: $red $wsadownload $yellow OpenGapps: $red $opengappsdownload $yellow WSATools: $red $wsatoolsdownload $yellow AllOkey: $red $allOkey $yellow Okey: $red $okey
-echo $yellow TempWSA: $red $tempwsa
+echo $yellow TempWSA: $red $tempwsa $yellow WSAOnly: $red $wsaonlydownload
 echo $yellow gappsarch: $red $gappsarch $yellow msarch: $red $msarch $yellow mskernel: $red $mskernel
 
 function wsatools {
