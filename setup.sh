@@ -156,7 +156,7 @@ okey=false;
 wsaonlydownload=true;
   elif [[ $1 == "--wsa" ]]; then
 wsadownload=true;
-  elif [[ $1 == "--opengapps" ]]; then
+  elif [[ $1 == "--opengapps" ]] || [[ $1 == "--gapps" ]]; then
 opengappsdownload=true;
 elif [[ $1 == "--wsatools" ]]; then
 wsatools=true;
@@ -315,19 +315,24 @@ mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell.ps1 -O powershell.ps1
-echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
+#wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell.ps1 -O powershell.ps1
+#echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
 fi
 #py3
 fi
-echo "$green EXIT $white"
+echo "$green FINISH $white"
 exit 1;
 }
-
+if [[ $wsatoolsdownload == true ]]; then
+wsatools
+fi
+#/#/
 if [[ $wsaonlydownload == true ]]; then
 
+wsaonly
 
 else
+##//
 if [ -d ~/wsaproject ];
 cd ~ && cd wsaproject
 else 
@@ -335,9 +340,6 @@ echo "$yellow Creating folder for project files. on the linux side $white"
 cd ~ && mkdir wsaproject && cd wsaproject
 fi
 
-if [[ $wsatoolsdownload == true ]]; then
-wsatools
-fi
 if [[ $wsadownload == true ]]; then
 wsa
 fi
