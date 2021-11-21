@@ -13,7 +13,7 @@ param(
 Write-Host "$wsatoolsint $wsaint $gappsint $vmcint $selectos"
 pause
 
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $wsaint $gappsint $vmcint $wsatoolsint $selectos" -Verb RunAs; exit }
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $gappsint $vmcint $wsatoolsint" -Verb RunAs; exit }
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
 
 Import-Module -Name Appx -UseWIndowsPowershell
