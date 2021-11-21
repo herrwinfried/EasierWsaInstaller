@@ -18,7 +18,11 @@ cyan="$(tput setaf 6)"
 white="$(tput setaf 7)"
 ### Finish
 if [[ $EUID -ne 0 ]]; then
-   echo "$red You have to start it as SuperUser $white" 
+   echo "$red You have to start it as SuperUser $white"
+   exit 1
+fi
+if [[ $EUID -ne 0 ]]; then
+   echo "$red You have to start it as SuperUser $white"
    exit 1
 fi
 if ! [ -x "$(command -v unzip)" ]; then
@@ -27,6 +31,7 @@ echo "$green I found a missing package, I'm installing it... (unzip) $white"
 sudo apt install -y unzip lzip
 elif [ -x "$(command -v zypper)" ]; then
 echo "$green I found a missing package, I'm installing it... (unzip) $white"
+sudo zypper install -y unzip lzip
 else
 echo "$red I couldn't find the unzip package. That's why I canceled the transaction. $white"
 exit 1
@@ -37,6 +42,9 @@ if ! [ -x "$(command -v lzip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (lzip) $white"
 sudo apt install -y unzip lzip
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (lzip) $white"
+sudo zypper install -y unzip lzip
 else
 echo "$red I couldn't find the lzip package. That's why I canceled the transaction. $white"
 exit 1
@@ -47,6 +55,9 @@ if ! [ -x "$(command -v e2fsck)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (e2fsck) $white"
 sudo apt install -y e2fsprogs
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (e2fsck) $white"
+sudo zypper install -y ue2fsprogs
 else
 echo "$red I couldn't find the e2fsck package. That's why I canceled the transaction. $white"
 exit 1
@@ -57,6 +68,9 @@ if ! [ -x "$(command -v resize2fs)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (resize2fs) $white"
 sudo apt install -y e2fsprogs
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (resize2fs) $white"
+sudo zypper install -y ue2fsprogs
 else
 echo "$red I couldn't find the resize2fs package. That's why I canceled the transaction. $white"
 exit 1
@@ -67,6 +81,9 @@ if ! [ -x "$(command -v git)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (git) $white"
 sudo apt install -y git wget
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (git) $white"
+sudo zypper install -y git wget
 else
 echo "$red I couldn't find the git package. That's why I canceled the transaction. $white"
 exit 1
@@ -77,7 +94,10 @@ if ! [ -x "$(command -v wget)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (wget) $white"
 sudo apt install -y git wget
-else 
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (wget) $white"
+sudo zypper install -y git wget
+else
 echo "$red I couldn't find the wget package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -86,6 +106,9 @@ if ! [ -x "$(command -v python3)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (python3) $white"
 sudo apt install -y python3.8 python3-pip
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (python3) $white"
+sudo zypper install -y python38 python38-pip
 else
 echo "$red I couldn't find the python3 package. That's why I canceled the transaction. $white"
 exit 1
@@ -95,7 +118,10 @@ if ! [ -x "$(command -v pip3)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
 sudo apt install -y python3.8 python3-pip
-else 
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
+sudo zypper install -y python38 python38-pip
+else
 echo "$red I couldn't find the python3-pip package. That's why I canceled the transaction. $white"
 exit 1
 fi
@@ -114,7 +140,7 @@ wsaonlydownload=false;     #
 ############################
 i=1;
 j=$#;
-while [ $i -le $j ] 
+while [ $i -le $j ]
 do
 if [[ $1 == "--arm" ]]; then
 gappsarch=arm64
@@ -291,7 +317,6 @@ sudo rm -rf wsa.py
 
 #wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell.ps1 -O powershell.ps1
 #echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
-fi
 #py3
 fi
 echo "$green FINISH $white"
@@ -307,9 +332,9 @@ wsaonly
 
 else
 ##//
-if [ -d ~/wsaproject ];
+if [ -d ~/wsaproject ]; then
 cd ~ && cd wsaproject
-else 
+else
 echo "$yellow Creating folder for project files. on the linux side $white"
 cd ~ && mkdir wsaproject && cd wsaproject
 fi
@@ -321,9 +346,9 @@ if [[ $opengapps == true ]]; then
 opengapps
 fi
 
-if [ -d "/mnt/c/wsaproject" ];
+if [ -d "/mnt/c/wsaproject" ]; then
 cd ~ && cd /mnt/c/wsaproject
-else 
+else
 echo "$yellow Creating folder for project files. on the windows side $white"
 cd ~ && mkdir /mnt/c/wsaproject && cd /mnt/c/wsaproject
 fi
@@ -380,7 +405,7 @@ echo "$green Preparation: Moving files that need to be moved. $white"
 mv *.img ../../WSAGAScript/#IMAGES/
 
 cd ../..
-cd WSAGAScript 
+cd WSAGAScript
 echo "$green Preparation: Entering / changing required information $white"
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
 sed -ie 's+Root="$(pwd)"+Root="/mnt/c/wsaproject/WSAGAScript"+i' VARIABLES.sh
