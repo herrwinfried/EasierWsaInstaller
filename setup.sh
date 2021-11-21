@@ -150,7 +150,7 @@ echo "$red Still in BETA $white"
  elif [[ $1 == "--wsaonly" ]]; then
 wsadownload=false;
 opengappsdownload=false;
-wsatools=false;
+wsatoolsdownload=false;
 allOkey=false;
 okey=false;
 wsaonlydownload=true;
