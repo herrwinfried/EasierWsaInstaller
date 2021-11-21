@@ -154,8 +154,10 @@ okey=false;
 wsaonlydownload=true;
   elif [[ $1 == "--wsa" ]]; then
 wsadownload=true;
-  elif [[ $1 == "--opengapps" ]] || [[ $1 == "--gapps" ]]; then
+  elif [[ $1 == "--opengapps" ]]; then
 opengappsdownload=true;
+ elif [[ $1 == "--gapps" ]]; then
+ opengappsdownload=true;
 elif [[ $1 == "--wsatools" ]]; then
 wsatoolsdownload=true;
 elif [[ $1 == "--all-okey" ]]; then
