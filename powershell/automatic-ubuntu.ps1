@@ -24,66 +24,85 @@ elseif ($Arch -eq 'Arm32') {
 elseif ($Arch -eq 'amd64') {
     Write-Host -Object 'Running 64-bit PowerShell';
     $wsafolder = 'C:\wsa'
-if (Test-Path -Path $wsafolder) {
-   Write-Host "I found folder named wsa."
-} else {
-    mkdir "C:\wsa"
-}
-$wsaprojectfolderr = 'C:\wsaproject'
-if (Test-Path -Path $wsaprojectfolderr) {
-   Write-Host "I found folder named wsaproject."
-} else {
-    mkdir "C:\wsaproject"
-}
-
-$wsaprojectfolderr = 'C:\wsaproject\microsoftwsa'
-if (Test-Path -Path $wsaprojectfolderr) {
-   Write-Host "I found folder named microsoftwsa and delete."
-   Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
-} else {
-}
-$wsaprojectfolderr = 'C:\wsa\x64'
-if (Test-Path -Path $wsaprojectfolderr) {
-   Write-Host "I found folder named wsa and delete."
-   Remove-Item -Path C:\wsa\x64 -Force -Recurse
-} else {
-}
+    if (Test-Path -Path $wsafolder) {
+       Write-Host "I found folder named wsa."
+    } else {
+        mkdir "C:\wsa"
+    }
+    $wsaprojectfolderr = 'C:\wsaproject'
+    if (Test-Path -Path $wsaprojectfolderr) {
+       Write-Host "I found folder named wsaproject."
+    } else {
+        mkdir "C:\wsaproject"
+    }
     
-Clear-Host
-    if ($vmcint) {
-        dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-        Clear-Host
+    $wsaprojectfolderr = 'C:\wsaproject\microsoftwsa'
+    if (Test-Path -Path $wsaprojectfolderr) {
+       Write-Host "I found folder named microsoftwsa and delete."
+       Remove-Item -Path C:\wsaproject\microsoftwsa\ -Force -Recurse
+    } else {
     }
-    if ($wsaint -and $gappsint) {
-        wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --all-okey"
+    $wsaprojectfolderr = 'C:\wsa\amd64'
+    if (Test-Path -Path $wsaprojectfolderr) {
+       Write-Host "I found folder named wsa and delete."
+       Remove-Item -Path C:\wsa\amd64 -Force -Recurse
+    } else {
     }
-    elseif ($wsaint)
-    {
-        wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --all-okey"
-    }
-    elseif ($gappsint)
-    {
-        wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --gapps --all-okey"
-    }
-    elseif (! $wsaint -or !$gappsint )
-    {
-        Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
-        Pause
-        Clear-Host
-        wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
-    }
-    if ( $wsatoolsint ) {
-        Clear-Host
+    Clear-Host
+        if ($vmcint) {
+            dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+            Clear-Host
+        }
+        if ($wsatoolsint) {
+            if ($wsaint -and $gappsint) {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --all-okey"
+            }
+            elseif ($wsaint)
+            {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --wsatools --all-okey"
+            }
+            elseif ($gappsint)
+            {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --opengapps --wsatools --all-okey"
+            }
+            elseif (! $wsaint -or !$gappsint )
+            {
+                Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
+                Pause
+                Clear-Host
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsatools --all-okey"
+            }
+            if ( $wsatoolsint ) {
+                Clear-Host
+                Set-Location "C:\wsaproject"
+               .\wsatools.ps1
+            }
+        }
+        else {
+            if ($wsaint -and $gappsint) {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --all-okey"
+            }
+            elseif ($wsaint)
+            {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --all-okey"
+            }
+            elseif ($gappsint)
+            {
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --opengapps --all-okey"
+            }
+            elseif (! $wsaint -or !$gappsint )
+            {
+                Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
+                Pause
+                Clear-Host
+                wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
+            }
+        }
         Set-Location "C:\wsaproject"
-        add-appxpackage .\WSATools.Msixbundle
+    .\powershell.ps1
     }
- 
-Set-Location "C:\wsaproject"
-.\powershell.ps1
 
-}
 elseif ($Arch -eq 'Arm64') {
-    Write-Host -Object 'Running 64-bit ARM PowerShell';
     $wsafolder = 'C:\wsa'
 if (Test-Path -Path $wsafolder) {
    Write-Host "I found folder named wsa."
@@ -111,32 +130,53 @@ if (Test-Path -Path $wsaprojectfolderr) {
 }
 Clear-Host
     Write-Host "BETA SCRIPT"
-    if ($vmc) {
+    if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-        Clear-Host
     }
-    if ($wsa -and $gapps) {
-        wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --all-okey"
+    if ($wsatoolsint) {
+        if ($wsaint -and $gappsint) {
+            wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --wsatools --all-okey"
+        }
+        elseif ($wsaint)
+        {
+            wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --wsatools --all-okey"
+        }
+        elseif ($gappsint)
+        {
+            wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --opengapps --wsatools --all-okey"
+        }
+        elseif (! $wsaint -or !$gappsint )
+        {
+            Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
+            Pause
+            Clear-Host
+            wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsatools --all-okey"
+        }
+        if ( $wsatoolsint ) {
+            Clear-Host
+            Set-Location "C:\wsaproject"
+           .\wsatools.ps1
+        }
     }
-    elseif ($wsa)
-    {
-        wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --all-okey"
-    }
-    elseif ($gapps)
-    {
-        wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --gapps --all-okey"
-    }
-    elseif (! $wsaint -or !$gappsint )
-    {
-        Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
-        Pause
-        Clear-Host
-        wsl -d ubuntu -e sudo sh -c "cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --all-okey"
-    }
-    if ( $wsatoolsint ) {
-        Clear-Host
-        Set-Location "C:\wsaproject"
-        add-appxpackage .\WSATools.Msixbundle
+    else {
+        if ($wsaint -and $gappsint) {
+            wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --all-okey"
+        }
+        elseif ($wsaint)
+        {
+            wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --all-okey"
+        }
+        elseif ($gappsint)
+        {
+            wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --opengapps --all-okey"
+        }
+        elseif (! $wsaint -or !$gappsint )
+        {
+            Write-Host "Make sure you have Ubuntu(ubuntu without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
+            Pause
+            Clear-Host
+            wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --all-okey"
+        }
     }
     Set-Location "C:\wsaproject"
 .\powershell.ps1

@@ -2,13 +2,16 @@
 Our project was written to aim to use [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) more easily. Due to the smooth running of the project and issues that may arise against the WSAGAScript update in the future. WSAGAScript is forked. ([You can navigate to the forked project here](https://github.com/herrwinfried/WSAGAScript))
 
 ## Important Information
+
+**It works for WSA version 1.7xx. And if you download WSA with script, it will offer you 1.7xx, not 1.8xx. Since 1.8xx is the problem. 1.7xx is downloading.**
+
 **You need to delete the pre-installed WSA. You cannot get updates from Microsoft Store after installing WSA.**
 
 > The ARM version is still beta, please give feedback when you encounter an error.
 
 ## Information
 You can also install it with a graphical interface. [Click if you want to take a look](https://github.com/herrwinfried/wsa-gui#readme).
-![image](https://user-images.githubusercontent.com/52379312/140661103-d5c4a0f8-9347-40f9-a739-4c7219cf6f96.png)
+![image](https://user-images.githubusercontent.com/52379312/141656952-5d782981-6e6c-4026-a56e-73cccc47fb35.png)
 
 
 ## An amateur video showing the installation
@@ -58,13 +61,13 @@ __**In normal use, you should prefer windows terminal instead of Powershell 7.**
 
 ### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
+cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### **OpenSUSE Tumbleweed**
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -83,7 +86,7 @@ Packages that need to install their own script and WSAGAScript
 - `pip3` -> `wget` (own script)
 - `pip3` -> `lxml` (own script)
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
+ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -93,12 +96,12 @@ Packages that need to install their own script and WSAGAScript
 
 ### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
+cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
 [Go To "What to do after installation"](#what-to-do-after-installation)
 ```
 ### **OpenSUSE Tumbleweed**
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -117,15 +120,15 @@ Packages that need to install their own script and WSAGAScript
 - `pip3` -> `wget` (own script)
 - `pip3` -> `lxml` (own script)
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
+ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
 # You need to run the script on Ubuntu/OpenSUSE TumbleWeed (or WSL Linux Distro)
 
 ### **WSA and OpenGapps Download**
-- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/1.0.1/docs/opengapps.md)
-- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/1.0.1/docs/wsamsixbundle.md)
+- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/beta/docs/opengapps.md)
+- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/beta/docs/wsamsixbundle.md)
 
 ###
 
@@ -136,13 +139,13 @@ Packages that need to install their own script and WSAGAScript
 
 ### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### **OpenSUSE Tumbleweed**
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -161,7 +164,7 @@ Packages that need to install their own script and WSAGAScript
 - `pip3` -> `wget` (own script)
 - `pip3` -> `lxml` (own script)
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -171,12 +174,12 @@ Packages that need to install their own script and WSAGAScript
 
 ### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
+cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 ### **OpenSUSE Tumbleweed**
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -195,7 +198,7 @@ Packages that need to install their own script and WSAGAScript
 - `pip3` -> `wget` (own script)
 - `pip3` -> `lxml` (own script)
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
+ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
