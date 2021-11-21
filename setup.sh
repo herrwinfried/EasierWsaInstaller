@@ -142,7 +142,7 @@ i=1;
 j=$#;
 while [ $i -le $j ] 
 do
-if [[ $1 == "--arm"]]; then
+if [[ $1 == "--arm" ]]; then
 gappsarch=arm64
 msarch=ARM64
 mskernel=arm64
