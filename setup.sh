@@ -342,7 +342,7 @@ fi
 if [[ $wsadownload == true ]]; then
 wsa
 fi
-if [[ $opengapps == true ]]; then
+if [[ $opengappsdownload == true ]]; then
 opengapps
 fi
 
