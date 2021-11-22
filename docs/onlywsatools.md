@@ -8,13 +8,13 @@ Transactions are made over WSL. So it's main requirements apply.
 
 ### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
+cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### **OpenSUSE Tumbleweed**
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -33,7 +33,7 @@ Packages that need to install their own script and WSAGAScript
 - `pip3` -> `wget`
 - `pip3` -> `lxml`
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
+ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
