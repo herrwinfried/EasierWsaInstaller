@@ -461,10 +461,10 @@ mv \#IMAGES/*img ../microsoftwsa/wsa/
 
 sudo rm ../microsoftwsa/wsa/Tools/kernel && cp misc/kernel-$mskernel ../microsoftwsa/wsa/Tools/kernel
 
-sudo rm -rf /mnt/c/wsa/$mskernel
-sudo mkdir /mnt/c/wsa/$mskernel
+sudo rm -rf /mnt/c/wsa/$msarch
+sudo mkdir /mnt/c/wsa/$msarch
 
-sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$mskernel/
+sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
 
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
