@@ -319,11 +319,11 @@ echo "$green FINISH $white"
 exit 1;
 }
 
-if [ -d ~/wsaproject ]; then
-cd ~ && cd wsaproject
+if [ -d /tmp/wsaproject ]; then
+cd /tmp && cd wsaproject
 else
 echo "$yellow Creating folder for project files. on the linux side $white"
-cd ~ && mkdir wsaproject && cd wsaproject
+cd /tmp && mkdir wsaproject && cd wsaproject
 fi
 
 
