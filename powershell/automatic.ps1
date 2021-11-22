@@ -60,6 +60,7 @@ elseif ($Arch -eq 'amd64') {
         }
 if ( $selectos -eq "Ubuntu") {
     Clear-Host
+
     if ($wsatoolsint) {
         if ($wsaint -and $gappsint) {
             wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --all-okey"
@@ -107,6 +108,7 @@ if ( $selectos -eq "Ubuntu") {
     }
     
 }
+
 if ( $selectos -eq "openSUSE-Tumbleweed") {
     Clear-Host
     if ($wsatoolsint) {
@@ -236,6 +238,7 @@ if ( $selectos -eq "Ubuntu") {
             wsl -d ubuntu -e sudo sh -c "cd ~ && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --all-okey"
         }
     }
+
 }
 if ( $selectos -eq "openSUSE-Tumbleweed") {
     Clear-Host

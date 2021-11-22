@@ -21,10 +21,6 @@ if [[ $EUID -ne 0 ]]; then
    echo "$red You have to start it as SuperUser $white"
    exit 1
 fi
-if [[ $EUID -ne 0 ]]; then
-   echo "$red You have to start it as SuperUser $white"
-   exit 1
-fi
 if ! [ -x "$(command -v unzip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (unzip) $white"
@@ -322,6 +318,15 @@ fi
 echo "$green FINISH $white"
 exit 1;
 }
+
+if [ -d ~/wsaproject ]; then
+cd ~ && cd wsaproject
+else
+echo "$yellow Creating folder for project files. on the linux side $white"
+cd ~ && mkdir wsaproject && cd wsaproject
+fi
+
+
 if [[ $wsatoolsdownload == true ]]; then
 wsatools
 fi
@@ -332,12 +337,7 @@ wsaonly
 
 else
 ##//
-if [ -d ~/wsaproject ]; then
-cd ~ && cd wsaproject
-else
-echo "$yellow Creating folder for project files. on the linux side $white"
-cd ~ && mkdir wsaproject && cd wsaproject
-fi
+
 
 if [[ $wsadownload == true ]]; then
 wsa
