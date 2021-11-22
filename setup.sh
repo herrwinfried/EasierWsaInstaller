@@ -406,7 +406,7 @@ mv open_gapps-$gappsarch-11.0*.zip WSAGAScript/#GAPPS/
 if [[ $tempwsa == "yes" ]] && [[ $wsadownload == true ]]; then
 mkdir microsoftwsa
 cd microsoftwsa
-echo "$yellow This script is set as temporary WSA. So probably because there is a problem with a current WSA, the old version will be downloaded. $yellow"
+echo "$red This script is set as temporary WSA. So probably because there is a problem with a current WSA, the old version will be downloaded. $yellow"
 
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
 wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_x64_Release-Nightly.msix
