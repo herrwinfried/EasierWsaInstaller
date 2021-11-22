@@ -171,6 +171,12 @@ echo $yellow TempWSA: $red $tempwsa $yellow WSAOnly: $red $wsaonlydownload
 echo $yellow gappsarch: $red $gappsarch $yellow msarch: $red $msarch $yellow mskernel: $red $mskernel
 
 function wsatools {
+    if [ -d /tmp/wsaproject ]; then
+cd /tmp && cd wsaproject
+else
+echo "$yellow Creating folder for project files. on the linux side $white"
+cd /tmp && mkdir wsaproject && cd wsaproject
+fi
 if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
 if [[ -x "$(command -v python3)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
@@ -209,6 +215,12 @@ fi
 }
 
 function wsa {
+    if [ -d /tmp/wsaproject ]; then
+cd /tmp && cd wsaproject
+else
+echo "$yellow Creating folder for project files. on the linux side $white"
+cd /tmp && mkdir wsaproject && cd wsaproject
+fi
 if [[ -x "$(command -v python3)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
@@ -249,6 +261,12 @@ fi
 }
 
 function opengapps {
+if [ -d /tmp/wsaproject ]; then
+cd /tmp && cd wsaproject
+else
+echo "$yellow Creating folder for project files. on the linux side $white"
+cd /tmp && mkdir wsaproject && cd wsaproject
+fi
     if [ -f "opengapps.py" ]; then
     echo "$red There is opengapps.py. This file will be deleted. $white"
     sudo rm -rf opengapps.py
@@ -277,6 +295,12 @@ echo "$red Deleting opengapps.py file. $white"
 sudo rm -rf opengapps.py
 }
 function wsaonly {
+if [ -d /tmp/wsaproject ]; then
+cd /tmp && cd wsaproject
+else
+echo "$yellow Creating folder for project files. on the linux side $white"
+cd /tmp && mkdir wsaproject && cd wsaproject
+fi
 sudo mkdir /mnt/c/wsaproject
 sudo mkdir /mnt/c/wsaproject
     if [[ -x "$(command -v python3)" ]]; then
