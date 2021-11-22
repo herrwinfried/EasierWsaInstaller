@@ -166,7 +166,7 @@ okey=true;
     i=$((i + 1));
     shift 1;
 done
-$pwdsh="$(pwd)"
+$pwdsh=pwd
 echo $yellow WSADownload: $red $wsadownload $yellow OpenGapps: $red $opengappsdownload $yellow WSATools: $red $wsatoolsdownload $yellow AllOkey: $red $allOkey $yellow Okey: $red $okey
 echo $yellow TempWSA: $red $tempwsa $yellow WSAOnly: $red $wsaonlydownload
 echo $yellow gappsarch: $red $gappsarch $yellow msarch: $red $msarch $yellow mskernel: $red $mskernel
@@ -383,7 +383,10 @@ else
 echo "$yellow Creating folder for project files. on the windows side $white"
 cd ~ && mkdir /mnt/c/wsaproject && cd /mnt/c/wsaproject
 fi
-
+    if [ -d /mnt/c/wsaproject/WSAGAScript ]; then
+sudo rm -rf /mnt/c/wsaproject/WSAGAScript
+else
+fi
 echo "$green WSAGAProject Downloading. $yellow"
 
 git clone https://github.com/herrwinfried/WSAGAScript
