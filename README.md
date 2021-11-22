@@ -1,36 +1,34 @@
+# Important warning
 
-Our project was written to aim to use [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) more easily. Due to the smooth running of the project and issues that may arise against the WSAGAScript update in the future. WSAGAScript is forked. ([You can navigate to the forked project here](https://github.com/herrwinfried/WSAGAScript))
+**Do it within your own consciousness. We take no responsibility.**
 
-## Important Information
+This method is experimental. Made easy for you to enter fewer commands.
 
-**It works for WSA version 1.7xx. And if you download WSA with script, it will offer you 1.7xx, not 1.8xx. Since 1.8xx is the problem. 1.7xx is downloading.**
+# What is wsa script?
 
-**You need to delete the pre-installed WSA. You cannot get updates from Microsoft Store after installing WSA.**
+wsa-script is a script that makes it easy to download WSAGAScript and regular WSA. It aims to offer you an easier OpenGapps + WSA by facilitating the WSAGAScript project.
 
-> The ARM version is still beta, please give feedback when you encounter an error.
+> NOTE: The WSAGAScript Project is Forked for the script to run properly. In this way, the script will not be corrupted when a new update comes. This does not mean that WSAGAScript will not be updated. When the command is updated on the WSAGAScript side, our Script will be available as soon as possible and the Fork will be updated.
 
-## Information
-You can also install it with a graphical interface. [Click if you want to take a look](https://github.com/herrwinfried/wsa-gui#readme).
+# Looking for a Graphical Interface and something easier?
+
+[Go To WSA-GUI Project](https://github.com/herrwinfried/wsa-gui#readme).
 ![image](https://user-images.githubusercontent.com/52379312/141656952-5d782981-6e6c-4026-a56e-73cccc47fb35.png)
 
-
-## An amateur video showing the installation
+# An amateur video showing the installation
 
 [![q_yd7DohKQA](https://img.youtube.com/vi/NAEF_S1JTFk/0.jpg)](https://www.youtube.com/watch?v=NAEF_S1JTFk)
 
 https://youtu.be/NAEF_S1JTFk
 
-# Requirements
+# What are the Requirements?
 
-- Windows 11
-- [Ubuntu](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6) or [openSUSE Tumbleweed](https://www.microsoft.com/en-us/p/opensuse-tumbleweed/9mssk2zxxn11)
+- You must have a minimum Windows 11 device. It is adjusted for Windows 11 only.
+- [Virtual Machine Platform Must Be Active](#virtual-machine-platform-must-be-active)
+- [Developer Mode must be active.](#developer-mode-must-be-turned-on) **(Applicable if you are going to use the opengapps + wsa method.)**
 - [WSL](https://aka.ms/wslstorepage)
-- [Developer mode must be on](#developer-mode-must-be-turned-on)
-- [Active Virtual Machine Platform](#virtual-machine-platform-must-be-active)
-
-## What needs to be created before starting the process
-- Create a folder named `wsaproject` under the `C` directory. (`C:\wsaproject`)
-- Create a folder named `wsa` under the `C` directory. (`C:\wsa`)
+- [Ubuntu](https://www.microsoft.com/en-us/p/ubuntu/9nblggh4msv6) or [openSUSE Tumbleweed](https://www.microsoft.com/en-us/p/opensuse-tumbleweed/9mssk2zxxn11)
+- [Powershell Core(7+)](https://www.microsoft.com/en-us/p/powershell/9mz1snwt0n5d) **(Applicable if you are going to use the WSA-Gui project.)**
 
 ## Developer Mode must be turned on.
 > Settings > Privacy & security > For Developers > Developer Mode
@@ -48,165 +46,243 @@ __**In normal use, you should prefer windows terminal instead of Powershell 7.**
 > ```
 > You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu or openSUSE TumbleWeed
 
-[WSA and OpenGapps Click Here to download it yourself.](#you-need-to-run-the-script-on-ubuntuopensuse-tumbleweed-or-wsl-linux-distro)
+# What to do before you start
 
-[If you want it to happen automatically, keep reading.](#you-need-to-run-the-script-on-ubuntuopensuse-tumbleweed-or-wsl-linux-distro-wsa-and-opengapps-install-automatically)
+- Create a folder named `wsaproject` under the `C` directory. (`C:\wsaproject`)
+- Create a folder named `wsa` under the `C` directory. (`C:\wsa`)
 
-# You need to run the script on Ubuntu/OpenSUSE TumbleWeed (or WSL Linux Distro). wsa and opengapps install automatically
+# Information before you start
 
-- [64 Bit(amd64)](#64-bit)
-- [ARM64](#arm64)
+You need to remove the existing WSA.
 
-## 64 Bit
+___The ARM version is still beta, please give feedback when you encounter an error.___ **(Applicable if you are going to use the opengapps + wsa method.)**
 
-### **Ubuntu**
+# WSA + OpenGapps Method
+
+**(Files are not original, contain OpenGapps, can't get MS Store updates later)**
+
+- [amd64](#amd64) (x64 intel/amd)
+- [arm64](#arm64)
+
+## amd64
+### **Ubuntu:**
+
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --okey"
 ```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-### **OpenSUSE Tumbleweed**
+### **openSUSE Tumbleweed**
+
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --okey"
 ```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-### **In Other Distros**
-Be sure to install the following packages before running, as you have to install the missing packages yourself.
-Packages that need to install their own script and WSAGAScript
-- `unzip` (WSAGAScript)
-- `lzip` (WSAGAScript)
-- `lzip` (WSAGAScript)
-- `git` (own script)
-- `wget` (own script)
-- `curl` (own script)
-- `python3.8` (own script)
-- `python3-pip` (own script)
-- `pip3` -> `BeautifulSoup4` (own script)
-- `pip3` -> `wget` (own script)
-- `pip3` -> `lxml` (own script)
+### Other Distros:
+ **You need to download and install the following Packages. (Listed by name on Ubuntu.)**
+ - `sudo`
+ - `unzip`
+ - `lzip`
+ - `e2fsprogs`
+ - `git`
+ - `wget`
+ - `python3.8`
+ - `python3-pip`
+ 
+**What to install via pip**
+- `BeautifulSoup4`
+ - `wget`
+ - `lxml`
+
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --gapps --okey
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --okey"
 ```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-## ARM64
+## arm64
 
-> Still beta
+### **Ubuntu:**
 
-### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
-[Go To "What to do after installation"](#what-to-do-after-installation)
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --okey"
 ```
-### **OpenSUSE Tumbleweed**
-```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
-```
-[Go To "What to do after installation"](#what-to-do-after-installation)
-
-### **In Other Distros**
-Be sure to install the following packages before running, as you have to install the missing packages yourself.
-Packages that need to install their own script and WSAGAScript
-- `unzip` (WSAGAScript)
-- `lzip` (WSAGAScript)
-- `lzip` (WSAGAScript)
-- `git` (own script)
-- `wget` (own script)
-- `curl` (own script)
-- `python3.8` (own script)
-- `python3-pip` (own script)
-- `pip3` -> `BeautifulSoup4` (own script)
-- `pip3` -> `wget` (own script)
-- `pip3` -> `lxml` (own script)
-```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh --wsa --gapps --okey
-```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-# You need to run the script on Ubuntu/OpenSUSE TumbleWeed (or WSL Linux Distro)
+### **openSUSE Tumbleweed**
 
-### **WSA and OpenGapps Download**
-- [OpenGapps](https://opengapps.org/) | [What should I choose when installing opengapps](https://github.com/herrwinfried/wsa-script/blob/beta/docs/opengapps.md)
-- [WSA msixbundle file](https://github.com/herrwinfried/wsa-script/blob/beta/docs/wsamsixbundle.md)
-
-###
-
-- [64 Bit(amd64)](#64-bit-1)
-- [ARM64](#arm64-1)
-
-## 64 Bit
-
-### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --okey"
 ```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-### **OpenSUSE Tumbleweed**
+### Other Distros:
+ **You need to download and install the following Packages. (Listed by name on Ubuntu.)**
+ - `sudo`
+ - `unzip`
+ - `lzip`
+ - `e2fsprogs`
+ - `git`
+ - `wget`
+ - `python3.8`
+ - `python3-pip`
+ 
+**What to install via pip**
+- `BeautifulSoup4`
+ - `wget`
+ - `lxml`
+
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --okey"
 ```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-### **In Other Distros**
-Be sure to install the following packages before running, as you have to install the missing packages yourself.
-Packages that need to install their own script and WSAGAScript
-- `unzip` (WSAGAScript)
-- `lzip` (WSAGAScript)
-- `lzip` (WSAGAScript)
-- `git` (own script)
-- `wget` (own script)
-- `curl` (own script)
-- `python3.8` (own script)
-- `python3-pip` (own script)
-- `pip3` -> `BeautifulSoup4` (own script)
-- `pip3` -> `wget` (own script)
-- `pip3` -> `lxml` (own script)
+# WSA Upload only
+**(No file touch original, no OpenGapps)**
+
+- [amd64](#amd64-1) (x64 intel/amd)
+- [arm64](#arm64-1)
+
+## amd64
+### **Ubuntu:**
+
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --okey"
 ```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-## ARM64
+### **openSUSE Tumbleweed**
 
-> Still beta
-
-### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --okey"
 ```
-[Go To "What to do after installation"](#what-to-do-after-installation)
-### **OpenSUSE Tumbleweed**
-```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
-```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-### **In Other Distros**
-Be sure to install the following packages before running, as you have to install the missing packages yourself.
-Packages that need to install their own script and WSAGAScript
-- `unzip` (WSAGAScript)
-- `lzip` (WSAGAScript)
-- `lzip` (WSAGAScript)
-- `git` (own script)
-- `wget` (own script)
-- `curl` (own script)
-- `python3.8` (own script)
-- `python3-pip` (own script)
-- `pip3` -> `BeautifulSoup4` (own script)
-- `pip3` -> `wget` (own script)
-- `pip3` -> `lxml` (own script)
+### Other Distros:
+ **You need to download and install the following Packages. (Listed by name on Ubuntu.)**
+ - `sudo`
+ - `unzip`
+ - `lzip`
+ - `e2fsprogs`
+ - `git`
+ - `wget`
+ - `python3.8`
+ - `python3-pip`
+ 
+**What to install via pip**
+- `BeautifulSoup4`
+ - `wget`
+ - `lxml`
+
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup-arm.sh -O setup-arm.sh && sudo chmod +x ./setup-arm.sh && sudo ./setup-arm.sh
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --okey"
 ```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --okey"
+> ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-## What to do after installation
+## arm64
+
+### **Ubuntu:**
+
+```
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --okey"
+```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --okey"
+> ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
+
+### **openSUSE Tumbleweed**
+
+```
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --okey"
+```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --okey"
+> ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
+
+### Other Distros:
+ **You need to download and install the following Packages. (Listed by name on Ubuntu.)**
+ - `sudo`
+ - `unzip`
+ - `lzip`
+ - `e2fsprogs`
+ - `git`
+ - `wget`
+ - `python3.8`
+ - `python3-pip`
+ 
+**What to install via pip**
+- `BeautifulSoup4`
+ - `wget`
+ - `lxml`
+
+```
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --okey"
+```
+> Also, if you want to download wsatools, you have to write this command completely. If you want to download the above command without WSATools, use it.
+>
+> ```
+> sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --okey"
+> ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
+
+# What to do after installation
+
+- [Method 1](#method-1)
+- [Method 2](#method-2) (Manuel)
 
 In order for the powershell script in the "C:\wsaproject" directory to run, you need to change your permission setting. Below is the command you need to type. Run as Administrator Powershell.
-Or Install manually. I talked about it below.
-
+# Method 1
 ```
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
@@ -218,7 +294,7 @@ Making change permission default for Powershell
 ```
 Set-ExecutionPolicy -ExecutionPolicy Restricted
 ```
-
+# Method 2
 or if you want to do it manually, start windows terminal administrator and type the following commands.
 > If you are using arm arm64. x64 if you are using intel or amd processor 64 bit. As the folder you will choose
 ```
@@ -228,4 +304,3 @@ cd 'C:\wsa\[x64/arm64]'
 ```
 Add-AppxPackage -Register .\AppxManifest.xml
 ```
-> In the past, it was necessary to connect adb and do something additional for google play, it is not needed anymore.

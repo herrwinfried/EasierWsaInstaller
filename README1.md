@@ -61,8 +61,8 @@ ___The ARM version is still beta, please give feedback when you encounter an err
 
 **(Files are not original, contain OpenGapps, can't get MS Store updates later)**
 
-- amd64 (x64 intel/amd)
-- arm64
+- [amd64](#amd64) (x64 intel/amd)
+- [arm64](#arm64)
 
 ## amd64
 ### **Ubuntu:**
@@ -75,7 +75,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --okey"
 > ```
-
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### **openSUSE Tumbleweed**
 
@@ -87,6 +87,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --okey"
 > ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### Other Distros:
  **You need to download and install the following Packages. (Listed by name on Ubuntu.)**
@@ -112,6 +113,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --okey"
 > ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ## arm64
 
@@ -125,7 +127,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --wsatools --okey"
 > ```
-
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### **openSUSE Tumbleweed**
 
@@ -137,6 +139,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --wsatools --okey"
 > ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### Other Distros:
  **You need to download and install the following Packages. (Listed by name on Ubuntu.)**
@@ -162,12 +165,13 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --wsatools --okey"
 > ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 # WSA Upload only
 **(No file touch original, no OpenGapps)**
 
-- amd64 (x64 intel/amd)
-- arm64
+- [amd64](#amd64-1) (x64 intel/amd)
+- [arm64](#arm64-1)
 
 ## amd64
 ### **Ubuntu:**
@@ -180,7 +184,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --okey"
 > ```
-
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### **openSUSE Tumbleweed**
 
@@ -192,6 +196,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --okey"
 > ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### Other Distros:
  **You need to download and install the following Packages. (Listed by name on Ubuntu.)**
@@ -217,6 +222,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --okey"
 > ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ## arm64
 
@@ -230,7 +236,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --okey"
 > ```
-
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### **openSUSE Tumbleweed**
 
@@ -242,6 +248,7 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --okey"
 > ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### Other Distros:
  **You need to download and install the following Packages. (Listed by name on Ubuntu.)**
@@ -267,11 +274,12 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 > ```
 > sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --okey"
 > ```
+[Go To "What to do after installation"](#what-to-do-after-installation)
 
 # What to do after installation
 
-- Method 1
-- Method 2 (Manuel)
+- [Method 1](#method-1)
+- [Method 2](#method-2) (Manuel)
 
 In order for the powershell script in the "C:\wsaproject" directory to run, you need to change your permission setting. Below is the command you need to type. Run as Administrator Powershell.
 # Method 1
