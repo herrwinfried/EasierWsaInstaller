@@ -6,9 +6,11 @@ This method is experimental. Made easy for you to enter fewer commands.
 
 # What is wsa script?
 
-wsa-script is a script that makes it easy to download WSAGAScript and regular WSA. It aims to offer you an easier OpenGapps + WSA by facilitating the WSAGAScript project.
+wsa-script is a script that makes it easy to download [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) and regular WSA. It aims to offer you an easier OpenGapps + WSA by facilitating the [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) project.
 
-> NOTE: The WSAGAScript Project is Forked for the script to run properly. In this way, the script will not be corrupted when a new update comes. This does not mean that WSAGAScript will not be updated. When the command is updated on the WSAGAScript side, our Script will be available as soon as possible and the Fork will be updated.
+> NOTE: The [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) Project is Forked for the script to run properly. In this way, the script will not be corrupted when a new update comes. This does not mean that [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) will not be updated. When the command is updated on the [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) side, our Script will be available as soon as possible and the Fork will be updated.
+
+> [WSAGAScript fork link: https://github.com/herrwinfried/WSAGAScript](https://github.com/herrwinfried/WSAGAScript)
 
 # Looking for a Graphical Interface and something easier?
 
