@@ -193,6 +193,12 @@ if [ -f "wsatools.py" ]; then
     else
  echo "$green wsatools.py dont exists. $white"
     fi
+if [ -f "/mnt/c/wsaproject/WSATools.Msixbundle" ]; then
+    echo "$red There is WSATools. This file will be deleted. $white"
+rm -rf /mnt/c/wsaproject/WSATools.Msixbundle
+    else
+ echo "$green WSATools dont exists. $white"
+fi
 echo "$green Downloading wsatools.py To download WSATools. $white"
 
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsatools.py -O wsatools.py
@@ -204,12 +210,6 @@ echo "$green WSATools has been downloaded. Now the PS file is downloading. $whit
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools1.ps1 -O wsatools.ps1
 echo "$green Download completed, moving to required location."
 
-if [ -f "/mnt/c/wsaproject/WSATools.Msixbundle" ]; then
-    echo "$red There is WSATools. This file will be deleted. $white"
-rm -rf /mnt/c/wsaproject/WSATools.Msixbundle
-    else
- echo "$green WSATools dont exists. $white"
-fi
 mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
 mv 54406Simizfo.WSATools*.Msixbundle /mnt/c/wsaproject/WSATools.Msixbundle
 
