@@ -63,6 +63,9 @@ You need to remove the existing WSA.
 
 ___The ARM version is still beta, please give feedback when you encounter an error.___ **(Applicable if you are going to use the opengapps + wsa method.)**
 
+- [WSA + OpenGapps Method](#wsa--opengapps-method)
+- [WSA Upload only](#wsa-upload-only)
+
 # WSA + OpenGapps Method
 
 **(Files are not original, contain OpenGapps, can't get MS Store updates later)**
