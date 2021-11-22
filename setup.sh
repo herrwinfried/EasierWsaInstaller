@@ -385,7 +385,6 @@ cd ~ && mkdir /mnt/c/wsaproject && cd /mnt/c/wsaproject
 fi
     if [ -d /mnt/c/wsaproject/WSAGAScript ]; then
 sudo rm -rf /mnt/c/wsaproject/WSAGAScript
-else
 fi
 echo "$green WSAGAProject Downloading. $yellow"
 
