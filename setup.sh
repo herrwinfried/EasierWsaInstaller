@@ -146,7 +146,6 @@ echo "$red Still in BETA $white"
  elif [[ $1 == "--wsaonly" ]]; then
 wsadownload=false;
 opengappsdownload=false;
-okey=false;
 wsaonlydownload=true;
   elif [[ $1 == "--wsa" ]]; then
 wsadownload=true;
@@ -308,6 +307,7 @@ else
 echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
+pwd
 sudo mkdir /mnt/c/wsaproject
 sudo mkdir /mnt/c/wsaproject
     if [[ -x "$(command -v python3)" ]]; then
@@ -329,14 +329,14 @@ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.p
 echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
-
+pwd
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
 rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
-
+pwd
 echo "$green Download completed, moving to required location."
 mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
