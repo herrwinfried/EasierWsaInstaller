@@ -98,12 +98,12 @@ echo "$red I couldn't find the wget package. That's why I canceled the transacti
 exit 1
 fi
 fi
-if ! [ -x "$(command -v python3)" ]; then
+if ! [ -x "$(command -v python3.8)" ]; then
 if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3) $white"
+echo "$green I found a missing package, I'm installing it... (python3.8) $white"
 sudo apt install -y python3.8 python3-pip
 elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3) $white"
+echo "$green I found a missing package, I'm installing it... (python3.8) $white"
 sudo zypper install -y python38 python38-pip
 else
 echo "$red I couldn't find the python3 package. That's why I canceled the transaction. $white"
@@ -178,7 +178,7 @@ echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
 if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-if [[ -x "$(command -v python3)" ]]; then
+if [[ -x "$(command -v python3.8)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
 pip3 install BeautifulSoup4
@@ -203,7 +203,7 @@ echo "$green Downloading wsatools.py To download WSATools. $white"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
 echo "$green WSATools Beginning to download. $yellow"
 
-chmod +x ./wsatools.py && python3 ./wsatools.py
+chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
 
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools1.ps1 -O wsatools.ps1
@@ -227,7 +227,7 @@ else
 echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
-if [[ -x "$(command -v python3)" ]]; then
+if [[ -x "$(command -v python3.8)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
 pip3 install BeautifulSoup4
@@ -247,7 +247,7 @@ if [ -f "wsa.py" ]; then
 echo "$green Downloading wsa.py To download WSA. $yellow"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
-chmod +x ./wsa.py && python3 ./wsa.py
+chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
@@ -294,7 +294,7 @@ fi
  echo "$green open_gapps-$gappsarch dont exists. $white"
     fi
     echo "$green OpenGapps Beginning to download. $yellow"
-chmod +x ./opengapps.py && python3 ./opengapps.py
+chmod +x ./opengapps.py && python3.8 ./opengapps.py
 echo "$green Download completed, moving to required location."
 mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
 echo "$red Deleting opengapps.py file. $white"
@@ -310,7 +310,7 @@ fi
 pwd
 sudo mkdir /mnt/c/wsaproject
 sudo mkdir /mnt/c/wsaproject
-    if [[ -x "$(command -v python3)" ]]; then
+    if [[ -x "$(command -v python3.8)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
 pip3 install BeautifulSoup4
@@ -327,7 +327,7 @@ if [ -f "wsa.py" ]; then
 echo "$green Downloading wsa.py To download WSA. $yellow"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
-chmod +x ./wsa.py && python3 ./wsa.py
+chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 pwd
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
