@@ -1,5 +1,5 @@
 #!/bin/bash
-tempwsa=yes
+tempwsa=no
 ### Fonts
 termcols=$(tput cols)
 bold="$(tput bold)"
