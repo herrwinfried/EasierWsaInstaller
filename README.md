@@ -4,7 +4,11 @@
 
 This method is experimental. Made easy for you to enter fewer commands.
 
-**Except for the wsa option, the current wsa is still not downloading. This is because the WSAGAProject team for Current WSA is still working on it. So version 1.7xx is still used in the wsa + opengapps method.**
+
+<del> **Except for the wsa option, the current wsa is still not downloading. This is because the WSAGAProject team for Current WSA is still working on it. So version 1.7xx is still used in the wsa + opengapps method.** </del>
+
+Code change for a [Developer](https://github.com/WSA-Community/WSAGAScript/pull/139/) to work properly on version 1.8xx
+ I noticed. I updated before the original WSAGAScript. You can now use the WSA + OpenGapps method in version 1.8xx.
 
 # What is wsa script?
 
