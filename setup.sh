@@ -194,7 +194,7 @@ if [ -f "wsatools.py" ]; then
     fi
 if [ -f "/mnt/c/wsaproject/WSATools.Msixbundle" ]; then
     echo "$red There is WSATools. This file will be deleted. $white"
-rm -rf /mnt/c/wsaproject/WSATools.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/WSATools.Msixbundle
     else
  echo "$green WSATools dont exists. $white"
 fi
@@ -209,8 +209,8 @@ echo "$green WSATools has been downloaded. Now the PS file is downloading. $whit
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools1.ps1 -O wsatools.ps1
 echo "$green Download completed, moving to required location."
 
-mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
-mv 54406Simizfo.WSATools*.Msixbundle /mnt/c/wsaproject/WSATools.Msixbundle
+sudo mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
+sudo mv 54406Simizfo.WSATools*.Msixbundle /mnt/c/wsaproject/WSATools.Msixbundle
 
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsatools.py
@@ -252,13 +252,13 @@ echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
-rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
 
 echo "$green Download completed, moving to required location."
-mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+sudo mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 fi
@@ -332,13 +332,13 @@ echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 pwd
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
-rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
 pwd
 echo "$green Download completed, moving to required location."
-mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+sudo mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 
