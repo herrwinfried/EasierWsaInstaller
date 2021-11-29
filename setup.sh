@@ -192,9 +192,9 @@ if [ -f "wsatools.py" ]; then
     else
  echo "$green wsatools.py dont exists. $white"
     fi
-if [ -f "/mnt/c/wsaproject/WSATools.Msixbundle" ]; then
+if [ -f "/mnt/c/wsaproject/WSATools.msixbundle" ]; then
     echo "$red There is WSATools. This file will be deleted. $white"
-sudo rm -rf /mnt/c/wsaproject/WSATools.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/WSATools.msixbundle
     else
  echo "$green WSATools dont exists. $white"
 fi
@@ -210,7 +210,7 @@ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/
 echo "$green Download completed, moving to required location."
 
 sudo mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
-sudo mv 54406Simizfo.WSATools*.Msixbundle /mnt/c/wsaproject/WSATools.Msixbundle
+sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
 
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsatools.py
@@ -250,15 +250,15 @@ echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 
-if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
+if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
-sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
 
 echo "$green Download completed, moving to required location."
-sudo mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 fi
@@ -330,15 +330,15 @@ echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 pwd
-if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
+if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
-sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
 pwd
 echo "$green Download completed, moving to required location."
-sudo mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 
@@ -425,7 +425,7 @@ fi
 
 else
 echo "$yellow Preparation: Extracting the WSA file $white"
-unzip -o Microsoft*WindowsSubsystemForAndroid*.Msixbundle -d microsoftwsa && cd microsoftwsa
+unzip -o Microsoft*WindowsSubsystemForAndroid*.msixbundle -d microsoftwsa && cd microsoftwsa
 fi
 echo "$yellow Preparation: Extracting the WSA Package file $white"
 unzip -o "WsaPackage_*_$msarch_*.msix" -d wsa
