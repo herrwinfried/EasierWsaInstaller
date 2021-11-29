@@ -258,7 +258,7 @@ sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
 fi
 
 echo "$green Download completed, moving to required location."
-sudo mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 fi
