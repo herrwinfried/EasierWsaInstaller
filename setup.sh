@@ -252,13 +252,13 @@ echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
-rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
 
 echo "$green Download completed, moving to required location."
-mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+sudo mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 fi
