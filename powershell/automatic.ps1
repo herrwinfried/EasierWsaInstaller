@@ -83,7 +83,7 @@ if ( $selectos -eq "Ubuntu") {
         if ( $wsatoolsint ) {
             Clear-Host
             Set-Location "C:\wsaproject"
-           .\wsatools.ps1
+           .\wsatools.ps1 1
         }
     }
     else {
@@ -133,7 +133,7 @@ if ( $selectos -eq "openSUSE-Tumbleweed") {
         if ( $wsatoolsint ) {
             Clear-Host
             Set-Location "C:\wsaproject"
-           .\wsatools.ps1
+           .\wsatools.ps1 1
         }
     }
     else {
@@ -182,7 +182,7 @@ if ( $selectos -eq "Debian") {
         if ( $wsatoolsint ) {
             Clear-Host
             Set-Location "C:\wsaproject"
-           .\wsatools.ps1
+           .\wsatools.ps1 1
         }
     }
     else {
@@ -208,7 +208,7 @@ if ( $selectos -eq "Debian") {
     
 }
 Set-Location "C:\wsaproject"
-.\Setup.ps1
+.\setup.ps1 1
 }
 elseif ($Arch -eq 'Arm64') {
     $wsafolder = 'C:\wsa'
@@ -265,7 +265,7 @@ if ( $selectos -eq "Ubuntu") {
         if ( $wsatoolsint ) {
             Clear-Host
             Set-Location "C:\wsaproject"
-           .\wsatools.ps1
+           .\wsatools.ps1 1
         }
     }
     else {
@@ -314,7 +314,7 @@ if ( $selectos -eq "openSUSE-Tumbleweed") {
         if ( $wsatoolsint ) {
             Clear-Host
             Set-Location "C:\wsaproject"
-           .\wsatools.ps1
+           .\wsatools.ps1 1
         }
     }
     else {
@@ -362,7 +362,7 @@ if ( $selectos -eq "Debian") {
         if ( $wsatoolsint ) {
             Clear-Host
             Set-Location "C:\wsaproject"
-           .\wsatools.ps1
+           .\wsatools.ps1 1
         }
     }
     else {
@@ -388,5 +388,5 @@ if ( $selectos -eq "Debian") {
 
 }
 Set-Location "C:\wsaproject"
-.\Setup.ps1
+.\setup.ps1 1
 }
