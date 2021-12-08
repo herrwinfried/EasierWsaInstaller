@@ -482,8 +482,6 @@ sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
 echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
 fi
 
-
-else
 sudo cp /mnt/c/wsaproject/Setup.ps1 /mnt/c/wsa/Setup.ps1
 echo "$green Process completed. $red Note that Developer Mode must be turned on to install WSA."
 echo "$yellow If all operations are successful, you can run the Setup.ps1 script in $green 'C:\wsaproject'$yellow. $white"
