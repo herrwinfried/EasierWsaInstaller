@@ -17,7 +17,7 @@ magenta="$(tput setaf 5)"
 cyan="$(tput setaf 6)"
 white="$(tput setaf 7)"
 
-tempwsa=no
+
 
 ### Finish
 if [[ $EUID -ne 0 ]]; then
@@ -137,6 +137,7 @@ allOkey=false;             #
 okey=false;                #
 wsaonlydownload=false;     #
 install_all=false;         #
+tempwsa=false;             #
 ############################
 i=1;
 j=$#;
@@ -163,6 +164,8 @@ elif [[ $1 == "--all-okey" ]]; then
 allOkey=true;
 elif [[ $1 == "--okey" ]]; then
 okey=true;
+elif [[ $1 == "--tempwsa" ]]; then
+tempwsa=true;
 
     else
     echo "$red Invalid argument-$i: $1 $white";
@@ -183,7 +186,7 @@ sleep 1
 echo $yellow WSAOnly: $red $wsaonlydownload 
 sleep 1
 echo $yellow WSATools: $red $wsatoolsdownload $yellow AllOkey: $red $allOkey $yellow Okey: $red $okey
-sleep 2
+sleep 4
 
 function wsatools {
     if [ -d /tmp/wsaproject ]; then
@@ -219,6 +222,7 @@ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsato
 echo "$green WSATools Beginning to download. $yellow"
 
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools.ps1 -O wsatools.ps1
+
 chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
 echo "$green Download completed, moving to required location."
