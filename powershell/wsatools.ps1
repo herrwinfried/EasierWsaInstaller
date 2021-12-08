@@ -1,4 +1,6 @@
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs; exit }
+param([bool]$nostop)
+    $nostopint = [int][bool]::Parse($nostop)
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" -nostop $nostopint" -Verb RunAs; exit }
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
 Import-Module -Name Appx -UseWIndowsPowershell
 if ($Arch -eq 'x86') {
@@ -15,9 +17,15 @@ elseif ($Arch -eq 'amd64') {
     Set-Location "C:\wsaproject"
     add-appxpackage .\WSATools.Msixbundle
     $PSVersionTable
-pause
+    if ($nostopint) {
+Write-Host "No-Stop"
+    } else {
+        pause
+    }
+
+
 }
 elseif ($Arch -eq 'Arm64') {
     Write-Host "Developer Sorry, it doesn't support ARM. (WSATools)"
-Pause
+    pause
 }

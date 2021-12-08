@@ -157,8 +157,58 @@ if ( $selectos -eq "openSUSE-Tumbleweed") {
         }
     }
 }
+if ( $selectos -eq "Debian") {
+    Clear-Host
+
+    if ($wsatoolsint) {
+        if ($wsaint -and $gappsint) {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --wsatools --all-okey"
+        }
+        elseif ($wsaint)
+        {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --wsatools --all-okey"
+        }
+        elseif ($gappsint)
+        {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --opengapps --wsatools --all-okey"
+        }
+        elseif (! $wsaint -or !$gappsint )
+        {
+            Write-Host "Make sure you have Debian(Debian without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."    
+            Pause
+            Clear-Host
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsatools --all-okey"
+        }
+        if ( $wsatoolsint ) {
+            Clear-Host
+            Set-Location "C:\wsaproject"
+           .\wsatools.ps1
+        }
+    }
+    else {
+        if ($wsaint -and $gappsint) {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --opengapps --all-okey"
+        }
+        elseif ($wsaint)
+        {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsa --all-okey"
+        }
+        elseif ($gappsint)
+        {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --opengapps --all-okey"
+        }
+        elseif (! $wsaint -or !$gappsint )
+        {
+            Write-Host "Make sure you have Debian(Debian without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."    
+            Pause
+            Clear-Host
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --all-okey"
+        }
+    }
+    
+}
 Set-Location "C:\wsaproject"
-.\powershell.ps1
+.\Setup.ps1
 }
 elseif ($Arch -eq 'Arm64') {
     $wsafolder = 'C:\wsa'
@@ -288,6 +338,55 @@ if ( $selectos -eq "openSUSE-Tumbleweed") {
         }
     }
 }
+if ( $selectos -eq "Debian") {
+    Clear-Host
+    if ($wsatoolsint) {
+        if ($wsaint -and $gappsint) {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --wsatools --all-okey"
+        }
+        elseif ($wsaint)
+        {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --wsatools --all-okey"
+        }
+        elseif ($gappsint)
+        {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --opengapps --wsatools --all-okey"
+        }
+        elseif (! $wsaint -or !$gappsint )
+        {
+            Write-Host "Make sure you have Debian(Debian without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
+            Pause
+            Clear-Host
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsatools --all-okey"
+        }
+        if ( $wsatoolsint ) {
+            Clear-Host
+            Set-Location "C:\wsaproject"
+           .\wsatools.ps1
+        }
+    }
+    else {
+        if ($wsaint -and $gappsint) {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --opengapps --all-okey"
+        }
+        elseif ($wsaint)
+        {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsa --all-okey"
+        }
+        elseif ($gappsint)
+        {
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --opengapps --all-okey"
+        }
+        elseif (! $wsaint -or !$gappsint )
+        {
+            Write-Host "Make sure you have Debian(Debian without version number) installed or it could cause problems if things go wrong. If not, please close the window directly."
+            Pause
+            Clear-Host
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --all-okey"
+        }
+    }
+
+}
 Set-Location "C:\wsaproject"
-.\powershell.ps1
+.\Setup.ps1
 }

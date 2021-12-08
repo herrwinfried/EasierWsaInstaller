@@ -1,5 +1,5 @@
 #!/bin/bash
-tempwsa=yes
+
 ### Fonts
 termcols=$(tput cols)
 bold="$(tput bold)"
@@ -16,6 +16,9 @@ blue="$(tput setaf 4)"
 magenta="$(tput setaf 5)"
 cyan="$(tput setaf 6)"
 white="$(tput setaf 7)"
+
+tempwsa=no
+
 ### Finish
 if [[ $EUID -ne 0 ]]; then
    echo "$red You have to start it as SuperUser $white"
@@ -98,12 +101,12 @@ echo "$red I couldn't find the wget package. That's why I canceled the transacti
 exit 1
 fi
 fi
-if ! [ -x "$(command -v python3)" ]; then
+if ! [ -x "$(command -v python3.8)" ]; then
 if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3) $white"
+echo "$green I found a missing package, I'm installing it... (python3.8) $white"
 sudo apt install -y python3.8 python3-pip
 elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3) $white"
+echo "$green I found a missing package, I'm installing it... (python3.8) $white"
 sudo zypper install -y python38 python38-pip
 else
 echo "$red I couldn't find the python3 package. That's why I canceled the transaction. $white"
@@ -133,6 +136,7 @@ wsatoolsdownload=false;    #
 allOkey=false;             #
 okey=false;                #
 wsaonlydownload=false;     #
+install_all=false;         #
 ############################
 i=1;
 j=$#;
@@ -159,17 +163,28 @@ elif [[ $1 == "--all-okey" ]]; then
 allOkey=true;
 elif [[ $1 == "--okey" ]]; then
 okey=true;
+
     else
     echo "$red Invalid argument-$i: $1 $white";
     fi
     i=$((i + 1));
     shift 1;
 done
-$pwdsh=pwd
-echo $yellow WSADownload: $red $wsadownload $yellow OpenGapps: $red $opengappsdownload $yellow WSATools: $red $wsatoolsdownload $yellow AllOkey: $red $allOkey $yellow Okey: $red $okey
-echo $yellow TempWSA: $red $tempwsa $yellow WSAOnly: $red $wsaonlydownload
+pwdsh="$(pwd)"
+
 echo $yellow gappsarch: $red $gappsarch $yellow msarch: $red $msarch $yellow mskernel: $red $mskernel
+sleep 1
 echo $yellow Location: $red $pwdsh
+sleep 1
+echo $yellow WSA Download: $red $wsadownload $yellow OpenGapps: $red $opengappsdownload
+sleep 1
+echo $yellow TempWSA: $red $tempwsa $yellow WSAOnly: $red $wsaonlydownload 
+sleep 1
+echo $yellow WSAOnly: $red $wsaonlydownload 
+sleep 1
+echo $yellow WSATools: $red $wsatoolsdownload $yellow AllOkey: $red $allOkey $yellow Okey: $red $okey
+sleep 2
+
 function wsatools {
     if [ -d /tmp/wsaproject ]; then
 cd /tmp && cd wsaproject
@@ -178,7 +193,7 @@ echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
 if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-if [[ -x "$(command -v python3)" ]]; then
+if [[ -x "$(command -v python3.8)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
 pip3 install BeautifulSoup4
@@ -192,9 +207,9 @@ if [ -f "wsatools.py" ]; then
     else
  echo "$green wsatools.py dont exists. $white"
     fi
-if [ -f "/mnt/c/wsaproject/WSATools.Msixbundle" ]; then
+if [ -f "/mnt/c/wsaproject/WSATools.msixbundle" ]; then
     echo "$red There is WSATools. This file will be deleted. $white"
-rm -rf /mnt/c/wsaproject/WSATools.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/WSATools.msixbundle
     else
  echo "$green WSATools dont exists. $white"
 fi
@@ -203,14 +218,14 @@ echo "$green Downloading wsatools.py To download WSATools. $white"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsatools.py -O wsatools.py
 echo "$green WSATools Beginning to download. $yellow"
 
-chmod +x ./wsatools.py && python3 ./wsatools.py
+chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
 
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools1.ps1 -O wsatools.ps1
 echo "$green Download completed, moving to required location."
 
-mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
-mv 54406Simizfo.WSATools*.Msixbundle /mnt/c/wsaproject/WSATools.Msixbundle
+sudo mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
+sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
 
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsatools.py
@@ -227,7 +242,7 @@ else
 echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
-if [[ -x "$(command -v python3)" ]]; then
+if [[ -x "$(command -v python3.8)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
 pip3 install BeautifulSoup4
@@ -247,18 +262,18 @@ if [ -f "wsa.py" ]; then
 echo "$green Downloading wsa.py To download WSA. $yellow"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
-chmod +x ./wsa.py && python3 ./wsa.py
+chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 
-if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
+if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
-rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
 
 echo "$green Download completed, moving to required location."
-mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 fi
@@ -294,7 +309,7 @@ fi
  echo "$green open_gapps-$gappsarch dont exists. $white"
     fi
     echo "$green OpenGapps Beginning to download. $yellow"
-chmod +x ./opengapps.py && python3 ./opengapps.py
+chmod +x ./opengapps.py && python3.8 ./opengapps.py
 echo "$green Download completed, moving to required location."
 mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
 echo "$red Deleting opengapps.py file. $white"
@@ -310,7 +325,7 @@ fi
 pwd
 sudo mkdir /mnt/c/wsaproject
 sudo mkdir /mnt/c/wsaproject
-    if [[ -x "$(command -v python3)" ]]; then
+    if [[ -x "$(command -v python3.8)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
 pip3 install BeautifulSoup4
@@ -327,18 +342,18 @@ if [ -f "wsa.py" ]; then
 echo "$green Downloading wsa.py To download WSA. $yellow"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
-chmod +x ./wsa.py && python3 ./wsa.py
+chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 pwd
-if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle ]; then
+if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
-rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.Msixbundle
+sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
 pwd
 echo "$green Download completed, moving to required location."
-mv Microsoft*WindowsSubsystemForAndroid*.Msixbundle /mnt/c/wsaproject/
+sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 
@@ -392,11 +407,9 @@ git clone https://github.com/herrwinfried/WSAGAScript
 
 echo "$green Downloading PS File for WSA. $yellow"
 
-if [[ $allOkey == true ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/powershell1.ps1 -O powershell.ps1
-else
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/powershell.ps1 -O powershell.ps1
-fi
+
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/Setup.ps1 -O Setup.ps1
+
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
 if [[ $allOkey == true ]] || [[ $okey == true ]]; then
@@ -425,7 +438,7 @@ fi
 
 else
 echo "$yellow Preparation: Extracting the WSA file $white"
-unzip -o Microsoft*WindowsSubsystemForAndroid*.Msixbundle -d microsoftwsa && cd microsoftwsa
+unzip -o Microsoft*WindowsSubsystemForAndroid*.msixbundle -d microsoftwsa && cd microsoftwsa
 fi
 echo "$yellow Preparation: Extracting the WSA Package file $white"
 unzip -o "WsaPackage_*_$msarch_*.msix" -d wsa
@@ -468,8 +481,12 @@ sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
 fi
-echo "$green Process completed. $red Note that Developer Mode must be turned on to install WSA."
-echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
 
+
+else
+sudo cp /mnt/c/wsaproject/Setup.ps1 /mnt/c/wsa/Setup.ps1
+echo "$green Process completed. $red Note that Developer Mode must be turned on to install WSA."
+echo "$yellow If all operations are successful, you can run the Setup.ps1 script in $green 'C:\wsaproject'$yellow. $white"
+fi
 sudo rm -rf setup.sh
 fi

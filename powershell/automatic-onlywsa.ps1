@@ -69,6 +69,22 @@ elseif ($wsaint -and !$wsatoolsint) {
 }
 
 }
+if ( $selectos -eq "Debian") {
+    Clear-Host
+    if ($wsaint -and $wsatoolsint)
+        {
+            Clear-Host
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --wsatools --all-okey"
+
+            
+    }
+    elseif ($wsaint -and !$wsatoolsint) {
+        {
+            Clear-Host
+            wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --wsaonly --all-okey"
+    }
+    }
+}
 Set-Location "C:\wsaproject"
 Write-Host "Your file has been downloaded under c:\wsaproject. You can double click and install."
 pause
@@ -115,6 +131,21 @@ Clear-Host
             wsl -d openSUSE-Tumbleweed -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --all-okey"
     }
     
+    }
+    if ( $selectos -eq "Debian") {
+        Clear-Host
+        if ($wsaint -and $wsatoolsint)
+            {
+                Clear-Host
+                wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --wsatools --all-okey"
+       
+          }
+        elseif ($wsaint -and !$wsatoolsint) {
+            {
+                Clear-Host
+                wsl -d Debian -e sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh && sudo ./setup.sh --arm --wsaonly --all-okey"
+        }
+        }
     }
 Set-Location "C:\wsaproject"
 Write-Host "Your file has been downloaded under c:\wsaproject. You can double click and install."

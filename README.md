@@ -4,6 +4,12 @@
 
 This method is experimental. Made easy for you to enter fewer commands.
 
+
+<del> **Except for the wsa option, the current wsa is still not downloading. This is because the WSAGAProject team for Current WSA is still working on it. So version 1.7xx is still used in the wsa + opengapps method.** </del>
+
+Code change for a [Developer](https://github.com/WSA-Community/WSAGAScript/pull/139/) to work properly on version 1.8xx
+ I noticed. I updated before the original WSAGAScript. You can now use the WSA + OpenGapps method in version 1.8xx.
+
 # What is wsa script?
 
 wsa-script is a script that makes it easy to download [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) and regular WSA. It aims to offer you an easier OpenGapps + WSA by facilitating the [WSAGAScript](https://github.com/WSA-Community/WSAGAScript) project.
@@ -24,6 +30,8 @@ wsa-script is a script that makes it easy to download [WSAGAScript](https://gith
 https://youtu.be/NAEF_S1JTFk
 
 # What are the Requirements?
+
+> You need to fully install ubuntu or opensuse tumbleweed. So you have to create a User account.
 
 - You must have a minimum Windows 11 device. It is adjusted for Windows 11 only.
 - [Virtual Machine Platform Must Be Active](#virtual-machine-platform-must-be-active)
@@ -58,6 +66,9 @@ __**In normal use, you should prefer windows terminal instead of Powershell 7.**
 You need to remove the existing WSA.
 
 ___The ARM version is still beta, please give feedback when you encounter an error.___ **(Applicable if you are going to use the opengapps + wsa method.)**
+
+- [WSA + OpenGapps Method](#wsa--opengapps-method)
+- [WSA Upload only](#wsa-upload-only)
 
 # WSA + OpenGapps Method
 
