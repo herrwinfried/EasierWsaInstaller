@@ -166,7 +166,6 @@ elif [[ $1 == "--okey" ]]; then
 okey=true;
 elif [[ $1 == "--tempwsa" ]]; then
 tempwsa=true;
-
     else
     echo "$red Invalid argument-$i: $1 $white";
     fi
@@ -374,15 +373,16 @@ echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
 
-
+sleep 1
 if [[ $wsatoolsdownload == true ]]; then
 wsatools
 fi
+sleep 2
 #/#/
 if [[ $wsaonlydownload == true ]]; then
 
 wsaonly
-
+sleep 2
 else
 ##//
 
@@ -390,10 +390,11 @@ else
 if [[ $wsadownload == true ]]; then
 wsa
 fi
+sleep 2
 if [[ $opengappsdownload == true ]]; then
 opengapps
 fi
-
+sleep 2
 if [ -d "/mnt/c/wsaproject" ]; then
 cd ~ && cd /mnt/c/wsaproject
 else
@@ -403,6 +404,7 @@ fi
     if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
 sudo rm -rf /mnt/c/wsaproject/WSAGAScript
 fi
+sleep 2
 echo "$green WSAGAProject Downloading. $yellow"
 
 git clone https://github.com/herrwinfried/WSAGAScript
@@ -411,7 +413,7 @@ echo "$green Downloading PS File for WSA. $yellow"
 
 
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/Setup.ps1 -O Setup.ps1
-
+sleep 3
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
 if [[ $allOkey == true ]] || [[ $okey == true ]]; then
@@ -425,30 +427,36 @@ pwd
 echo "$green Preparation: moving opengapps to required location. $white"
 
 mv open_gapps-$gappsarch-11.0*.zip WSAGAScript/#GAPPS/
-
+sleep 2
 if [[ $tempwsa == "yes" ]] && [[ $wsadownload == true ]]; then
 mkdir microsoftwsa
 cd microsoftwsa
 echo "$red This script is set as temporary WSA. So probably because there is a problem with a current WSA, the old version will be downloaded. $yellow"
 
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_x64_Release-Nightly.msix
+#wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_x64_Release-Nightly.msix
+wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.8.32828.0/WsaPackage_1.8.32828.0_x64_Release-Nightly.msix
 fi
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
-wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_ARM64_Release-Nightly.msix
+#wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_ARM64_Release-Nightly.msix
+wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.8.32828.0/WsaPackage_1.8.32828.0_x64_Release-Nightly.msix
 fi
 
 else
 echo "$yellow Preparation: Extracting the WSA file $white"
+sleep 3
 unzip -o Microsoft*WindowsSubsystemForAndroid*.msixbundle -d microsoftwsa && cd microsoftwsa
 fi
 echo "$yellow Preparation: Extracting the WSA Package file $white"
+sleep 3
 unzip -o "WsaPackage_*_$msarch_*.msix" -d wsa
 echo "$red Unnecessary files are deleted. $white"
 find . -maxdepth 1 ! -name WsaPackage_*_\$msarch_*.msix ! -name "wsa" ! -name . -exec rm -r {} \;
 cd wsa
 echo "$green Preparation: files that need to be deleted are being deleted. $white"
+sleep 2
 rm -rf '[Content_Types].xml' AppxBlockMap.xml AppxSignature.p7x AppxMetadata
+sleep 2
 echo "$green Preparation: Moving files that need to be moved. $white"
 mv *.img ../../WSAGAScript/#IMAGES/
 
