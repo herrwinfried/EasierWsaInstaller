@@ -166,6 +166,8 @@ elif [[ $1 == "--okey" ]]; then
 okey=true;
 elif [[ $1 == "--tempwsa" ]]; then
 tempwsa=true;
+elif [[ $1 == "--no-tempwsa" ]]; then
+tempwsa=false;
     else
     echo "$red Invalid argument-$i: $1 $white";
     fi
