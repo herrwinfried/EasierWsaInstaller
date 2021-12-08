@@ -220,8 +220,6 @@ echo "$green WSATools Beginning to download. $yellow"
 
 chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
-
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools1.ps1 -O wsatools.ps1
 echo "$green Download completed, moving to required location."
 
 sudo mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
@@ -477,14 +475,12 @@ sudo rm -rf /mnt/c/wsa/$msarch
 sudo mkdir /mnt/c/wsa/$msarch
 
 sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
-
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
 fi
-
 sudo cp /mnt/c/wsaproject/Setup.ps1 /mnt/c/wsa/Setup.ps1
 echo "$green Process completed. $red Note that Developer Mode must be turned on to install WSA."
-echo "$yellow If all operations are successful, you can run the Setup.ps1 script in $green 'C:\wsaproject'$yellow. $white"
-fi
+echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
+
 sudo rm -rf setup.sh
 fi
