@@ -1,9 +1,0 @@
-for ( $i = 0; $i -lt $args.count; $i++ ) {
-    if ( $($args[$i]) -eq "np" )  {
-$nostop=$True;
-    }
-    else {
-        write-host "Invalid argument-$i : $($args[$i])"
-    }
-    
-} 

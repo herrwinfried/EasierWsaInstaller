@@ -218,10 +218,10 @@ echo "$green Downloading wsatools.py To download WSATools. $white"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsatools.py -O wsatools.py
 echo "$green WSATools Beginning to download. $yellow"
 
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools.ps1 -O wsatools.ps1
 chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
 echo "$green Download completed, moving to required location."
-
 sudo mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
 sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
 
