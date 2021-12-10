@@ -1,5 +1,5 @@
 #!/bin/bash
-tempwsa=no
+
 ### Fonts
 termcols=$(tput cols)
 bold="$(tput bold)"
@@ -16,6 +16,9 @@ blue="$(tput setaf 4)"
 magenta="$(tput setaf 5)"
 cyan="$(tput setaf 6)"
 white="$(tput setaf 7)"
+
+
+
 ### Finish
 if [[ $EUID -ne 0 ]]; then
    echo "$red You have to start it as SuperUser $white"
@@ -133,6 +136,8 @@ wsatoolsdownload=false;    #
 allOkey=false;             #
 okey=false;                #
 wsaonlydownload=false;     #
+install_all=false;         #
+tempwsa=false;             #
 ############################
 i=1;
 j=$#;
@@ -159,17 +164,31 @@ elif [[ $1 == "--all-okey" ]]; then
 allOkey=true;
 elif [[ $1 == "--okey" ]]; then
 okey=true;
+elif [[ $1 == "--tempwsa" ]]; then
+tempwsa=true;
+elif [[ $1 == "--no-tempwsa" ]]; then
+tempwsa=false;
     else
     echo "$red Invalid argument-$i: $1 $white";
     fi
     i=$((i + 1));
     shift 1;
 done
-$pwdsh=pwd
-echo $yellow WSADownload: $red $wsadownload $yellow OpenGapps: $red $opengappsdownload $yellow WSATools: $red $wsatoolsdownload $yellow AllOkey: $red $allOkey $yellow Okey: $red $okey
-echo $yellow TempWSA: $red $tempwsa $yellow WSAOnly: $red $wsaonlydownload
+pwdsh="$(pwd)"
+
 echo $yellow gappsarch: $red $gappsarch $yellow msarch: $red $msarch $yellow mskernel: $red $mskernel
+sleep 1
 echo $yellow Location: $red $pwdsh
+sleep 1
+echo $yellow WSA Download: $red $wsadownload $yellow OpenGapps: $red $opengappsdownload
+sleep 1
+echo $yellow TempWSA: $red $tempwsa $yellow WSAOnly: $red $wsaonlydownload 
+sleep 1
+echo $yellow WSAOnly: $red $wsaonlydownload 
+sleep 1
+echo $yellow WSATools: $red $wsatoolsdownload $yellow AllOkey: $red $allOkey $yellow Okey: $red $okey
+sleep 4
+
 function wsatools {
     if [ -d /tmp/wsaproject ]; then
 cd /tmp && cd wsaproject
@@ -203,12 +222,11 @@ echo "$green Downloading wsatools.py To download WSATools. $white"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
 echo "$green WSATools Beginning to download. $yellow"
 
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools.ps1 -O wsatools.ps1
+
 chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
-
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools1.ps1 -O wsatools.ps1
 echo "$green Download completed, moving to required location."
-
 sudo mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
 sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
 
@@ -357,15 +375,16 @@ echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
 
-
+sleep 1
 if [[ $wsatoolsdownload == true ]]; then
 wsatools
 fi
+sleep 2
 #/#/
 if [[ $wsaonlydownload == true ]]; then
 
 wsaonly
-
+sleep 2
 else
 ##//
 
@@ -373,10 +392,11 @@ else
 if [[ $wsadownload == true ]]; then
 wsa
 fi
+sleep 2
 if [[ $opengappsdownload == true ]]; then
 opengapps
 fi
-
+sleep 2
 if [ -d "/mnt/c/wsaproject" ]; then
 cd ~ && cd /mnt/c/wsaproject
 else
@@ -386,17 +406,16 @@ fi
     if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
 sudo rm -rf /mnt/c/wsaproject/WSAGAScript
 fi
+sleep 2
 echo "$green WSAGAProject Downloading. $yellow"
 
 git clone https://github.com/herrwinfried/WSAGAScript
 
 echo "$green Downloading PS File for WSA. $yellow"
 
-if [[ $allOkey == true ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell1.ps1 -O powershell.ps1
-else
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell.ps1 -O powershell.ps1
-fi
+
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/Setup.ps1 -O Setup.ps1
+sleep 3
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
 if [[ $allOkey == true ]] || [[ $okey == true ]]; then
@@ -410,30 +429,36 @@ pwd
 echo "$green Preparation: moving opengapps to required location. $white"
 
 mv open_gapps-$gappsarch-11.0*.zip WSAGAScript/#GAPPS/
-
+sleep 2
 if [[ $tempwsa == "yes" ]] && [[ $wsadownload == true ]]; then
 mkdir microsoftwsa
 cd microsoftwsa
 echo "$red This script is set as temporary WSA. So probably because there is a problem with a current WSA, the old version will be downloaded. $yellow"
 
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_x64_Release-Nightly.msix
+#wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_x64_Release-Nightly.msix
+wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.8.32828.0/WsaPackage_1.8.32828.0_x64_Release-Nightly.msix
 fi
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
-wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_ARM64_Release-Nightly.msix
+#wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_ARM64_Release-Nightly.msix
+wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.8.32828.0/WsaPackage_1.8.32828.0_x64_Release-Nightly.msix
 fi
 
 else
 echo "$yellow Preparation: Extracting the WSA file $white"
+sleep 3
 unzip -o Microsoft*WindowsSubsystemForAndroid*.msixbundle -d microsoftwsa && cd microsoftwsa
 fi
 echo "$yellow Preparation: Extracting the WSA Package file $white"
+sleep 3
 unzip -o "WsaPackage_*_$msarch_*.msix" -d wsa
 echo "$red Unnecessary files are deleted. $white"
 find . -maxdepth 1 ! -name WsaPackage_*_\$msarch_*.msix ! -name "wsa" ! -name . -exec rm -r {} \;
 cd wsa
 echo "$green Preparation: files that need to be deleted are being deleted. $white"
+sleep 2
 rm -rf '[Content_Types].xml' AppxBlockMap.xml AppxSignature.p7x AppxMetadata
+sleep 2
 echo "$green Preparation: Moving files that need to be moved. $white"
 mv *.img ../../WSAGAScript/#IMAGES/
 
@@ -464,10 +489,10 @@ sudo rm -rf /mnt/c/wsa/$msarch
 sudo mkdir /mnt/c/wsa/$msarch
 
 sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
-
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
 fi
+sudo cp /mnt/c/wsaproject/Setup.ps1 /mnt/c/wsa/Setup.ps1
 echo "$green Process completed. $red Note that Developer Mode must be turned on to install WSA."
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
 
