@@ -87,10 +87,10 @@ pip3 install lxml
 #pip3
 fi
 echo "$red Only 64 Bit(amd64)"
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsatools.py -O wsatools.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
 chmod +x ./wsatools.py && python3 ./wsatools.py
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools.ps1 -O wsatools.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools.ps1 -O wsatools.ps1
 
 mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
 

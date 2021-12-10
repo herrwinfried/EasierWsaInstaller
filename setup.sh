@@ -219,10 +219,10 @@ sudo rm -rf /mnt/c/wsaproject/WSATools.msixbundle
 fi
 echo "$green Downloading wsatools.py To download WSATools. $white"
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsatools.py -O wsatools.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
 echo "$green WSATools Beginning to download. $yellow"
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools.ps1 -O wsatools.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools.ps1 -O wsatools.ps1
 
 chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
@@ -263,7 +263,7 @@ if [ -f "wsa.py" ]; then
  echo "$green wsa.py dont exists. $white"
     fi
 echo "$green Downloading wsa.py To download WSA. $yellow"
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
@@ -300,10 +300,10 @@ fi
 
     echo "$green Downloading opengapps.py To download OpenGAPPS. $yellow"
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps.py -O opengapps.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps.py -O opengapps.py
 fi
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps-arm.py -O opengapps.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps-arm.py -O opengapps.py
 fi
     if [ -f /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip ]; then
     echo "$red open_gapps-$gappsarch. This file will be deleted. $white"
@@ -343,7 +343,7 @@ if [ -f "wsa.py" ]; then
  echo "$green wsa.py dont exists. $white"
     fi
 echo "$green Downloading wsa.py To download WSA. $yellow"
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
@@ -360,7 +360,7 @@ sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
 
-#wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/powershell.ps1 -O powershell.ps1
+#wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/powershell.ps1 -O powershell.ps1
 #echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
 #py3
 fi
@@ -414,7 +414,7 @@ git clone https://github.com/herrwinfried/WSAGAScript
 echo "$green Downloading PS File for WSA. $yellow"
 
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/Setup.ps1 -O Setup.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/Setup.ps1 -O Setup.ps1
 sleep 3
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
