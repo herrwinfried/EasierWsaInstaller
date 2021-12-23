@@ -210,7 +210,7 @@ if ( $selectos -eq "Debian") {
     
 }
 Set-Location "C:\wsaproject"
-.\setup.ps1 1
+.\Setup.ps1 1
 }
 elseif ($Arch -eq 'Arm64') {
     $wsafolder = 'C:\wsa'
@@ -390,5 +390,5 @@ if ( $selectos -eq "Debian") {
 
 }
 Set-Location "C:\wsaproject"
-.\setup.ps1 1
+.\Setup.ps1 1
 }
