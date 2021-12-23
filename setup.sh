@@ -203,6 +203,7 @@ echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white
 pip3 install BeautifulSoup4
 pip3 install wget
 pip3 install lxml
+pip3 install requests
 #pip3
 fi
 if [ -f "wsatools.py" ]; then
