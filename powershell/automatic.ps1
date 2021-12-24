@@ -11,7 +11,7 @@ param(
     $vmcint = [int][bool]::Parse($vmc)
     $wsatoolsint = [int][bool]::Parse($wsatools)
     $wsadevwinint = [int][bool]::Parse($wsadevwin)
-Write-Host "$wsatoolsint $wsaint $gappsint $vmcint $selectos"
+Write-Host "$selectos $wsaint $gappsint $vmcint $wsatoolsint $wsadevwinint"
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $gappsint $vmcint $wsatoolsint $wsadevwinint" -Verb RunAs; exit }
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
