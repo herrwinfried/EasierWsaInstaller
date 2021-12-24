@@ -3,16 +3,17 @@ param(
 [bool]$wsa,
 [bool]$gapps,
 [bool]$vmc,
-[bool]$wsatools
-
+[bool]$wsatools,
+[bool]$wsadevwin
 )
     $wsaint = [int][bool]::Parse($wsa)
     $gappsint = [int][bool]::Parse($gapps)
     $vmcint = [int][bool]::Parse($vmc)
     $wsatoolsint = [int][bool]::Parse($wsatools)
+    $wsadevwinint = [int][bool]::Parse($wsadevwin)
 Write-Host "$wsatoolsint $wsaint $gappsint $vmcint $selectos"
 
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $gappsint $vmcint $wsatoolsint" -Verb RunAs; exit }
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $gappsint $vmcint $wsatoolsint $wsadevwinint" -Verb RunAs; exit }
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
 if ( ((Get-Host).Version).Major -ne "5" ) 
 { 
@@ -210,7 +211,24 @@ if ( $selectos -eq "Debian") {
     
 }
 Set-Location "C:\wsaproject"
+if ( $wsadevwinint -eq 1 ) {
+    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+}
 .\Setup.ps1 1
+if ( $wsadevwinint -eq 1 ) {
+    $wsalocation = "$env:LOCALAPPDATA/Packages/MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe/Settings/settings.dat"
+    $mountPoint = "HKLM\WSA"
+reg load $mountPoint $wsalocation
+    $develbit = "1"
+    $data  = "Windows Registry Editor Version 5.00`n`n"
+    $data += "[HKEY_LOCAL_MACHINE\WSA]`n`n"
+    $data += "[HKEY_LOCAL_MACHINE\WSA\LocalState]`n"
+    $data += "`"DeveloperModeEnabled`"=hex(5f5e10b):0"+ $develbit + ",07,b9,6f,f3,d3,dc,d7,01`n"
+    $data | Out-File "./wsadevelopermode.reg"
+[gc]::collect()
+reg import "./wsadevelopermode.reg"
+reg unload $mountPoint
+}
 }
 elseif ($Arch -eq 'Arm64') {
     $wsafolder = 'C:\wsa'
@@ -390,5 +408,22 @@ if ( $selectos -eq "Debian") {
 
 }
 Set-Location "C:\wsaproject"
+if ( $wsadevwinint -eq 1 ) {
+    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+}
 .\Setup.ps1 1
+if ( $wsadevwinint -eq 1 ) {
+    $wsalocation = "$env:LOCALAPPDATA/Packages/MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe/Settings/settings.dat"
+    $mountPoint = "HKLM\WSA"
+reg load $mountPoint $wsalocation
+    $develbit = "1"
+    $data  = "Windows Registry Editor Version 5.00`n`n"
+    $data += "[HKEY_LOCAL_MACHINE\WSA]`n`n"
+    $data += "[HKEY_LOCAL_MACHINE\WSA\LocalState]`n"
+    $data += "`"DeveloperModeEnabled`"=hex(5f5e10b):0"+ $develbit + ",07,b9,6f,f3,d3,dc,d7,01`n"
+    $data | Out-File "./wsadevelopermode.reg"
+[gc]::collect()
+reg import "./wsadevelopermode.reg"
+reg unload $mountPoint
+}
 }
