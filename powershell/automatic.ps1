@@ -166,7 +166,7 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
         $prep1 = 'sudo sh -c "'
         $prep2 = '"'
 Write-Host "wsl -d $OS -e $prep1$prep$setup$prep2"
-Start-Process -NoNewWindow wsl "-d $OS -e $prep1$prep$setup$prep2"
+powershell -command "wsl -d $OS -e $prep1$prep$setup$prep2"
 
         if ( $wsatoolsint ) {
             Clear-Host
