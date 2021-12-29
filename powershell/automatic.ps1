@@ -96,18 +96,23 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
      }
 
     if ($Arch -eq 'amd64') {
-        Write-Host "I found folder named amd64 and delete." -ForegroundColor Red
-        Remove-Item -Path C:\wsa\x64 -Force -Recurse
+        if (Test-Path -Path 'C:\wsa\x64') {
+            Write-Host "I found folder named amd64 and delete." -ForegroundColor Red
+            Remove-Item -Path C:\wsa\x64 -Force -Recurse
+         }
+
     }
     elseif ($Arch -eq 'Arm64') {
-        Write-Host "I found folder named arm64 and delete." -ForegroundColor Red
-        Remove-Item -Path C:\wsa\arm64 -Force -Recurse
+        if (Test-Path -Path 'C:\wsa\arm64') {
+            Write-Host "I found folder named arm64 and delete." -ForegroundColor Red
+            Remove-Item -Path C:\wsa\arm64 -Force -Recurse
+         }
      } 
      if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         Clear-Host
     }
-    Clear-Host
+
     if ( $selectos -eq "Ubuntu") {
         $prep = "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh"
         $OS = "Ubuntu"
@@ -161,15 +166,18 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
         }
         $prep1 = 'sudo sh -c "'
         $prep2 = '"'
+        pause
 
-        wsl -d $OS -e $prep1$prep$setup$prep2
+Write-Host "wsl -d $OS -e $prep1$prep$setup$prep2"
+Pause
+Start-Process -NoNewWindow wsl "-d $OS -e $prep1$prep$setup$prep2"
 
         if ( $wsatoolsint ) {
             Clear-Host
             Set-Location "C:\wsaproject"
            .\wsatools.ps1 1
         }
-    
+    pause
         Set-Location "C:\wsaproject"
         if ( $wsadevwinint -eq 1 ) {
             reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
