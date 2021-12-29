@@ -23,7 +23,7 @@ $tempwsaint = [int][bool]::Parse($tempwsa)
 $onlywsaint = [int][bool]::Parse($onlywsa)
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $gappsint $vmcint $wsatoolsint $wsadevwinint $tempwsaint $onlywsaint" -Verb RunAs; exit }
-
+Clear-Host
 
 Write-Host "1 = True/Yes/Active" -ForegroundColor Green
 Write-Host "0 = False/No/Deactive" -ForegroundColor Red
@@ -111,7 +111,7 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         Clear-Host
     }
-
+    Clear-Host
     if ( $selectos -eq "Ubuntu") {
         $prep = "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.8 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/setup.sh -O setup.sh && sudo chmod +x ./setup.sh"
         $OS = "Ubuntu"
