@@ -232,7 +232,7 @@ fi
 fi
 }
 function wsagaproject_already_remove {
-      while find /mnt/c/wsaproject 1> /dev/null 2>&1
+      while find /mnt/c/WSAGAScript 1> /dev/null 2>&1
     do
       echo "$red\folder found if the same thing keeps appearing please delete  folder manually$yellow(/mnt/c/wsaproject/WSAGAScript | C://wsaproject/WSAGAScript)$white"
         if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
