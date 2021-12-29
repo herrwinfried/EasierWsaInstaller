@@ -266,10 +266,10 @@ fi
 ####################
 echo "$green Downloading wsatools.py To download WSATools. $white"
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsatools.py -O wsatools.py
 echo "$green WSATools Beginning to download. $yellow"
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools.ps1 -O wsatools.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools.ps1 -O wsatools.ps1
 
 chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
@@ -309,7 +309,7 @@ if [ -f "wsa.py" ]; then
     fi
 #
 echo "$green Downloading wsa.py To download WSA. $yellow"
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
@@ -344,9 +344,9 @@ function opengapps {
     if [[ -x "$(command -v python3.8)" ]] && [[ -x "$(command -v pip3)" ]]; then
 
         if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps.py -O opengapps.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps.py -O opengapps.py
 elif [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps-arm.py -O opengapps.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps-arm.py -O opengapps.py
 else 
 echo "$red\Something went wrong.$white"
 sleep 3
@@ -389,7 +389,7 @@ if [ -f "wsa.py" ]; then
     fi
 #
 echo "$green Downloading wsa.py To download WSA. $yellow"
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
@@ -455,7 +455,7 @@ git clone https://github.com/herrwinfried/WSAGAScript
 
 echo "$green Downloading PS File for WSA. $yellow"
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/Setup.ps1 -O Setup.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/Setup.ps1 -O Setup.ps1
 sleep 3
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
