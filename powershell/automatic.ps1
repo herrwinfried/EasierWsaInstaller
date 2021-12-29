@@ -44,7 +44,6 @@ Write-Host "WSA And Windows Developer Mode Value: " -ForegroundColor Magenta -No
 Start-Sleep -s 0.2
 Write-Host "Running Powershell version: " -ForegroundColor DarkBlue -NoNewline; Write-Host (Get-Host).Version -ForegroundColor White
 Start-Sleep -s 3.88
-Pause
 Clear-Host
 
 #####################################
@@ -166,10 +165,7 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
         }
         $prep1 = 'sudo sh -c "'
         $prep2 = '"'
-        pause
-
 Write-Host "wsl -d $OS -e $prep1$prep$setup$prep2"
-Pause
 Start-Process -NoNewWindow wsl "-d $OS -e $prep1$prep$setup$prep2"
 
         if ( $wsatoolsint ) {
