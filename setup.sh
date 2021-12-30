@@ -194,9 +194,9 @@ sleep 4
 ### INFORMATION finish
 ### Normal Function
 function check_linux_wsaproject {
-    while ! find /tmp/wsaproject 1> /dev/null 2>&1
+    while ! ls /tmp/wsaproject 1> /dev/null 2>&1
     do
-    echo "$red\folder not found if the same thing keeps appearing please create a folder manually$yellow(/tmp/wsaproject)$white"
+    echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/tmp/wsaproject)$white"
 if [ -d /tmp/wsaproject ]; then
 cd /tmp && cd wsaproject
 else
@@ -207,9 +207,9 @@ sleep 2
 done
 }
 function check_windows_wsaproject {
-        while ! find /mnt/c/wsaproject 1> /dev/null 2>&1
+    while ! ls /mnt/c/wsaproject 1> /dev/null 2>&1
     do
-    echo "$red\folder not found if the same thing keeps appearing please create a folder manually$yellow(/mnt/c/wsaproject | C://wsaproject)$white"
+    echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/mnt/c/wsaproject | C://wsaproject)$white"
 
 if [ -d /mnt/c/wsaproject ]; then
 cd /mnt/c/ && cd wsaproject
@@ -232,9 +232,9 @@ fi
 fi
 }
 function wsagaproject_already_remove {
-      while find /mnt/c/WSAGAScript 1> /dev/null 2>&1
+      while ! ls /mnt/c/wsaproject/WSAGAScript 1> /dev/null 2>&1
     do
-      echo "$red\folder found if the same thing keeps appearing please delete  folder manually$yellow(/mnt/c/wsaproject/WSAGAScript | C://wsaproject/WSAGAScript)$white"
+      echo "$red folder found if the same thing keeps appearing please delete folder manually$yellow(/mnt/c/wsaproject/WSAGAScript | C://wsaproject/WSAGAScript)$white"
         if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
 sudo rm -rf /mnt/c/wsaproject/WSAGAScript
 fi
@@ -280,12 +280,12 @@ sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsatools.py
 else
-echo "$yellow\I think there was a problem. I may not have downloaded WSATools. $white"
+echo "$yellow I think there was a problem. I may not have downloaded WSATools. $white"
 sleep 5
 fi
 ###
 else 
-echo "$red\WSATools has no support yet for the Processor you are using. $white"
+echo "$red WSATools has no support yet for the Processor you are using. $white"
 sleep 5
 fi
 }
@@ -329,7 +329,7 @@ sudo rm -rf wsa.py
 fi
 ###
 else
-echo "$red\Process aborted because python or pip is not installed.$white"
+echo "$red Process aborted because python or pip is not installed.$white"
 sleep 3
 exit 1
 fi
@@ -367,7 +367,7 @@ echo "$red Deleting opengapps.py file. $white"
 sudo rm -rf opengapps.py
 #
 else
-echo "$red\Process aborted because python or pip is not installed.$white"
+echo "$red Process aborted because python or pip is not installed.$white"
 sleep 3
 exit 1
 fi
@@ -405,12 +405,12 @@ echo "$green Download completed, moving to required location."
 sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
-echo "$green\Downloaded to C://wsaproject folder. Go to Location and then Double click on it and it will be installed. $white"
+echo "$green Downloaded to C://wsaproject folder. Go to Location and then Double click on it and it will be installed. $white"
 
 sleep 5
 #
 else
-echo "$red\Process aborted because python or pip is not installed.$white"
+echo "$red Process aborted because python or pip is not installed.$white"
 sleep 3
 exit 1
 fi
@@ -469,20 +469,21 @@ fi
 check_pwd="$(pwd)"
 cd /mnt/c/wsaproject
 
-while ! find MicrosoftCorporationII.WindowsSubsystemForAndroid*.msixbundle 1> /dev/null 2>&1
+while ! ls /mnt/c/wsaproject/MicrosoftCorporationII.WindowsSubsystemForAndroid*.msixbundle 1> /dev/null 2>&1
 do
-echo "$red\WSA file not found.$white"
-echo "$yellow\Go To$blue https://store.rg-adguard.net $yellow \n 1. Select ProductID\n $cyan ProductId: $red 9P3395VX91NR \n $cyan Ring: $red slow \n $yellow Download the file which is approximately 1.2 GiB starting with MicrosoftCorporationII.WindowsSubsystemForAndroid. Drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
+echo "$red WSA file not found.$white"
+echo "$yellow Go To$blue https://store.rg-adguard.net $yellow \n 1. Select ProductID \n $cyan ProductId: $red 9P3395VX91NR \n $cyan Ring: $red slow \n $yellow Download the file which is approximately 1.2 GiB starting with MicrosoftCorporationII.WindowsSubsystemForAndroid. Drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
+sleep 10
 done
-echo "$green\WSA file found.$white"
+echo "$green WSA file found.$white"
 sleep 2
-while ! find open_gapps-$gappsarch-*.zip 1> /dev/null 2>&1
+while ! ls /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip 1> /dev/null 2>&1
 do
-echo "$red\OpenGapps file not found.$white"
-echo "$yellow\Go To$blue https://opengapps.org/ \n $cyan Platform: $red $gappsarch \n $cyan Android: $red 11.0 \n $cyan Variant: pico (recomment) \n $yellow download the file. and drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
-
+echo "$red OpenGapps file not found.$white"
+echo "$yellow Go To$blue https://opengapps.org/ \n $cyan Platform: $red $gappsarch \n $cyan Android: $red 11.0 \n $cyan Variant: pico (recomment) \n $yellow download the file. and drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
+sleep 10
 done
-echo "$green\OpenGapps file found.$white"
+echo "$green OpenGapps file found.$white"
 sleep 2
 
 cd $check_pwd
