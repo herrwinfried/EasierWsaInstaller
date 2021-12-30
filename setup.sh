@@ -194,22 +194,22 @@ sleep 4
 ### INFORMATION finish
 ### Normal Function
 function check_linux_wsaproject {
-    while ! find /tmp/wsaproject 1> /dev/null 2>&1
-    do
-    echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/tmp/wsaproject)$white"
+    #while ! find /tmp/wsaproject 1> /dev/null 2>&1
+    #do
+    #echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/tmp/wsaproject)$white"
 if [ -d /tmp/wsaproject ]; then
 cd /tmp && cd wsaproject
 else
 echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
-sleep 2
-done
+sleep 5
+#done
 }
 function check_windows_wsaproject {
-    while ! find /mnt/c/wsaproject 1> /dev/null 2>&1
-    do
-    echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/mnt/c/wsaproject | C://wsaproject)$white"
+  #  while ! find /mnt/c/wsaproject 1> /dev/null 2>&1
+   # do
+    #echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/mnt/c/wsaproject | C://wsaproject)$white"
 
 if [ -d /mnt/c/wsaproject ]; then
 cd /mnt/c/ && cd wsaproject
@@ -217,8 +217,8 @@ else
 echo "$yellow Creating folder for project files. on the windows side $white"
 cd /mnt/c/ && mkdir wsaproject && cd wsaproject
 fi
-sleep 2
-done
+sleep 5
+#done
 }
 function pip_install {
     if [[ -x "$(command -v python3.8)" ]]; then
@@ -232,14 +232,14 @@ fi
 fi
 }
 function wsagaproject_already_remove {
-      while ! find /mnt/c/WSAGAScript 1> /dev/null 2>&1
-    do
-      echo "$red folder found if the same thing keeps appearing please delete folder manually$yellow(/mnt/c/wsaproject/WSAGAScript | C://wsaproject/WSAGAScript)$white"
-        if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
+            if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
 sudo rm -rf /mnt/c/wsaproject/WSAGAScript
 fi
-sleep 2
-done
+     # while ! find /mnt/c/WSAGAScript 1> /dev/null 2>&1
+    #do
+      #echo "$red folder found if the same thing keeps appearing please delete folder manually$yellow(/mnt/c/wsaproject/WSAGAScript | C://wsaproject/WSAGAScript)$white"
+sleep 5
+#done
 }
 ### Normal Function End
 
