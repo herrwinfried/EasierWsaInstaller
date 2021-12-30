@@ -8,7 +8,9 @@ param(
 [bool]$tempwsa,
 [bool]$onlywsa
 )
-
+Clear-Host
+Clear-Host
+Clear-Host
 if ([string]::IsNullOrEmpty($selectos)) {
 $selectos = "Unknown"
 } elseif ([string]::IsNullOrWhiteSpace($selectos)) {

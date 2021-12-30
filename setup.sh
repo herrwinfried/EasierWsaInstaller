@@ -465,14 +465,18 @@ else
 read tr
 fi
 
-while ! find /mnt/c/wsaproject/MicrosoftCorporationII.WindowsSubsystemForAndroid*.Msixbundle 1> /dev/null 2>&1
+
+check_pwd="$(pwd)"
+cd /mnt/c/wsaproject
+
+while ! find MicrosoftCorporationII.WindowsSubsystemForAndroid*.msixbundle 1> /dev/null 2>&1
 do
 echo "$red\WSA file not found.$white"
 echo "$yellow\Go To$blue https://store.rg-adguard.net $yellow \n 1. Select ProductID\n $cyan ProductId: $red 9P3395VX91NR \n $cyan Ring: $red slow \n $yellow Download the file which is approximately 1.2 GiB starting with MicrosoftCorporationII.WindowsSubsystemForAndroid. Drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
 done
 echo "$green\WSA file found.$white"
 sleep 2
-while ! find /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip 1> /dev/null 2>&1
+while ! find open_gapps-$gappsarch-*.zip 1> /dev/null 2>&1
 do
 echo "$red\OpenGapps file not found.$white"
 echo "$yellow\Go To$blue https://opengapps.org/ \n $cyan Platform: $red $gappsarch \n $cyan Android: $red 11.0 \n $cyan Variant: pico (recomment) \n $yellow download the file. and drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
@@ -481,6 +485,7 @@ done
 echo "$green\OpenGapps file found.$white"
 sleep 2
 
+cd $check_pwd
 pwd 
 
 echo "$green Preparation: moving opengapps to required location. $white"
