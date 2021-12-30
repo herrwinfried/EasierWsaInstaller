@@ -450,6 +450,7 @@ opengapps
 fi
 # OpenGapps END
 wsagaproject_already_remove
+cd /mnt/c/wsaproject
 echo "$green WSAGAProject Downloading. $yellow"
 git clone https://github.com/herrwinfried/WSAGAScript
 
