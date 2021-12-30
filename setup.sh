@@ -486,7 +486,7 @@ done
 echo "$green OpenGapps file found.$white"
 sleep 2
 
-cd $check_pwd
+#cd $check_pwd
 pwd 
 
 echo "$green Preparation: moving opengapps to required location. $white"
