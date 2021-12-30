@@ -109,6 +109,10 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
             Remove-Item -Path C:\wsa\arm64 -Force -Recurse
          }
      } 
+     if (Test-Path -Path 'C:\wsaproject') {
+        Write-Host "I found folder named wsaproject and delete." -ForegroundColor Red
+        Remove-Item -Path C:\wsaproject -Force -Recurse
+     }
      if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         Clear-Host
@@ -167,6 +171,35 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
         }
         $prep1 = 'sudo sh -c "'
         $prep2 = '"'
+
+if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
+    if (Test-Path -Path 'C:\wsaproject') {
+        Write-Host "I found folder named wsaproject."
+     } else {
+         mkdir "C:\wsaproject"
+     }
+     if (Test-Path -Path 'C:\wsa') {
+        Write-Host "I found folder named wsa."
+     } else {
+         mkdir "C:\wsa"
+     }
+}
+
+if ($Arch -eq 'amd64') {
+    if (Test-Path -Path 'C:\wsa\x64') {
+        Write-Host "I found folder named x64."
+     } else {
+         mkdir "C:\wsa\x64"
+     }
+}
+
+if ($Arch -eq 'Arm64') {
+    if (Test-Path -Path 'C:\wsa\arm64') {
+        Write-Host "I found folder named arm64."
+     } else {
+         mkdir "C:\wsa\arm64"
+     }
+}
 $runwsl = "wsl -d $OS -e $prep1$prep$setup$prep2"
 Invoke-Expression $runwsl
 
