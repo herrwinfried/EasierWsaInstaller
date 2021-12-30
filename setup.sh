@@ -194,7 +194,7 @@ sleep 4
 ### INFORMATION finish
 ### Normal Function
 function check_linux_wsaproject {
-    while ! ls /tmp/wsaproject 1> /dev/null 2>&1
+    while ! find /tmp/wsaproject 1> /dev/null 2>&1
     do
     echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/tmp/wsaproject)$white"
 if [ -d /tmp/wsaproject ]; then
@@ -207,7 +207,7 @@ sleep 2
 done
 }
 function check_windows_wsaproject {
-    while ! ls /mnt/c/wsaproject 1> /dev/null 2>&1
+    while ! find /mnt/c/wsaproject 1> /dev/null 2>&1
     do
     echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/mnt/c/wsaproject | C://wsaproject)$white"
 
@@ -232,7 +232,7 @@ fi
 fi
 }
 function wsagaproject_already_remove {
-      while ! ls /mnt/c/wsaproject/WSAGAScript 1> /dev/null 2>&1
+      while ! find /mnt/c/WSAGAScript 1> /dev/null 2>&1
     do
       echo "$red folder found if the same thing keeps appearing please delete folder manually$yellow(/mnt/c/wsaproject/WSAGAScript | C://wsaproject/WSAGAScript)$white"
         if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
