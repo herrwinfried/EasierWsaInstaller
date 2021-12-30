@@ -194,22 +194,22 @@ sleep 4
 ### INFORMATION finish
 ### Normal Function
 function check_linux_wsaproject {
-    while ! find /tmp/wsaproject 1> /dev/null 2>&1
-    do
-    echo "$red\folder not found if the same thing keeps appearing please create a folder manually$yellow(/tmp/wsaproject)$white"
+    #while ! find /tmp/wsaproject 1> /dev/null 2>&1
+    #do
+    #echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/tmp/wsaproject)$white"
 if [ -d /tmp/wsaproject ]; then
 cd /tmp && cd wsaproject
 else
 echo "$yellow Creating folder for project files. on the linux side $white"
 cd /tmp && mkdir wsaproject && cd wsaproject
 fi
-sleep 2
-done
+sleep 5
+#done
 }
 function check_windows_wsaproject {
-        while ! find /mnt/c/wsaproject 1> /dev/null 2>&1
-    do
-    echo "$red\folder not found if the same thing keeps appearing please create a folder manually$yellow(/mnt/c/wsaproject | C://wsaproject)$white"
+  #  while ! find /mnt/c/wsaproject 1> /dev/null 2>&1
+   # do
+    #echo "$red folder not found if the same thing keeps appearing please create a folder manually$yellow(/mnt/c/wsaproject | C://wsaproject)$white"
 
 if [ -d /mnt/c/wsaproject ]; then
 cd /mnt/c/ && cd wsaproject
@@ -217,8 +217,8 @@ else
 echo "$yellow Creating folder for project files. on the windows side $white"
 cd /mnt/c/ && mkdir wsaproject && cd wsaproject
 fi
-sleep 2
-done
+sleep 5
+#done
 }
 function pip_install {
     if [[ -x "$(command -v python3.8)" ]]; then
@@ -232,14 +232,14 @@ fi
 fi
 }
 function wsagaproject_already_remove {
-      while find /mnt/c/wsaproject 1> /dev/null 2>&1
-    do
-      echo "$red\folder found if the same thing keeps appearing please delete  folder manually$yellow(/mnt/c/wsaproject/WSAGAScript | C://wsaproject/WSAGAScript)$white"
-        if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
+            if [ -d "/mnt/c/wsaproject/WSAGAScript" ]; then
 sudo rm -rf /mnt/c/wsaproject/WSAGAScript
 fi
-sleep 2
-done
+     # while ! find /mnt/c/WSAGAScript 1> /dev/null 2>&1
+    #do
+      #echo "$red folder found if the same thing keeps appearing please delete folder manually$yellow(/mnt/c/wsaproject/WSAGAScript | C://wsaproject/WSAGAScript)$white"
+sleep 5
+#done
 }
 ### Normal Function End
 
@@ -266,10 +266,10 @@ fi
 ####################
 echo "$green Downloading wsatools.py To download WSATools. $white"
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsatools.py -O wsatools.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsatools.py -O wsatools.py
 echo "$green WSATools Beginning to download. $yellow"
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/wsatools.ps1 -O wsatools.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools.ps1 -O wsatools.ps1
 
 chmod +x ./wsatools.py && python3.8 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
@@ -280,12 +280,12 @@ sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsatools.py
 else
-echo "$yellow\I think there was a problem. I may not have downloaded WSATools. $white"
+echo "$yellow I think there was a problem. I may not have downloaded WSATools. $white"
 sleep 5
 fi
 ###
 else 
-echo "$red\WSATools has no support yet for the Processor you are using. $white"
+echo "$red WSATools has no support yet for the Processor you are using. $white"
 sleep 5
 fi
 }
@@ -309,7 +309,7 @@ if [ -f "wsa.py" ]; then
     fi
 #
 echo "$green Downloading wsa.py To download WSA. $yellow"
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
@@ -329,7 +329,7 @@ sudo rm -rf wsa.py
 fi
 ###
 else
-echo "$red\Process aborted because python or pip is not installed.$white"
+echo "$red Process aborted because python or pip is not installed.$white"
 sleep 3
 exit 1
 fi
@@ -344,9 +344,9 @@ function opengapps {
     if [[ -x "$(command -v python3.8)" ]] && [[ -x "$(command -v pip3)" ]]; then
 
         if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps.py -O opengapps.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps.py -O opengapps.py
 elif [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/opengapps-arm.py -O opengapps.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps-arm.py -O opengapps.py
 else 
 echo "$red\Something went wrong.$white"
 sleep 3
@@ -367,7 +367,7 @@ echo "$red Deleting opengapps.py file. $white"
 sudo rm -rf opengapps.py
 #
 else
-echo "$red\Process aborted because python or pip is not installed.$white"
+echo "$red Process aborted because python or pip is not installed.$white"
 sleep 3
 exit 1
 fi
@@ -389,7 +389,7 @@ if [ -f "wsa.py" ]; then
     fi
 #
 echo "$green Downloading wsa.py To download WSA. $yellow"
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/python/wsa.py -O wsa.py
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
 chmod +x ./wsa.py && python3.8 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
@@ -405,12 +405,12 @@ echo "$green Download completed, moving to required location."
 sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
 echo "$red Deleting wsatools.py file. $white"
 sudo rm -rf wsa.py
-echo "$green\Downloaded to C://wsaproject folder. Go to Location and then Double click on it and it will be installed. $white"
+echo "$green Downloaded to C://wsaproject folder. Go to Location and then Double click on it and it will be installed. $white"
 
 sleep 5
 #
 else
-echo "$red\Process aborted because python or pip is not installed.$white"
+echo "$red Process aborted because python or pip is not installed.$white"
 sleep 3
 exit 1
 fi
@@ -419,9 +419,7 @@ fi
 ### Only WSA Function FINISH
 
 ### Processor
-
 check_linux_wsaproject
-check_windows_wsaproject
 sleep 1
 # WSA Tools
 if [[ $wsatoolsdownload == true ]]; then
@@ -449,13 +447,15 @@ if [[ $opengappsdownload == true ]]; then
 opengapps
 fi
 # OpenGapps END
+check_windows_wsaproject
 wsagaproject_already_remove
+
 echo "$green WSAGAProject Downloading. $yellow"
 git clone https://github.com/herrwinfried/WSAGAScript
 
 echo "$green Downloading PS File for WSA. $yellow"
 
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/powershell/Setup.ps1 -O Setup.ps1
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/Setup.ps1 -O Setup.ps1
 sleep 3
 
 echo " $green Have you placed the WSA and OpenGapps Files in the $red 'C:\wsaproject' $green directory ? $blue (Press enter to continue.) $white "
@@ -465,20 +465,21 @@ else
 read tr
 fi
 
-while ! find /mnt/c/wsaproject/MicrosoftCorporationII.WindowsSubsystemForAndroid*.Msixbundle 1> /dev/null 2>&1
+while ! ls /mnt/c/wsaproject/MicrosoftCorporationII.WindowsSubsystemForAndroid*.msixbundle 1> /dev/null 2>&1
 do
-echo "$red\WSA file not found.$white"
-echo "$yellow\Go To$blue https://store.rg-adguard.net $yellow \n 1. Select ProductID\n $cyan ProductId: $red 9P3395VX91NR \n $cyan Ring: $red slow \n $yellow Download the file which is approximately 1.2 GiB starting with MicrosoftCorporationII.WindowsSubsystemForAndroid. Drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
+echo "$red WSA file not found.$white"
+echo "$yellow Go To$blue https://store.rg-adguard.net $yellow \n 1. Select ProductID \n $cyan ProductId: $red 9P3395VX91NR \n $cyan Ring: $red slow \n $yellow Download the file which is approximately 1.2 GiB starting with MicrosoftCorporationII.WindowsSubsystemForAndroid. Drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
+sleep 10
 done
-echo "$green\WSA file found.$white"
+echo "$green WSA file found.$white"
 sleep 2
-while ! find /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip 1> /dev/null 2>&1
+while ! ls /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip 1> /dev/null 2>&1
 do
-echo "$red\OpenGapps file not found.$white"
-echo "$yellow\Go To$blue https://opengapps.org/ \n $cyan Platform: $red $gappsarch \n $cyan Android: $red 11.0 \n $cyan Variant: pico (recomment) \n $yellow download the file. and drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
-
+echo "$red OpenGapps file not found.$white"
+echo "$yellow Go To$blue https://opengapps.org/ \n $cyan Platform: $red $gappsarch \n $cyan Android: $red 11.0 \n $cyan Variant: pico (recomment) \n $yellow download the file. and drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
+sleep 10
 done
-echo "$green\OpenGapps file found.$white"
+echo "$green OpenGapps file found.$white"
 sleep 2
 
 pwd 
@@ -495,8 +496,7 @@ echo "$red This script is set as temporary WSA. So probably because there is a p
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
 #wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_x64_Release-Nightly.msix
 wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.8.32828.0/WsaPackage_1.8.32828.0_x64_Release-Nightly.msix
-fi
- if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
+ elif [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 #wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_ARM64_Release-Nightly.msix
 wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.8.32828.0/WsaPackage_1.8.32828.0_x64_Release-Nightly.msix
 fi
@@ -548,10 +548,10 @@ sudo mkdir /mnt/c/wsa/$msarch
 sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
+fi
 sudo cp /mnt/c/wsaproject/Setup.ps1 /mnt/c/wsa/Setup.ps1
 echo "$green Process completed. $red Note that Developer Mode must be turned on to install WSA."
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
-fi
-sudo rm -rf setup.sh
 
+sudo rm -rf setup.sh
 ### Processor finish
