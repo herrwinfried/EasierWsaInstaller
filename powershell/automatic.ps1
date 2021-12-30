@@ -184,7 +184,7 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
          mkdir "C:\wsa"
      }
 }
-
+Clear-Host
 if ($Arch -eq 'amd64') {
     if (Test-Path -Path 'C:\wsa\x64') {
         Write-Host "I found folder named x64."
@@ -192,7 +192,7 @@ if ($Arch -eq 'amd64') {
          mkdir "C:\wsa\x64"
      }
 }
-
+Clear-Host
 if ($Arch -eq 'Arm64') {
     if (Test-Path -Path 'C:\wsa\arm64') {
         Write-Host "I found folder named arm64."
@@ -200,6 +200,7 @@ if ($Arch -eq 'Arm64') {
          mkdir "C:\wsa\arm64"
      }
 }
+Clear-Host
 $runwsl = "wsl -d $OS -e $prep1$prep$setup$prep2"
 Invoke-Expression $runwsl
 
