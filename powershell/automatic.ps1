@@ -8,9 +8,6 @@ param(
 [bool]$tempwsa,
 [bool]$onlywsa
 )
-Clear-Host
-Clear-Host
-Clear-Host
 if ([string]::IsNullOrEmpty($selectos)) {
 $selectos = "Unknown"
 } elseif ([string]::IsNullOrWhiteSpace($selectos)) {
@@ -26,7 +23,6 @@ $onlywsaint = [int][bool]::Parse($onlywsa)
 
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $gappsint $vmcint $wsatoolsint $wsadevwinint $tempwsaint $onlywsaint" -Verb RunAs; exit }
 Clear-Host
-
 Write-Host "1 = True/Yes/Active" -ForegroundColor Green
 Write-Host "0 = False/No/Deactive" -ForegroundColor Red
 Start-Sleep -s 0.75
@@ -49,8 +45,7 @@ Start-Sleep -s 3.88
 Clear-Host
 
 #####################################
-if ( ((Get-Host).Version).Major -ne "5" ) 
-{ 
+if ( ((Get-Host).Version).Major -ne "5" ) { 
     Import-Module -Name Appx -UseWIndowsPowershell
 } 
 
