@@ -555,5 +555,5 @@ echo "$yellow If all operations are successful, you can run the powershell.ps1 s
 
 sudo rm -rf setup.sh
 fi
-
+fi
 ### Processor finish
