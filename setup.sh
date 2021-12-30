@@ -419,9 +419,7 @@ fi
 ### Only WSA Function FINISH
 
 ### Processor
-
 check_linux_wsaproject
-check_windows_wsaproject
 sleep 1
 # WSA Tools
 if [[ $wsatoolsdownload == true ]]; then
@@ -449,8 +447,9 @@ if [[ $opengappsdownload == true ]]; then
 opengapps
 fi
 # OpenGapps END
+check_windows_wsaproject
 wsagaproject_already_remove
-cd /mnt/c/wsaproject
+
 echo "$green WSAGAProject Downloading. $yellow"
 git clone https://github.com/herrwinfried/WSAGAScript
 
@@ -465,10 +464,6 @@ echo "$yellow Okey $white"
 else
 read tr
 fi
-
-
-check_pwd="$(pwd)"
-cd /mnt/c/wsaproject
 
 while ! ls /mnt/c/wsaproject/MicrosoftCorporationII.WindowsSubsystemForAndroid*.msixbundle 1> /dev/null 2>&1
 do
@@ -487,7 +482,6 @@ done
 echo "$green OpenGapps file found.$white"
 sleep 2
 
-#cd $check_pwd
 pwd 
 
 echo "$green Preparation: moving opengapps to required location. $white"
@@ -502,8 +496,7 @@ echo "$red This script is set as temporary WSA. So probably because there is a p
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
 #wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_x64_Release-Nightly.msix
 wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.8.32828.0/WsaPackage_1.8.32828.0_x64_Release-Nightly.msix
-fi
- if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
+ elif [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 #wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.7.32815.0/WsaPackage_1.7.32815.0_ARM64_Release-Nightly.msix
 wget https://github.com/herrwinfried/wsa-mirror/releases/download/1.8.32828.0/WsaPackage_1.8.32828.0_x64_Release-Nightly.msix
 fi
