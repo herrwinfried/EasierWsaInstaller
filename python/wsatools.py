@@ -14,5 +14,5 @@ def bar_custom(current, total, width=80):
     print("WSATools Downloading: %d%% [%d / %d] bytes" % (current / total * 100, current, total))
 
 print("=============================WSATools Download====================================================")
-wget.download(link)
+wget.download(link, a.string)
 print("=====================================================================================================")

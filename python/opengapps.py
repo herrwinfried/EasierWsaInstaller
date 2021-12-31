@@ -16,7 +16,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-a", "--arch", nargs='?', const=amd64vg, default=amd64vg, choices=[armvg, amd64vg, amd64vg2])
 parser.add_argument("-va", "--variant", nargs='?', const=gappsvariant, default=gappsvariant, choices=["super", "stock", "full", "mini", "micro", "nano", "pico"])
 args = parser.parse_args()
-print(args)
+
 if args.arch == armvg:
         gappsarch = armvg
 elif args.arch == amd64vg or args.arch == "x64":
@@ -38,7 +38,7 @@ def bar_custom(current, total, width=80):
     print("OpenGapps Downloading: %d%% [%d / %d] bytes" %
           (current / total * 100, current, total))
 
-print(gappsarch)
+
 print("=============================OpenGapps Download====================================================")
 wget.download(link)
 print("=====================================================================================================")
