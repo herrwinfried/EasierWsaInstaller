@@ -206,9 +206,11 @@ echo $yellow Location: $red $pwdsh
 sleep 1
 echo $yellow WSA Download: $red $wsadownload $yellow OpenGapps: $red $opengappsdownload
 sleep 1
-echo $yellow TempWSA: $red $tempwsa $yellow WSAOnly: $red $wsaonlydownload 
+echo $yellow TempWSA: $red $tempwsa
 sleep 1
 echo $yellow WSAOnly: $red $wsaonlydownload 
+sleep 1
+echo $yellow Gapps Variant: $red $gappsvariant 
 sleep 1
 echo $yellow WSATools: $red $wsatoolsdownload $yellow AllOkey: $red $allOkey $yellow Okey: $red $okey
 sleep 4

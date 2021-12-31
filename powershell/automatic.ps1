@@ -154,7 +154,7 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
             $setup = $setup + " --gapps"
         }
         if ( $gappsvariant -ne "default" ) {
-            $setup = $setup + " --"+$gappsvariant
+            $setup = $setup + " --variant="+$gappsvariant
         }
         $setup = $setup + " --all-okey"
         if ( $Arch -eq 'Arm64' -and $wsatoolsint -eq "1")
