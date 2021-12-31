@@ -364,11 +364,6 @@ function opengapps {
     pip_install
     if [[ -x "$(command -v python3.9)" ]] && [[ -x "$(command -v pip3)" ]]; then
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps.py -O opengapps.py
-else 
-echo "$red\Something went wrong.$white"
-sleep 3
-exit 1
-fi
 #
     if [ -f /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip ]; then
     echo "$red open_gapps-$gappsarch. This file will be deleted. $white"
