@@ -113,7 +113,7 @@ echo "$red I couldn't find the python3 package. That's why I canceled the transa
 exit 1
 fi
 fi
-if ! [ -x "$(command -v pip3)" ]; then
+if ! [ -x "$(command -v pip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
 sudo apt install -y python3.9 python3-pip
@@ -222,13 +222,11 @@ sleep 5
 }
 function pip_install {
     if [[ -x "$(command -v python3.9)" ]]; then
-if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
-pip3 install BeautifulSoup4
-pip3 install wget
-pip3 install lxml
-pip3 install requests
-fi
+python3.9 -m pip install requests
+python3.9 -m pip install BeautifulSoup4
+python3.9 -m pip install lxml
+python3.9 -m pip install wget
 fi
 }
 function wsagaproject_already_remove {
