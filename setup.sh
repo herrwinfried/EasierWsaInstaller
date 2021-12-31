@@ -101,12 +101,12 @@ echo "$red I couldn't find the wget package. That's why I canceled the transacti
 exit 1
 fi
 fi
-if ! [ -x "$(command -v python3.8)" ]; then
+if ! [ -x "$(command -v python3.9)" ]; then
 if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3.8) $white"
-sudo apt install -y python3.8 python3-pip
+echo "$green I found a missing package, I'm installing it... (python3.9) $white"
+sudo apt install -y python3.9 python3-pip
 elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3.8) $white"
+echo "$green I found a missing package, I'm installing it... (python3.9) $white"
 sudo zypper install -y python38 python38-pip
 else
 echo "$red I couldn't find the python3 package. That's why I canceled the transaction. $white"
@@ -115,8 +115,8 @@ fi
 fi
 if ! [ -x "$(command -v pip3)" ]; then
 if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
-sudo apt install -y python3.8 python3-pip
+echo "$green I found a missing package, I'm installing it... (python3.9) $white"
+sudo apt install -y python3.9 python3-pip
 elif [ -x "$(command -v zypper)" ]; then
 echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
 sudo zypper install -y python38 python38-pip
@@ -221,7 +221,7 @@ sleep 5
 #done
 }
 function pip_install {
-    if [[ -x "$(command -v python3.8)" ]]; then
+    if [[ -x "$(command -v python3.9)" ]]; then
 if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow Downloading packages "BeautifulSoup4, wget, lxml". Via pip. $white"
 pip3 install BeautifulSoup4
@@ -249,7 +249,7 @@ check_linux_wsaproject
 
 if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
 pip_install
-if [[ -x "$(command -v python3.8)" ]] && [[ -x "$(command -v pip3)" ]]; then
+if [[ -x "$(command -v python3.9)" ]] && [[ -x "$(command -v pip3)" ]]; then
 if [ -f "wsatools.py" ]; then
 echo "$red There is wsatools.py. This file will be deleted. $white"
     sudo rm -rf wsatools.py
@@ -271,7 +271,7 @@ echo "$green WSATools Beginning to download. $yellow"
 
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/wsatools.ps1 -O wsatools.ps1
 
-chmod +x ./wsatools.py && python3.8 ./wsatools.py
+chmod +x ./wsatools.py && python3.9 ./wsatools.py
 echo "$green WSATools has been downloaded. Now the PS file is downloading. $white"
 echo "$green Download completed, moving to required location."
 sudo mv wsatools.ps1 /mnt/c/wsaproject/wsatools.ps1
@@ -296,7 +296,7 @@ fi
 function wsa {
 check_linux_wsaproject
 pip_install
-if [[ -x "$(command -v python3.8)" ]] && [[ -x "$(command -v pip3)" ]]; then
+if [[ -x "$(command -v python3.9)" ]] && [[ -x "$(command -v pip3)" ]]; then
 if [[ $tempwsa == "yes" ]]; then
 echo "$yellow This script is set as temporary WSA. So probably because there is a problem with a current WSA, the old version will be downloaded. $white"
 else
@@ -311,7 +311,7 @@ if [ -f "wsa.py" ]; then
 echo "$green Downloading wsa.py To download WSA. $yellow"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
-chmod +x ./wsa.py && python3.8 ./wsa.py
+chmod +x ./wsa.py && python3.9 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle ]; then
@@ -341,7 +341,7 @@ fi
 function opengapps {
     check_linux_wsaproject
     pip_install
-    if [[ -x "$(command -v python3.8)" ]] && [[ -x "$(command -v pip3)" ]]; then
+    if [[ -x "$(command -v python3.9)" ]] && [[ -x "$(command -v pip3)" ]]; then
 
         if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps.py -O opengapps.py
@@ -360,7 +360,7 @@ fi
  echo "$green open_gapps-$gappsarch dont exists. $white"
     fi
     echo "$green OpenGapps Beginning to download. $yellow"
-chmod +x ./opengapps.py && python3.8 ./opengapps.py
+chmod +x ./opengapps.py && python3.9 ./opengapps.py
 echo "$green Download completed, moving to required location."
 mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
 echo "$red Deleting opengapps.py file. $white"
@@ -379,7 +379,7 @@ fi
 function wsaonly {
     check_linux_wsaproject
     pip_install
-       if [[ -x "$(command -v python3.8)" ]] && [[ -x "$(command -v pip3)" ]]; then
+       if [[ -x "$(command -v python3.9)" ]] && [[ -x "$(command -v pip3)" ]]; then
 ###############
 if [ -f "wsa.py" ]; then
     echo "$red There is wsa.py. This file will be deleted. $white"
@@ -391,7 +391,7 @@ if [ -f "wsa.py" ]; then
 echo "$green Downloading wsa.py To download WSA. $yellow"
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
 echo "$green WSA Beginning to download. $yellow"
-chmod +x ./wsa.py && python3.8 ./wsa.py
+chmod +x ./wsa.py && python3.9 ./wsa.py
 echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle ]; then
