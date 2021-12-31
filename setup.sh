@@ -480,7 +480,11 @@ fi
 while ! ls /mnt/c/wsaproject/MicrosoftCorporationII.WindowsSubsystemForAndroid*.msixbundle 1> /dev/null 2>&1
 do
 echo "$red WSA file not found.$white"
-echo "$yellow Go To$blue https://store.rg-adguard.net $yellow \n 1. Select ProductID \n $cyan ProductId: $red 9P3395VX91NR \n $cyan Ring: $red slow \n $yellow Download the file which is approximately 1.2 GiB starting with MicrosoftCorporationII.WindowsSubsystemForAndroid. Drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
+echo "$yellow Go To$blue https://store.rg-adguard.net 
+echo $yellow 1. Select ProductID 
+echo $cyan ProductId: $red 9P3395VX91NR 
+echo $cyan Ring: $red slow 
+echo $yellow Download the file which is approximately 1.2 GiB starting with MicrosoftCorporationII.WindowsSubsystemForAndroid. Drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
 sleep 10
 done
 echo "$green WSA file found.$white"
@@ -488,7 +492,11 @@ sleep 2
 while ! ls /mnt/c/wsaproject/open_gapps-$gappsarch-*.zip 1> /dev/null 2>&1
 do
 echo "$red OpenGapps file not found.$white"
-echo "$yellow Go To$blue https://opengapps.org/ \n $cyan Platform: $red $gappsarch \n $cyan Android: $red 11.0 \n $cyan Variant: pico (recomment) \n $yellow download the file. and drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
+echo "$yellow Go To$blue https://opengapps.org/ 
+echo $cyan Platform: $red $gappsarch 
+echo $cyan Android: $red 11.0 
+echo $cyan Variant: pico (recomment) 
+echo $yellow download the file. and drop the wsaproject folder under the C directory.$magenta(c://wsaproject) $white"
 sleep 10
 done
 echo "$green OpenGapps file found.$white"
@@ -546,7 +554,7 @@ sed -ie 's+Architecture="x64"+Architecture="arm64"+i' VARIABLES.sh
 
 fi
 
-echo "$red Sta$blue\rting Oper$red\ation. $green !!! $yellow"
+echo "$red Starting $magenta Operation. $green !!! $yellow"
 sudo ./extract_gapps_pico.sh && sudo ./extend_and_mount_images.sh && sudo ./apply.sh && sudo ./unmount_images.sh
 
 echo " $green WSA and Opengapps merging is complete. $red It is now being moved to the necessary places. $white"
@@ -564,6 +572,6 @@ fi
 sudo cp /mnt/c/wsaproject/Setup.ps1 /mnt/c/wsa/Setup.ps1
 echo "$green Process completed. $red Note that Developer Mode must be turned on to install WSA."
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
-
+sleep 1
 sudo rm -rf setup.sh
 ### Processor finish

@@ -38,7 +38,9 @@ def bar_custom(current, total, width=80):
     print("OpenGapps Downloading: %d%% [%d / %d] bytes" %
           (current / total * 100, current, total))
 
-
-print("=============================OpenGapps Download====================================================")
+print("Arch: "+ gappsarch)
+print("Android: " + gappsandroid)
+print("Variant: " + gappsvariant)
+print("\n=============================OpenGapps Download====================================================")
 wget.download(link)
-print("=====================================================================================================")
+print("\n=====================================================================================================")
