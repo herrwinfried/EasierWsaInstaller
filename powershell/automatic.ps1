@@ -204,7 +204,6 @@ Invoke-Expression $runwsl
             Set-Location "C:\wsaproject"
            .\wsatools.ps1 1
         }
-    pause
         Set-Location "C:\wsaproject"
         if ( $wsadevwinint -eq 1 ) {
             reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
