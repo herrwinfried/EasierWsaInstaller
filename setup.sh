@@ -131,6 +131,8 @@ package_check
 
 
 gappsarch=x86_64
+gappsvariant=pico
+#gappslistvariant=("super", "stock", "full", "mini", "micro", "nano", "pico")
 msarch=x64
 mskernel=x86_64
 ############################
@@ -170,6 +172,25 @@ elif [[ $1 == "--tempwsa" ]]; then
 tempwsa=true;
 elif [[ $1 == "--no-tempwsa" ]]; then
 tempwsa=false;
+elif [[ $1 == "--variant=super" ]]; then
+gappsvariant=super
+elif [[ $1 == "--variant=stock" ]]; then
+gappsvariant=stock
+elif [[ $1 == "--variant=full" ]]; then
+gappsvariant=full
+elif [[ $1 == "--variant=mini" ]]; then
+gappsvariant=mini
+elif [[ $1 == "--variant=micro" ]]; then
+gappsvariant=micro
+elif [[ $1 == "--variant=nano" ]]; then
+gappsvariant=nano
+elif [[ $1 == "--variant=mini" ]]; then
+gappsvariant=mini
+elif [[ $1 == "--variant=pico" ]]; then
+gappsvariant=pico
+elif [[ $1 == "--variant"* ]]; then
+echo "$red invalid value. Pico selected $white"
+gappsvariant=pico
     else
     echo "$red Invalid argument-$i: $1 $white";
     fi
@@ -340,11 +361,7 @@ function opengapps {
     check_linux_wsaproject
     pip_install
     if [[ -x "$(command -v python3.9)" ]] && [[ -x "$(command -v pip3)" ]]; then
-
-        if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
 wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps.py -O opengapps.py
-elif [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/opengapps-arm.py -O opengapps.py
 else 
 echo "$red\Something went wrong.$white"
 sleep 3
@@ -358,7 +375,7 @@ fi
  echo "$green open_gapps-$gappsarch dont exists. $white"
     fi
     echo "$green OpenGapps Beginning to download. $yellow"
-chmod +x ./opengapps.py && python3.9 ./opengapps.py
+chmod +x ./opengapps.py && python3.9 ./opengapps.py -a $gappsarch -va $gappsvariant
 echo "$green Download completed, moving to required location."
 mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
 echo "$red Deleting opengapps.py file. $white"

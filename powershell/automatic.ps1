@@ -6,13 +6,20 @@ param(
 [bool]$wsatools,
 [bool]$wsadevwin,
 [bool]$tempwsa,
-[bool]$onlywsa
+[bool]$onlywsa,
+[ValidateSet("default", "super", "stock", "full", "mini", "micro", "nano", "pico")][string]$gappsvariant
+
 )
 if ([string]::IsNullOrEmpty($selectos)) {
 $selectos = "Unknown"
 } elseif ([string]::IsNullOrWhiteSpace($selectos)) {
     $selectos = "Unknown"
 }
+if ([string]::IsNullOrEmpty($gappsvariant)) {
+    $gappsvariant = "default"
+    } elseif ([string]::IsNullOrWhiteSpace($gappsvariant)) {
+        $gappsvariant = "default"
+    }
 $wsaint = [int][bool]::Parse($wsa)
 $gappsint = [int][bool]::Parse($gapps)
 $vmcint = [int][bool]::Parse($vmc)
@@ -21,7 +28,7 @@ $wsadevwinint = [int][bool]::Parse($wsadevwin)
 $tempwsaint = [int][bool]::Parse($tempwsa)
 $onlywsaint = [int][bool]::Parse($onlywsa)
 
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $gappsint $vmcint $wsatoolsint $wsadevwinint $tempwsaint $onlywsaint" -Verb RunAs; exit }
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" $selectos $wsaint $gappsint $vmcint $wsatoolsint $wsadevwinint $tempwsaint $onlywsaint $gappsvariant" -Verb RunAs; exit }
 Clear-Host
 Write-Host "1 = True/Yes/Active" -ForegroundColor Green
 Write-Host "0 = False/No/Deactive" -ForegroundColor Red
@@ -41,6 +48,9 @@ Start-Sleep -s 0.2
 Write-Host "WSA And Windows Developer Mode Value: " -ForegroundColor Magenta -NoNewline; Write-Host "$wsadevwinint" -ForegroundColor White
 Start-Sleep -s 0.2
 Write-Host "Running Powershell version: " -ForegroundColor DarkBlue -NoNewline; Write-Host (Get-Host).Version -ForegroundColor White
+Start-Sleep -s 0.2
+Write-Host "Gapps Variant: " -ForegroundColor DarkBlue -NoNewline; Write-Host $gappsvariant -ForegroundColor White
+
 Start-Sleep -s 3.88
 Clear-Host
 
@@ -142,6 +152,9 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
         if ( $gappsint -eq "1")
         {
             $setup = $setup + " --gapps"
+        }
+        if ( $gappsvariant -ne "default" ) {
+            $setup = $setup + " --"+$gappsvariant
         }
         $setup = $setup + " --all-okey"
         if ( $Arch -eq 'Arm64' -and $wsatoolsint -eq "1")
