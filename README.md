@@ -52,6 +52,8 @@ __**In normal use, you should prefer windows terminal instead of Powershell 7.**
 - Create a folder named `wsaproject` under the `C` directory. (`C:\wsaproject`)
 - Create a folder named `wsa` under the `C` directory. (`C:\wsa`)
 
+> NOTE: If you are going to do WSA Upload only. You do not need to create a WSA folder.
+
 # Information before you start
 
 You need to remove the existing WSA.
