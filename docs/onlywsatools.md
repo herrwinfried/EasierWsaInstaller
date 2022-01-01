@@ -8,13 +8,13 @@ Transactions are made over WSL. So it's main requirements apply.
 
 ### **Ubuntu**
 ```
-cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
+cd ~ && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.1.0/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
 ### **OpenSUSE Tumbleweed**
 ```
-cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python38 python38-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
+cd ~ && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python39 python39-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.1.0/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -27,13 +27,14 @@ Packages that need to install their own script and WSAGAScript
 - `git`
 - `wget`
 - `curl`
-- `python3.8`
+- `python3.9`
 - `python3-pip`
-- `pip3` -> `BeautifulSoup4`
-- `pip3` -> `wget`
-- `pip3` -> `lxml`
+- `pip` -> `requests`
+- `pip` -> `BeautifulSoup4`
+- `pip` -> `lxml`
+- `pip` -> `wget`
 ```
- wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.0.1/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
+ wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.1.0/other/wsatools.sh -O wsatools.sh && sudo chmod +x ./wsatools.sh && sudo ./wsatools.sh
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
@@ -45,7 +46,7 @@ In order for the powershell script in the "C:\wsaproject" directory to run, you 
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 ```
 we can run the script now!
-![image](https://user-images.githubusercontent.com/52379312/138756336-feef2fd0-f697-401a-85d1-a243c9763e75.png)
+![image](https://user-images.githubusercontent.com/52379312/139756336-feef2fd0-f697-401a-85d1-a243c9763e75.png)
 The operation is successful when it is as in the picture. Red text should not necessarily be.
 
 Making change permission default for Powershell

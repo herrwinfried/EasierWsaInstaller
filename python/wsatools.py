@@ -12,4 +12,7 @@ a = html.find("a", string=re.compile(
 link = a["href"]
 def bar_custom(current, total, width=80):
     print("WSATools Downloading: %d%% [%d / %d] bytes" % (current / total * 100, current, total))
-wget.download(link, a.string, bar=bar_custom)
+
+print("\n=============================WSATools Download====================================================")
+wget.download(link, a.string)
+print("\n=====================================================================================================")
