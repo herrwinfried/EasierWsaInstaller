@@ -40,12 +40,12 @@ __**In normal use, you should prefer windows terminal instead of Powershell 7.**
 
 ## **Virtual Machine Platform must be active.**
 
-> Open windows terminal as administrator. You can easily enable it by typing the following command. You should have enabled Ubuntu, OpenSUSE TumbleWeed or Debian WSL when you installed it.
+> Open windows terminal as administrator. You can easily enable it by typing the following command. You should have enabled Ubuntu, OpenSUSE Tumbleweed or Debian WSL when you installed it.
 
 > ```
 > dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
 > ```
-> You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu, openSUSE TumbleWeed or Debian
+> You need to Activate [WSL](https://aka.ms/wslstorepage) also to use ubuntu, openSUSE Tumbleweed or Debian
 
 # What to do before you start
 
