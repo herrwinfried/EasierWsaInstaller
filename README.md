@@ -60,6 +60,37 @@ You need to remove the existing WSA.
 
 ___The ARM version is still beta, please give feedback when you encounter an error.___ **(Applicable if you are going to use the opengapps + wsa method.)**
 
+## Parametres
+All the parameters you need to know to make things easier.
+- `--wsa` ~ it will download wsa for you.
+- `--opengapps` or `--gapps` ~ it will download openGapps for you.
+- `--wsatools` ~ it will download WSATools for you.
+- `--tempwsa` ~ It downloads the latest tried wsa from wsa-mirror. (Old WSA Version is more likely to be installed.)
+- `--no-tempwsa` ~ always install the newest wsa. (If tempwsa is selected by default then you can use this)
+- `--onlywsa` ~ just download WSA. Do not touch.
+- `--arm` ~ Allows you to select the architect as arm.
+> Unless you enter arm value, 64 bit is selected as normal processor.
+
+### OpenGapps Variant
+
+> By default pico is set if you don't touch it. It is our recommendation.
+
+Allows you to select the variant. Variants are limited for now.
+
+> `--variant=$VALUE`
+
+List:
+- `--variant=super`
+- `--variant=stock`
+- `--variant=full`
+- `--variant=mini`
+- `--variant=micro`
+- `--variant=nano`
+- `--variant=mini`
+- `--variant=pico`
+
+Lets continue. The following Commands are the commands that will allow you to basically do what you want. You can set it using the above parameters or write the same as it appears.
+
 - [WSA + OpenGapps Method](#wsa--opengapps-method)
 - [WSA Upload only](#wsa-upload-only)
 # WSA + OpenGapps Method
