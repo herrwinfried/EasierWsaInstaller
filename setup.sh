@@ -570,8 +570,21 @@ sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
 fi
+if [ $wsatoolsdownload == "false" ]; then
 sudo cp /mnt/c/wsaproject/Setup.ps1 /mnt/c/wsa/Setup.ps1
-echo "$green Process completed. $red Note that Developer Mode must be turned on to install WSA."
+fi
+
+echo "$green Process completed."
+if [ $wsatoolsdownload == "false" ]; then
+echo "$red Note that Developer Mode must be turned on to install WSA. $white"
+echo "$green Open Settings"
+echo "$magenta Press $red Privacy & security"
+echo "$magenta Press $red for developers"
+echo "$magenta Select $yellow enable $red Developer Mode"
+echo "$yellow If you are going to $green install apk via adb. $red Enable Developer settings from WSA Settings."
+sleep 2
+fi
+
 echo "$yellow If all operations are successful, you can run the powershell.ps1 script in $yellow 'C:\wsaproject'$yellow. $white"
 sleep 1
 sudo rm -rf setup.sh
