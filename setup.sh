@@ -570,12 +570,12 @@ sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
 echo "$red It's still in beta since we haven't found a device to test it, please let me know if you have any problems. $white"
 fi
-if [ $wsatoolsdownload == "false" ]; then
+if [ $wsaonlydownload == "false" ]; then
 sudo cp /mnt/c/wsaproject/Setup.ps1 /mnt/c/wsa/Setup.ps1
 fi
 
 echo "$green Process completed."
-if [ $wsatoolsdownload == "false" ]; then
+if [ $wsaonlydownload == "false" ]; then
 echo "$red Note that Developer Mode must be turned on to install WSA. $white"
 echo "$green Open Settings"
 echo "$magenta Press $red Privacy & security"

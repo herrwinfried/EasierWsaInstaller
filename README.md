@@ -281,6 +281,8 @@ sudo sh -c "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /t
 
 # What to do after installation
 
+**Only If You Download Original WSA . Go to `C:\\wsaproject` and double click the file. then install it.**
+
 - [Method 1](#method-1)
 - [Method 2](#method-2) (Manuel)
 
