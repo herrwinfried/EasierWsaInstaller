@@ -67,7 +67,7 @@ All the parameters you need to know to make things easier.
 - `--wsatools` ~ it will download WSATools for you.
 - `--tempwsa` ~ It downloads the latest tried wsa from wsa-mirror. (Old WSA Version is more likely to be installed.)
 - `--no-tempwsa` ~ always install the newest wsa. (If tempwsa is selected by default then you can use this)
-- `--onlywsa` ~ just download WSA. Do not touch.
+- `--onlywsa` ~ only just download WSA. Do not touch.
 - `--arm` ~ Allows you to select the architect as arm.
 > Unless you enter arm value, 64 bit is selected as normal processor.
 
