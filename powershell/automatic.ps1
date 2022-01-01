@@ -83,17 +83,23 @@ elseif ($Arch -eq 'Arm64') {
 
 #######
 if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
+    if (Test-Path -Path 'C:\wsaproject') {
+        Write-Host "I found folder named wsaproject." -ForegroundColor Red
+     } else {
+        Write-Host "A folder will be created in the C directory named wsaproject" -ForegroundColor Green
+         mkdir "C:\wsaproject"
+     }
+
+
+
+     if ( $onlywsaint -eq 0 ) {
+
+
     if (Test-Path -Path 'C:\wsa') {
         Write-Host "I found folder named wsa." -ForegroundColor Red
      } else {
         Write-Host "A folder will be created in the C directory named WSA" -ForegroundColor Green
          mkdir "C:\wsa"
-     }
-     if (Test-Path -Path 'C:\wsaproject') {
-        Write-Host "I found folder named wsaproject." -ForegroundColor Red
-     } else {
-        Write-Host "A folder will be created in the C directory named wsaproject" -ForegroundColor Green
-         mkdir "C:\wsaproject"
      }
      if (Test-Path -Path 'C:\wsaproject\microsoftwsa') {
         Write-Host "I found folder named microsoftwsa and delete." -ForegroundColor Red
@@ -118,6 +124,8 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
         Write-Host "I found folder named wsaproject and delete." -ForegroundColor Red
         Remove-Item -Path C:\wsaproject -Force -Recurse
      }
+
+    }
      if ($vmcint) {
         dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
         Clear-Host
@@ -221,7 +229,12 @@ Invoke-Expression $runwsl
         if ( $wsadevwinint -eq 1 ) {
             reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
         }
-        .\Setup.ps1 1
+        if ( $onlywsaint -eq 1 ) {
+            .\Setup.ps1 1 1
+        } else {
+            .\Setup.ps1 1
+        }
+
         if ( $wsadevwinint -eq 1 ) {
             
             $wsalocation = "$env:LOCALAPPDATA/Packages/MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe/Settings/settings.dat"

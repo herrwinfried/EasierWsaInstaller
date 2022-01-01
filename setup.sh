@@ -393,25 +393,26 @@ function wsaonly {
     pip_install
        if [[ -x "$(command -v python3.9)" ]] && [[ -x "$(command -v pip3)" ]]; then
 ###############
-if [ -f "wsa.py" ]; then
-    echo "$red There is wsa.py. This file will be deleted. $white"
-    sudo rm -rf wsa.py
-    else
- echo "$green wsa.py dont exists. $white"
-    fi
-#
-echo "$green Downloading wsa.py To download WSA. $yellow"
-wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
-echo "$green WSA Beginning to download. $yellow"
-chmod +x ./wsa.py && python3.9 ./wsa.py
-echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
-
 if [ -f /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle ]; then
     echo "$red There is WindowsSubsystemForAndroid. This file will be deleted. $white"
 sudo rm -rf /mnt/c/wsaproject/Microsoft*WindowsSubsystemForAndroid*.msixbundle
     else
  echo "$green WindowsSubsystemForAndroid dont exists. $white"
 fi
+
+if [ -f "wsa.py" ]; then
+    echo "$red There is wsa.py. This file will be deleted. $white"
+    sudo rm -rf wsa.py
+    else
+ echo "$green wsa.py dont exists. $white"
+    fi
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/powershell/Setup.ps1 -O Setup.ps1
+sudo mv Setup.ps1 /mnt/c/wsaproject/
+echo "$green Downloading wsa.py To download WSA. $yellow"
+wget https://raw.githubusercontent.com/herrwinfried/wsa-script/beta/python/wsa.py -O wsa.py
+echo "$green WSA Beginning to download. $yellow"
+chmod +x ./wsa.py && python3.9 ./wsa.py
+echo "$green WSA has been downloaded. Now the PS file is downloading. $white"
 
 echo "$green Download completed, moving to required location."
 sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
