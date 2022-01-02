@@ -4,6 +4,7 @@
 
 This method is experimental. Made easy for you to enter fewer commands.
 
+*This branch is old. It will no longer receive updates. Go to 1.1.0.*
 
 <del> **Except for the wsa option, the current wsa is still not downloading. This is because the WSAGAProject team for Current WSA is still working on it. So version 1.7xx is still used in the wsa + opengapps method.** </del>
 
