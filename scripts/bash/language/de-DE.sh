@@ -1,0 +1,8 @@
+welcome="hello world"
+invalidwsarelease="$yellow ungültiger Wert (wsa Release). retail ausgewählt $white"
+invalidmagiskversion="$yellow ungültiger Wert (Magisk Version). Stable ausgewählt $white"
+invalidamazonstore="$yellow Ungültiger Wert (Amazon Store). Nicht Entfernen ausgewählt $white"
+invalidwsatools="$red ungültiger Wert (wsaTools). Lassen Sie Nicht installiert ausgewählt $white"
+invalidproductname="$yellow ungültiger Wert (Product name). Wert: redfin $white"
+invalidgapps="$yellow ungültiger Wert (variant). Pico ausgewählt $white"
+invalidmethod="$red WSAGAScript-Methode ist ausgewählt, weil keine Methode ausgewählt ist. $white"
