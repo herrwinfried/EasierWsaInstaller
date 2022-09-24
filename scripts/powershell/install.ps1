@@ -1,5 +1,5 @@
-param([bool]$nostop=1,
-[bool]$original=1)
+param([bool]$nostop=0,
+[bool]$original=0)
     $nostopint = [int][bool]::Parse($nostop)
     $originalint = [int][bool]::Parse($original)
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" -nostop $nostopint -original $originalint" -Verb RunAs; exit }

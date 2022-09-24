@@ -28,22 +28,26 @@ param (
         [string]$gappsvariant = 'pico',
 
         [ValidateSet('yes','no')]
-        [string]$winvmc = 'yes',
+        [string]$winvmp = 'yes',
 
         [ValidateSet('yes','no')]
-        [string]$windevmode = 'yes'
+        [string]$windevmode = 'yes',
+
+        [ValidateSet('yes','no')]
+        [string]$adb = 'no'
         )
       
-#$WindowsArch = ($env:PROCESSOR_ARCHITECTURE)
-#if (!$WindowsArch) {
-#    Write-Host "Only Windows Powershell Core." -ForegroundColor Red;
-#    Start-Sleep -s 0.60
-#    Exit 1
-#} else if ($WindowsArch -eq 'x86' -or $WindowsArch -eq 'Arm32') {
-#    write-Host "Sorry I dont support $WindowsArch"
-#    Start-Sleep -s 0.60
-#    Exit 1
-#}
+$WindowsArch = ($env:PROCESSOR_ARCHITECTURE)
+if (!$WindowsArch) {
+    Write-Host "Only Windows Powershell Core." -ForegroundColor Red;
+    Start-Sleep -s 0.60
+    Exit 1
+}
+ elseif ($WindowsArch -eq 'x86' -or $WindowsArch -eq 'Arm32') {
+    write-Host "Sorry I dont support $WindowsArch"
+    Start-Sleep -s 0.60
+    Exit 1
+}
 
 
 Write-Host "This script is for the wsa-gui project." -ForegroundColor Yellow;
@@ -57,6 +61,47 @@ write-host "== Windows ==" -ForegroundColor Green; Write-Host $winvmc $windevmod
 if ($winvmc) {
     Write-host "[PREP] I Activate Virtual Machine Platform."
     dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+}
+
+if ($adb) {
+    Write-host "[PREP] ADB."
+    $Folder = 'C:\src\platform-tools'
+if (Test-Path -Path $Folder) {
+   Write-Host "[PREP] I found folder named platform-tools and deleted it.[ADB]"
+    Remove-Item C:\src\platform-tools -Recurse
+} else {
+}
+
+Write-Host "[PREP] I'm downloading platform-tools r33.0.3-windows. [ADB]"
+Invoke-WebRequest https://dl.google.com/android/repository/platform-tools_r33.0.3-windows.zip -OutFile c:\src\platform-tools_r33.0.3-windows.zip
+Write-Host "[PREP] I unzip platform-tools r33.0.3-windows[ADB]"
+Expand-Archive c:\src\platform-tools_r33.0.3-windows.zip -DestinationPath c:\src\platform-tools_r33.0.3-windows
+Write-Host "[PREP] I find and extract the main folder[ADB]"
+Move-Item -Path  c:\src\platform-tools_r33.0.3-windows\platform-tools -Destination c:\src\platform-tools
+
+Write-Host "[PREP] I delete unnecessary files and folders.[ADB]"
+Remove-Item  c:\src\platform-tools_r33.0.3-windows.zip -Recurse
+Remove-Item  c:\src\platform-tools_r33.0.3-windows -Recurse
+
+$pathContent = [Environment]::GetEnvironmentVariable('Path', 'Machine')
+$myPath = 'c:\src\platform-tools'
+if ($pathContent -ne $null)
+{
+  # "Exist in the system!"
+  if ($pathContent -split ';'  -contains  $myPath)
+  {
+    # My path Exists
+    Write-Host "[PREP] I don't touch it because the path I will add is already there[ADB]"
+  }
+  else
+  {
+    Write-Host "[PREP] I add PATH as system. (It is added in the type that every user can use.)[ADB]"
+    $path = [Environment]::GetEnvironmentVariable('Path', 'Machine')
+    $newpath = $path + ';c:\src\platform-tools'
+    [Environment]::SetEnvironmentVariable("Path", $newpath, 'Machine')
+    Write-Host "[PREP] You may need to close all open CMD, Powershell, Terminal to use it. If it does not appear, restart your computer.[ADB]"
+  }
+}
 }
 
 $wslprep
@@ -76,6 +121,7 @@ elseif ( $wsldistro -eq "Debian") {
     $wslprep = "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.9 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.1.0/setup.sh -O setup.sh && sudo chmod +x ./setup.sh"
 }
 else {
+    $wsldistro="Ubuntu"
     $wslprep = "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.9 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.1.0/setup.sh -O setup.sh && sudo chmod +x ./setup.sh"
 }
 if ($arch -eq "arm64") {
@@ -91,12 +137,9 @@ $wslsetup = $wslsetup + "--productname="+$productname+" ";
 $wslsetup = $wslsetup + "--variant="+$gappsvariant+" ";
 
 Write-Host "WSL will pass, please be careful. If you are asked for a password, please enter your password correctly. If you enter it incorrectly, a mishap may occur." -ForegroundColor Green
-Start-Sleep -Seconds 60
-# wsl -d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2
-
+Start-Sleep -Seconds 5
 write-host "-d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2"
-
-exit 1
+wsl -d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2
 ####Finish
 
 

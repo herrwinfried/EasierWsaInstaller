@@ -253,7 +253,7 @@ echo "$green I found a missing package, I'm installing it... (resize2fs) $white"
 sudo apt install -y e2fsprogs
 elif [ -x "$(command -v zypper)" ]; then
 echo "$green I found a missing package, I'm installing it... (resize2fs) $white"
-sudo zypper install -y ue2fsprogs
+sudo zypper install -y e2fsprogs
 else
 echo "$red I couldn't find the resize2fs package. That's why I canceled the transaction. $white"
 exit 1
@@ -320,8 +320,8 @@ msarch=x64
 mskernel=x86_64
 #---------------METHOD-----------------------
 OnlyWSA=false;
-WSAGAScript=true;
-MagiskWSA=false;
+WSAGAScript=false;
+MagiskWSA=true;
 #####################################################
 WSATools=false;
 #--------------CUSTOMIZER--------------
@@ -357,4 +357,15 @@ function GetMessage() {
   . ./language/en-us.sh
   fi
  
+}
+
+function function_regex_folder() {
+ echo ${info_Folder/\$x/$1}
+}
+function function_regex_getfolder() {
+ echo ${info_get_Folder/\$x/$1}
+}
+
+function function_regex_getfolder1() {
+ echo ${info_get_Folder1/\$x/$1}
 }

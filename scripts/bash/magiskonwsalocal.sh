@@ -1,6 +1,6 @@
 #!/bin/bash
 function magiskonwsamethod_d () {
-    echo "$green [Magisk] $yellow I'm doing Package Check. The package will be installed if needed. (If in supported distribution list) $red . $green . $white "
+    echo "$green [Magisk] $info_vv_ss"
     requirePackage_magisk
 echo "$green [Magisk] $yellow Before I start, I make the necessary adjustments to pip. $white"
     pip list --disable-pip-version-check | grep -E "^requests " >/dev/null 2>&1 || python3 -m pip install requests

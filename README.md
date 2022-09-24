@@ -68,7 +68,7 @@ __**In normal use, you should prefer windows terminal instead of Powershell 7.**
 
 You need to remove the existing WSA.
 
-___The ARM version is still beta, please give feedback when you encounter an error.___ **(Applicable if you are going to use the opengapps + wsa method.)**
+___The ARM version is still beta, please give feedback when you encounter an error.___
 
 ## Parametres
 All the parameters you need to know to make things easier.
@@ -131,6 +131,89 @@ All the parameters you need to know to make things easier.
 - `productname=micro`
 - `productname=nano`
 - `productname=pico` [Default]
+
+# WSL Requirements
+
+## Packages
+
+> Written based on Ubuntu.
+
+### MagiskOnWSALocal
+- `sudo`
+- `lzip`
+- `unzip`
+- `setools`
+- `whiptail`
+- `wine`
+- `winetricks`
+- `patchelf`
+- `e2fsprogs`
+- `aria2`
+- `p7zip-full`
+- `python3-pip`
+- `git`
+- `wget`
+
+### onlywsa and WSAGAScript
+
+- `sudo`
+- `lzip`
+- `unzip`
+- `e2fsprogs`
+- `git`
+- `wget`
+- `python3.9`
+- `python3-pip`
+
+# Example Install
+## Ubuntu & AMD64 & MagiskOnWSALocal
+
+```bash 
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh && setup.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+
+```
+[Go To "What to do after installation"](#what-to-do-after-installation)
+## Ubuntu & ARM64 & MagiskOnWSALocal
+```bash 
+sudo sh -c "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh && setup.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+
+```
+
+[Go To "What to do after installation"](#what-to-do-after-installation)
+
+# What to do after installation
+
+**Only If You Download Original WSA . Go to `C:\\wsaproject` and double click the file. then install it.** *(Only If You Used WSA Upload only method)*
+
+**If you used the WSAGAScript or the magiskonwsalocal Method, read on**
+
+- [Method 1](#method-1)
+- [Method 2](#method-2) (Manuel)
+
+In order for the powershell script in the "C:\wsaproject" directory to run, you need to change your permission setting. Below is the command you need to type. Run as Administrator Powershell.
+# Method 1
+```
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+```
+we can run the script now!
+![image](https://user-images.githubusercontent.com/52379312/138756336-feef2fd0-f697-401a-85d1-a243c9763e75.png)
+The operation is successful when it is as in the picture. Red text should not necessarily be.
+
+Making change permission default for Powershell
+```
+Set-ExecutionPolicy -ExecutionPolicy Restricted
+```
+# Method 2
+or if you want to do it manually, start windows terminal administrator and type the following commands.
+> If you are using arm arm64. x64 if you are using intel or amd processor 64 bit. As the folder you will choose
+```
+cd 'C:\wsa\[x64/arm64]'
+```
+
+```
+Add-AppxPackage -Register .\AppxManifest.xml
+```
+
 
 # Credits
 

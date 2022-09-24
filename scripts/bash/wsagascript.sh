@@ -1,5 +1,5 @@
 function wsagascriptmethod_d() {
-echo "$green [WSAGAScript] $yellow I'm doing Package Check. The package will be installed if needed. (If in supported distribution list) $red . $green . $white "
+echo "$green [WSAGAScript] $info_vv_ss"
 requirePackage_normal
 
 echo "$green [WSAGAScript] $white"

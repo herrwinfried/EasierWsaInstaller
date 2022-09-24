@@ -141,9 +141,9 @@ exit 1
 function WSLFolder() {
 if [ -d /tmp/wsaproject ]; then
 
-echo "$green Function: $yellow WSLFolder found. $white"
+function_regex_folder WSLFolder
 cd /tmp && cd wsaproject
-echo "$green Function: $yellow I am deleting all the files in it. $white"
+echo $info_Folder1
 sudo rm -rf /tmp/wsaproject/*
 else
 echo $selectwslfolder
@@ -155,9 +155,9 @@ sleepwait 5
 
 function WindowsFolder() {
     if [ -d /mnt/c/wsaproject ]; then
-    echo "$green Function: $yellow WindowsFolder found. $white"
+function_regex_folder WindowsFolder
 cd /mnt/c/ && cd wsaproject
-echo "$green Function: $yellow I am deleting all the files in it. $white"
+echo $info_Folder1
 sudo rm -rf /mnt/c/wsaproject/*
 else
 echo $selectwindowsfolder
@@ -167,36 +167,36 @@ sleepwait 5
 }
 
 function Get_WSLFolder() {
-    echo "$green Function: $yellow I go into the Get_WSLFolder Folder. $white"
+  function_regex_getfolder Get_WSLFolder
 cd /tmp/ && cd wsaproject || scriptabort
-echo "$green Function: $yellow I went into the Get_WSLFolder Folder. $white"
+function_regex_getfolder1 Get_WSLFolder
 }
 
 function Get_WSLFolderBashScript() {
-    echo "$green Function: $yellow I go into the Get_WSLFolderBashScript Folder. $white"
+    function_regex_getfolder Get_WSLFolderBashScript
 cd /tmp/ && cd wsa-script && cd scripts && cd bash || scriptabort
-echo "$green Function: $yellow I went into the Get_WSLFolderBashScript Folder. $white"
+function_regex_getfolder1 Get_WSLFolderBashScript
 }
 function Get_WSLFolderPython() {
-    echo "$green Function: $yellow I go into the Get_WSLFolderPython Folder. $white"
+    function_regex_getfolder Get_WSLFolderPython
 cd /tmp/ && cd wsa-script && cd scripts && cd python || scriptabort
-echo "$green Function: $yellow I went into the Get_WSLFolderPython Folder. $white"
+function_regex_getfolder1 Get_WSLFolderPython
 }
 function Get_WSLFolderPowershell() {
-    echo "$green Function: $yellow I go into the Get_WSLFolderPowershell Folder. $white"
+   function_regex_getfolder Get_WSLFolderPowershell
 cd /tmp/ && cd wsa-script && cd scripts && cd powershell || scriptabort
-echo "$green Function: $yellow I went into the Get_WSLFolderPowershell Folder. $white"
+function_regex_getfolder1 Get_WSLFolderPowershell
 }
 function Get_WSLFolderScripts() {
-        echo "$green Function: $yellow I go into the Get_WSLFolderScripts Folder. $white"
+   function_regex_getfolder Get_WSLFolderScripts
 cd /tmp/ && cd wsa-script && cd scripts || scriptabort
-echo "$green Function: $yellow I went into the Get_WSLFolderScripts Folder. $white"
+function_regex_getfolder1 Get_WSLFolderScripts
 }
 
 function Get_WindowsFolder() {
-        echo "$green Function: $yellow I go into the Get_WindowsFolder Folder. $white"
+function_regex_getfolder Get_WindowsFolder
 cd /mnt/c/ && cd wsaproject || scriptabort
-echo "$green Function: $yellow I went into the Get_WindowsFolder Folder. $white"
+function_regex_getfolder1 Get_WindowsFolder
 }
 
 function scriptpip(){
@@ -250,7 +250,7 @@ exit 1
 }
 ####################################################################################################################################
 if [[ $onlywsa == true ]]; then
-echo "$yellow I'm doing Package Check. The package will be installed if needed. (If in supported distribution list) $red . $green . $white "
+echo $info_vv_ss
 requirePackage_normal
 WSLFolder
 WindowsFolder
