@@ -114,15 +114,15 @@ if ( $wsldistro -eq "Ubuntu") {
 }
 
 elseif ( $wsldistro -eq "openSUSE-Tumbleweed") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo zypper ref && sudo zypper dup -y && sudo zypper in -y git curl wget lzip unzip e2fsprogs python39 python39-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.1.0/setup.sh -O setup.sh && sudo chmod +x ./setup.sh"
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo zypper install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
 
 }
 elseif ( $wsldistro -eq "Debian") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.9 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.1.0/setup.sh -O setup.sh && sudo chmod +x ./setup.sh"
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
 }
 else {
     $wsldistro="Ubuntu"
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsaproject; sudo mkdir /tmp/wsaproject; cd /tmp/wsaproject && sudo rm -rf setup.sh && sudo apt update && sudo apt upgrade -y && sudo apt install -y unzip lzip e2fsprogs git wget python3.9 python3-pip && wget https://raw.githubusercontent.com/herrwinfried/wsa-script/1.1.0/setup.sh -O setup.sh && sudo chmod +x ./setup.sh"
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
 }
 if ($arch -eq "arm64") {
 $wslsetup = $wslsetup + "--arm ";
