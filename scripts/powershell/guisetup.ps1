@@ -114,7 +114,7 @@ if ( $wsldistro -eq "Ubuntu") {
 }
 
 elseif ( $wsldistro -eq "openSUSE-Tumbleweed") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo zypper install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
 
 }
 elseif ( $wsldistro -eq "Debian") {
