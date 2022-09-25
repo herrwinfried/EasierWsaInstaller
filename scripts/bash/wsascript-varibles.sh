@@ -346,14 +346,18 @@ function GetMessage() {
   unset ./language/de-DE.sh
   if [[ $Language == "en_US" ]];
   then
+  chmod +x ./language/en-us.sh
   . ./language/en-us.sh
     elif [[ $Language == "tr" ]];
   then
+  chmod +x ./language/tr.sh
   . ./language/tr.sh
       elif [[ $Language == "de_DE" ]];
   then
+   chmod +x ./language/de-DE.sh
   . ./language/de-DE.sh
   else
+   chmod +x ./language/en-us.sh
   . ./language/en-us.sh
   fi
  

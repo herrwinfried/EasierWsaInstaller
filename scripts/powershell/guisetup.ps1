@@ -54,7 +54,7 @@ Write-Host "This script is for the wsa-gui project." -ForegroundColor Yellow;
 Start-Sleep -s 0.70
 write-host "== Script ==" -ForegroundColor Cyan;
 write-host $wsldistro $arch $scriptlang $method $wsarelease $magiskversion $amazonstore $wsatools $productname $gappsvariant
-write-host "== Windows ==" -ForegroundColor Green; Write-Host $winvmc $windevmode
+write-host "== Windows ==" -ForegroundColor Green; Write-Host $winvmp $windevmode $adb
 
 ####################################################################################################################################
 
@@ -107,22 +107,22 @@ if ($pathContent -ne $null)
 $wslprep
 $wslprep1 = 'sudo sh -c "'
 $wslprep2 = '"'
-$wslsetup = "&& setup.sh "
+$wslsetup = "&& ./install.sh "
 
 if ( $wsldistro -eq "Ubuntu") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 
 elseif ( $wsldistro -eq "openSUSE-Tumbleweed") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo zypper install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 
 }
 elseif ( $wsldistro -eq "Debian") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 else {
     $wsldistro="Ubuntu"
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 if ($arch -eq "arm64") {
 $wslsetup = $wslsetup + "--arm ";
@@ -138,10 +138,16 @@ $wslsetup = $wslsetup + "--variant="+$gappsvariant+" ";
 
 Write-Host "WSL will pass, please be careful. If you are asked for a password, please enter your password correctly. If you enter it incorrectly, a mishap may occur." -ForegroundColor Green
 Start-Sleep -Seconds 5
+Clear-Host
 write-host "-d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2"
-wsl -d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2
-####Finish
+Start-Sleep -Seconds 1
+Clear-Host
+Clear-Host
+$runwsl = "wsl -d $wsldistro -u root -e $wslprep1$wslprep$wslsetup$wslprep2"
+Invoke-Expression $runwsl || Write-Host "WSL failed to start." -ForegroundColor Red
 
+####Finish
+exit 1
 
 ### FFF
 if ( ((Get-Host).Version).Major -ne "5" ) 

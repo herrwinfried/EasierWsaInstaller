@@ -14,7 +14,6 @@ if [[ $WSATools == true ]]; then
 echo "$green {WSAGAScript} $red WSATOOLS $white"
 wsatoolspy || scriptabort
 echo "$green {WSAGAScript} $red WSATOOLS Done $white"
-
 fi
 echo "$green [WSAGAScript] $white"
 wsapy
