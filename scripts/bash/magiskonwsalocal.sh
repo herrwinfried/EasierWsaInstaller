@@ -96,7 +96,7 @@ sudo mkdir -p /mnt/c/wsa/wsamagisk || scriptabort
 
 echo "$green [Magisk] $white [PRE-FINISH]"
 echo "$green [Magisk] $yellow go to powershell folder $white [PRE-FINISH]"
-cd powershell || scriptabort
+Get_WSLFolderPowershell || scriptabort
 echo "$green [Magisk] $yellow necessary files are copied. [0] $white [PRE-FINISH]"
 sudo cp guiinstall.ps1 /mnt/c/wsa/wsamagisk || scriptabort
 
