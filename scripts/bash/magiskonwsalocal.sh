@@ -4,6 +4,7 @@ function magiskonwsamethod_d () {
     requirePackage_magisk
 echo "$green [Magisk] $yellow Before I start, I make the necessary adjustments to pip. $white"
     pip list --disable-pip-version-check | grep -E "^requests " >/dev/null 2>&1 || python3 -m pip install requests
+    scriptpip || abort
 echo "$green [Magisk] $yellow I'm making winetrick adjustments. $white"
 winetricks list-installed | grep -E "^msxml6" >/dev/null 2>&1 || {
     echo "$green [Magisk] $red [winetricks.1.0] $yellow [...] $white"

@@ -1,3 +1,4 @@
+#!/bin/bash
 welcome="Hallo Welt"
 MethodName="magiskonwsalocal"
 invalidwsarelease="$yellow ungültiger Wert (wsa-Release). Einzelhandel ausgewählt $white"

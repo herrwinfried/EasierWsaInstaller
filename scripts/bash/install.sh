@@ -255,7 +255,7 @@ requirePackage_normal
 WSLFolder
 WindowsFolder
 scriptpip
-Get_WindowsFolder
+Get_WSLFolderScripts
 wsapy
 if [[ $WSATools == true ]]; then
 wsatoolspy

@@ -341,25 +341,21 @@ function equalcommand() {
   echo $1 | cut -f2 -d"="
 }
 function GetMessage() {
-  chmod +x *
+  chmod +x language/*
   unset ./language/en-us.sh
   unset ./language/tr.sh
   unset ./language/de-DE.sh
   if [[ $Language == "en_US" ]];
   then
-  chmod +x *
-  . ./language/en-us.sh
+  . ./language/en-US.sh
     elif [[ $Language == "tr" ]];
   then
-  chmod +x *
   . ./language/tr.sh
       elif [[ $Language == "de_DE" ]];
   then
-   chmod +x *
   . ./language/de-DE.sh
   else
-   chmod +x *
-  . ./language/en-us.sh
+  . ./language/en-US.sh
   fi
  
 }

@@ -1,3 +1,4 @@
+#!/bin/bash
 welcome="Selam Dünya"
 MethodName="magiskonwsalocal"
 invalidwsarelease="$yellow geçersiz değer(wsa release). retail seçilmiş $white"
@@ -20,7 +21,6 @@ notifwsa="$yellow Lütfen yukarda belirtilen klasörü kontrol ediniz. Eğer mag
 info_function="$green Fonksiyon: $white"
 info_Folder="$info_function $yellow \$x bulundu. $white"
 info_Folder1="$info_function $yellow İçindeki tüm dosyaları siliyorum. $white"
-
 info_get_Folder="$info_function $yellow \$x Klasörüne giriyorum. $white"
 info_get_Folder1="$info_function $yellow \$x klasörüne girdim. $white"
 info_vv_ss="$yellow Paket Kontrolü yapıyorum. Gerekirse paket yüklenir. (Desteklenen dağıtım listesinde ise) $red . $green . $white "
