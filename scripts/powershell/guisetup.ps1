@@ -140,10 +140,14 @@ Write-Host "WSL will pass, please be careful. If you are asked for a password, p
 Start-Sleep -Seconds 5
 Clear-Host
 write-host "-d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2"
-Start-Sleep -Seconds 0.10
-wsl -d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2 || Write-Host "WSL failed to start." -ForegroundColor Red
-####Finish
+Start-Sleep -Seconds 1
+Clear-Host
+Clear-Host
+$runwsl = "wsl -d $wsldistro -u root -e $wslprep1$wslprep$wslsetup$wslprep2"
+Invoke-Expression $runwsl || Write-Host "WSL failed to start." -ForegroundColor Red
 
+####Finish
+exit 1
 
 ### FFF
 if ( ((Get-Host).Version).Major -ne "5" ) 
