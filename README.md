@@ -153,6 +153,7 @@ All the parameters you need to know to make things easier.
 - `python3-pip`
 - `git`
 - `wget`
+- `attr`
 
 ### onlywsa and WSAGAScript
 

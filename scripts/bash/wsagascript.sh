@@ -101,6 +101,7 @@ echo "$green [WSAGAScript] $yellow old kernel deleted. The new kernel is migrate
 cp misc/kernel-$mskernel /mnt/c/wsaproject/microsoftwsa/wsa/Tools/kernel || scriptabort
 
 echo "$green [WSAGAScript] $yellow Checking in /mnt/c/wsa/$msarch. If full, it will be deleted. $white [PRE-FINISH]"
+sudo mkdir -p /mnt/c/wsa || scriptabort
 sudo rm -rf /mnt/c/wsa/$msarch || scriptabort
 echo "$green [WSAGAScript] $yellow Checking in /mnt/c/wsa/$msarch. If None, it will be created. $white [PRE-FINISH]"
 sudo mkdir -p /mnt/c/wsa/$msarch || scriptabort

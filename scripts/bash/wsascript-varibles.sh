@@ -202,6 +202,19 @@ exit 1
 fi
 fi
 
+if ! [ -x "$(command -v setfattr)" ]; then
+if [ -x "$(command -v apt)" ]; then
+echo "$green I found a missing package, I'm installing it... (attr) $white"
+sudo apt install -y attr
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (attr) $white"
+sudo zypper install -y attr
+else
+echo "$red I couldn't find the attr package. That's why I canceled the transaction. $white"
+exit 1
+fi
+fi
+
 sleepwait 1
 
 }
