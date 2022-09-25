@@ -203,10 +203,10 @@ function scriptpip(){
     if [[ -x "$(command -v pip3)" ]]; then
 echo $pipinstall
 sleepwait 0.5
-python3.9 -m pip install requests
-python3.9 -m pip install BeautifulSoup4
-python3.9 -m pip install lxml
-python3.9 -m pip install wget
+python3.10 -m pip install requests
+python3.10 -m pip install BeautifulSoup4
+python3.10 -m pip install lxml
+python3.10 -m pip install wget
 else
 echo $nopip
 exit 1
@@ -214,9 +214,9 @@ fi
 }
 
 function wsapy() {
-        if [[ -x "$(command -v python3.9)" ]]; then
+        if [[ -x "$(command -v python3.10)" ]]; then
         echo "I will install $yellow W $red S $green A $white"
-    python3.9 ./python/wsa.py -r $wsarelease
+    python3.10 ./python/wsa.py -r $wsarelease
     echo $downloadsus
 sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
     else 
@@ -226,9 +226,9 @@ fi
 }
 
 function wsatoolspy() {
-    if [[ -x "$(command -v python3.9)" ]]; then
+    if [[ -x "$(command -v python3.10)" ]]; then
     echo "I will install $yellow WSA $red TOOLS $white"
-    python3.9 ./python/wsatools.py
+    python3.10 ./python/wsatools.py
  echo $downloadsus
 sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
 else 
@@ -238,9 +238,9 @@ fi
 }
 
 function opengappspy() {
-    if [[ -x "$(command -v python3.9)" ]]; then
+    if [[ -x "$(command -v python3.10)" ]]; then
     echo "I will install $yellow OPEN $red GAPPS $white"
-python3.9 ./python/opengapps.py -a $gappsarch -va $gappsvariant
+python3.10 ./python/opengapps.py -a $gappsarch -va $gappsvariant
  echo $downloadsus
 sudo mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
     else 

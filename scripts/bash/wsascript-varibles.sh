@@ -165,10 +165,10 @@ fi
 if ! [ -x "$(command -v pip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
-sudo apt install -y python3.9 python3-pip
+sudo apt install -y python3-pip
 elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (python39-pip) $white"
-sudo zypper install -y python39 python39-pip
+echo "$green I found a missing package, I'm installing it... (python3.10-pip) $white"
+sudo zypper install -y python310 python310-pip
 else
 echo "$red I couldn't find the python3-pip package. That's why I canceled the transaction. $white"
 exit 1
@@ -285,13 +285,13 @@ echo "$red I couldn't find the wget package. That's why I canceled the transacti
 exit 1
 fi
 fi
-if ! [ -x "$(command -v python3.9)" ]; then
+if ! [ -x "$(command -v python3.10)" ]; then
 if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3.9) $white"
-sudo apt install -y python3.9 python3-pip
+echo "$green I found a missing package, I'm installing it... (python3.10) $white"
+sudo apt install -y python3-pip
 elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (python3.9) $white"
-sudo zypper install -y python39 python39-pip
+echo "$green I found a missing package, I'm installing it... (python3.10) $white"
+sudo zypper install -y python310 python310-pip
 else
 echo "$red I couldn't find the python3 package. That's why I canceled the transaction. $white"
 exit 1
@@ -300,10 +300,10 @@ fi
 if ! [ -x "$(command -v pip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (python3-pip) $white"
-sudo apt install -y python3.9 python3-pip
+sudo apt install -y python3-pip
 elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (python39-pip) $white"
-sudo zypper install -y python39 python39-pip
+echo "$green I found a missing package, I'm installing it... (python3.10-pip) $white"
+sudo zypper install -y python310 python310-pip
 else
 echo "$red I couldn't find the python3-pip package. That's why I canceled the transaction. $white"
 exit 1
