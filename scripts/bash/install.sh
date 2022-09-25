@@ -18,13 +18,13 @@ mskernel=arm64
 #ARM FINISH
 
 ################################language SELECT#####################################
-elif [[ $n == "--lang=en" ]] || [[ $n == "--lang=en-US" ]]; then
+elif [[ $n == "--lang=en" ]] || [[ $n == "--lang=en-us" ]]; then
 Language=en_US
 GetMessage
-elif [[ $n == "--lang=tr" ]] || [[ $n == "--lang=tr-TR" ]]; then
+elif [[ $n == "--lang=tr" ]] || [[ $n == "--lang=tr-tr" ]]; then
 Language=tr
 GetMessage
-elif [[ $n == "--lang=de" ]] || [[ $n == "--lang=de-DE" ]]; then
+elif [[ $n == "--lang=de" ]] || [[ $n == "--lang=de-de" ]]; then
 Language=de_DE
 GetMessage
 elif [[ $n == "--lang="* ]]; then

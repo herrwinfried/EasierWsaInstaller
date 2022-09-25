@@ -29,27 +29,39 @@ if [ "$HOST_ARCH" != "x86_64" ] && [ "$HOST_ARCH" != "aarch64" ]; then
 fi
 cd "$(dirname "$0")" || exit 1
 trap umount_clean EXIT
+# export TMPDIR=$(dirname "$PWD")/WORK_DIR_
+if [ "$TMPDIR" ] && [ ! -d "$TMPDIR" ]; then
+    mkdir -p "$TMPDIR"
+fi
 WORK_DIR=$(mktemp -d -t wsa-build-XXXXXXXXXX_) || exit 1
 DOWNLOAD_DIR=../download
 DOWNLOAD_CONF_NAME=download.list
 OUTPUT_DIR=../output
 MOUNT_DIR="$WORK_DIR"/system
+SUDO="$(which sudo 2>/dev/null)"
+if [ -z "$SUDO" ]; then
+    unset SUDO
+fi
 umount_clean() {
     if [ -d "$MOUNT_DIR" ]; then
         echo "Cleanup Work Directory"
         if [ -d "$MOUNT_DIR/vendor" ]; then
-            sudo umount "$MOUNT_DIR"/vendor
+            $SUDO umount "$MOUNT_DIR"/vendor
         fi
         if [ -d "$MOUNT_DIR/product" ]; then
-            sudo umount "$MOUNT_DIR"/product
+            $SUDO umount "$MOUNT_DIR"/product
         fi
         if [ -d "$MOUNT_DIR/system_ext" ]; then
-            sudo umount "$MOUNT_DIR"/system_ext
+            $SUDO umount "$MOUNT_DIR"/system_ext
         fi
-        sudo umount "$MOUNT_DIR"
-        sudo rm -rf "${WORK_DIR:?}"
+        $SUDO umount "$MOUNT_DIR"
+        $SUDO rm -rf "${WORK_DIR:?}"
     else
         rm -rf "${WORK_DIR:?}"
+    fi
+    if [ "$TMPDIR" ] && [ -d "$TMPDIR" ]; then
+        rm -rf "${TMPDIR:?}"
+        unset TMPDIR
     fi
 }
 clean_download() {
@@ -84,7 +96,7 @@ default() {
     ARCH=x64
     RELEASE_TYPE=retail
     MAGISK_VER=stable
-    GAPPS_BRAND=OpenGApps
+    GAPPS_BRAND=MindTheGapps
     GAPPS_VARIANT=pico
     ROOT_SOL=magisk
 }
@@ -267,10 +279,19 @@ if [ "$DEBUG" ]; then
     set -x
 fi
 
+require_su() {
+    if test "$(whoami)" != "root"; then
+        if [ -z "$SUDO" ] || [ "$($SUDO whoami)" != "root" ]; then
+            echo "ROOT/SUDO is required to run this script"
+            abort
+        fi
+    fi
+}
+
 declare -A RELEASE_NAME_MAP=(["retail"]="Retail" ["RP"]="Release Preview" ["WIS"]="Insider Slow" ["WIF"]="Insider Fast")
 RELEASE_NAME=${RELEASE_NAME_MAP[$RELEASE_TYPE]} || abort
 
-echo -e "build: RELEASE_TYPE=$RELEASE_NAME"
+echo -e "Build: RELEASE_TYPE=$RELEASE_NAME"
 
 WSA_ZIP_PATH=$DOWNLOAD_DIR/wsa-$ARCH-$RELEASE_TYPE.zip
 vclibs_PATH=$DOWNLOAD_DIR/vclibs-"$ARCH".appx
@@ -287,18 +308,17 @@ if [ "$GAPPS_BRAND" = "OpenGApps" ]; then
 else
     GAPPS_PATH="$DOWNLOAD_DIR"/MindTheGapps-"$ARCH".zip
 fi
-if [ "$(sudo whoami)" != "root" ]; then
-    sudo echo "sudo is required to run this script"
-fi
+
 if [ -z "${OFFLINE+x}" ]; then
     trap 'rm -f -- "${DOWNLOAD_DIR:?}/${DOWNLOAD_CONF_NAME}"' EXIT
+    require_su
     echo "Generate Download Links"
     python3 generateWSALinks.py "$ARCH" "$RELEASE_TYPE" "$DOWNLOAD_DIR" "$DOWNLOAD_CONF_NAME" || abort
     if [ -z "${CUSTOM_MAGISK+x}" ]; then
         python3 generateMagiskLink.py "$MAGISK_VER" "$DOWNLOAD_DIR" "$DOWNLOAD_CONF_NAME" || abort
     fi
-    if [ "$GAPPS_BRAND" = "OpenGApps" ]; then
-        python3 generateGappsLink.py "$ARCH" "$GAPPS_VARIANT" "$DOWNLOAD_DIR" "$DOWNLOAD_CONF_NAME" || abort
+    if [ "$GAPPS_BRAND" != "none" ]; then
+        python3 generateGappsLink.py "$ARCH" "$GAPPS_BRAND" "$GAPPS_VARIANT" "$DOWNLOAD_DIR" "$DOWNLOAD_CONF_NAME" || abort
     fi
 
     echo "Download Artifacts"
@@ -324,12 +344,14 @@ else
         echo "Offline mode: Some files are missing, please disable offline mode."
         exit 1
     fi
+    require_su
 fi
 
 echo "Extract WSA"
 if [ -f "$WSA_ZIP_PATH" ]; then
     WSA_WORK_ENV="${WORK_DIR:?}"/ENV
     if [ -f "$WSA_WORK_ENV" ]; then rm -f "${WSA_WORK_ENV:?}"; fi
+    touch "$WSA_WORK_ENV"
     export WSA_WORK_ENV
     if ! python3 extractWSA.py "$ARCH" "$WSA_ZIP_PATH" "$WORK_DIR"; then
         echo "Unzip WSA failed, is the download incomplete?"
@@ -343,14 +365,20 @@ else
     echo "The WSA zip package does not exist, is the download incomplete?"
     exit 1
 fi
-echo "Extract Magisk"
 
+echo "Extract Magisk"
 if [ -f "$MAGISK_PATH" ]; then
     if ! python3 extractMagisk.py "$ARCH" "$MAGISK_PATH" "$WORK_DIR"; then
         echo "Unzip Magisk failed, is the download incomplete?"
         CLEAN_DOWNLOAD_MAGISK=1
         abort
     fi
+    $SUDO patchelf --replace-needed libc.so "../linker/$HOST_ARCH/libc.so" "$WORK_DIR"/magisk/magiskpolicy || abort
+    $SUDO patchelf --replace-needed libm.so "../linker/$HOST_ARCH/libm.so" "$WORK_DIR"/magisk/magiskpolicy || abort
+    $SUDO patchelf --replace-needed libdl.so "../linker/$HOST_ARCH/libdl.so" "$WORK_DIR"/magisk/magiskpolicy || abort
+    chmod +x "../linker/$HOST_ARCH/linker64" || abort
+    $SUDO patchelf --set-interpreter "../linker/$HOST_ARCH/linker64" "$WORK_DIR"/magisk/magiskpolicy || abort
+    chmod +x "$WORK_DIR"/magisk/magiskpolicy || abort
 elif [ -z "${CUSTOM_MAGISK+x}" ]; then
     echo "The Magisk zip package does not exist, is the download incomplete?"
     exit 1
@@ -361,7 +389,7 @@ fi
 echo -e "done\n"
 
 if [ "$GAPPS_BRAND" != 'none' ]; then
-    echo "Extract GApps"
+    echo "Extract $GAPPS_BRAND"
     mkdir -p "$WORK_DIR"/gapps || abort
     if [ -f "$GAPPS_PATH" ]; then
         if [ "$GAPPS_BRAND" = "OpenGApps" ]; then
@@ -391,22 +419,22 @@ if [ "$GAPPS_BRAND" != 'none' ]; then
 fi
 
 echo "Expand images"
-
-e2fsck -yf "$WORK_DIR"/wsa/"$ARCH"/system_ext.img || abort
+if [ ! -f /etc/mtab ]; then $SUDO ln -s /proc/self/mounts /etc/mtab; fi
+e2fsck -pf "$WORK_DIR"/wsa/"$ARCH"/system_ext.img || abort
 SYSTEM_EXT_SIZE=$(($(du --apparent-size -sB512 "$WORK_DIR"/wsa/"$ARCH"/system_ext.img | cut -f1) + 20000))
 if [ -d "$WORK_DIR"/gapps/system_ext ]; then
     SYSTEM_EXT_SIZE=$(( SYSTEM_EXT_SIZE + $(du --apparent-size -sB512 "$WORK_DIR"/gapps/system_ext | cut -f1) ))
 fi
 resize2fs "$WORK_DIR"/wsa/"$ARCH"/system_ext.img "$SYSTEM_EXT_SIZE"s || abort
 
-e2fsck -yf "$WORK_DIR"/wsa/"$ARCH"/product.img || abort
+e2fsck -pf "$WORK_DIR"/wsa/"$ARCH"/product.img || abort
 PRODUCT_SIZE=$(($(du --apparent-size -sB512 "$WORK_DIR"/wsa/"$ARCH"/product.img | cut -f1) + 20000))
 if [ -d "$WORK_DIR"/gapps/product ]; then
     PRODUCT_SIZE=$(( PRODUCT_SIZE + $(du --apparent-size -sB512 "$WORK_DIR"/gapps/product | cut -f1) ))
 fi
 resize2fs "$WORK_DIR"/wsa/"$ARCH"/product.img "$PRODUCT_SIZE"s || abort
 
-e2fsck -yf "$WORK_DIR"/wsa/"$ARCH"/system.img || abort
+e2fsck -pf "$WORK_DIR"/wsa/"$ARCH"/system.img || abort
 SYSTEM_SIZE=$(($(du --apparent-size -sB512 "$WORK_DIR"/wsa/"$ARCH"/system.img | cut -f1) + 20000))
 if [ -d "$WORK_DIR"/gapps ]; then
     SYSTEM_SIZE=$(( SYSTEM_SIZE + $(du --apparent-size -sB512 "$WORK_DIR"/gapps | cut -f1) - $(du --apparent-size -sB512 "$WORK_DIR"/gapps/product | cut -f1) ))
@@ -425,34 +453,34 @@ if [ -d "../$ARCH/system" ]; then
 fi
 resize2fs "$WORK_DIR"/wsa/"$ARCH"/system.img "$SYSTEM_SIZE"s || abort
 
-e2fsck -yf "$WORK_DIR"/wsa/"$ARCH"/vendor.img || abort
+e2fsck -pf "$WORK_DIR"/wsa/"$ARCH"/vendor.img || abort
 VENDOR_SIZE=$(($(du --apparent-size -sB512 "$WORK_DIR"/wsa/"$ARCH"/vendor.img | cut -f1) + 20000))
 resize2fs "$WORK_DIR"/wsa/"$ARCH"/vendor.img "$VENDOR_SIZE"s || abort
 echo -e "Expand images done\n"
 
 echo "Mount images"
-sudo mkdir "$MOUNT_DIR" || abort
-sudo mount -o loop "$WORK_DIR"/wsa/"$ARCH"/system.img "$MOUNT_DIR" || abort
-sudo mount -o loop "$WORK_DIR"/wsa/"$ARCH"/vendor.img "$MOUNT_DIR"/vendor || abort
-sudo mount -o loop "$WORK_DIR"/wsa/"$ARCH"/product.img "$MOUNT_DIR"/product || abort
-sudo mount -o loop "$WORK_DIR"/wsa/"$ARCH"/system_ext.img "$MOUNT_DIR"/system_ext || abort
+$SUDO mkdir "$MOUNT_DIR" || abort
+$SUDO mount -o loop "$WORK_DIR"/wsa/"$ARCH"/system.img "$MOUNT_DIR" || abort
+$SUDO mount -o loop "$WORK_DIR"/wsa/"$ARCH"/vendor.img "$MOUNT_DIR"/vendor || abort
+$SUDO mount -o loop "$WORK_DIR"/wsa/"$ARCH"/product.img "$MOUNT_DIR"/product || abort
+$SUDO mount -o loop "$WORK_DIR"/wsa/"$ARCH"/system_ext.img "$MOUNT_DIR"/system_ext || abort
 echo -e "done\n"
 
 if [ "$REMOVE_AMAZON" ]; then
-    echo "Remove Amazon AppStore"
-    find "${MOUNT_DIR:?}"/product/{etc/permissions,etc/sysconfig,framework,priv-app} | grep -e amazon -e venezia | sudo xargs rm -rf
+    echo "Remove Amazon Appstore"
+    find "${MOUNT_DIR:?}"/product/{etc/permissions,etc/sysconfig,framework,priv-app} | grep -e amazon -e venezia | $SUDO xargs rm -rf
     echo -e "done\n"
 fi
 
 if [ "$ROOT_SOL" = 'magisk' ] || [ "$ROOT_SOL" = '' ]; then
     echo "Integrate Magisk"
-    sudo mkdir "$MOUNT_DIR"/sbin
-    sudo chcon --reference "$MOUNT_DIR"/init.environ.rc "$MOUNT_DIR"/sbin
-    sudo chown root:root "$MOUNT_DIR"/sbin
-    sudo chmod 0700 "$MOUNT_DIR"/sbin
-    sudo cp "$WORK_DIR"/magisk/magisk/* "$MOUNT_DIR"/sbin/
-    sudo cp "$MAGISK_PATH" "$MOUNT_DIR"/sbin/magisk.apk
-    sudo tee -a "$MOUNT_DIR"/sbin/loadpolicy.sh <<EOF
+    $SUDO mkdir "$MOUNT_DIR"/sbin
+    $SUDO setfattr -n security.selinux -v "u:object_r:rootfs:s0" "$MOUNT_DIR"/sbin || abort
+    $SUDO chown root:root "$MOUNT_DIR"/sbin
+    $SUDO chmod 0700 "$MOUNT_DIR"/sbin
+    $SUDO cp "$WORK_DIR"/magisk/magisk/* "$MOUNT_DIR"/sbin/
+    $SUDO cp "$MAGISK_PATH" "$MOUNT_DIR"/sbin/magisk.apk
+    $SUDO tee -a "$MOUNT_DIR"/sbin/loadpolicy.sh <<EOF
 #!/system/bin/sh
 mkdir -p /data/adb/magisk
 cp /sbin/* /data/adb/magisk/
@@ -465,23 +493,19 @@ for module in \$(ls /data/adb/modules); do
 done
 EOF
 
-    sudo find "$MOUNT_DIR"/sbin -type f -exec chmod 0755 {} \;
-    sudo find "$MOUNT_DIR"/sbin -type f -exec chown root:root {} \;
-    sudo find "$MOUNT_DIR"/sbin -type f -exec chcon --reference "$MOUNT_DIR"/product {} \;
-    sudo patchelf --replace-needed libc.so "../linker/$HOST_ARCH/libc.so" "$WORK_DIR"/magisk/magiskpolicy || abort
-    sudo patchelf --replace-needed libm.so "../linker/$HOST_ARCH/libm.so" "$WORK_DIR"/magisk/magiskpolicy || abort
-    sudo patchelf --replace-needed libdl.so "../linker/$HOST_ARCH/libdl.so" "$WORK_DIR"/magisk/magiskpolicy || abort
-    sudo patchelf --set-interpreter "../linker/$HOST_ARCH/linker64" "$WORK_DIR"/magisk/magiskpolicy || abort
-    chmod +x "$WORK_DIR"/magisk/magiskpolicy || abort
+    $SUDO find "$MOUNT_DIR"/sbin -type f -exec chmod 0755 {} \;
+    $SUDO find "$MOUNT_DIR"/sbin -type f -exec chown root:root {} \;
+    $SUDO find "$MOUNT_DIR"/sbin -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+
     TMP_PATH=$(Gen_Rand_Str 8)
-    echo "/dev/$TMP_PATH(/.*)?    u:object_r:magisk_file:s0" | sudo tee -a "$MOUNT_DIR"/vendor/etc/selinux/vendor_file_contexts
-    echo '/data/adb/magisk(/.*)?   u:object_r:magisk_file:s0' | sudo tee -a "$MOUNT_DIR"/vendor/etc/selinux/vendor_file_contexts
-    sudo "$WORK_DIR"/magisk/magiskpolicy --load "$MOUNT_DIR"/vendor/etc/selinux/precompiled_sepolicy --save "$MOUNT_DIR"/vendor/etc/selinux/precompiled_sepolicy --magisk "allow * magisk_file lnk_file *" || abort
+    echo "/dev/$TMP_PATH(/.*)?    u:object_r:magisk_file:s0" | $SUDO tee -a "$MOUNT_DIR"/vendor/etc/selinux/vendor_file_contexts
+    echo '/data/adb/magisk(/.*)?   u:object_r:magisk_file:s0' | $SUDO tee -a "$MOUNT_DIR"/vendor/etc/selinux/vendor_file_contexts
+    $SUDO "$WORK_DIR"/magisk/magiskpolicy --load "$MOUNT_DIR"/vendor/etc/selinux/precompiled_sepolicy --save "$MOUNT_DIR"/vendor/etc/selinux/precompiled_sepolicy --magisk "allow * magisk_file lnk_file *" || abort
     SERVER_NAME1=$(Gen_Rand_Str 12)
     SERVER_NAME2=$(Gen_Rand_Str 12)
     SERVER_NAME3=$(Gen_Rand_Str 12)
     SERVER_NAME4=$(Gen_Rand_Str 12)
-    sudo tee -a "$MOUNT_DIR"/system/etc/init/hw/init.rc <<EOF
+    $SUDO tee -a "$MOUNT_DIR"/system/etc/init/hw/init.rc <<EOF
 on post-fs-data
     start adbd
     mkdir /dev/$TMP_PATH
@@ -553,108 +577,103 @@ sed -i -zE "s/<Resources.*Resources>/<Resources>\n$(cat "$WORK_DIR"/wsa/xml/* | 
 echo -e "Merge Language Resources done\n"
 
 echo "Add extra packages"
-sudo cp -r ../"$ARCH"/system/* "$MOUNT_DIR" || abort
-find ../"$ARCH"/system/system/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/priv-app/dir -type d -exec chmod 0755 {} \;
-find ../"$ARCH"/system/system/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/priv-app/dir -type f -exec chmod 0644 {} \;
-find ../"$ARCH"/system/system/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/priv-app/dir -exec chown root:root {} \;
-find ../"$ARCH"/system/system/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/priv-app/dir -exec chcon --reference="$MOUNT_DIR"/system/priv-app {} \;
-find ../"$ARCH"/system/system/etc/permissions/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/system/etc/permissions/file -type f -exec chmod 0644 {} \;
-find ../"$ARCH"/system/system/etc/permissions/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/system/etc/permissions/file -exec chown root:root {} \;
-find ../"$ARCH"/system/system/etc/permissions/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/system/etc/permissions/file -type f -exec chcon --reference="$MOUNT_DIR"/system/etc/permissions/platform.xml {} \;
+$SUDO cp -r ../"$ARCH"/system/* "$MOUNT_DIR" || abort
+find ../"$ARCH"/system/system/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/priv-app/placeholder -type d -exec chmod 0755 {} \;
+find ../"$ARCH"/system/system/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/priv-app/placeholder -type f -exec chmod 0644 {} \;
+find ../"$ARCH"/system/system/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/priv-app/placeholder -exec chown root:root {} \;
+find ../"$ARCH"/system/system/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/priv-app/placeholder -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+find ../"$ARCH"/system/system/etc/permissions/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/etc/permissions/placeholder -type f -exec chmod 0644 {} \;
+find ../"$ARCH"/system/system/etc/permissions/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/etc/permissions/placeholder -exec chown root:root {} \;
+find ../"$ARCH"/system/system/etc/permissions/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/etc/permissions/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
 echo -e "Add extra packages done\n"
 
 if [ "$GAPPS_BRAND" != 'none' ]; then
-    echo "Integrate GApps"
+    echo "Integrate $GAPPS_BRAND"
 
-    find "$WORK_DIR/gapps/" -mindepth 1 -type d -exec sudo chmod 0755 {} \;
-    find "$WORK_DIR/gapps/" -mindepth 1 -type d -exec sudo chown root:root {} \;
+    find "$WORK_DIR/gapps/" -mindepth 1 -type d -exec $SUDO chmod 0755 {} \;
+    find "$WORK_DIR/gapps/" -mindepth 1 -type d -exec $SUDO chown root:root {} \;
     file_list="$(find "$WORK_DIR/gapps/" -mindepth 1 -type f | cut -d/ -f5-)"
     for file in $file_list; do
-        sudo chown root:root "$WORK_DIR/gapps/${file}"
-        sudo chmod 0644 "$WORK_DIR/gapps/${file}"
+        $SUDO chown root:root "$WORK_DIR/gapps/${file}"
+        $SUDO chmod 0644 "$WORK_DIR/gapps/${file}"
     done
 
     if [ "$GAPPS_BRAND" = "OpenGApps" ]; then
-        find "$WORK_DIR"/gapps/ -maxdepth 1 -mindepth 1 -type d -not -path '*product' -exec sudo cp --preserve=all -r {} "$MOUNT_DIR"/system \; || abort
+        find "$WORK_DIR"/gapps/ -maxdepth 1 -mindepth 1 -type d -not -path '*product' -exec $SUDO cp --preserve=all -r {} "$MOUNT_DIR"/system \; || abort
     elif [ "$GAPPS_BRAND" = "MindTheGapps" ]; then
-        sudo cp --preserve=all -r "$WORK_DIR"/gapps/system_ext/* "$MOUNT_DIR"/system_ext/ || abort
+        $SUDO cp --preserve=all -r "$WORK_DIR"/gapps/system_ext/* "$MOUNT_DIR"/system_ext/ || abort
         if [ -e "$MOUNT_DIR"/system_ext/priv-app/SetupWizard ]; then
             rm -rf "${MOUNT_DIR:?}/system_ext/priv-app/Provision"
         fi
     fi
-    sudo cp --preserve=all -r "$WORK_DIR"/gapps/product/* "$MOUNT_DIR"/product || abort
+    $SUDO cp --preserve=all -r "$WORK_DIR"/gapps/product/* "$MOUNT_DIR"/product || abort
 
-    find "$WORK_DIR"/gapps/product/overlay -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/product/overlay/file -type f -exec chcon --reference="$MOUNT_DIR"/product/overlay/FontNotoSerifSource/FontNotoSerifSourceOverlay.apk {} \;
+    find "$WORK_DIR"/gapps/product/overlay -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/overlay/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:vendor_overlay_file:s0" {} \; || abort
 
     if [ "$GAPPS_BRAND" = "OpenGApps" ]; then
-        find "$WORK_DIR"/gapps/app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/app/dir -type d -exec chcon --reference="$MOUNT_DIR"/system/app {} \;
-        find "$WORK_DIR"/gapps/framework/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/framework/dir -type d -exec chcon --reference="$MOUNT_DIR"/system/framework {} \;
-        find "$WORK_DIR"/gapps/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/priv-app/dir -type d -exec chcon --reference="$MOUNT_DIR"/system/priv-app {} \;
-        find "$WORK_DIR"/gapps/app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/system/app/file -type f -exec chcon --reference="$MOUNT_DIR"/system/app/KeyChain/KeyChain.apk {} \;
-        find "$WORK_DIR"/gapps/framework/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/system/framework/file -type f -exec chcon --reference="$MOUNT_DIR"/system/framework/ext.jar {} \;
-        find "$WORK_DIR"/gapps/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/system/priv-app/file -type f -exec chcon --reference="$MOUNT_DIR"/system/priv-app/Shell/Shell.apk {} \;
-        find "$WORK_DIR"/gapps/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/etc/dir -type d -exec chcon --reference="$MOUNT_DIR"/system/etc/permissions {} \;
-        find "$WORK_DIR"/gapps/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system/etc/dir -type f -exec chcon --reference="$MOUNT_DIR"/system/etc/permissions {} \;
+        find "$WORK_DIR"/gapps/app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/app/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/framework/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/framework/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/priv-app/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/app/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/framework/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/framework/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/priv-app/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/etc/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system/etc/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
     else
-        find "$WORK_DIR"/gapps/product/app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I item sudo find "$MOUNT_DIR"/product/app/item -type d -exec chcon --reference="$MOUNT_DIR"/product/app {} \;
-        find "$WORK_DIR"/gapps/product/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I item sudo find "$MOUNT_DIR"/product/etc/item -type d -exec chcon --reference="$MOUNT_DIR"/product/etc {} \;
-        find "$WORK_DIR"/gapps/product/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I item sudo find "$MOUNT_DIR"/product/priv-app/item -type d -exec chcon --reference="$MOUNT_DIR"/product/priv-app {} \;
-        find "$WORK_DIR"/gapps/product/framework/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I item sudo find "$MOUNT_DIR"/product/framework/item -type d -exec chcon --reference="$MOUNT_DIR"/product/framework {} \;
+        find "$WORK_DIR"/gapps/product/app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/app/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/product/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/etc/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/product/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/priv-app/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/product/framework/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/framework/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
 
-        find "$WORK_DIR"/gapps/product/app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I item sudo find "$MOUNT_DIR"/product/app/item -type f -exec chcon --reference="$MOUNT_DIR"/product/app/HomeApp/HomeApp.apk {} \;
-        find "$WORK_DIR"/gapps/product/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I item sudo find "$MOUNT_DIR"/product/etc/item -type f -exec chcon --reference="$MOUNT_DIR"/product/etc/permissions/com.android.settings.intelligence.xml {} \;
-        find "$WORK_DIR"/gapps/product/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I item sudo find "$MOUNT_DIR"/product/priv-app/item -type f -exec chcon --reference="$MOUNT_DIR"/product/priv-app/SettingsIntelligence/SettingsIntelligence.apk {} \;
-        find "$WORK_DIR"/gapps/product/framework/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I item sudo find "$MOUNT_DIR"/product/framework/item -type f -exec chcon --reference="$MOUNT_DIR"/product/etc/permissions/com.android.settings.intelligence.xml {} \;
-        find "$WORK_DIR"/gapps/system_ext/etc/permissions/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/system_ext/etc/permissions/file -type f -exec chcon --reference="$MOUNT_DIR"/system_ext/etc/permissions/com.android.systemui.xml {} \;
+        find "$WORK_DIR"/gapps/product/app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/app/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/product/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/etc/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/product/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/priv-app/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/product/framework/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/framework/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/system_ext/etc/permissions/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system_ext/etc/permissions/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
 
-        sudo chcon --reference="$MOUNT_DIR"/product/lib64/libjni_eglfence.so "$MOUNT_DIR"/product/lib
-        find "$WORK_DIR"/gapps/product/lib/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/product/lib/file -exec chcon --reference="$MOUNT_DIR"/product/lib64/libjni_eglfence.so {} \;
-        find "$WORK_DIR"/gapps/product/lib64/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I file sudo find "$MOUNT_DIR"/product/lib64/file -type f -exec chcon --reference="$MOUNT_DIR"/product/lib64/libjni_eglfence.so {} \;
-        find "$WORK_DIR"/gapps/system_ext/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system_ext/priv-app/dir -type d -exec chcon --reference="$MOUNT_DIR"/system_ext/priv-app {} \;
-        find "$WORK_DIR"/gapps/system_ext/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system_ext/etc/dir -type d -exec chcon --reference="$MOUNT_DIR"/system_ext/etc {} \;
-        find "$WORK_DIR"/gapps/system_ext/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I dir sudo find "$MOUNT_DIR"/system_ext/priv-app/dir -type f -exec chcon --reference="$MOUNT_DIR"/system_ext/priv-app/Settings/Settings.apk {} \;
+        $SUDO setfattr -n security.selinux -v "u:object_r:system_lib_file:s0" "$MOUNT_DIR"/product/lib || abort
+        find "$WORK_DIR"/gapps/product/lib/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/lib/placeholder -exec setfattr -n security.selinux -v "u:object_r:system_lib_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/product/lib64/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/product/lib64/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_lib_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/system_ext/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system_ext/priv-app/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/system_ext/etc/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system_ext/etc/placeholder -type d -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
+        find "$WORK_DIR"/gapps/system_ext/priv-app/ -maxdepth 1 -mindepth 1 -printf '%P\n' | xargs -I placeholder $SUDO find "$MOUNT_DIR"/system_ext/priv-app/placeholder -type f -exec setfattr -n security.selinux -v "u:object_r:system_file:s0" {} \; || abort
     fi
 
-    sudo patchelf --replace-needed libc.so "../linker/$HOST_ARCH/libc.so" "$WORK_DIR"/magisk/magiskpolicy || abort
-    sudo patchelf --replace-needed libm.so "../linker/$HOST_ARCH/libm.so" "$WORK_DIR"/magisk/magiskpolicy || abort
-    sudo patchelf --replace-needed libdl.so "../linker/$HOST_ARCH/libdl.so" "$WORK_DIR"/magisk/magiskpolicy || abort
-    sudo patchelf --set-interpreter "../linker/$HOST_ARCH/linker64" "$WORK_DIR"/magisk/magiskpolicy || abort
-    chmod +x "$WORK_DIR"/magisk/magiskpolicy || abort
-    sudo "$WORK_DIR"/magisk/magiskpolicy --load "$MOUNT_DIR"/vendor/etc/selinux/precompiled_sepolicy --save "$MOUNT_DIR"/vendor/etc/selinux/precompiled_sepolicy "allow gmscore_app gmscore_app vsock_socket { create connect write read }" "allow gmscore_app device_config_runtime_native_boot_prop file read" "allow gmscore_app system_server_tmpfs dir search" "allow gmscore_app system_server_tmpfs file open" || abort
-    echo -e "Integrate GApps done\n"
+    $SUDO "$WORK_DIR"/magisk/magiskpolicy --load "$MOUNT_DIR"/vendor/etc/selinux/precompiled_sepolicy --save "$MOUNT_DIR"/vendor/etc/selinux/precompiled_sepolicy "allow gmscore_app gmscore_app vsock_socket { create connect write read }" "allow gmscore_app device_config_runtime_native_boot_prop file read" "allow gmscore_app system_server_tmpfs dir search" "allow gmscore_app system_server_tmpfs file open" "allow gmscore_app system_server_tmpfs filesystem getattr" "allow gmscore_app gpu_device dir search" || abort
+    echo -e "Integrate $GAPPS_BRAND done\n"
 fi
 
 if [ "$GAPPS_BRAND" != 'none' ]; then
-    echo "Fix GApps prop"
-    sudo python3 fixGappsProp.py "$MOUNT_DIR" || abort
+    echo "Fix $GAPPS_BRAND prop"
+    $SUDO python3 fixGappsProp.py "$MOUNT_DIR" || abort
     echo -e "done\n"
 fi
 
 echo "Umount images"
-sudo find "$MOUNT_DIR" -exec touch -amt 200901010000.00 {} \; >/dev/null 2>&1
-sudo umount "$MOUNT_DIR"/vendor
-sudo umount "$MOUNT_DIR"/product
-sudo umount "$MOUNT_DIR"/system_ext
-sudo umount "$MOUNT_DIR"
+$SUDO find "$MOUNT_DIR" -exec touch -hamt 200901010000.00 {} \;
+$SUDO umount "$MOUNT_DIR"/vendor
+$SUDO umount "$MOUNT_DIR"/product
+$SUDO umount "$MOUNT_DIR"/system_ext
+$SUDO umount "$MOUNT_DIR"
 echo -e "done\n"
 
 echo "Shrink images"
-e2fsck -yf "$WORK_DIR"/wsa/"$ARCH"/system.img || abort
+e2fsck -pf "$WORK_DIR"/wsa/"$ARCH"/system.img || abort
 resize2fs -M "$WORK_DIR"/wsa/"$ARCH"/system.img || abort
-e2fsck -yf "$WORK_DIR"/wsa/"$ARCH"/vendor.img || abort
+e2fsck -pf "$WORK_DIR"/wsa/"$ARCH"/vendor.img || abort
 resize2fs -M "$WORK_DIR"/wsa/"$ARCH"/vendor.img || abort
-e2fsck -yf "$WORK_DIR"/wsa/"$ARCH"/product.img || abort
+e2fsck -pf "$WORK_DIR"/wsa/"$ARCH"/product.img || abort
 resize2fs -M "$WORK_DIR"/wsa/"$ARCH"/product.img || abort
-e2fsck -yf "$WORK_DIR"/wsa/"$ARCH"/system_ext.img || abort
+e2fsck -pf "$WORK_DIR"/wsa/"$ARCH"/system_ext.img || abort
 resize2fs -M "$WORK_DIR"/wsa/"$ARCH"/system_ext.img || abort
 echo -e "Shrink images done\n"
 
 echo "Remove signature and add scripts"
-sudo rm -rf "${WORK_DIR:?}"/wsa/"$ARCH"/\[Content_Types\].xml "$WORK_DIR"/wsa/"$ARCH"/AppxBlockMap.xml "$WORK_DIR"/wsa/"$ARCH"/AppxSignature.p7x "$WORK_DIR"/wsa/"$ARCH"/AppxMetadata || abort
+$SUDO rm -rf "${WORK_DIR:?}"/wsa/"$ARCH"/\[Content_Types\].xml "$WORK_DIR"/wsa/"$ARCH"/AppxBlockMap.xml "$WORK_DIR"/wsa/"$ARCH"/AppxSignature.p7x "$WORK_DIR"/wsa/"$ARCH"/AppxMetadata || abort
 cp "$vclibs_PATH" "$xaml_PATH" "$WORK_DIR"/wsa/"$ARCH" || abort
 tee "$WORK_DIR"/wsa/"$ARCH"/Install.ps1 <<EOF
 # Automated Install script by Midonei
-# http://github.com/doneibcn
+\$Host.UI.RawUI.WindowTitle = "Installing MagiskOnWSA..."
 function Test-Administrator {
     [OutputType([bool])]
     param()
@@ -670,23 +689,23 @@ function Finish {
     Start-Process "wsa://com.android.vending"
 }
 
-if (-not (Test-Administrator)) {
+If (-Not (Test-Administrator)) {
     Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force
-    \$proc = Start-Process -PassThru -WindowStyle Hidden -Verb RunAs powershell.exe -Args "-executionpolicy bypass -command Set-Location '\$PSScriptRoot'; &'\$PSCommandPath' EVAL"
+    \$proc = Start-Process -PassThru -WindowStyle Hidden -Verb RunAs powershell.exe -Args "-ExecutionPolicy Bypass -Command Set-Location '\$PSScriptRoot'; &'\$PSCommandPath' EVAL"
     \$proc.WaitForExit()
-    if (\$proc.ExitCode -ne 0) {
+    If (\$proc.ExitCode -Ne 0) {
         Clear-Host
         Write-Warning "Failed to launch start as Administrator\`r\`nPress any key to exit"
         \$null = \$Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
     }
     exit
 }
-elseif ((\$args.Count -eq 1) -and (\$args[0] -eq "EVAL")) {
-    Start-Process powershell.exe -Args "-executionpolicy bypass -command Set-Location '\$PSScriptRoot'; &'\$PSCommandPath'"
+ElseIf ((\$args.Count -Eq 1) -And (\$args[0] -Eq "EVAL")) {
+    Start-Process powershell.exe -Args "-ExecutionPolicy Bypass -Command Set-Location '\$PSScriptRoot'; &'\$PSCommandPath'"
     exit
 }
 
-if (((Test-Path -Path $(find "$WORK_DIR"/wsa/"$ARCH" -maxdepth 1 -mindepth 1 -printf "\"%P\"\n" | paste -sd "," -)) -eq \$false).Count) {
+If (((Test-Path -Path $(find "$WORK_DIR"/wsa/"$ARCH" -maxdepth 1 -mindepth 1 -printf "\"%P\"\n" | paste -sd "," -)) -Eq \$false).Count) {
     Write-Error "Some files are missing in the folder. Please try to build again. Press any key to exist"
     \$null = \$Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
     exit 1
@@ -694,13 +713,12 @@ if (((Test-Path -Path $(find "$WORK_DIR"/wsa/"$ARCH" -maxdepth 1 -mindepth 1 -pr
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
 
-\$VMP = Get-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform'
-if (\$VMP.State -ne "Enabled") {
+If (\$(Get-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform').State -Ne "Enabled") {
     Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'VirtualMachinePlatform'
     Clear-Host
     Write-Warning "Need restart to enable virtual machine platform\`r\`nPress y to restart or press any key to exit"
     \$key = \$Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-    If ("y" -eq \$key.Character) {
+    If ("y" -Eq \$key.Character) {
         Restart-Computer -Confirm
     }
     Else {
@@ -714,11 +732,11 @@ Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Path xaml-
 \$Installed = \$null
 \$Installed = Get-AppxPackage -Name 'MicrosoftCorporationII.WindowsSubsystemForAndroid'
 
-If ((\$null -ne \$Installed) -and (-not (\$Installed.IsDevelopmentMode))) {
+If ((\$null -Ne \$Installed) -And (-Not (\$Installed.IsDevelopmentMode))) {
     Clear-Host
     Write-Warning "There is already one installed WSA. Please uninstall it first.\`r\`nPress y to uninstall existing WSA or press any key to exit"
     \$key = \$Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-    If ("y" -eq \$key.Character) {
+    If ("y" -Eq \$key.Character) {
         Remove-AppxPackage -Package \$Installed.PackageFullName
     }
     Else {
@@ -727,22 +745,36 @@ If ((\$null -ne \$Installed) -and (-not (\$Installed.IsDevelopmentMode))) {
 }
 Clear-Host
 Write-Host "Installing MagiskOnWSA..."
-Stop-Process -Name "wsaclient" -ErrorAction "silentlycontinue"
+Stop-Process -Name "WsaClient" -ErrorAction SilentlyContinue
 Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Register .\AppxManifest.xml
-if (\$?) {
+If (\$?) {
     Finish
 }
-Elseif (\$null -ne \$Installed) {
+ElseIf (\$null -Ne \$Installed) {
     Clear-Host
     Write-Host "Failed to update, try to uninstall existing installation while preserving userdata..."
     Remove-AppxPackage -PreserveApplicationData -Package \$Installed.PackageFullName
     Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Register .\AppxManifest.xml
-    if (\$?) {
+    If (\$?) {
         Finish
     }
 }
-Write-Host "All Done\`r\`nPress any key to exit"
+Write-Host "All Done!\`r\`nPress any key to exit"
 \$null = \$Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
+EOF
+tee "$WORK_DIR"/wsa/"$ARCH"/Run.bat <<EOF
+:: Automated Install batch script by Syuugo
+
+@echo off
+if not exist Install.ps1 (
+    echo "Install.ps1" is not found.
+    echo Press any key to exit
+    pause>nul
+    exit 1
+) else (
+    start powershell.exe -ExecutionPolicy Bypass -File .\Install.ps1
+    exit
+)
 EOF
 echo -e "Remove signature and add scripts done\n"
 
@@ -771,20 +803,21 @@ artifact_name="WSA${name1}${name2}_${WSA_VER}_${ARCH}_${WSA_REL}"
 echo "$artifact_name"
 echo -e "\nFinishing building...."
 if [ -f "$OUTPUT_DIR" ]; then
-    sudo rm -rf "${OUTPUT_DIR:?}"
+    $SUDO rm -rf "${OUTPUT_DIR:?}"
 fi
 if [ ! -d "$OUTPUT_DIR" ]; then
     mkdir -p "$OUTPUT_DIR"
 fi
 if [ "$COMPRESS_OUTPUT" ]; then
     rm -f "${OUTPUT_DIR:?}"/"$artifact_name.7z" || abort
-    7z a "$OUTPUT_DIR"/"$artifact_name.7z" "$WORK_DIR/wsa/$ARCH/" || abort
+    mv "$WORK_DIR/wsa/$ARCH" "$WORK_DIR/wsa/$artifact_name"
+    7z a "$OUTPUT_DIR"/"$artifact_name.7z" "$WORK_DIR/wsa/$artifact_name" || abort
 else
     rm -rf "${OUTPUT_DIR:?}/${artifact_name}" || abort
-    mv "$WORK_DIR"/wsa/"$ARCH" "$OUTPUT_DIR/$artifact_name" || abort
+    cp -r "$WORK_DIR"/wsa/"$ARCH" "$OUTPUT_DIR/$artifact_name" || abort
 fi
 echo -e "done\n"
 
 echo "Cleanup Work Directory"
-sudo rm -rf "${WORK_DIR:?}"
+$SUDO rm -rf "${WORK_DIR:?}"
 echo "done"

@@ -4,8 +4,8 @@ param (
     [ValidateSet('amd64','arm64')]
     [string]$arch = 'amd64',
 
-    [ValidateSet('tr-tr','de-de', 'en-US')]
-    [string]$scriptlang = 'en-US',
+    [ValidateSet('tr-tr','de-de', 'en-us')]
+    [string]$scriptlang = 'en-us',
 
     [ValidateSet('onlywsa','wsagascript', 'magiskonwsalocal')]
     [string]$method = 'magiskonwsalocal',
@@ -147,7 +147,6 @@ $runwsl = "wsl -d $wsldistro -u root -e $wslprep1$wslprep$wslsetup$wslprep2"
 Invoke-Expression $runwsl || Write-Host "WSL failed to start." -ForegroundColor Red
 
 ####Finish
-exit 1
 
 ### FFF
 if ( ((Get-Host).Version).Major -ne "5" ) 
