@@ -54,7 +54,7 @@ Write-Host "This script is for the wsa-gui project." -ForegroundColor Yellow;
 Start-Sleep -s 0.70
 write-host "== Script ==" -ForegroundColor Cyan;
 write-host $wsldistro $arch $scriptlang $method $wsarelease $magiskversion $amazonstore $wsatools $productname $gappsvariant
-write-host "== Windows ==" -ForegroundColor Green; Write-Host $winvmc $windevmode
+write-host "== Windows ==" -ForegroundColor Green; Write-Host $winvmp $windevmode $adb
 
 ####################################################################################################################################
 
@@ -110,19 +110,19 @@ $wslprep2 = '"'
 $wslsetup = "&& setup.sh "
 
 if ( $wsldistro -eq "Ubuntu") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 
 elseif ( $wsldistro -eq "openSUSE-Tumbleweed") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 
 }
 elseif ( $wsldistro -eq "Debian") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 else {
     $wsldistro="Ubuntu"
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
+    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 if ($arch -eq "arm64") {
 $wslsetup = $wslsetup + "--arm ";
