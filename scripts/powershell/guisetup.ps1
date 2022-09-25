@@ -107,24 +107,13 @@ if ($pathContent -ne $null)
 $wslprep
 $wslprep1 = 'sudo sh -c "'
 $wslprep2 = '"'
-$wslsetup = "&& setup.sh "
+$wslsetup = "&& ./setup.sh "
 
 if ( $wsldistro -eq "Ubuntu") {
     $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 
 elseif ( $wsldistro -eq "openSUSE-Tumbleweed") {
-<<<<<<< HEAD
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo zypper install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
-
-}
-elseif ( $wsldistro -eq "Debian") {
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
-}
-else {
-    $wsldistro="Ubuntu"
-    $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x /*.sh "
-=======
     $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 
 }
@@ -134,7 +123,6 @@ elseif ( $wsldistro -eq "Debian") {
 else {
     $wsldistro="Ubuntu"
     $wslprep = "cd ~; sudo rm -rf /tmp/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /tmp/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
->>>>>>> 69f8f2bbdcae69d8085f7fc6190ea73edab229ff
 }
 if ($arch -eq "arm64") {
 $wslsetup = $wslsetup + "--arm ";
