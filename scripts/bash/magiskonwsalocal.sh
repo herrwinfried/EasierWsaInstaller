@@ -100,9 +100,9 @@ Get_WSLFolderPowershell || scriptabort
 echo "$green [Magisk] $yellow necessary files are copied. [0] $white [PRE-FINISH]"
 sudo cp guiinstall.ps1 /mnt/c/wsa/wsamagisk || scriptabort
 
-sleepwait 1
+sleepwait 5
 echo $notonlywsa2
-sleep 5
+sleepwait 5
 echo $notifwsa
-sleep 5
+sleepwait 5
 }

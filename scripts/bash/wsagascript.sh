@@ -120,7 +120,7 @@ echo "$green [WSAGAScript] $yellow go to batch folder $white [PRE-FINISH]"
 cd batch || scriptabort
 echo "$green [WSAGAScript] $yellow necessary files are copied. [1] $white [PRE-FINISH]"
 sudo cp setup.bat /mnt/c/wsa/$msarch/ || scriptabort
-
+sleepwait 5
 echo $notonlywsa2
 sleep 5
 echo $notifwsa

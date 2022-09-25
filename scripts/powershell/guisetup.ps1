@@ -139,14 +139,20 @@ $wslsetup = $wslsetup + "--variant="+$gappsvariant+" ";
 Write-Host "WSL will pass, please be careful. If you are asked for a password, please enter your password correctly. If you enter it incorrectly, a mishap may occur." -ForegroundColor Green
 Start-Sleep -Seconds 5
 Clear-Host
+Clear-Host
 write-host "-d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2"
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 10
 Clear-Host
 Clear-Host
 $runwsl = "wsl -d $wsldistro -u root -e $wslprep1$wslprep$wslsetup$wslprep2"
 Invoke-Expression $runwsl || Write-Host "WSL failed to start." -ForegroundColor Red
 
 ####Finish
+Clear-Host
+Clear-Host
+Start-Sleep -Seconds 60
+Clear-Host
+Clear-Host
 
 ### FFF
 if ( ((Get-Host).Version).Major -ne "5" ) 
