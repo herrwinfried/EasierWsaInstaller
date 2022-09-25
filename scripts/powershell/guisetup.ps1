@@ -35,8 +35,8 @@ param (
 
         [ValidateSet('yes','no')]
         [string]$adb = 'no'
-        )
-      
+)
+if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" -wsldistro $wsldistro -arch $arch -scriptlang $scriptlang -method $method -wsarelease $wsarelease -magiskversion $magiskversion -amazonstore $amazonstore -wsatools $wsatools -productname $productname -gappsvariant $gappsvariant -winvmp $winvmp -windevmode $windevmode -adb $adb" -Verb RunAs; exit }
 $WindowsArch = ($env:PROCESSOR_ARCHITECTURE)
 if (!$WindowsArch) {
     Write-Host "Only Windows Powershell Core." -ForegroundColor Red;
