@@ -139,15 +139,15 @@ exit 1
 }
 
 function WSLFolder() {
-if [ -d /tmp/wsaproject ]; then
+if [ -d /root/wsaproject ]; then
 
 function_regex_folder WSLFolder
-cd /tmp && cd wsaproject
+cd /root && cd wsaproject
 echo $info_Folder1
-sudo rm -rf /tmp/wsaproject/*
+sudo rm -rf /root/wsaproject/*
 else
 echo $selectwslfolder
-cd /tmp/ && mkdir wsaproject && cd wsaproject || scriptabort
+cd /root/ && mkdir wsaproject && cd wsaproject || scriptabort
 fi
 sleepwait 5
 
@@ -168,28 +168,28 @@ sleepwait 5
 
 function Get_WSLFolder() {
   function_regex_getfolder Get_WSLFolder
-cd /tmp/ && cd wsaproject || scriptabort
+cd /root/ && cd wsaproject || scriptabort
 function_regex_getfolder1 Get_WSLFolder
 }
 
 function Get_WSLFolderBashScript() {
     function_regex_getfolder Get_WSLFolderBashScript
-cd /tmp/ && cd wsa-script && cd scripts && cd bash || scriptabort
+cd /root/ && cd wsa-script && cd scripts && cd bash || scriptabort
 function_regex_getfolder1 Get_WSLFolderBashScript
 }
 function Get_WSLFolderPython() {
     function_regex_getfolder Get_WSLFolderPython
-cd /tmp/ && cd wsa-script && cd scripts && cd python || scriptabort
+cd /root/ && cd wsa-script && cd scripts && cd python || scriptabort
 function_regex_getfolder1 Get_WSLFolderPython
 }
 function Get_WSLFolderPowershell() {
    function_regex_getfolder Get_WSLFolderPowershell
-cd /tmp/ && cd wsa-script && cd scripts && cd powershell || scriptabort
+cd /root/ && cd wsa-script && cd scripts && cd powershell || scriptabort
 function_regex_getfolder1 Get_WSLFolderPowershell
 }
 function Get_WSLFolderScripts() {
    function_regex_getfolder Get_WSLFolderScripts
-cd /tmp/ && cd wsa-script && cd scripts || scriptabort
+cd /root/ && cd wsa-script && cd scripts || scriptabort
 function_regex_getfolder1 Get_WSLFolderScripts
 }
 

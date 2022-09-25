@@ -44,13 +44,13 @@ rm -rf '[Content_Types].xml' AppxBlockMap.xml AppxSignature.p7x AppxMetadata || 
 echo "$green [WSAGAScript] $yellow Process completed. $red [Preparation] $white"
 #
 echo "$yellow [WSAGAScript] $green I am moving image files. $red [Preparation] $white"
-mv *.img /tmp/wsa-script/scripts/WSAGAScript/#IMAGES/ || scriptabort
+mv *.img /root/wsa-script/scripts/WSAGAScript/#IMAGES/ || scriptabort
 echo "$yellow [WSAGAScript] $green I moved the image files. $red [Preparation] $white"
 echo "$yellow [WSAGAScript] $green I am running a Get_WindowsFolder function. [Preparation] $white"
 Get_WindowsFolder
 echo "$yellow [WSAGAScript] $white"
 echo "$yellow [WSAGAScript] $green I'm moving opengapps to the required location. [Preparation] $white"
-mv open_gapps-$gappsarch-11.0*.zip /tmp/wsa-script/scripts/WSAGAScript/#GAPPS/ || scriptabort
+mv open_gapps-$gappsarch-11.0*.zip /root/wsa-script/scripts/WSAGAScript/#GAPPS/ || scriptabort
 echo "$yellow [WSAGAScript] $green I moved it where needed. [Preparation] $white"
 #+++++++++++++++++-------------------------Config WSAGAScript------------------++++++++++++++++
 echo "$red [WSAGAScript] $green I am running a Get_WSLFolderScripts function. [Preparation] $white"
@@ -63,11 +63,11 @@ sudo chmod +x ./*.sh || find "$(pwd)" -iname "*.sh" -exec chmod +x "{}" \; || sc
 echo "$red [WSAGAScript] $green I make the necessary adjustments. [Preparation] $white"
 
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-sed -ie 's+Root="$(pwd)"+Root="/tmp/wsa-script/scripts/WSAGAScript"+i' VARIABLES.sh || scriptabort
+sed -ie 's+Root="$(pwd)"+Root="/root/wsa-script/scripts/WSAGAScript"+i' VARIABLES.sh || scriptabort
 fi
 
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
-sed -ie 's+Root="$(pwd)"+Root="/tmp/wsa-script/scripts/WSAGAScript"+i' VARIABLES.sh || scriptabort
+sed -ie 's+Root="$(pwd)"+Root="/root/wsa-script/scripts/WSAGAScript"+i' VARIABLES.sh || scriptabort
 sed -ie 's+Architecture="x64"+Architecture="arm64"+i' VARIABLES.sh || scriptabort
 fi
 ### 
