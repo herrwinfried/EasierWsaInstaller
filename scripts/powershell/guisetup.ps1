@@ -167,7 +167,7 @@ if ($method -ne "onlywsa") {
         if ($method -eq "arm64") {
             Set-Location C:\wsa\ARM64
         }
-        ./install.ps1 0 0
+        ./install.ps1 1 0
 
         Start-Sleep -s 10
 
