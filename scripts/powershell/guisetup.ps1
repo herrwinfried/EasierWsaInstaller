@@ -189,19 +189,25 @@ if ($method -ne "onlywsa") {
         }
 
     } else {
+        Start-Sleep -s 1
         Set-Location C:\wsa\wsamagisk
-        invoke-expression 'cmd /c start powershell.exe -ExecutionPolicy Bypass -File .\guiinstall.ps1'
+        Start-Sleep -s 1
+        Invoke-Expression 'cmd /c start powershell.exe -ExecutionPolicy Bypass -File .\guiinstall.ps1'
         
     }
 
 if ($method -eq "onlywsa") {
+    Start-Sleep -s 1
     Set-Location "C:\wsaproject"
+    Start-Sleep -s 1
     Add-AppxPackage Microsoft*WindowsSubsystemForAndroid*.msixbundle
 }
 
 Start-Sleep -s 0.80
 if ($wsatools -eq "yes") {
+    Start-Sleep -s 1
     Set-Location "C:\wsaproject"
+    Start-Sleep -s 1
     add-appxpackage .\WSATools.Msixbundle
 }
 
