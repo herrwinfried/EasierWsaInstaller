@@ -99,7 +99,7 @@ sudo rm -rf /mnt/c/wsa/wsamagisk/*
 echo "$red [Magisk] $green [3] $white"
 cd WSA-with-magisk* || scriptabort
 echo "$red [Magisk] $green [4] $white"
-cp -r WSA-with-magisk* /mnt/c/wsa/wsamagisk || scriptabort
+cp -r * /mnt/c/wsa/wsamagisk || scriptabort
 
 #############################7Z##############################################
 #7z x -y WSA-with-magisk* -o/mnt/c/wsa/wsamagisk -r || scriptabort          #
