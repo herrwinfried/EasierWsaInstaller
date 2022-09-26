@@ -89,13 +89,13 @@ cd MagiskOnWSALocal || scriptabort
 echo "$red [Magisk] $green Go to MagiskOnWSALocal/output folder. $white"
 cd output || scriptabort
 echo "$red [Magisk] $green Open the file and move it where needed. $white"
-sudo mkdir -p /mnt/c/wsa || scriptabort
+sudo mkdir -p /mnt/c/wsa
 echo "$red [Magisk] $green [0] $white"
-sudo rm -rf /mnt/c/wsa/wsamagisk || scriptabort
+sudo rm -rf /mnt/c/wsa/wsamagisk
 echo "$red [Magisk] $green [1] $white"
-sudo mkdir -p /mnt/c/wsa/wsamagisk || scriptabort
+sudo mkdir -p /mnt/c/wsa/wsamagisk
 echo "$red [Magisk] $green [2] $white"
-sudo rm -rf /mnt/c/wsa/wsamagisk/* || scriptabort
+sudo rm -rf /mnt/c/wsa/wsamagisk/*
 echo "$red [Magisk] $green [3] $white"
 7z x -y WSA-with-magisk* -o/mnt/c/wsa/wsamagisk -r || scriptabort
 cd /mnt/c/wsa/wsamagisk/WSA* || scriptabort
