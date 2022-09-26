@@ -280,5 +280,4 @@ fi
 sleepwait 1
 sudo rm -rf /root/wsaproject
 sleepwait 10
-clear
-clear
+clear & clear

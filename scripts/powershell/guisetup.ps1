@@ -141,7 +141,7 @@ Start-Sleep -Seconds 5
 Clear-Host
 Clear-Host
 write-host "-d $wsldistro -u root -e $wslprep1 $wslprep $wslsetup $wslprep2"
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 6
 Clear-Host
 Clear-Host
 $runwsl = "wsl -d $wsldistro -u root -e $wslprep1$wslprep$wslsetup$wslprep2"
@@ -150,7 +150,7 @@ Invoke-Expression $runwsl || Write-Host "WSL failed to start." -ForegroundColor 
 ####Finish
 Clear-Host
 Clear-Host
-Start-Sleep -Seconds 60
+Start-Sleep -Seconds 7
 Clear-Host
 Clear-Host
 
