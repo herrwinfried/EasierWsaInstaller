@@ -47,7 +47,7 @@ REMOVE_AMAZON=""
 fi
 
 ROOT_SOL="magisk"
-COMPRESS_OUTPUT="--compress"
+COMPRESS_OUTPUT="" #"--compress"
 
 if [[ $WSATools == true ]]; then
 Get_WSLFolderScripts || scriptabort
@@ -97,9 +97,16 @@ sudo mkdir -p /mnt/c/wsa/wsamagisk
 echo "$red [Magisk] $green [2] $white"
 sudo rm -rf /mnt/c/wsa/wsamagisk/*
 echo "$red [Magisk] $green [3] $white"
-7z x -y WSA-with-magisk* -o/mnt/c/wsa/wsamagisk -r || scriptabort
-cd /mnt/c/wsa/wsamagisk/WSA* || scriptabort
-mv * /mnt/c/wsa/wsamagisk || scriptabort
+cd WSA-with-magisk* || scriptabort
+echo "$red [Magisk] $green [4] $white"
+cp -r WSA-with-magisk* /mnt/c/wsa/wsamagisk || scriptabort
+
+#############################7Z##############################################
+#7z x -y WSA-with-magisk* -o/mnt/c/wsa/wsamagisk -r || scriptabort          #
+#cd /mnt/c/wsa/wsamagisk/WSA* || scriptabort                                #
+#mv * /mnt/c/wsa/wsamagisk || scriptabort                                   #
+#############################7Z##############################################
+
 echo "$green [Magisk] $white [PRE-FINISH]"
 echo "$green [Magisk] $yellow go to powershell folder $white [PRE-FINISH]"
 Get_WSLFolderPowershell || scriptabort
