@@ -190,7 +190,8 @@ if ($method -ne "onlywsa") {
 
     } else {
         Set-Location C:\wsa\wsamagisk
-        ./guiinstall.ps1
+        invoke-expression 'cmd /c start powershell.exe -ExecutionPolicy Bypass -File .\guiinstall.ps1'
+        
     }
 
 if ($method -eq "onlywsa") {
