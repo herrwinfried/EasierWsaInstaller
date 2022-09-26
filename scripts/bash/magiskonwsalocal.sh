@@ -90,10 +90,16 @@ echo "$red [Magisk] $green Go to MagiskOnWSALocal/output folder. $white"
 cd output || scriptabort
 echo "$red [Magisk] $green Open the file and move it where needed. $white"
 sudo mkdir -p /mnt/c/wsa || scriptabort
+echo "$red [Magisk] $green [0] $white"
 sudo rm -rf /mnt/c/wsa/wsamagisk || scriptabort
+echo "$red [Magisk] $green [1] $white"
 sudo mkdir -p /mnt/c/wsa/wsamagisk || scriptabort
-7z e WSA-with-magisk* -y -o/mnt/c/wsa/wsamagisk || scriptabort
-
+echo "$red [Magisk] $green [2] $white"
+sudo rm -rf /mnt/c/wsa/wsamagisk/* || scriptabort
+echo "$red [Magisk] $green [3] $white"
+7z x -y WSA-with-magisk* -o/mnt/c/wsa/wsamagisk -r || scriptabort
+cd /mnt/c/wsa/wsamagisk/WSA* || scriptabort
+mv * /mnt/c/wsa/wsamagisk || scriptabort
 echo "$green [Magisk] $white [PRE-FINISH]"
 echo "$green [Magisk] $yellow go to powershell folder $white [PRE-FINISH]"
 Get_WSLFolderPowershell || scriptabort
