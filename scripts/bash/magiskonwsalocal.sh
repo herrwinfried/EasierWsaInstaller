@@ -88,17 +88,15 @@ echo "$red [Magisk] $green Go to MagiskOnWSALocal folder. $white"
 cd MagiskOnWSALocal || scriptabort
 echo "$red [Magisk] $green Go to MagiskOnWSALocal/output folder. $white"
 cd output || scriptabort
-echo "$red [Magisk] $green Open the file and move it where needed. $white"
+echo "$red [Magisk] $green move it where needed. $white"
 sudo mkdir -p /mnt/c/wsa
 echo "$red [Magisk] $green [0] $white"
-sudo rm -rf /mnt/c/wsa/wsamagisk
-echo "$red [Magisk] $green [1] $white"
 sudo mkdir -p /mnt/c/wsa/wsamagisk
-echo "$red [Magisk] $green [2] $white"
+echo "$red [Magisk] $green [1] $white"
 sudo rm -rf /mnt/c/wsa/wsamagisk/*
-echo "$red [Magisk] $green [3] $white"
+echo "$red [Magisk] $green [2] $white"
 cd WSA-with-magisk* || scriptabort
-echo "$red [Magisk] $green [4] $white"
+echo "$red [Magisk] $green [3] $white"
 cp -r * /mnt/c/wsa/wsamagisk || scriptabort
 
 #############################7Z##############################################
