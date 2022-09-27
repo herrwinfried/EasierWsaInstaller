@@ -112,11 +112,7 @@ echo "$red I couldn't find the wine package. That's why I canceled the transacti
 exit 1
 fi
 fi
-
-if ! [ -x "$(command -v winetricks)" ]; then
-if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it... (winetricks) $white"
-sudo apt install -y winetricks || {
+function debian_t() {
 if [ $distroselect == "Debian GNU/Linux 11 (bullseye)"]; then 
 find /etc/apt/sources* -type f -exec cat {} \; | grep -E 'contrib' && find /etc/apt/sources* -type f -exec cat {} \; | grep -E 'non-free'{
   echo "$yellow I am adding the $red contrib non-free $yellow repository. (winetricks) $white"
@@ -128,6 +124,10 @@ sudo apt-add-repository non-free
 
 fi
 }
+if ! [ -x "$(command -v winetricks)" ]; then
+if [ -x "$(command -v apt)" ]; then
+echo "$green I found a missing package, I'm installing it... (winetricks) $white"
+sudo apt install -y winetricks || debian_t
 elif [ -x "$(command -v zypper)" ]; then
 echo "$green I found a missing package, I'm installing it... (winetricks) $white"
 sudo zypper install -y winetricks 
