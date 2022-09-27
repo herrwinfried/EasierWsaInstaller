@@ -114,11 +114,10 @@ fi
 fi
 function debian_t() {
 if [ $distroselect == "Debian GNU/Linux 11 (bullseye)"]; then
-find /etc/apt/sources* -type f -exec cat {} \; | grep -E 'contrib' && find /etc/apt/sources* -type f -exec cat {} \; | grep -E 'non-free' || {
 echo "$yellow I am adding the $red contrib non-free $yellow repository. (winetricks) $white"
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free
-}
+
 sudo apt update
 sudo apt install -y winetricks
 ## DistroSelect Finish
