@@ -126,7 +126,7 @@ fi
 if ! [ -x "$(command -v winetricks)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (winetricks) $white"
-sudo apt install -y winetricks || debian_t
+sudo apt install -y winetricks || { debian_t }
 elif [ -x "$(command -v zypper)" ]; then
 echo "$green I found a missing package, I'm installing it... (winetricks) $white"
 sudo zypper install -y winetricks 
