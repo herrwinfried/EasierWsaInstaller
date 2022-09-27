@@ -46,22 +46,6 @@ sleep $1
 
 function requirePackage_magisk() {
 
-if ! [ -x "$(command -v lsb_release)" ]; then
-if [ -x "$(command -v apt)" ]; then
-echo "$green I found a missing package, I'm installing it... (lsb_release) $white"
-sudo apt install -y lsb-release
-elif [ -x "$(command -v zypper)" ]; then
-echo "$green I found a missing package, I'm installing it... (lsb_release) $white"
-sudo zypper install -y unzip lzip
-else
-echo "$red I couldn't find the lsb_release package. That's why I canceled the transaction. $white"
-exit 1
-fi
-fi
-
-export distroselect=$(lsb_release -d | awk -F"\t" '{print $2}')
-export distrocodename=$(lsb_release -c | awk -F"\t" '{print $2}')
-
 if ! [ -x "$(command -v lzip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (lzip) $white"
@@ -112,22 +96,11 @@ echo "$red I couldn't find the wine package. That's why I canceled the transacti
 exit 1
 fi
 fi
-function debian_t() {
-if [ $distroselect == "Debian GNU/Linux 11 (bullseye)"]; then 
-find /etc/apt/sources* -type f -exec cat {} \; | grep -E 'contrib' && find /etc/apt/sources* -type f -exec cat {} \; | grep -E 'non-free'{
-  echo "$yellow I am adding the $red contrib non-free $yellow repository. (winetricks) $white"
-sudo apt-add-repository contrib
-sudo apt-add-repository non-free
-  }
-    sudo apt update
-  sudo apt install -y winetricks
 
-fi
-}
 if ! [ -x "$(command -v winetricks)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (winetricks) $white"
-sudo apt install -y winetricks || debian_t
+sudo apt install -y winetricks
 elif [ -x "$(command -v zypper)" ]; then
 echo "$green I found a missing package, I'm installing it... (winetricks) $white"
 sudo zypper install -y winetricks 
