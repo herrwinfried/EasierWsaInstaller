@@ -121,8 +121,7 @@ elseif ( $wsldistro -eq "Debian") {
     $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 else {
-    $wsldistro="Ubuntu"
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; cd /root/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 if ($arch -eq "arm64") {
 $wslsetup = $wslsetup + "--arm ";
@@ -167,7 +166,7 @@ if ($method -ne "onlywsa") {
         if ($method -eq "arm64") {
             Set-Location C:\wsa\ARM64
         }
-        ./install.ps1 1 0
+        Invoke-Expression 'cmd /c start powershell.exe -ExecutionPolicy Bypass -File .\install.ps1 1 0'
 
         Start-Sleep -s 10
 

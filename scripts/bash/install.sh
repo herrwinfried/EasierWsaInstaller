@@ -1,7 +1,7 @@
 #!/bin/bash
 
 . ./wsascript-varibles.sh
-echo "$red Version: $green $WSASCRIPTVERSION $white"
+echo "$red Version: $green $SCRIPTVERSION $white"
 onlywsl
 checkroot
 ###################
@@ -230,6 +230,7 @@ function wsatoolspy() {
     echo "I will install $yellow WSA $red TOOLS $white"
     python3 ./python/wsatools.py
  echo $downloadsus
+rm rf /mnt/c/wsaproject/*
 sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
 else 
 echo $nopy39
