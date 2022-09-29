@@ -44,13 +44,13 @@ rm -rf '[Content_Types].xml' AppxBlockMap.xml AppxSignature.p7x AppxMetadata || 
 echo "$green [WSAGAScript] $yellow Process completed. $red [Preparation] $white"
 #
 echo "$yellow [WSAGAScript] $green I am moving image files. $red [Preparation] $white"
-mv *.img /root/wsa-script/scripts/WSAGAScript/#IMAGES/ || scriptabort
+mv *.img /root/easierwsainstaller/scripts/WSAGAScript/#IMAGES/ || scriptabort
 echo "$yellow [WSAGAScript] $green I moved the image files. $red [Preparation] $white"
 echo "$yellow [WSAGAScript] $green I am running a Get_WindowsFolder function. [Preparation] $white"
 Get_WindowsFolder
 echo "$yellow [WSAGAScript] $white"
 echo "$yellow [WSAGAScript] $green I'm moving opengapps to the required location. [Preparation] $white"
-mv open_gapps-$gappsarch-11.0*.zip /root/wsa-script/scripts/WSAGAScript/#GAPPS/ || scriptabort
+mv open_gapps-$gappsarch-11.0*.zip /root/easierwsainstaller/scripts/WSAGAScript/#GAPPS/ || scriptabort
 echo "$yellow [WSAGAScript] $green I moved it where needed. [Preparation] $white"
 #+++++++++++++++++-------------------------Config WSAGAScript------------------++++++++++++++++
 echo "$red [WSAGAScript] $green I am running a Get_WSLFolderScripts function. [Preparation] $white"
@@ -63,11 +63,11 @@ sudo chmod +x ./*.sh || find "$(pwd)" -iname "*.sh" -exec chmod +x "{}" \; || sc
 echo "$red [WSAGAScript] $green I make the necessary adjustments. [Preparation] $white"
 
     if [[ $gappsarch == "x86_64" ]] && [[ $msarch == "x64" ]] && [[ $mskernel == "x86_64" ]]; then
-sed -ie 's+Root="$(pwd)"+Root="/root/wsa-script/scripts/WSAGAScript"+i' VARIABLES.sh || scriptabort
+sed -ie 's+Root="$(pwd)"+Root="/root/easierwsainstaller/scripts/WSAGAScript"+i' VARIABLES.sh || scriptabort
 fi
 
  if [[ $gappsarch == "arm64" ]] && [[ $msarch == "ARM64" ]] && [[ $mskernel == "arm64" ]]; then
-sed -ie 's+Root="$(pwd)"+Root="/root/wsa-script/scripts/WSAGAScript"+i' VARIABLES.sh || scriptabort
+sed -ie 's+Root="$(pwd)"+Root="/root/easierwsainstaller/scripts/WSAGAScript"+i' VARIABLES.sh || scriptabort
 sed -ie 's+Architecture="x64"+Architecture="arm64"+i' VARIABLES.sh || scriptabort
 fi
 ### 
@@ -92,13 +92,13 @@ sudo ./apply.sh && sudo ./unmount_images.sh || scriptabort
 echo "$green [WSAGAScript] $yellow The operation seems successful. $white [PRE-FINISH]"
 
 echo "$green [WSAGAScript] $yellow image files are moved to the required location. $white [PRE-FINISH]"
-mv \#IMAGES/*img /mnt/c/easierwsainstaller/microsoftwsa/wsa/ || scriptabort
+mv \#IMAGES/*img /mnt/c/easierwsainstaller-project/microsoftwsa/wsa/ || scriptabort
 echo "$green [WSAGAScript] $yellow image files have been moved. $white [PRE-FINISH]"
 
 echo "$green [WSAGAScript] $yellow old kernel is deleted. $white [PRE-FINISH]"
-sudo rm /mnt/c/easierwsainstaller/microsoftwsa/wsa/Tools/kernel || scriptabort
+sudo rm /mnt/c/easierwsainstaller-project/microsoftwsa/wsa/Tools/kernel || scriptabort
 echo "$green [WSAGAScript] $yellow old kernel deleted. The new kernel is migrated. $white [PRE-FINISH]"
-cp misc/kernel-$mskernel /mnt/c/easierwsainstaller/microsoftwsa/wsa/Tools/kernel || scriptabort
+cp misc/kernel-$mskernel /mnt/c/easierwsainstaller-project/microsoftwsa/wsa/Tools/kernel || scriptabort
 
 echo "$green [WSAGAScript] $yellow Checking in /mnt/c/wsa/$msarch. If full, it will be deleted. $white [PRE-FINISH]"
 sudo mkdir -p /mnt/c/wsa || scriptabort
@@ -106,7 +106,7 @@ sudo rm -rf /mnt/c/wsa/$msarch || scriptabort
 echo "$green [WSAGAScript] $yellow Checking in /mnt/c/wsa/$msarch. If None, it will be created. $white [PRE-FINISH]"
 sudo mkdir -p /mnt/c/wsa/$msarch || scriptabort
 echo "$green [WSAGAScript] $yellow wsa is moving. $white [PRE-FINISH]"
-sudo mv /mnt/c/easierwsainstaller/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/ || scriptabort
+sudo mv /mnt/c/easierwsainstaller-project/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/ || scriptabort
 echo "$green [WSAGAScript] $yellow I am running a Get_WSLFolderScripts function. $white [PRE-FINISH]"
 Get_WSLFolderScripts || scriptabort
 echo "$green [WSAGAScript] $white [PRE-FINISH]"

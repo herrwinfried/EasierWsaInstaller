@@ -110,18 +110,18 @@ $wslprep2 = '"'
 $wslsetup = "&& ./install.sh "
 
 if ( $wsldistro -eq "Ubuntu") {
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/easierwsainstaller.git ; cd easierwsainstaller; cd scripts; cd bash; chmod +x ./*.sh "
 }
 
 elseif ( $wsldistro -eq "openSUSE-Tumbleweed") {
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/easierwsainstaller.git ; cd easierwsainstaller; cd scripts; cd bash; chmod +x ./*.sh "
 
 }
 elseif ( $wsldistro -eq "Debian") {
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/easierwsainstaller.git ; cd easierwsainstaller; cd scripts; cd bash; chmod +x ./*.sh "
 }
 else {
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; cd /root/; git clone -b beta https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; cd /root/; git clone -b beta https://github.com/herrwinfried/easierwsainstaller.git ; cd easierwsainstaller; cd scripts; cd bash; chmod +x ./*.sh "
 }
 if ($arch -eq "arm64") {
 $wslsetup = $wslsetup + "--arm ";
@@ -197,7 +197,7 @@ if ($method -ne "onlywsa") {
 
 if ($method -eq "onlywsa") {
     Start-Sleep -s 1
-    Set-Location "C:\easierwsainstaller"
+    Set-Location "C:\easierwsainstaller-project"
     Start-Sleep -s 1
     Add-AppxPackage Microsoft*WindowsSubsystemForAndroid*.msixbundle
 }
@@ -205,7 +205,7 @@ if ($method -eq "onlywsa") {
 Start-Sleep -s 0.80
 if ($wsatools -eq "yes") {
     Start-Sleep -s 1
-    Set-Location "C:\easierwsainstaller"
+    Set-Location "C:\easierwsainstaller-project"
     Start-Sleep -s 1
     add-appxpackage .\WSATools.Msixbundle
 }

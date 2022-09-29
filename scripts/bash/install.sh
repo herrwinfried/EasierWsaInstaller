@@ -139,63 +139,63 @@ exit 1
 }
 
 function WSLFolder() {
-if [ -d /root/wsaproject ]; then
+if [ -d /root/easierwsainstaller-project ]; then
 
 function_regex_folder WSLFolder
-cd /root && cd wsaproject
+cd /root && cd easierwsainstaller-project
 echo $info_Folder1
-sudo rm -rf /root/wsaproject/*
+sudo rm -rf /root/easierwsainstaller-project/*
 else
 echo $selectwslfolder
-cd /root/ && mkdir wsaproject && cd wsaproject || scriptabort
+cd /root/ && mkdir easierwsainstaller-project && cd easierwsainstaller-project || scriptabort
 fi
 sleepwait 5
 
 }
 
 function WindowsFolder() {
-    if [ -d /mnt/c/wsaproject ]; then
+    if [ -d /mnt/c/easierwsainstaller-project ]; then
 function_regex_folder WindowsFolder
-cd /mnt/c/ && cd wsaproject
+cd /mnt/c/ && cd easierwsainstaller-project
 echo $info_Folder1
-sudo rm -rf /mnt/c/wsaproject/*
+sudo rm -rf /mnt/c/easierwsainstaller-project/*
 else
 echo $selectwindowsfolder
-cd /mnt/c/ && mkdir wsaproject && cd wsaproject || scriptabort
+cd /mnt/c/ && mkdir easierwsainstaller-project && cd easierwsainstaller-project || scriptabort
 fi
 sleepwait 5
 }
 
 function Get_WSLFolder() {
   function_regex_getfolder Get_WSLFolder
-cd /root/ && cd wsaproject || scriptabort
+cd /root/ && cd easierwsainstaller-project || scriptabort
 function_regex_getfolder1 Get_WSLFolder
 }
 
 function Get_WSLFolderBashScript() {
     function_regex_getfolder Get_WSLFolderBashScript
-cd /root/ && cd wsa-script && cd scripts && cd bash || scriptabort
+cd /root/ && cd easierwsainstaller && cd scripts && cd bash || scriptabort
 function_regex_getfolder1 Get_WSLFolderBashScript
 }
 function Get_WSLFolderPython() {
     function_regex_getfolder Get_WSLFolderPython
-cd /root/ && cd wsa-script && cd scripts && cd python || scriptabort
+cd /root/ && cd easierwsainstaller && cd scripts && cd python || scriptabort
 function_regex_getfolder1 Get_WSLFolderPython
 }
 function Get_WSLFolderPowershell() {
    function_regex_getfolder Get_WSLFolderPowershell
-cd /root/ && cd wsa-script && cd scripts && cd powershell || scriptabort
+cd /root/ && cd easierwsainstaller && cd scripts && cd powershell || scriptabort
 function_regex_getfolder1 Get_WSLFolderPowershell
 }
 function Get_WSLFolderScripts() {
    function_regex_getfolder Get_WSLFolderScripts
-cd /root/ && cd wsa-script && cd scripts || scriptabort
+cd /root/ && cd easierwsainstaller && cd scripts || scriptabort
 function_regex_getfolder1 Get_WSLFolderScripts
 }
 
 function Get_WindowsFolder() {
 function_regex_getfolder Get_WindowsFolder
-cd /mnt/c/ && cd wsaproject || scriptabort
+cd /mnt/c/ && cd easierwsainstaller-project || scriptabort
 function_regex_getfolder1 Get_WindowsFolder
 }
 
@@ -218,7 +218,7 @@ function wsapy() {
         echo "I will install $yellow W $red S $green A $white"
     python3 ./python/wsa.py -r $wsarelease
     echo $downloadsus
-sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsaproject/
+sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/easierwsainstaller-project/
     else 
 echo $nopy39
 exit 1
@@ -230,8 +230,8 @@ function wsatoolspy() {
     echo "I will install $yellow WSA $red TOOLS $white"
     python3 ./python/wsatools.py
  echo $downloadsus
-rm -rf /mnt/c/wsaproject/*
-sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsaproject/WSATools.msixbundle
+rm -rf /mnt/c/easierwsainstaller-project/*
+sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/easierwsainstaller-project/WSATools.msixbundle
 else 
 echo $nopy39
 exit 1
@@ -243,7 +243,7 @@ function opengappspy() {
     echo "I will install $yellow OPEN $red GAPPS $white"
 python3 ./python/opengapps.py -a $gappsarch -va $gappsvariant
  echo $downloadsus
-sudo mv open_gapps-$gappsarch-*.zip /mnt/c/wsaproject/
+sudo mv open_gapps-$gappsarch-*.zip /mnt/c/easierwsainstaller-project/
     else 
 echo $nopy39
 exit 1
@@ -279,6 +279,6 @@ wsagascriptmethod_d
 fi
 ####################################################################################################################################
 sleepwait 1
-sudo rm -rf /root/wsaproject
+sudo rm -rf /root/easierwsainstaller-project
 sleepwait 10
 clear & clear
