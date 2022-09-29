@@ -5,9 +5,6 @@
 
 2. This method is experimental. Made easy for you to enter fewer commands.
 
-# BETA
-**Not Stable. Still under construction, not finished yet.**
-
 # What is EasierWsaInstaller?
 
 Our project is a simple CLI that makes it easier to install WSAGAScript, MagiskOnWSA Local and original wsa(download).
