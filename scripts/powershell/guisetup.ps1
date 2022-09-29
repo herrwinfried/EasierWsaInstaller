@@ -110,18 +110,18 @@ $wslprep2 = '"'
 $wslsetup = "&& ./install.sh "
 
 if ( $wsldistro -eq "Ubuntu") {
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 
 elseif ( $wsldistro -eq "openSUSE-Tumbleweed") {
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 
 }
 elseif ( $wsldistro -eq "Debian") {
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b beta https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 else {
-    $wslprep = "cd ~; sudo rm -rf /root/wsa*; cd /root/; git clone -b beta https://github.com/herrwinfried/wsa-script.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
+    $wslprep = "cd ~; sudo rm -rf /root/wsa*; cd /root/; git clone -b beta https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh "
 }
 if ($arch -eq "arm64") {
 $wslsetup = $wslsetup + "--arm ";
