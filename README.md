@@ -8,7 +8,7 @@
 # BETA
 **Not Stable. Still under construction, not finished yet.**
 
-# What is wsa-script?
+# What is EasierWsaInstaller?
 
 Our project is a simple CLI that makes it easier to install WSAGAScript, MagiskOnWSA Local and original wsa(download).
 
@@ -17,7 +17,7 @@ Our project is a simple CLI that makes it easier to install WSAGAScript, MagiskO
 We thought it would be more logical to use it after reviewing the update coming to the projects so that it can work properly, so it is in the project. There is no play involved. (Except for product name change etc.)
 
 # Command lines not for you?
-[Try our wsa-gui project](https://github.com/herrwinfried/wsa-gui#readme)
+[Try our EasierWsaInstallerGui project](https://github.com/herrwinfried/wsa-gui#readme)
 
 # An amateur video showing the installation
 
@@ -36,17 +36,14 @@ ___The ARM version is still beta, please give feedback when you encounter an err
 - You must have a minimum Windows 11 device. It is adjusted for Windows 11 only.
 
 - [Virtual Machine Platform Must Be Active](#virtual-machine-platform-must-be-active)
-- [Developer Mode must be active.](#developer-mode-must-be-turned-on) **(Applicable if you are going to use the opengapps + wsa method.)**
+- [Developer Mode must be active.](#developer-mode-must-be-turned-on) **(Applicable if you are going to use the MagiskOnWSA and WSAGAScript method.)**
 - [WSL](https://aka.ms/wslstorepage)
 - [Ubuntu](https://www.microsoft.com/p/ubuntu/9nblggh4msv6), [OpenSUSE Tumbleweed](https://www.microsoft.com/p/opensuse-tumbleweed/9mssk2zxxn11) or [Debian](https://www.microsoft.com/p/debian/9msvkqc78pk6)
-- [Powershell Core(7+)](https://www.microsoft.com/en-us/p/powershell/9mz1snwt0n5d) **(Applicable if you are going to use the WSA-Gui project.)**
+- [Powershell Core(7+)](https://www.microsoft.com/en-us/p/powershell/9mz1snwt0n5d) **(Applicable if you are going to use the EasierWsaInstallerGui project.)**
 
 ## Developer Mode must be turned on.
 > Settings > Privacy & security > For Developers > Developer Mode
 > ![image](https://user-images.githubusercontent.com/52379312/138754144-e81779ea-4c61-46c6-8860-6c39b33aab47.png)
-
-__**IF YOU ARE USING WINDOWS TERMINAL, "Windows Powershell" MUST BE SELECTED. IT IS MORE LIKELY TO GET AN ERROR WITH POWERSHELL 7.**__
-__**In normal use, you should prefer windows terminal instead of Powershell 7.**__
 
 ## **Virtual Machine Platform must be active.**
 
@@ -59,10 +56,10 @@ __**In normal use, you should prefer windows terminal instead of Powershell 7.**
 
 # What to do before you start
 
-- Create a folder named `wsaproject` under the `C` directory. (`C:\wsaproject`)
+- Create a folder named `easierwsainstaller` under the `C` directory. (`C:\easierwsainstaller`)
 - Create a folder named `wsa` under the `C` directory. (`C:\wsa`)
 
-> NOTE: If you are going to do WSA Upload only. You do not need to create a WSA folder.
+> NOTE: If you choose onlywsa method. You do not need to create a WSA folder.
 
 # Information before you start
 
@@ -195,17 +192,17 @@ sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper instal
 
 # What to do after installation
 
-**Only If You Download Original WSA . Go to `C:\\wsaproject` and double click the file. then install it.** *(Only If You Used WSA Upload only method)*
+**Only If You Download Original WSA . Go to `C:\\easierwsainstaller` and double click the file. then install it.** *(Only If You Used WSA Upload only method)*
 
 **If you used the WSAGAScript or the magiskonwsalocal Method, read on**
 
 - [Method 1](#method-1)
 - [Method 2](#method-2) (Manuel)
 
-In order for the powershell script in the "C:\wsaproject" directory to run, you need to change your permission setting. Below is the command you need to type. Run as Administrator Powershell.
+In order for the powershell script in the "C:\easierwsainstaller" directory to run, you need to change your permission setting. Below is the command you need to type. Run as Administrator Powershell.
 # Method 1
 ```
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+Set-ExecutionPolicy -ExecutionPolicy bypass
 ```
 we can run the script now!
 ![image](https://user-images.githubusercontent.com/52379312/138756336-feef2fd0-f697-401a-85d1-a243c9763e75.png)

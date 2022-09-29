@@ -197,7 +197,7 @@ if ($method -ne "onlywsa") {
 
 if ($method -eq "onlywsa") {
     Start-Sleep -s 1
-    Set-Location "C:\wsaproject"
+    Set-Location "C:\easierwsainstaller"
     Start-Sleep -s 1
     Add-AppxPackage Microsoft*WindowsSubsystemForAndroid*.msixbundle
 }
@@ -205,7 +205,7 @@ if ($method -eq "onlywsa") {
 Start-Sleep -s 0.80
 if ($wsatools -eq "yes") {
     Start-Sleep -s 1
-    Set-Location "C:\wsaproject"
+    Set-Location "C:\easierwsainstaller"
     Start-Sleep -s 1
     add-appxpackage .\WSATools.Msixbundle
 }

@@ -29,7 +29,7 @@ elseif ($Arch -eq 'Arm64') {
 if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
     if ($originalint -eq 1) {
 
-        Set-Location "C:\wsaproject"
+        Set-Location "C:\easierwsainstaller"
         Add-AppxPackage Microsoft*WindowsSubsystemForAndroid*.msixbundle
     } else {
         Add-AppxPackage -Register .\AppxManifest.xml

@@ -92,13 +92,13 @@ sudo ./apply.sh && sudo ./unmount_images.sh || scriptabort
 echo "$green [WSAGAScript] $yellow The operation seems successful. $white [PRE-FINISH]"
 
 echo "$green [WSAGAScript] $yellow image files are moved to the required location. $white [PRE-FINISH]"
-mv \#IMAGES/*img /mnt/c/wsaproject/microsoftwsa/wsa/ || scriptabort
+mv \#IMAGES/*img /mnt/c/easierwsainstaller/microsoftwsa/wsa/ || scriptabort
 echo "$green [WSAGAScript] $yellow image files have been moved. $white [PRE-FINISH]"
 
 echo "$green [WSAGAScript] $yellow old kernel is deleted. $white [PRE-FINISH]"
-sudo rm /mnt/c/wsaproject/microsoftwsa/wsa/Tools/kernel || scriptabort
+sudo rm /mnt/c/easierwsainstaller/microsoftwsa/wsa/Tools/kernel || scriptabort
 echo "$green [WSAGAScript] $yellow old kernel deleted. The new kernel is migrated. $white [PRE-FINISH]"
-cp misc/kernel-$mskernel /mnt/c/wsaproject/microsoftwsa/wsa/Tools/kernel || scriptabort
+cp misc/kernel-$mskernel /mnt/c/easierwsainstaller/microsoftwsa/wsa/Tools/kernel || scriptabort
 
 echo "$green [WSAGAScript] $yellow Checking in /mnt/c/wsa/$msarch. If full, it will be deleted. $white [PRE-FINISH]"
 sudo mkdir -p /mnt/c/wsa || scriptabort
@@ -106,7 +106,7 @@ sudo rm -rf /mnt/c/wsa/$msarch || scriptabort
 echo "$green [WSAGAScript] $yellow Checking in /mnt/c/wsa/$msarch. If None, it will be created. $white [PRE-FINISH]"
 sudo mkdir -p /mnt/c/wsa/$msarch || scriptabort
 echo "$green [WSAGAScript] $yellow wsa is moving. $white [PRE-FINISH]"
-sudo mv /mnt/c/wsaproject/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/ || scriptabort
+sudo mv /mnt/c/easierwsainstaller/microsoftwsa/wsa/* /mnt/c/wsa/$msarch/ || scriptabort
 echo "$green [WSAGAScript] $yellow I am running a Get_WSLFolderScripts function. $white [PRE-FINISH]"
 Get_WSLFolderScripts || scriptabort
 echo "$green [WSAGAScript] $white [PRE-FINISH]"
