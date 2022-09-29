@@ -166,7 +166,7 @@ if ($method -ne "onlywsa") {
         if ($method -eq "arm64") {
             Set-Location C:\wsa\ARM64
         }
-        Invoke-Expression 'cmd /c start powershell.exe -ExecutionPolicy Bypass -File .\install.ps1 1 0'
+        Invoke-Expression "Start-Process pwsh.exe -verb runas -ArgumentList '-ExecutionPolicy Bypass -c .\install.ps1 -nostop 1 -original 0'"
 
         Start-Sleep -s 10
 
