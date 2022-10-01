@@ -235,7 +235,7 @@ function wsatoolspy() {
     echo "I will install $yellow WSA $red TOOLS $white"
     python3 ./python/wsatools.py
  echo $downloadsus
-rm -rf /mnt/c/easierwsainstaller-project/*
+sudo rm -rf /mnt/c/easierwsainstaller-project/54406Simizfo.WSATools*.msixbundle
 sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/easierwsainstaller-project/WSATools.msixbundle
 else 
 echo $nopy39
