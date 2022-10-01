@@ -236,6 +236,7 @@ function wsatoolspy() {
     python3 ./python/wsatools.py
  echo $downloadsus
 sudo rm -rf /mnt/c/easierwsainstaller-project/54406Simizfo.WSATools*.msixbundle
+sleepwait 2
 sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/easierwsainstaller-project/WSATools.msixbundle
 else 
 echo $nopy39

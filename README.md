@@ -167,25 +167,25 @@ All the parameters you need to know to make things easier.
 ## Ubuntu & AMD64 & MagiskOnWSALocal
 
 ```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+sudo sh -c "cd ~; sudo rm -rf  /root/easierwsainstaller ; sudo rm -rf  /root/easierwsainstaller-project ; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 ## openSUSE Tumbleweed & AMD64 & MagiskOnWSALocal
 ```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+sudo sh -c "cd ~; sudo rm -rf  /root/easierwsainstaller ; sudo rm -rf  /root/easierwsainstaller-project ; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 ```
 
 [Go To "What to do after installation"](#what-to-do-after-installation)
 ## Ubuntu & ARM64 & MagiskOnWSALocal
 ```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+sudo sh -c "cd ~; sudo rm -rf  /root/easierwsainstaller ; sudo rm -rf  /root/easierwsainstaller-project ; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
 ## openSUSE Tumbleweed & AMD64 & MagiskOnWSALocal
 ```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+sudo sh -c "cd ~; sudo rm -rf  /root/easierwsainstaller ; sudo rm -rf  /root/easierwsainstaller-project ; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 ```
 
 [Go To "What to do after installation"](#what-to-do-after-installation)
