@@ -11,7 +11,7 @@ while [ $i -le $j ]
 do
 n=$(echo $1 | tr '[:upper:]' '[:lower:]')
 ###HELP
-elif [[ $n == "--help" ]]; then
+if [[ $n == "--help" ]]; then
 echo "Soon..."
 exit 1
 ###HELP FINISH
