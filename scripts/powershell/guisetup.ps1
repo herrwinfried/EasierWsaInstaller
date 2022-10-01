@@ -49,13 +49,26 @@ if (!$WindowsArch) {
     Exit 1
 }
 
-
 Write-Host "This script is for the wsa-gui project." -ForegroundColor Yellow;
 Start-Sleep -s 0.70
 write-host "== Script ==" -ForegroundColor Cyan;
 write-host $wsldistro $arch $scriptlang $method $wsarelease $magiskversion $amazonstore $wsatools $productname $gappsvariant
 write-host "== Windows ==" -ForegroundColor Green; Write-Host $winvmp $windevmode $adb
+####################################################################################################################################
 
+if (Test-Path -Path 'C:\easierwsainstaller-project') {
+    Write-Host "I found folder named easierwsainstaller-project." -ForegroundColor Red
+ } else {
+    Write-Host "A folder will be created in the C directory named easierwsainstaller-project" -ForegroundColor Green
+     mkdir "C:\easierwsainstaller-project"
+ }
+
+ if (Test-Path -Path 'C:\wsa') {
+    Write-Host "I found folder named wsa." -ForegroundColor Red
+ } else {
+    Write-Host "A folder will be created in the C directory named wsa" -ForegroundColor Green
+     mkdir "C:\wsa"
+ }
 ####################################################################################################################################
 
 if ($winvmc) {
