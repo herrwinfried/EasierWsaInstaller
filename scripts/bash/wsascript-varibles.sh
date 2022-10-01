@@ -113,7 +113,7 @@ exit 1
 fi
 fi
 function debian_t() {
-if [ $distroselect == "Debian GNU/Linux 11 (bullseye)"]; then
+if [ $distroselect == "Debian GNU/Linux 11 (bullseye)" ]; then
 echo "$yellow I am adding the $red contrib non-free $yellow repository. (winetricks) $white"
 sudo apt-add-repository contrib
 sudo apt-add-repository non-free

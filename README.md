@@ -1,9 +1,12 @@
 
-# Warn
+# Warning
 
 1. **This is an experimental project. We are not responsible for an incident that you will encounter. Do it within your own consciousness.**
 
 2. This method is experimental. Made easy for you to enter fewer commands.
+
+# BETA
+**Not Stable. Still under construction, not finished yet.**
 
 # What is EasierWsaInstaller?
 
@@ -14,7 +17,11 @@ Our project is a simple CLI that makes it easier to install WSAGAScript, MagiskO
 We thought it would be more logical to use it after reviewing the update coming to the projects so that it can work properly, so it is in the project. There is no play involved. (Except for product name change etc.)
 
 # Command lines not for you?
-[Try our EasierWsaInstallerGui project](https://github.com/herrwinfried/wsa-gui#readme)
+[Try our EasierWsaInstallerGui project](https://github.com/herrwinfried/EasierWsaInstallerGui#readme)
+
+# An amateur video showing the installation
+
+Soon...
 
 # Information before you start
 
@@ -160,32 +167,32 @@ All the parameters you need to know to make things easier.
 ## Ubuntu & AMD64 & MagiskOnWSALocal
 
 ```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 ## openSUSE Tumbleweed & AMD64 & MagiskOnWSALocal
 ```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 ```
 
 [Go To "What to do after installation"](#what-to-do-after-installation)
 ## Ubuntu & ARM64 & MagiskOnWSALocal
 ```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
 ## openSUSE Tumbleweed & AMD64 & MagiskOnWSALocal
 ```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone https://github.com/herrwinfried/EasierWsaInstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
+sudo sh -c "cd ~; sudo rm -rf /root/wsa*; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 ```
 
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
 # What to do after installation
 
-**Only If You Download Original WSA . Go to `C:\\easierwsainstaller` and double click the file. then install it.** *(Only If You Used WSA Upload only method)*
+**Only If You Download OriginalWSA . Go to `C:\\easierwsainstaller` and double click the file. then install it.** *(Only If You Used WSA Upload only method)*
 
 **If you used the WSAGAScript or the magiskonwsalocal Method, read on**
 

@@ -50,8 +50,10 @@ ROOT_SOL="magisk"
 COMPRESS_OUTPUT="" #"--compress"
 
 if [[ $WSATools == true ]]; then
+WSLFolder || scriptabort
 Get_WSLFolderScripts || scriptabort
 echo "$green {MAGISK} $red WSATOOLS $white"
+WindowsFolder || scriptabort
 wsatoolspy || scriptabort
 echo "$green {MAGISK} $red WSATOOLS Done $white"
 
