@@ -16,10 +16,6 @@ We thought it would be more logical to use it after reviewing the update coming 
 # Command lines not for you?
 [Try our EasierWsaInstallerGui project](https://github.com/herrwinfried/EasierWsaInstallerGui#readme)
 
-# An amateur video showing the installation
-
-Soon...
-
 # Information before you start
 
 You need to remove the existing WSA.
