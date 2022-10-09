@@ -1,10 +1,8 @@
 # Automated Install script by Midonei
-# http://github.com/doneibcn
-
 
 # copy MagiskOnWSALocal
 # + If the process is completed, it will be successfully closed without pressing the key.
-
+$Host.UI.RawUI.WindowTitle = "Installing MagiskOnWSA..."
 function Test-Administrator {
     [OutputType([bool])]
     param()
@@ -13,62 +11,78 @@ function Test-Administrator {
         return $user.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator);
     }
 }
-
+function Get-InstalledDependencyVersion {
+    param (
+        [string]$Name,
+        [string]$ProcessorArchitecture
+    )
+    process {
+        return Get-AppxPackage -Name $Name | ForEach-Object { if ($_.Architecture -eq $ProcessorArchitecture) { $_ } } | Sort-Object -Property Version | Select-Object -ExpandProperty Version -Last 1;
+    }
+}
 function Finish {
     Clear-Host
     Start-Process "wsa://com.topjohnwu.magisk"
     Start-Process "wsa://com.android.vending"
 }
-
-if (-not (Test-Administrator)) {
+If (-Not (Test-Administrator)) {
     Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Bypass -Force
-    $proc = Start-Process -PassThru -WindowStyle Hidden -Verb RunAs powershell.exe -Args "-executionpolicy bypass -command Set-Location '$PSScriptRoot'; &'$PSCommandPath' EVAL"
+    $proc = Start-Process -PassThru -WindowStyle Hidden -Verb RunAs ConHost.exe -Args "powershell -ExecutionPolicy Bypass -Command Set-Location '$PSScriptRoot'; &'$PSCommandPath' EVAL"
     $proc.WaitForExit()
-    if ($proc.ExitCode -ne 0) {
+    If ($proc.ExitCode -Ne 0) {
         Clear-Host
         Write-Warning "Failed to launch start as Administrator`r`nPress any key to exit"
         $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown');
     }
     exit
 }
-elseif (($args.Count -eq 1) -and ($args[0] -eq "EVAL")) {
-    Start-Process powershell.exe -Args "-executionpolicy bypass -command Set-Location '$PSScriptRoot'; &'$PSCommandPath'"
+ElseIf (($args.Count -Eq 1) -And ($args[0] -Eq "EVAL")) {
+    Start-Process ConHost.exe -Args "powershell -ExecutionPolicy Bypass -Command Set-Location '$PSScriptRoot'; &'$PSCommandPath'"
     exit
 }
-
-if (((Test-Path -Path "WsaProxy","vendor.img","gfxstream_backend.dll","lxutil.dll","product.img","WsaSettingsBroker","Microsoft.UI.Xaml.winmd","networking_schema.json","Tools","system.img","WSACrashUploader","Licenses","networking.json","Assets","WsaSettings.exe","vclibs-x64.appx","userdata.vhdx","WsaService","Styles","WsaClient","Registry.dat","classicAppInstaller_WSA.sccd","wsldeps.dll","wslhost.exe","appcompatdb_schema.json","Images","xaml-x64.appx","WSACodecs.dll","libGLESv2.dll","wsldevicehost.dll","resources.pri","GSKServer","libEGL.dll","appcompatdb.json","AppxManifest.xml","metadata.vhdx","CustomInstall","wslcore.dll","system_ext.img","Fonts","WsaSettings.winmd") -eq $false).Count) {
+If (((Test-Path -Path ) -Eq $false).Count) {
     Write-Error "Some files are missing in the folder. Please try to build again. Press any key to exist"
     $null = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
     exit 1
 }
-
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
-
-$VMP = Get-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform'
-if ($VMP.State -ne "Enabled") {
+If ($(Get-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform').State -Ne "Enabled") {
     Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'VirtualMachinePlatform'
     Clear-Host
     Write-Warning "Need restart to enable virtual machine platform`r`nPress y to restart or press any key to exit"
     $key = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-    If ("y" -eq $key.Character) {
+    If ("y" -Eq $key.Character) {
         Restart-Computer -Confirm
     }
     Else {
         exit 1
     }
 }
-
-Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Path vclibs-x64.appx
-Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Path xaml-x64.appx
-
+[xml]$Xml = Get-Content ".\AppxManifest.xml";
+$Name = $Xml.Package.Identity.Name;
+$ProcessorArchitecture = $Xml.Package.Identity.ProcessorArchitecture;
+$Dependencies = $Xml.Package.Dependencies.PackageDependency;
+$Dependencies | ForEach-Object {
+    If ($_.Name -Eq "Microsoft.VCLibs.140.00.UWPDesktop") {
+        $HighestInstalledVCLibsVersion = Get-InstalledDependencyVersion -Name $_.Name -ProcessorArchitecture $ProcessorArchitecture;
+        If ( $HighestInstalledVCLibsVersion -Lt $_.MinVersion ) {
+            Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Path "Microsoft.VCLibs.$ProcessorArchitecture.14.00.Desktop.appx"
+        }
+    }
+    ElseIf ($_.Name -Match "Microsoft.UI.Xaml") {
+        $HighestInstalledXamlVersion = Get-InstalledDependencyVersion -Name $_.Name -ProcessorArchitecture $ProcessorArchitecture;
+        If ( $HighestInstalledXamlVersion -Lt $_.MinVersion ) {
+            Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Path "Microsoft.UI.Xaml_$ProcessorArchitecture.appx"
+        }
+    }
+}
 $Installed = $null
-$Installed = Get-AppxPackage -Name 'MicrosoftCorporationII.WindowsSubsystemForAndroid'
-
-If (($null -ne $Installed) -and (-not ($Installed.IsDevelopmentMode))) {
+$Installed = Get-AppxPackage -Name $Name
+If (($null -Ne $Installed) -And (-Not ($Installed.IsDevelopmentMode))) {
     Clear-Host
     Write-Warning "There is already one installed WSA. Please uninstall it first.`r`nPress y to uninstall existing WSA or press any key to exit"
     $key = $Host.UI.RawUI.ReadKey('NoEcho,IncludeKeyDown')
-    If ("y" -eq $key.Character) {
+    If ("y" -Eq $key.Character) {
         Remove-AppxPackage -Package $Installed.PackageFullName
     }
     Else {
@@ -77,18 +91,19 @@ If (($null -ne $Installed) -and (-not ($Installed.IsDevelopmentMode))) {
 }
 Clear-Host
 Write-Host "Installing MagiskOnWSA..."
-Stop-Process -Name "wsaclient" -ErrorAction "silentlycontinue"
+Stop-Process -Name "WsaClient" -ErrorAction SilentlyContinue
 Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Register .\AppxManifest.xml
-if ($?) {
+If ($?) {
     Finish
 }
-Elseif ($null -ne $Installed) {
+ElseIf ($null -Ne $Installed) {
     Clear-Host
     Write-Host "Failed to update, try to uninstall existing installation while preserving userdata..."
     Remove-AppxPackage -PreserveApplicationData -Package $Installed.PackageFullName
     Add-AppxPackage -ForceApplicationShutdown -ForceUpdateFromAnyVersion -Register .\AppxManifest.xml
-    if ($?) {
+    If ($?) {
         Finish
     }
 }
+
 Start-Sleep -s 5
