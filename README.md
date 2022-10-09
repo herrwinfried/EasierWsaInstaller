@@ -5,9 +5,6 @@
 
 2. This method is experimental. Made easy for you to enter fewer commands.
 
-# BETA
-**Not Stable. Still under construction, not finished yet.**
-
 # What is EasierWsaInstaller?
 
 Our project is a simple CLI that makes it easier to install WSAGAScript, MagiskOnWSA Local and original wsa(download).
@@ -18,10 +15,6 @@ We thought it would be more logical to use it after reviewing the update coming 
 
 # Command lines not for you?
 [Try our EasierWsaInstallerGui project](https://github.com/herrwinfried/EasierWsaInstallerGui#readme)
-
-# An amateur video showing the installation
-
-Soon...
 
 # Information before you start
 
@@ -38,7 +31,7 @@ ___The ARM version is still beta, please give feedback when you encounter an err
 - [Virtual Machine Platform Must Be Active](#virtual-machine-platform-must-be-active)
 - [Developer Mode must be active.](#developer-mode-must-be-turned-on) **(Applicable if you are going to use the MagiskOnWSA and WSAGAScript method.)**
 - [WSL](https://aka.ms/wslstorepage)
-- [Ubuntu](https://www.microsoft.com/p/ubuntu/9nblggh4msv6), [OpenSUSE Tumbleweed](https://www.microsoft.com/p/opensuse-tumbleweed/9mssk2zxxn11) or [Debian](https://www.microsoft.com/p/debian/9msvkqc78pk6)
+- [Ubuntu](https://www.microsoft.com/store/productId/9PDXGNCFSCZV), [OpenSUSE Tumbleweed](https://www.microsoft.com/p/opensuse-tumbleweed/9mssk2zxxn11) or [Debian](https://www.microsoft.com/p/debian/9msvkqc78pk6)
 - [Powershell Core(7+)](https://www.microsoft.com/en-us/p/powershell/9mz1snwt0n5d) **(Applicable if you are going to use the EasierWsaInstallerGui project.)**
 
 ## Developer Mode must be turned on.
