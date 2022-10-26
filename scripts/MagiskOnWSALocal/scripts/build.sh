@@ -148,6 +148,13 @@ ROOT_SOL_MAP=(
     "magisk"
     "none"
 )
+
+COMPRESS_FORMAT_MAP=(
+    "7z"
+    "xz"
+    "zip"
+)
+
 ARR_TO_STR() {
     local arr=("$@")
     local joined
@@ -190,9 +197,15 @@ usage() {
                     Possible values: $(ARR_TO_STR "${ROOT_SOL_MAP[@]}")
                     Default: $ROOT_SOL
 
+    --compress-format
+                    Compress format of output file.
+                    If this option is not specified and --compress is not specified, the generated file will not be compressed
+
+                    Possible values: $(ARR_TO_STR "${COMPRESS_FORMAT_MAP[@]}")
+
 Additional Options:
     --remove-amazon Remove Amazon Appstore from the system
-    --compress      Compress the WSA
+    --compress      Compress the WSA, The default format is 7z, you can use the format specified by --compress-format
     --offline       Build WSA offline
     --magisk-custom Install custom Magisk
     --debug         Debug build mode
@@ -213,6 +226,7 @@ ARGUMENT_LIST=(
     "gapps-brand:"
     "gapps-variant:"
     "root-sol:"
+    "compress-format:"
     "remove-amazon"
     "compress"
     "offline"
@@ -240,6 +254,7 @@ while [[ $# -gt 0 ]]; do
         --gapps-brand     ) GAPPS_BRAND="$2"; shift 2 ;;
         --gapps-variant   ) GAPPS_VARIANT="$2"; shift 2 ;;
         --root-sol        ) ROOT_SOL="$2"; shift 2 ;;
+        --compress-format ) COMPRESS_FORMAT="$2"; shift 2 ;;
         --remove-amazon   ) REMOVE_AMAZON="remove"; shift ;;
         --compress        ) COMPRESS_OUTPUT="yes"; shift ;;
         --offline         ) OFFLINE="on"; shift ;;
@@ -252,20 +267,22 @@ done
 
 check_list() {
     local input=$1
-    local name=$2
-    shift
-    local arr=("$@")
-    local list_count=${#arr[@]}
-    for i in "${arr[@]}"; do
-        if [ "$input" == "$i" ]; then
-            echo "INFO: $name: $input"
-            break
-        fi
-        ((list_count--))
-        if (("$list_count" <= 0)); then
-            exit_with_message "Invalid $name: $input"
-        fi
-    done
+    if [ -n "$input" ]; then
+        local name=$2
+        shift
+        local arr=("$@")
+        local list_count=${#arr[@]}
+        for i in "${arr[@]}"; do
+            if [ "$input" == "$i" ]; then
+                echo "INFO: $name: $input"
+                break
+            fi
+            ((list_count--))
+            if (("$list_count" <= 0)); then
+                exit_with_message "Invalid $name: $input"
+            fi
+        done
+    fi
 }
 
 check_list "$ARCH" "Architecture" "${ARCH_MAP[@]}"
@@ -274,6 +291,7 @@ check_list "$MAGISK_VER" "Magisk Version" "${MAGISK_VER_MAP[@]}"
 check_list "$GAPPS_BRAND" "GApps Brand" "${GAPPS_BRAND_MAP[@]}"
 check_list "$GAPPS_VARIANT" "GApps Variant" "${GAPPS_VARIANT_MAP[@]}"
 check_list "$ROOT_SOL" "Root Solution" "${ROOT_SOL_MAP[@]}"
+check_list "$COMPRESS_FORMAT" "Compress Format" "${COMPRESS_FORMAT_MAP[@]}"
 
 if [ "$DEBUG" ]; then
     set -x
@@ -530,6 +548,7 @@ on post-fs-data
     mkdir /dev/$TMP_PATH/.magisk/mirror 700
     mkdir /dev/$TMP_PATH/.magisk/block 700
     copy /sbin/magisk.apk /dev/$TMP_PATH/stub.apk
+    chmod 0644 /dev/$TMP_PATH/stub.apk
     rm /dev/.magisk_unblock
     start $SERVER_NAME1
     start $SERVER_NAME2
@@ -836,13 +855,35 @@ fi
 if [ ! -d "$OUTPUT_DIR" ]; then
     mkdir -p "$OUTPUT_DIR"
 fi
-if [ "$COMPRESS_OUTPUT" ]; then
-    rm -f "${OUTPUT_DIR:?}"/"$artifact_name.7z" || abort
+OUTPUT_PATH="${OUTPUT_DIR:?}/$artifact_name"
+if [ "$COMPRESS_OUTPUT" ] || [ -n "$COMPRESS_FORMAT" ]; then
     mv "$WORK_DIR/wsa/$ARCH" "$WORK_DIR/wsa/$artifact_name"
-    7z a "$OUTPUT_DIR"/"$artifact_name.7z" "$WORK_DIR/wsa/$artifact_name" || abort
+    if [ -z "$COMPRESS_FORMAT" ]; then
+        COMPRESS_FORMAT="7z"
+    fi
+    if [ -n "$COMPRESS_FORMAT" ]; then
+        FILE_EXT=".$COMPRESS_FORMAT"
+        if [ "$FILE_EXT" = ".xz" ]; then
+            FILE_EXT=".tar$FILE_EXT"
+        fi
+        OUTPUT_PATH="$OUTPUT_PATH$FILE_EXT"
+    fi
+    rm -f "${OUTPUT_PATH:?}" || abort
+    if [ "$COMPRESS_FORMAT" = "7z" ]; then
+        echo "Compressing with 7z"
+        7z a "${OUTPUT_PATH:?}" "$WORK_DIR/wsa/$artifact_name" || abort
+    elif [ "$COMPRESS_FORMAT" = "xz" ]; then
+        echo "Compressing with tar xz"
+        if ! (tar -cP -I 'xz -9 -T0' -f "${OUTPUT_PATH:?}" "$WORK_DIR/wsa/$artifact_name"); then
+            echo "Out of memory? Trying again with single threads..."
+            tar -cPJvf "${OUTPUT_PATH:?}" "$WORK_DIR/wsa/$artifact_name" || abort
+        fi
+    elif [ "$COMPRESS_FORMAT" = "zip" ]; then
+        7z -tzip a "${OUTPUT_PATH:?}" "$WORK_DIR/wsa/$artifact_name" || abort
+    fi
 else
-    rm -rf "${OUTPUT_DIR:?}/${artifact_name}" || abort
-    cp -r "$WORK_DIR"/wsa/"$ARCH" "$OUTPUT_DIR/$artifact_name" || abort
+    rm -rf "${OUTPUT_PATH:?}" || abort
+    cp -r "$WORK_DIR"/wsa/"$ARCH" "$OUTPUT_PATH" || abort
 fi
 echo -e "done\n"
 
