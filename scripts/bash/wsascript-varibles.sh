@@ -62,6 +62,19 @@ fi
 distroselect=$(lsb_release -d | awk -F"\t" '{print $2}')
 distrocodename=$(lsb_release -c | awk -F"\t" '{print $2}')
 
+if ! [ -x "$(command -v xz)" ]; then
+if [ -x "$(command -v apt)" ]; then
+echo "$green I found a missing package, I'm installing it... (xz-utils) $white"
+sudo apt install -y xz-utils
+elif [ -x "$(command -v zypper)" ]; then
+echo "$green I found a missing package, I'm installing it... (xz) $white"
+sudo zypper install -y xz
+else
+echo "$red I couldn't find the xz-utils package. That's why I canceled the transaction. $white"
+exit 1
+fi
+fi
+
 if ! [ -x "$(command -v lzip)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (lzip) $white"
@@ -74,6 +87,7 @@ echo "$red I couldn't find the lzip package. That's why I canceled the transacti
 exit 1
 fi
 fi
+
 if ! [ -x "$(command -v seinfo)" ]; then
 if [ -x "$(command -v apt)" ]; then
 echo "$green I found a missing package, I'm installing it... (setools) $white"

@@ -129,6 +129,8 @@ All the parameters you need to know to make things easier.
 > Written based on Ubuntu.
 
 ### MagiskOnWSALocal
+
+- `lsb-release`
 - `sudo`
 - `lzip`
 - `unzip`
@@ -144,9 +146,12 @@ All the parameters you need to know to make things easier.
 - `git`
 - `wget`
 - `attr`
+- `xz-utils`
+- `unzip`
 
 ### onlywsa and WSAGAScript
 
+- `lsb-release`
 - `sudo`
 - `lzip`
 - `unzip`
