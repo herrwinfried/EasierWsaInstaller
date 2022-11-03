@@ -77,6 +77,8 @@ elif [[ $n == "--magiskversion=canary" ]]; then
 MagiskVersion=canary
 elif [[ $n == "--magiskversion=debug" ]]; then
 MagiskVersion=debug
+elif [[ $n == "--magiskversion=release" ]]; then
+MagiskVersion=release
 elif [[ $n == "--magiskversion"* ]]; then
 echo $invalidmagiskversion
 MagiskVersion=stable

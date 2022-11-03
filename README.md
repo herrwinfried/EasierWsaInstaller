@@ -88,6 +88,7 @@ All the parameters you need to know to make things easier.
 - `magiskversion=canary`
 - `magiskversion=beta`
 - `magiskversion=stable` [Default]
+- `magiskversion=release`
 
 ### `amazonstore` parametres
 
