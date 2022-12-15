@@ -97,7 +97,7 @@ sudo mkdir -p /mnt/c/wsa/wsamagisk
 echo "$red [Magisk] $green [1] $white"
 sudo rm -rf /mnt/c/wsa/wsamagisk/*
 echo "$red [Magisk] $green [2] $white"
-cd WSA-with-magisk* || scriptabort
+cd WSA* || scriptabort
 echo "$red [Magisk] $green [3] $white"
 cp -r * /mnt/c/wsa/wsamagisk || scriptabort
 
