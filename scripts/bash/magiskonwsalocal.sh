@@ -71,7 +71,7 @@ echo "[Magisk] Go to MagiskOnWSALocal/scripts folder [Preparation] $white"
 cd MagiskOnWSALocal && cd scripts || scriptabort
 echo "[Magisk] Make everything in the MagiskOnWSALocal/scripts folder executable. [Preparation] $white"
 sudo chmod +x ./*.sh || find "$(pwd)" -iname "*.sh" -exec chmod +x "{}" \; || scriptabort
-echo "$red Everything seems ready. After this stage, the control will now be in the magiskonwsalocal project. When the process is finished, I will perform the migration. $white [Magisk] [Ready!]"
+echo "$yellow Everything seems ready. After this stage, the control will now be in the magiskonwsalocal project. When the process is finished, I will perform the migration. $white [Magisk] [Ready!]"
 #
 sed -ie 's+# export TMPDIR=$(dirname "$PWD")/WORK_DIR_+export TMPDIR=$(dirname "$PWD")/WORK_DIR_+i' build.sh || scriptabort
 sed -ie 's+("build", "product"): "redfin"+("build", "product"): "'$WSAProductName'"+i' fixGappsProp.py || scriptabort
