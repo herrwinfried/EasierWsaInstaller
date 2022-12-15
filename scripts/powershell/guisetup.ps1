@@ -38,6 +38,7 @@ param (
 )
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" -wsldistro $wsldistro -arch $arch -scriptlang $scriptlang -method $method -wsarelease $wsarelease -magiskversion $magiskversion -amazonstore $amazonstore -wsatools $wsatools -productname $productname -gappsvariant $gappsvariant -winvmp $winvmp -windevmode $windevmode -adb $adb" -Verb RunAs; exit }
 $WindowsArch = ($env:PROCESSOR_ARCHITECTURE)
+$Host.UI.RawUI.WindowTitle = "EasierWsaInstaller - SETUP [BETA]"
 if (!$WindowsArch) {
     Write-Host "Only Windows Powershell Core." -ForegroundColor Red;
     Start-Sleep -s 0.60

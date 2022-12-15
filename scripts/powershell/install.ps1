@@ -4,6 +4,7 @@ param([bool]$nostop=0,
     $originalint = [int][bool]::Parse($original)
 if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) { Start-Process powershell.exe "-ExecutionPolicy Bypass `"$PSCommandPath`" -nostop $nostopint -original $originalint" -Verb RunAs; exit }
 $Arch = ($env:PROCESSOR_ARCHITECTURE)
+$Host.UI.RawUI.WindowTitle = "EasierWsaInstaller - INSTALL [BETA]"
 if ( ((Get-Host).Version).Major -ne "5" ) 
 { 
     Import-Module -Name Appx -UseWIndowsPowershell
