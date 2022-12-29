@@ -1,9 +1,11 @@
 
 # Warning
 
-1. **This is an experimental project. We are not responsible for an incident that you will encounter. Do it within your own consciousness.**
+1. **Due to the intensity of my real life, the development and updating phase of the project has slowed down.**
 
-2. This method is experimental. Made easy for you to enter fewer commands.
+2. **This is an experimental project. We are not responsible for an incident that you will encounter. Do it within your own consciousness.**
+
+3. This method is experimental. Made easy for you to enter fewer commands.
 
 # What is EasierWsaInstaller?
 
@@ -182,7 +184,7 @@ sudo sh -c "cd ~; sudo rm -rf  /root/easierwsainstaller ; sudo rm -rf  /root/eas
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-## openSUSE Tumbleweed & AMD64 & MagiskOnWSALocal
+## openSUSE Tumbleweed & ARM64 & MagiskOnWSALocal
 ```bash 
 sudo sh -c "cd ~; sudo rm -rf  /root/easierwsainstaller ; sudo rm -rf  /root/easierwsainstaller-project ; sudo zypper dup -y; sudo zypper install -y git curl wget; cd /root/; git clone -b 2.0.1 https://github.com/herrwinfried/easierwsainstaller.git ; cd wsa-script; cd scripts; cd bash; chmod +x ./*.sh && ./install.sh --arm --lang=en-us --magiskonwsalocal --wsarelease=retail --magiskversion=stable --amazonstore=no --wsatools=no --productname=herrwinfried --variant=pico"
 ```
