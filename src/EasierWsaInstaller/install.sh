@@ -57,6 +57,8 @@ echo -e $"
 
 "$yellow"Example:
 "$magenta" sudo ./install.sh --arch=x86_64 --method=magiskonwsalocal --variant=pico --wsatools=yes --productname=redfin --amazonstore=no --wsarelease=retail --magiskversion=stable
+
+                                        $blue https://github.com/herrwinfried/EasierWsaInstaller $white
 "
 exit 1
 ###HELP FINISH
@@ -224,6 +226,108 @@ sleepwait 5
 echo "$red""Version: "$magenta"""$SCRIPTVERSION""$white"
 sleepwait 1
 ############
+
+function scriptpip(){
+    if [[ -x "$(command -v pip3)" ]]; then
+echo $"$yellow""Downloading necessary pip packages. $white"
+sleepwait 0.5
+python3 -m pip install requests
+python3 -m pip install BeautifulSoup4
+python3 -m pip install lxml
+python3 -m pip install wget
+else
+echo $"$red pip3 Not Found. The operation is being cancelled. $white"
+exit 1
+fi
+}
+function WSLFolder() {
+if [ -d /root/easierwsainstaller-project ]; then
+
+echo $"$yellow WSLFolder found. $white"
+cd /root && cd easierwsainstaller-project
+echo $"$yellow I am deleting all the files in it. $white"
+sudo rm -rf /root/easierwsainstaller-project/*
+else
+echo $"$green The necessary folder for the linux(wsl) part has been created. $white"
+cd /root/ && mkdir easierwsainstaller-project && cd easierwsainstaller-project || scriptabort
+fi
+sleepwait 5
+
+}
+
+function WindowsFolder() {
+    if [ -d /mnt/c/easierwsainstaller-project ]; then
+echo $"$yellow WindowsFolder found. $white"
+cd /mnt/c/ && cd easierwsainstaller-project
+echo $"$yellow I am deleting all the files in it. $white"
+sudo rm -rf /mnt/c/easierwsainstaller-project/*
+else
+echo $"$green The necessary folder for the windows part has been created. $white"
+cd /mnt/c/ && mkdir easierwsainstaller-project && cd easierwsainstaller-project || scriptabort
+fi
+sleepwait 5
+}
+
+function Get_WSLFolder() {
+cd /root/ && cd easierwsainstaller-project || scriptabort
+}
+
+function Get_WSLFolderBashScript() {
+cd /root/ && cd easierwsainstaller && cd scripts && cd bash || scriptabort
+}
+function Get_WSLFolderPython() {
+cd /root/ && cd easierwsainstaller && cd scripts && cd python || scriptabort
+}
+function Get_WSLFolderPowershell() {
+cd /root/ && cd easierwsainstaller && cd scripts && cd powershell || scriptabort
+}
+function Get_WSLFolderScripts() {
+cd /root/ && cd easierwsainstaller && cd scripts || scriptabort
+}
+
+function Get_WindowsFolder() {
+echo $"$yellow I go into the Get_WindowsFolder folder. $white"
+cd /mnt/c/ && cd easierwsainstaller-project || scriptabort
+echo $"$yellow I went into the Get_WindowsFolder folder. $white" 
+}
+function wsapy() {
+        if [[ -x "$(command -v python3)" ]]; then
+        echo $"$magenta""I will install WSA $white"
+    python3 ./wsa.py -r $wsarelease
+    echo $downloadsus
+sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/easierwsainstaller-project/
+    else 
+echo $"$red python3 Not Found. The operation is being cancelled. $white"
+exit 1
+fi
+}
+
+function wsatoolspy() {
+    if [[ -x "$(command -v python3)" ]]; then
+    echo $"$blue""I will install WSATools $white"
+    python3 ./wsatools.py
+ echo $downloadsus
+sudo rm -rf /mnt/c/easierwsainstaller-project/54406Simizfo.WSATools*.msixbundle
+sleepwait 2
+sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/easierwsainstaller-project/WSATools.msixbundle
+else 
+echo $"$red python3 Not Found. The operation is being cancelled. $white"
+exit 1
+fi
+}
+
+function opengappspy() {
+    if [[ -x "$(command -v python3)" ]]; then
+    echo $"$green""I will install OpenGAPPS $white"
+python3 ./opengapps.py -a $gappsarch -va $gappsvariant
+ echo $downloadsus
+sudo mv open_gapps-$gappsarch-*.zip /mnt/c/easierwsainstaller-project/
+    else 
+echo $"$red python3 Not Found. The operation is being cancelled. $white"
+exit 1
+    fi
+}
+
 if [[ $MagiskWSA == true ]]; then
 echo "test"
 
@@ -231,13 +335,9 @@ elif [[ $WSAGAScript == true ]]; then
 echo "test"
 
 elif [[ $onlywsa == true ]]; then
-echo "test"
+. ./onlywsa.sh
+onlywsa_s
 
 else
 scriptabort
 fi
-
-sleepwait 1
-#sudo rm -rf /root/easierwsainstaller-project
-sleepwait 10
-clear & clear
