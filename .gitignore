@@ -8,8 +8,6 @@ WSAGAScript/.git
 
 /src/*/.github
 /src/.github
-/src/*/.git
-/src/.git
 
 bin/
 obj/
