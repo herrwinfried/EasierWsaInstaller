@@ -242,12 +242,14 @@ fi
 fi
 #
 sleepwait 1
+if [ ! -z "$DownloadPackage" ]; then
 if [ -x "$(command -v apt)" ]; then
 sudo apt update && sudo apt install -y $DownloadPackage
 elif [ -x "$(command -v zypper)" ]; then
 sudo zypper refresh && sudo zypper install -y -l $DownloadPackage
 else
 scriptabort
+fi
 fi
 sleepwait 1
 ### other method
@@ -307,12 +309,14 @@ fi
 fi
 #
 sleepwait 1
+if [ ! -z "$DownloadPackage" ]; then
 if [ -x "$(command -v apt)" ]; then
 sudo apt update && sudo apt install -y $DownloadPackage
 elif [ -x "$(command -v zypper)" ]; then
 sudo zypper refresh && sudo zypper install -y -l $DownloadPackage
 else
 scriptabort
+fi
 fi
 sleepwait 1
 ## Other method end

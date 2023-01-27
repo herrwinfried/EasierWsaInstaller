@@ -54,6 +54,12 @@ if (-Not $isWindows) {
 Write-Host "I don't support the operating system..." -ForegroundColor red
 Start-Sleep -s 0.30
 Exit 1
+} else {
+    if (-not ([System.Environment]::OSVersion.Version.Build -ge 22000)) {
+        Write-Host "I don't support the Build..." -ForegroundColor red
+        Start-Sleep -s 0.30
+        Exit 1
+    }
 }
 
 $Scriptparameters = "-scriptLanguage $scriptLanguage -distro $distro -arch $arch "
@@ -220,12 +226,92 @@ $preCommand = $preCommand + "$([string](prepackage)) cd /root/; "
 $preCommand = $preCommand + "wget https://github.com/herrwinfried/EasierWsaInstaller/archive/refs/heads/alpha.zip -O easierwsainstaller.zip; " 
 $preCommand = $preCommand + "unzip easierwsainstaller.zip -d /root/easierwsainstaller; "
 $preCommand = $preCommand + "cd /root/easierwsainstaller; mv /root/easierwsainstaller/EasierWsaInstaller*/* /root/easierwsainstaller; "
-$preCommand = $preCommand + "cd scripts; cd bash; chmod +x ./*.sh "
+$preCommand = $preCommand + "cd src; cd EasierWsaInstaller; chmod +x ./*.sh "
 
 if ( ((Get-Host).Version).Major -ne "5" ) 
 { 
     Import-Module -Name Appx -UseWindowsPowershell
 }
 
+    $WCommand = $WCommand + "--lang="+$scriptlang+" ";
+    $WCommand = $WCommand + "--arch="+$arch+" ";
+    $WCommand = $WCommand + "--method="+$method+" ";
+    $WCommand = $WCommand + "--variant="+$gappsvariant+" ";
+    $WCommand = $WCommand + "--wsatools="+$wsatools+" ";
+    $WCommand = $WCommand + "--productname="+$productname+" ";
+    $WCommand = $WCommand + "--amazonstore="+$amazonstore+" ";
+    $WCommand = $WCommand + "--wsarelease="+$wsarelease+" ";
+    $WCommand = $WCommand + "--magiskversion="+$magiskversion+" ";
 
+$runwsl = "wsl -d $distro -u root -e $bashPrep1$preCommand$WCommand$bashPrep2"
+Write-Host "WSL will pass, please be careful. If you are asked for a password, please enter your password correctly. If you enter it incorrectly, a mishap may occur." -ForegroundColor Green
+Start-Sleep -Seconds 5
+Clear-Host
+write-host $runwsl
+Start-Sleep -Seconds 6
+Clear-Host
+Clear-Host   
+Invoke-Expression $runwsl || Write-Host "WSL failed to start." -ForegroundColor Red
+Clear-Host
+Clear-Host 
+Start-Sleep -Seconds 7
+Clear-Host
+Clear-Host 
+
+if ($autosetup -eq "yes") {
+
+if ($method -eq "onlywsa") {
+
+    Start-Sleep -s 1
+    Set-Location "C:\easierwsainstaller-project"
+    Start-Sleep -s 1
+    Add-AppxPackage Microsoft*WindowsSubsystemForAndroid*.msixbundle
+
+    }
+    elseif ($method -eq "wsagascript") {
+        if ($ScriptArch -eq "amd64") {
+            Set-Location C:\wsa\x64
+        }
+        if ($ScriptArch -eq "arm64") {
+            Set-Location C:\wsa\ARM64
+        }
+    Invoke-Expression "Start-Process pwsh.exe -verb runas -ArgumentList '-ExecutionPolicy Bypass -c .\install.ps1 -nostop 1 -original 0'"
+
+    Start-Sleep -s 10
+    if ($windevmode) {  
+
+        Write-host "Windows developer mode and WSA Developer mode are activated."
+        reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+        $wsalocation = "$env:LOCALAPPDATA/Packages/MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe/Settings/settings.dat"
+                $mountPoint = "HKLM\WSA"
+            reg load $mountPoint $wsalocation
+                $develbit = "1"
+                $data  = "Windows Registry Editor Version 5.00`n`n"
+                $data += "[HKEY_LOCAL_MACHINE\WSA]`n`n"
+                $data += "[HKEY_LOCAL_MACHINE\WSA\LocalState]`n"
+                $data += "`"DeveloperModeEnabled`"=hex(5f5e10b):0"+ $develbit + ",87,c4,ba,af,65,32,d9,01`n"
+                $data += "`"FixedFocusModeEnabled`"=hex(5f5e10b):0"+ $develbit + ",87,c4,ba,af,65,32,d9,01`n"
+                $data | Out-File "./wsadevelopermode.reg"
+            [gc]::collect()
+            reg import "./wsadevelopermode.reg"
+            reg unload $mountPoint
+
+    }
+
+    }
+    elseif ($method -eq "magiskonwsalocal") {
+        Start-Sleep -s 1
+        Set-Location C:\wsa\wsamagisk
+        Start-Sleep -s 1
+        Invoke-Expression 'cmd /c start powershell.exe -ExecutionPolicy Bypass -File .\guiSupport.ps1'
+    }
+    if ($wsatools -eq "yes") {
+    Start-Sleep -s 1
+    Set-Location "C:\easierwsainstaller-project"
+    Start-Sleep -s 1
+    add-appxpackage .\WSATools.Msixbundle
+    }
+}
+
+    
 

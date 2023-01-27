@@ -64,12 +64,12 @@ exit 1
 ###HELP FINISH
 
 #ARM
-elif [[ $n == "--arch=arm" ]]; then
+elif [[ $n == "--arch=arm" ]] || [[ $n == "--arch=aarch64" ]] || [[ $n == "--arch=arm64" ]]; then
 gappsarch=arm64
 msarch=ARM64
 mskernel=arm64
 #ARM FINISH
-elif [[ $n == "--arch=x86_64" ]] || [[ $n == "--arch=x64" ]]; then
+elif [[ $n == "--arch=x86_64" ]] || [[ $n == "--arch=x64" ]] || [[ $n == "--arch=amd64" ]]; then
 gappsarch=x86_64
 msarch=x64
 mskernel=x86_64
@@ -211,7 +211,7 @@ echo -e "
 "$green"gappsvariant: "$red"$gappsvariant
 "$green"msarch: "$red"$msarch
 "$green"mskernel: "$red"$mskernel
-"$green"OnlyWSA: "$red"$OnlyWSA
+"$green"OnlyWSA: "$red"$onlywsa
 "$green"WSAGAScript: "$red"$WSAGAScript
 "$green"MagiskWSA: "$red"$MagiskWSA
 "$green"WSATools: "$red"$WSATools
@@ -294,7 +294,7 @@ function wsapy() {
         if [[ -x "$(command -v python3)" ]]; then
         echo $"$magenta""I will install WSA $white"
     python3 ./wsa.py -r $wsarelease
-    echo $downloadsus
+    echo echo $"$green Download completed, moving to required location $white"
 sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/easierwsainstaller-project/
     else 
 echo $"$red python3 Not Found. The operation is being cancelled. $white"
@@ -306,7 +306,7 @@ function wsatoolspy() {
     if [[ -x "$(command -v python3)" ]]; then
     echo $"$blue""I will install WSATools $white"
     python3 ./wsatools.py
- echo $downloadsus
+ echo echo $"$green Download completed, moving to required location $white"
 sudo rm -rf /mnt/c/easierwsainstaller-project/54406Simizfo.WSATools*.msixbundle
 sleepwait 2
 sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/easierwsainstaller-project/WSATools.msixbundle
@@ -320,7 +320,7 @@ function opengappspy() {
     if [[ -x "$(command -v python3)" ]]; then
     echo $"$green""I will install OpenGAPPS $white"
 python3 ./opengapps.py -a $gappsarch -va $gappsvariant
- echo $downloadsus
+ echo echo $"$green Download completed, moving to required location $white"
 sudo mv open_gapps-$gappsarch-*.zip /mnt/c/easierwsainstaller-project/
     else 
 echo $"$red python3 Not Found. The operation is being cancelled. $white"

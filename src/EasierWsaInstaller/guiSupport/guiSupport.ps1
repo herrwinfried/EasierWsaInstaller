@@ -1,4 +1,5 @@
 # Automated Install script by Midonei
+
 # copy MagiskOnWSALocal
 # + If the process is completed, it will be successfully closed without pressing the key.
 
@@ -51,7 +52,22 @@ If (((Test-Path -Path $FileList) -Eq $false).Count) {
     exit 1
 }
 
+# I added it myself since there is no WSA Developer mode. (HerrWinfried)
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
+        
+                $wsalocation = "$env:LOCALAPPDATA/Packages/MicrosoftCorporationII.WindowsSubsystemForAndroid_8wekyb3d8bbwe/Settings/settings.dat"
+                $mountPoint = "HKLM\WSA"
+            reg load $mountPoint $wsalocation
+                $develbit = "1"
+                $data  = "Windows Registry Editor Version 5.00`n`n"
+                $data += "[HKEY_LOCAL_MACHINE\WSA]`n`n"
+                $data += "[HKEY_LOCAL_MACHINE\WSA\LocalState]`n"
+                $data += "`"DeveloperModeEnabled`"=hex(5f5e10b):0"+ $develbit + ",87,c4,ba,af,65,32,d9,01`n"
+                $data += "`"FixedFocusModeEnabled`"=hex(5f5e10b):0"+ $develbit + ",87,c4,ba,af,65,32,d9,01`n"
+                $data | Out-File "./wsadevelopermode.reg"
+            [gc]::collect()
+            reg import "./wsadevelopermode.reg"
+            reg unload $mountPoint
 
 If ($(Get-WindowsOptionalFeature -Online -FeatureName 'VirtualMachinePlatform').State -Ne "Enabled") {
     Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName 'VirtualMachinePlatform'
