@@ -228,4 +228,4 @@ if ( ((Get-Host).Version).Major -ne "5" )
 }
 
 
-## //TODO https://github.com/LSPosed/MagiskOnWSALocal/blob/main/scripts/build.sh ARCH parametresini değiştir
+

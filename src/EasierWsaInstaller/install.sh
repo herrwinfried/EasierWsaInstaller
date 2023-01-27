@@ -43,7 +43,7 @@ echo -e $"
     "$cyan"productname=NAME                     Set the product name name. "$red"Onlywsa method is not supported.
  "$cyan"[*]productname=redfin
 
-    "$cyan"--amazonstore=no
+    "$yellow"--amazonstore=no
     "$cyan"amazonstore=yes                      Remove amazon store. "$red"Onlywsa method is not supported.
  "$cyan"[*]amazonstore=no                       Don't remove amazon store. "$red"Onlywsa method is not supported.
 
@@ -273,16 +273,16 @@ cd /root/ && cd easierwsainstaller-project || scriptabort
 }
 
 function Get_WSLFolderBashScript() {
-cd /root/ && cd easierwsainstaller && cd scripts && cd bash || scriptabort
+cd /root/ && cd easierwsainstaller && cd src && cd EasierWsaInstaller || scriptabort
 }
 function Get_WSLFolderPython() {
-cd /root/ && cd easierwsainstaller && cd scripts && cd python || scriptabort
+cd /root/ && cd easierwsainstaller && cd src && cd EasierWsaInstaller || scriptabort
 }
 function Get_WSLFolderPowershell() {
-cd /root/ && cd easierwsainstaller && cd scripts && cd powershell || scriptabort
+cd /root/ && cd easierwsainstaller && cd src && cd EasierWsaInstaller || scriptabort
 }
 function Get_WSLFolderScripts() {
-cd /root/ && cd easierwsainstaller && cd scripts || scriptabort
+cd /root/ && cd easierwsainstaller && cd src || scriptabort
 }
 
 function Get_WindowsFolder() {
@@ -329,10 +329,12 @@ exit 1
 }
 
 if [[ $MagiskWSA == true ]]; then
-echo "test"
+. ./magiskonwsalocal.sh
+magiskonwsalocal_s
 
 elif [[ $WSAGAScript == true ]]; then
-echo "test"
+. ./wsagascript.sh
+wsagascript_s
 
 elif [[ $onlywsa == true ]]; then
 . ./onlywsa.sh
