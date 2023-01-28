@@ -36,6 +36,7 @@ if ($Arch -eq 'Arm64' -or $Arch -eq 'amd64') {
         Set-Location "C:\easierwsainstaller-project"
         Add-AppxPackage Microsoft*WindowsSubsystemForAndroid*.msixbundle
     } else {
+    reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock" /t REG_DWORD /f /v "AllowDevelopmentWithoutDevLicense" /d "1"
         Add-AppxPackage -Register .\AppxManifest.xml
     }
     $PSVersionTable
