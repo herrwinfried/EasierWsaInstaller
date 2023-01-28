@@ -68,7 +68,7 @@ Language=en_US
 
 NotWSL=false;
 #####################################################
-
+<<com
 function GetMessage() {
 
 for LANGOUTPUT in $(ls $ScriptLocal/lang)
@@ -97,6 +97,7 @@ function function_regex_getfolder() {
 function function_regex_getfolder1() {
  echo ${info_get_Folder1/\$x/$1}
 }
+com
 
 function requirePackages() {
 DownloadPackage=""

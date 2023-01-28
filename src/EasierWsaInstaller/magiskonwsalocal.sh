@@ -78,7 +78,8 @@ echo $"$(date +%H:%M:%S): [IF] [FINISH] Change ARCH Value" >> $GetFile
 
 echo $"$(date +%H:%M:%S): [START] Change MAGISK_VER , GAPPS_BRAND, GAPPS_VARIANT Value" >> $GetFile 
 MAGISK_VER=$MagiskVersion
-GAPPS_BRAND="OpenGApps"
+#GAPPS_BRAND="OpenGApps"
+GAPPS_BRAND="MindTheGapps"
 GAPPS_VARIANT=$gappsvariant
 echo $"$(date +%H:%M:%S): [FINISH] Change MAGISK_VER , GAPPS_BRAND, GAPPS_VARIANT Value" >> $GetFile 
 

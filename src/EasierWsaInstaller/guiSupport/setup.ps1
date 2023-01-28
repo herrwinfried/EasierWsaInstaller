@@ -96,7 +96,9 @@ Write-Host "scriptLanguage(UNSUPPORT) " -ForegroundColor Green -NoNewline; Write
 Write-Host "distro " -ForegroundColor Green -NoNewline; Write-Host $distro -ForegroundColor Red
 Write-Host "arch " -ForegroundColor Green -NoNewline; Write-Host $arch -ForegroundColor Red
 Write-Host "method " -ForegroundColor Green -NoNewline; Write-Host $method -ForegroundColor Red
+if ($method -ne "onlywsa") {
 Write-Host "gappsvariant " -ForegroundColor Green -NoNewline; Write-Host $gappsvariant -ForegroundColor Red
+}
 Write-Host "winvmp " -ForegroundColor Green -NoNewline; Write-Host $winvmp -ForegroundColor Red
 Start-Sleep -s 4
 write-Host ""
@@ -104,12 +106,18 @@ Write-Host "windevmode " -ForegroundColor Green -NoNewline; Write-Host $windevmo
 Write-Host "autosetup " -ForegroundColor Green -NoNewline; Write-Host $autosetup -ForegroundColor Red
 Write-Host "adb " -ForegroundColor Green -NoNewline; Write-Host $adb -ForegroundColor Red
 Write-Host "wsatools " -ForegroundColor Green -NoNewline; Write-Host $wsatools -ForegroundColor Red
+if ($method -ne "onlywsa") {
 Write-Host "productname " -ForegroundColor Green -NoNewline; Write-Host $productname -ForegroundColor Red
 Write-Host "amazonstore " -ForegroundColor Green -NoNewline; Write-Host $amazonstore -ForegroundColor Red
+
 Start-Sleep -s 4
 write-Host ""
+}
 Write-Host "wsarelease " -ForegroundColor Green -NoNewline; Write-Host $wsarelease -ForegroundColor Red
+
+if ($method -eq "magiskonwsalocal") {
 Write-Host "magiskversion " -ForegroundColor Green -NoNewline; Write-Host $magiskversion -ForegroundColor Red
+}
 Start-Sleep -s 5
 #############################################################################################################################
 

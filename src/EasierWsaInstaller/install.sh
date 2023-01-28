@@ -204,24 +204,43 @@ if [ $NotWSL == false ]; then
 wslcheck
 fi
 
-############
+
 echo -e "
 "$green"HOST_WSL_ARCH: "$red"$HOST_WSL_ARCH
+"
+if [[ $MagiskWSA == true ]] || [[ $WSAGAScript == true ]]; then
+echo -e "
 "$green"gappsarch: "$red"$gappsarch
 "$green"gappsvariant: "$red"$gappsvariant
+"
+fi
+echo -e "
 "$green"msarch: "$red"$msarch
 "$green"mskernel: "$red"$mskernel
 "$green"OnlyWSA: "$red"$onlywsa
 "$green"WSAGAScript: "$red"$WSAGAScript
 "$green"MagiskWSA: "$red"$MagiskWSA
 "$green"WSATools: "$red"$WSATools
+"
+if [[ $MagiskWSA == true ]] || [[ $WSAGAScript == true ]]; then
+echo -e "
 "$green"WSAProductName: "$red"$WSAProductName
 "$green"WSAAmazonRemove: "$red"$WSAAmazonRemove
+"
+fi
+echo -e "
 "$green"WSARelease: "$red"$WSARelease
+"
+if [[ $MagiskWSA == true ]]; then
+echo -e "
 "$green"MagiskVersion: "$red"$MagiskVersion
+"
+fi
+echo -e "
 "$green"Language: "$red"$Language
 "$green"NotWSL: "$cyan"$NotWSL $white
 "
+############
 sleepwait 5
 echo "$red""Version: "$magenta"""$SCRIPTVERSION""$white"
 sleepwait 1
