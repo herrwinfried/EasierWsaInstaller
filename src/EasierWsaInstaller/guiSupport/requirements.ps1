@@ -22,7 +22,7 @@ elseif ($ScriptArch -eq 'x86' -or $ScriptArch -eq 'Arm32') {
     Exit 1
 }
 
-$vmp = "Start-Process pwsh.exe -verb runas -ArgumentList '"
+$vmp = "Start-Process powershell.exe -verb runas -ArgumentList '"
 $vmp += "-c "
 $vmp += "dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart"
 $vmp += "'"
