@@ -113,7 +113,7 @@ fi
 distroselect=$(lsb_release -d | awk -F"\t" '{print $2}')
 distrocodename=$(lsb_release -c | awk -F"\t" '{print $2}')
 
-if ! [ -x "$(command -v xz)" ]; then
+if ! [ -x "$(command -v xz >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (xz-utils) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " xz-utils"
@@ -122,7 +122,7 @@ $DownloadPackage += " xz"
 fi
 fi
 #
-if ! [ -x "$(command -v lzip)" ]; then
+if ! [ -x "$(command -v lzip >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (lzip) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " lzip"
@@ -131,7 +131,7 @@ $DownloadPackage += " lzip"
 fi
 fi
 #
-if ! [ -x "$(command -v seinfo)" ]; then
+if ! [ -x "$(command -v seinfo >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (setools) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " setools"
@@ -140,7 +140,7 @@ $DownloadPackage += " setools-console"
 fi
 fi
 #
-if ! [ -x "$(command -v whiptail)" ]; then
+if ! [ -x "$(command -v whiptail >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (whiptail) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " whiptail"
@@ -149,7 +149,7 @@ $DownloadPackage += " newt"
 fi
 fi
 #
-if ! [ -x "$(command -v wine64)" ]; then
+if ! [ -x "$(command -v wine64 >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (wine) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " wine"
@@ -158,7 +158,7 @@ $DownloadPackage += " wine"
 fi
 fi
 #
-if ! [ -x "$(command -v winetricks)" ]; then
+if ! [ -x "$(command -v winetricks >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (winetricks) $white"
 if [ -x "$(command -v apt)" ]; then
 sudo apt-add-repository contrib
@@ -169,7 +169,7 @@ $DownloadPackage += " winetricks"
 fi
 fi
 #
-if ! [ -x "$(command -v patchelf)" ]; then
+if ! [ -x "$(command -v patchelf >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (patchelf) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " patchelf"
@@ -178,7 +178,7 @@ $DownloadPackage += " patchelf"
 fi
 fi
 #
-if ! [ -x "$(command -v e2fsck)" ]; then
+if ! [ -x "$(command -v e2fsck >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (e2fsprogs) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " e2fsprogs"
@@ -187,7 +187,7 @@ $DownloadPackage += " e2fsprogs"
 fi
 fi
 #
-if ! [ -x "$(command -v aria2c)" ]; then
+if ! [ -x "$(command -v aria2c >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (aria2) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " aria2"
@@ -196,7 +196,7 @@ $DownloadPackage += " aria2"
 fi
 fi
 #
-if ! [ -x "$(command -v 7z)" ]; then
+if ! [ -x "$(command -v 7z >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (p7zip-full) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " p7zip-full"
@@ -205,16 +205,16 @@ $DownloadPackage += " 7zip"
 fi
 fi
 #
-if ! [ -x "$(command -v pip)" ]; then
+if ! [ -x "$(command -v pip >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (python3-pip) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " python3-pip"
+$DownloadPackage += " python3 python3-pip"
 elif [ -x "$(command -v zypper)" ]; then
 $DownloadPackage += " python310 python310-pip"
 fi
 fi
 #
-if ! [ -x "$(command -v git)" ]; then
+if ! [ -x "$(command -v git >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (git) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " git"
@@ -223,7 +223,7 @@ $DownloadPackage += " git"
 fi
 fi
 #
-if ! [ -x "$(command -v wget)" ]; then
+if ! [ -x "$(command -v wget >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (wget) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " wget"
@@ -232,7 +232,7 @@ $DownloadPackage += " wget"
 fi
 fi
 #
-if ! [ -x "$(command -v setfattr)" ]; then
+if ! [ -x "$(command -v setfattr >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (attr) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " attr"
@@ -254,7 +254,7 @@ fi
 sleepwait 1
 ### other method
   else
-if ! [ -x "$(command -v unzip)" ]; then
+if ! [ -x "$(command -v unzip >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (unzip) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " unzip"
@@ -263,7 +263,7 @@ $DownloadPackage += " unzip"
 fi
 fi
 #
-if ! [ -x "$(command -v lzip)" ]; then
+if ! [ -x "$(command -v lzip >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (lzip) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " lzip"
@@ -272,7 +272,7 @@ $DownloadPackage += " lzip"
 fi
 fi
 #
-if ! [ -x "$(command -v e2fsck)" ]; then
+if ! [ -x "$(command -v e2fsck >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (e2fsprogs) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " e2fsprogs"
@@ -281,7 +281,7 @@ $DownloadPackage += " e2fsprogs"
 fi
 fi
 #
-if ! [ -x "$(command -v git)" ]; then
+if ! [ -x "$(command -v git >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (git) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " git"
@@ -290,7 +290,7 @@ $DownloadPackage += " git"
 fi
 fi
 #
-if ! [ -x "$(command -v wget)" ]; then
+if ! [ -x "$(command -v wget >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (wget) $white"
 if [ -x "$(command -v apt)" ]; then
 $DownloadPackage += " wget"
@@ -299,10 +299,10 @@ $DownloadPackage += " wget"
 fi
 fi
 #
-if ! [ -x "$(command -v pip)" ]; then
+if ! [ -x "$(command -v pip >/dev/null 2>&1)" ]; then
 echo $"$green I found a missing package, I'm installing it... (python3-pip) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " python3-pip"
+$DownloadPackage += "python3 python3-pip"
 elif [ -x "$(command -v zypper)" ]; then
 $DownloadPackage += " python310 python310-pip"
 fi
