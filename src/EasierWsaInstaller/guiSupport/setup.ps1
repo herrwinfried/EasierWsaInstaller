@@ -199,13 +199,13 @@ $bashPrep2 = '"'
 
 function prepackage {
 if ($distro -eq "Ubuntu") {
-return "sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget unzip; "
+return "sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget unzip python3 python3-pip; "
 }
 elseif ( $distro -eq "openSUSE-Tumbleweed") {
-return "sudo zypper dup -l -y; sudo zypper install -l -y git curl wget unzip; "
+return "sudo zypper dup -l -y; sudo zypper install -l -y git curl wget unzip python310 python310-pip; "
 }
 elseif ( $distro -eq "Debian") {
-return "sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget unzip; "    
+return "sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget unzip python3 python3-pip; "    
 }
 else {
     return " echo 'I hope you downloaded the packages.'; "
