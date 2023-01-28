@@ -105,9 +105,9 @@ if [[ $MagiskWSA == true ]]; then
 if ! [ -x "$(command -v lsb_release)" ]; then
 echo $"$green I found a missing package, I'm installing it... (lsb_release) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " lsb-release"
+$DownloadPackage = $DownloadPackage +  " lsb-release"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " lsb-release"
+$DownloadPackage = $DownloadPackage +  " lsb-release"
 fi
 fi
 distroselect=$(lsb_release -d | awk -F"\t" '{print $2}')
@@ -116,45 +116,45 @@ distrocodename=$(lsb_release -c | awk -F"\t" '{print $2}')
 if ! [ -x "$(command -v xz)" ]; then
 echo $"$green I found a missing package, I'm installing it... (xz-utils) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " xz-utils"
+$DownloadPackage = $DownloadPackage +  " xz-utils"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " xz"
+$DownloadPackage = $DownloadPackage +  " xz"
 fi
 fi
 #
 if ! [ -x "$(command -v lzip)" ]; then
 echo $"$green I found a missing package, I'm installing it... (lzip) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " lzip"
+$DownloadPackage = $DownloadPackage +  " lzip"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " lzip"
+$DownloadPackage = $DownloadPackage +  " lzip"
 fi
 fi
 #
 if ! [ -x "$(command -v seinfo)" ]; then
 echo $"$green I found a missing package, I'm installing it... (setools) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " setools"
+$DownloadPackage = $DownloadPackage +  " setools"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " setools-console"
+$DownloadPackage = $DownloadPackage +  " setools-console"
 fi
 fi
 #
 if ! [ -x "$(command -v whiptail)" ]; then
 echo $"$green I found a missing package, I'm installing it... (whiptail) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " whiptail"
+$DownloadPackage = $DownloadPackage +  " whiptail"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " newt"
+$DownloadPackage = $DownloadPackage +  " newt"
 fi
 fi
 #
 if ! [ -x "$(command -v wine64)" ]; then
 echo $"$green I found a missing package, I'm installing it... (wine) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " wine"
+$DownloadPackage = $DownloadPackage +  " wine"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " wine"
+$DownloadPackage = $DownloadPackage +  " wine"
 fi
 fi
 #
@@ -163,81 +163,81 @@ echo $"$green I found a missing package, I'm installing it... (winetricks) $whit
 if [ -x "$(command -v apt)" ]; then
 sudo apt-add-repository contrib
 sudo apt update
-$DownloadPackage += " winetricks"
+$DownloadPackage = $DownloadPackage +  " winetricks"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " winetricks"
+$DownloadPackage = $DownloadPackage +  " winetricks"
 fi
 fi
 #
 if ! [ -x "$(command -v patchelf)" ]; then
 echo $"$green I found a missing package, I'm installing it... (patchelf) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " patchelf"
+$DownloadPackage = $DownloadPackage +  " patchelf"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " patchelf"
+$DownloadPackage = $DownloadPackage +  " patchelf"
 fi
 fi
 #
 if ! [ -x "$(command -v e2fsck)" ]; then
 echo $"$green I found a missing package, I'm installing it... (e2fsprogs) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " e2fsprogs"
+$DownloadPackage = $DownloadPackage +  " e2fsprogs"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " e2fsprogs"
+$DownloadPackage = $DownloadPackage +  " e2fsprogs"
 fi
 fi
 #
 if ! [ -x "$(command -v aria2c)" ]; then
 echo $"$green I found a missing package, I'm installing it... (aria2) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " aria2"
+$DownloadPackage = $DownloadPackage +  " aria2"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " aria2"
+$DownloadPackage = $DownloadPackage +  " aria2"
 fi
 fi
 #
 if ! [ -x "$(command -v 7z)" ]; then
 echo $"$green I found a missing package, I'm installing it... (p7zip-full) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " p7zip-full"
+$DownloadPackage = $DownloadPackage +  " p7zip-full"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " 7zip"
+$DownloadPackage = $DownloadPackage +  " 7zip"
 fi
 fi
 #
 if ! [ -x "$(command -v pip)" ]; then
 echo $"$green I found a missing package, I'm installing it... (python3-pip) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " python3-pip"
+$DownloadPackage = $DownloadPackage +  " python3-pip"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " python310 python310-pip"
+$DownloadPackage = $DownloadPackage +  " python310 python310-pip"
 fi
 fi
 #
 if ! [ -x "$(command -v git)" ]; then
 echo $"$green I found a missing package, I'm installing it... (git) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " git"
+$DownloadPackage = $DownloadPackage +  " git"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " git"
+$DownloadPackage = $DownloadPackage +  " git"
 fi
 fi
 #
 if ! [ -x "$(command -v wget)" ]; then
 echo $"$green I found a missing package, I'm installing it... (wget) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " wget"
+$DownloadPackage = $DownloadPackage +  " wget"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " wget"
+$DownloadPackage = $DownloadPackage +  " wget"
 fi
 fi
 #
 if ! [ -x "$(command -v setfattr)" ]; then
 echo $"$green I found a missing package, I'm installing it... (attr) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " attr"
+$DownloadPackage = $DownloadPackage +  " attr"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " attr"
+$DownloadPackage = $DownloadPackage +  " attr"
 fi
 fi
 #
@@ -257,54 +257,54 @@ sleepwait 1
 if ! [ -x "$(command -v unzip)" ]; then
 echo $"$green I found a missing package, I'm installing it... (unzip) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " unzip"
+$DownloadPackage = $DownloadPackage +  " unzip"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " unzip"
+$DownloadPackage = $DownloadPackage +  " unzip"
 fi
 fi
 #
 if ! [ -x "$(command -v lzip)" ]; then
 echo $"$green I found a missing package, I'm installing it... (lzip) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " lzip"
+$DownloadPackage = $DownloadPackage +  " lzip"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " lzip"
+$DownloadPackage = $DownloadPackage +  " lzip"
 fi
 fi
 #
 if ! [ -x "$(command -v e2fsck)" ]; then
 echo $"$green I found a missing package, I'm installing it... (e2fsprogs) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " e2fsprogs"
+$DownloadPackage = $DownloadPackage +  " e2fsprogs"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " e2fsprogs"
+$DownloadPackage = $DownloadPackage +  " e2fsprogs"
 fi
 fi
 #
 if ! [ -x "$(command -v git)" ]; then
 echo $"$green I found a missing package, I'm installing it... (git) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " git"
+$DownloadPackage = $DownloadPackage +  " git"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " git"
+$DownloadPackage = $DownloadPackage +  " git"
 fi
 fi
 #
 if ! [ -x "$(command -v wget)" ]; then
 echo $"$green I found a missing package, I'm installing it... (wget) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " wget"
+$DownloadPackage = $DownloadPackage +  " wget"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " wget"
+$DownloadPackage = $DownloadPackage +  " wget"
 fi
 fi
 #
 if ! [ -x "$(command -v pip)" ]; then
 echo $"$green I found a missing package, I'm installing it... (python3-pip) $white"
 if [ -x "$(command -v apt)" ]; then
-$DownloadPackage += " python3-pip"
+$DownloadPackage = $DownloadPackage +  " python3-pip"
 elif [ -x "$(command -v zypper)" ]; then
-$DownloadPackage += " python310 python310-pip"
+$DownloadPackage = $DownloadPackage +  " python310 python310-pip"
 fi
 fi
 #
