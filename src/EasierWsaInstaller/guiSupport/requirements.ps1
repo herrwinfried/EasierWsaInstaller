@@ -27,7 +27,7 @@ $vmp += "-c "
 $vmp += "dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart"
 $vmp += "'"
 write-Host "EN: You will need administrator permission to enable the virtual machine platform..." -ForegroundColor yellow
-write-Host "TR: Sanal makine platformunu etkinlestirmek icin yönetici iznine ihtiyaciniz olacak..." -ForegroundColor white -Background red
+write-Host "TR: Sanal makine platformunu etkinlestirmek icin yonetici iznine ihtiyaciniz olacak..." -ForegroundColor white -Background red
 Start-Sleep -s 7
 Invoke-Expression $vmp
 
@@ -35,8 +35,8 @@ function wingetx{
     param (
         [Parameter (Mandatory = $true)] [String]$Id
         )
-$runnnx = "winget.exe install --id $Id --accept-package-agreements --accept-source-agreements"
-        Invoke-Expression $runnnx
+$runGet = "winget.exe install --id $Id --accept-package-agreements --accept-source-agreements"
+        Invoke-Expression $runGet
     }
 
 wingetx -Id 9P9TQF7MRM4R
@@ -55,13 +55,13 @@ Start-Sleep -s 3
 write-Host "EN: If you want to turn off the virtual machine platform, you can turn it off if you type 'Turn Windows features on or off' in the search. " -ForegroundColor yellow
 write-Host "TR: Sanal makine platformunu kapatmak istiyorsaniz arama kismina 'Windows ozelliklerini ac veya kapat' yazarsaniz kapatabilirsiniz." -ForegroundColor white -Background red
 Write-Host " "
-Start-Sleep -s 3
-write-Host "EN: Don't forget to restart your computer! " -ForegroundColor yellow
-write-Host "TR: Bilgisayarinizi yeniden baslatmayi unutmayin!" -ForegroundColor white -Background red
+Start-Sleep -s 5
+write-Host "EN: Don't forget to restart your computer!... " -ForegroundColor yellow
+write-Host "TR: Bilgisayarinizi yeniden baslatmayi unutmayin!..." -ForegroundColor white -Background red
 Write-Host " "
-Start-Sleep -s 2
+Start-Sleep -s 5
 write-Host "EN: After rebooting, open the application named Ubuntu And perform the Installation. " -ForegroundColor yellow
-write-Host "TR: Yeniden başlattıktan sonra Ubuntu isimli uygulamayı açın ve Kurulumu gerçekleştirin. " -ForegroundColor white -Background red
+write-Host "TR: Yeniden baslattiktan sonra Ubuntu isimli uygulamayi acin ve Kurulumu gerceklestirin. " -ForegroundColor white -Background red
 Write-Host " "
 
 
