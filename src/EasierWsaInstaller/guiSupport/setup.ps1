@@ -11,6 +11,9 @@ param (
     [ValidateSet('magiskonwsalocal', 'wsagascript', 'onlywsa')]
     [string]$method = 'magiskonwsalocal',
 
+    [ValidateSet('mindthegapps', 'opengapps')]
+    [string]$gapps = 'mindthegapps',
+
     [ValidateSet('super','stock', 'full', 'mini','micro','nano', 'pico')]
     [string]$gappsvariant = 'pico',
 
@@ -96,6 +99,9 @@ Write-Host "scriptLanguage(UNSUPPORT) " -ForegroundColor Green -NoNewline; Write
 Write-Host "distro " -ForegroundColor Green -NoNewline; Write-Host $distro -ForegroundColor Red
 Write-Host "arch " -ForegroundColor Green -NoNewline; Write-Host $arch -ForegroundColor Red
 Write-Host "method " -ForegroundColor Green -NoNewline; Write-Host $method -ForegroundColor Red
+if ($method -eq "magiskonwsalocal") {
+    Write-Host "gapps " -ForegroundColor Green -NoNewline; Write-Host $gapps -ForegroundColor Red
+}
 if ($method -ne "onlywsa") {
 Write-Host "gappsvariant " -ForegroundColor Green -NoNewline; Write-Host $gappsvariant -ForegroundColor Red
 }
@@ -244,6 +250,11 @@ if ( ((Get-Host).Version).Major -ne "5" )
     $WCommand = $WCommand + "--lang="+$scriptlang+" ";
     $WCommand = $WCommand + "--arch="+$arch+" ";
     $WCommand = $WCommand + "--method="+$method+" ";
+    if ($method -eq "magiskonwsalocal") {
+    $WCommand = $WCommand + "--gapps="+$gapps+" ";
+    } else {
+        $WCommand = $WCommand + "--gapps="+"opengapps"+" ";
+    }
     $WCommand = $WCommand + "--variant="+$gappsvariant+" ";
     $WCommand = $WCommand + "--wsatools="+$wsatools+" ";
     $WCommand = $WCommand + "--productname="+$productname+" ";

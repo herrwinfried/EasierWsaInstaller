@@ -53,6 +53,7 @@ gappsarch=x86_64
 gappsvariant=pico
 msarch=x64
 mskernel=x86_64
+gappsSelect="MindTheGapps"
 #---------------METHOD-----------------------
 OnlyWSA=false;
 WSAGAScript=false;

@@ -13,7 +13,7 @@ do
 n=$(echo $1 | tr '[:upper:]' '[:lower:]')
 
 ###HELP
-if [[ $n == "--help" ]]; then
+if [[ $n == "--help" ]] || [[ $n == "-h" ]]; then
 echo -e $"
 "$yellow"those selected by default are marked with [*]
 
@@ -29,6 +29,11 @@ echo -e $"
  "$cyan"[*]magiskonwsalocal                     Install Wsa using the MagiskOnWsaLocal project.
     "$cyan"wsagascript                          Install Wsa using the WSAGAScript project.
     "$cyan"onlywsa                              Download WSA without touching the contents of the file.
+
+"$green"Gapps:
+    "$yellow"--gapps=mindthegapps
+ "$cyan"[*]mindthegapps                         Use MindTheGapps as Gapps. "$red"Onlywsa and wsagascript method is not supported.
+    "$cyan"opengapps                            Use OpenGapps as Gapps. "$red"Onlywsa and wsagascript method is not supported.
 
 "$green"Opengapps variant:
     "$yellow"--variant=pico
@@ -88,6 +93,15 @@ Language=en_US
 #GetMessage
 ################################language FINISH#####################################
 
+################################GAPPS##########################################
+elif [[ $n == "--gapps=opengapps" ]]; then
+gappsSelect="OpenGApps"
+elif [[ $n == "--gapps=mindthegapps" ]]; then
+gappsSelect="MindTheGapps"
+elif [[ $n == "--gapps="* ]]; then
+echo "$red invalid value(gapps). MindTheGapps selected $white"
+gappsSelect="MindTheGapps"
+################################GAPPS FINISH##########################################
 
 ################################METHOD##########################################
 elif [[ $n == "--method=onlywsa" ]]; then
@@ -102,6 +116,7 @@ elif [[ $n == "--method=wsagascript" ]]; then
 onlywsa=false;
 WSAGAScript=true;
 MagiskWSA=false;
+gappsSelect="opengapps"
 ################################METHOD FINISH##########################################
 
 ################################WSA RELEASE SELECT#####################################
@@ -205,41 +220,32 @@ wslcheck
 fi
 
 
-echo -e "
-"$green"HOST_WSL_ARCH: "$red"$HOST_WSL_ARCH
-"
-if [[ $MagiskWSA == true ]] || [[ $WSAGAScript == true ]]; then
-echo -e "
-"$green"gappsarch: "$red"$gappsarch
-"$green"gappsvariant: "$red"$gappsvariant
-"
-fi
-echo -e "
-"$green"msarch: "$red"$msarch
-"$green"mskernel: "$red"$mskernel
-"$green"OnlyWSA: "$red"$onlywsa
-"$green"WSAGAScript: "$red"$WSAGAScript
-"$green"MagiskWSA: "$red"$MagiskWSA
-"$green"WSATools: "$red"$WSATools
-"
-if [[ $MagiskWSA == true ]] || [[ $WSAGAScript == true ]]; then
-echo -e "
-"$green"WSAProductName: "$red"$WSAProductName
-"$green"WSAAmazonRemove: "$red"$WSAAmazonRemove
-"
-fi
-echo -e "
-"$green"WSARelease: "$red"$WSARelease
-"
+
+echo "$green"HOST_WSL_ARCH: "$red"$HOST_WSL_ARCH
 if [[ $MagiskWSA == true ]]; then
-echo -e "
-"$green"MagiskVersion: "$red"$MagiskVersion
-"
+echo "$green"gappsSelect: "$red""$gappsSelect"
 fi
-echo -e "
-"$green"Language: "$red"$Language
-"$green"NotWSL: "$cyan"$NotWSL $white
-"
+if [[ $MagiskWSA == true ]] || [[ $WSAGAScript == true ]]; then
+echo "$green"gappsarch: "$red""$gappsarch"
+echo "$green"gappsvariant: "$red""$gappsvariant"
+fi
+echo "$green"msarch: "$red""$msarch"
+echo "$green"mskernel: "$red""$mskernel"
+echo "$green"OnlyWSA: "$red""$onlywsa"
+echo "$green"WSAGAScript: "$red""$WSAGAScript"
+echo "$green"MagiskWSA: "$red""$MagiskWSA"
+echo "$green"WSATools: "$red""$WSATools"
+if [[ $MagiskWSA == true ]] || [[ $WSAGAScript == true ]]; then
+echo "$green"WSAProductName: "$red""$WSAProductName"
+echo "$green"WSAAmazonRemove: "$red""$WSAAmazonRemove"
+fi
+echo "$green"WSARelease: "$red""$WSARelease"
+if [[ $MagiskWSA == true ]]; then
+echo "$green"MagiskVersion: "$red""$MagiskVersion"
+fi
+echo "$green"Language: "$red""$Language"
+echo "$green"NotWSL: "$cyan""$NotWSL $white"
+
 ############
 sleepwait 5
 echo "$red""Version: "$magenta"""$SCRIPTVERSION""$white"
