@@ -1,16 +1,12 @@
 $Host.UI.RawUI.WindowTitle = "EasierWsaInstaller Script for GUI requirements"
 
-if (-Not $isWindows) {
-    Write-Host "I don't support the operating system..." -ForegroundColor red
-    Start-Sleep -s 0.30
-    Exit 1
-    } else {
+
         if (-not ([System.Environment]::OSVersion.Version.Build -ge 22000)) {
             Write-Host "I don't support the Build..." -ForegroundColor red
             Start-Sleep -s 0.30
             Exit 1
         }
-    }
+    
 
 $ScriptArch = ($env:PROCESSOR_ARCHITECTURE)
 
@@ -51,18 +47,21 @@ write-Host "EN: Attention please" -ForegroundColor red
 write-Host "TR: LÜTFEN DİKKAT" -ForegroundColor white -Background red
 write-Host "EN: If you want to delete Ubuntu, powershell core and WSL, use this command: " -ForegroundColor yellow
 write-Host "TR: Ubuntu, powershell core ve WSL'yi silmek istiyorsanız şu komutu kullanın:" -ForegroundColor white -Background red
+Write-Host " "
 write-Host "winget.exe install --id 9P9TQF7MRM4R"
 write-Host "winget.exe install --id 9PDXGNCFSCZV"
 write-Host "winget.exe install --id 9MZ1SNWT0N5D"
 Start-Sleep -s 3
 write-Host "EN: If you want to turn off the virtual machine platform, you can turn it off if you type 'Turn Windows features on or off' in the search. " -ForegroundColor yellow
 write-Host "TR: Sanal makine platformunu kapatmak istiyorsanız arama kısmına 'Windows özelliklerini aç veya kapat' yazarsanız kapatabilirsiniz." -ForegroundColor white -Background red
+Write-Host " "
 Start-Sleep -s 3
 write-Host "EN: Don't forget to restart your computer! " -ForegroundColor yellow
 write-Host "TR: Bilgisayarınızı yeniden başlatmayı unutmayın!" -ForegroundColor white -Background red
+Write-Host " "
 Start-Sleep -s 2
 write-Host "EN: After rebooting, open the application named Ubuntu And perform the Installation. " -ForegroundColor yellow
 write-Host "TR: Yeniden başlattıktan sonra Ubuntu isimli uygulamayı açın ve Kurulumu gerçekleştirin. " -ForegroundColor white -Background red
-
+Write-Host " "
 
 

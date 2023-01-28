@@ -31,12 +31,13 @@ echo -e $"
     "$cyan"onlywsa                              Download WSA without touching the contents of the file.
 
 "$green"Gapps:
-    "$yellow"--gapps=mindthegapps
- "$cyan"[*]mindthegapps                         Use MindTheGapps as Gapps. "$red"Onlywsa and wsagascript method is not supported.
-    "$cyan"opengapps                            Use OpenGapps as Gapps. "$red"Onlywsa and wsagascript method is not supported.
+    "$yellow"--gapps=mindthegapps                 "$red"Onlywsa and wsagascript method is not supported.
+ "$cyan"[*]mindthegapps                         Use MindTheGapps as Gapps. 
+    "$cyan"opengapps                            Use OpenGapps as Gapps.
+    "$magenta"The wsagascript method will always have opengapps selected.
 
 "$green"Opengapps variant:
-    "$yellow"--variant=pico
+    "$yellow"--variant=pico                       "$red"Onlywsa method is not supported.
     "$cyan"super, stock, full, mini, micro, nano, [*]pico
 
 "$green"Customizations:
@@ -44,21 +45,21 @@ echo -e $"
     "$cyan"wsatools=yes                         Download WSATools
  "$cyan"[*]wsatools=no                          Do not download WSATools.
 
-    "$yellow"--productname=redfin
-    "$cyan"productname=NAME                     Set the product name name. "$red"Onlywsa method is not supported.
+    "$yellow"--productname=redfin                 "$red"Onlywsa method is not supported.
+    "$cyan"productname=NAME                     Set the product name name.
  "$cyan"[*]productname=redfin
 
-    "$yellow"--amazonstore=no
-    "$cyan"amazonstore=yes                      Remove amazon store. "$red"Onlywsa method is not supported.
- "$cyan"[*]amazonstore=no                       Don't remove amazon store. "$red"Onlywsa method is not supported.
+    "$yellow"--amazonstore=no                     "$red"Onlywsa method is not supported.
+    "$cyan"amazonstore=yes                      Remove amazon store.
+ "$cyan"[*]amazonstore=no                       Don't remove amazon store.
 
 "$green"WSA Release Options:
     "$yellow"--wsarelease=retail
     "$cyan"fast, slow, rp, [*]retail
 
 "$green"Magisk Version Options:
-    "$yellow"--magiskversion=stable
-    "$cyan"[*]stable, beta, canary, debug       "$red"Onlywsa and wsagascript method is not supported.
+    "$yellow"--magiskversion=stable               "$red"Onlywsa and wsagascript method is not supported.
+    "$cyan"[*]stable, beta, canary, debug       
 
 "$yellow"Example:
 "$magenta" sudo ./install.sh --arch=x86_64 --method=magiskonwsalocal --variant=pico --wsatools=yes --productname=redfin --amazonstore=no --wsarelease=retail --magiskversion=stable
