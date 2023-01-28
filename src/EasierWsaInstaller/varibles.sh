@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTVERSION="ALPHA"
+SCRIPTVERSION="v1.0.0"
 
 ScriptLocal=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
