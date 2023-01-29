@@ -34,6 +34,7 @@ echo -e $"
     "$yellow"--gapps=mindthegapps                 "$red"Onlywsa and wsagascript method is not supported.
  "$cyan"[*]mindthegapps                         Use MindTheGapps as Gapps. 
     "$cyan"opengapps                            Use OpenGapps as Gapps.
+    "$red"If mindthegapps is selected, the username will be invalid/disabled.
     "$magenta"The wsagascript method will always have opengapps selected.
 
 "$green"Opengapps variant:
@@ -48,6 +49,7 @@ echo -e $"
     "$yellow"--productname=redfin                 "$red"Onlywsa method is not supported.
     "$cyan"productname=NAME                     Set the product name name.
  "$cyan"[*]productname=redfin
+
 
     "$yellow"--amazonstore=no                     "$red"Onlywsa method is not supported.
     "$cyan"amazonstore=yes                      Remove amazon store.
