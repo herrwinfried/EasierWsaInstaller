@@ -82,8 +82,8 @@ if (YesNoBox '([title]="Install GApps" [text]="Do you want to install GApps?")')
         Radiolist '([title]="Which GApps do you want to install?"
                  [default]="MindTheGapps")' \
             \
-            'OpenGApps' "" 'off' \
-            'MindTheGapps' "" 'on'
+            'OpenGApps' "This flavor may cause startup failure" 'off' \
+            'MindTheGapps' "Recommend" 'on'
     )
 else
     GAPPS_BRAND="none"
@@ -141,7 +141,7 @@ if [ "$COMPRESS_OUTPUT" = "--compress" ]; then
             'xz' "tar.xz" 'off'
         )
 fi
-# if ! (YesNoBox '([title]="Off line mode" [text]="Do you want to enable off line mode?")'); then
+# if (YesNoBox '([title]="Off line mode" [text]="Do you want to enable off line mode?")'); then
 #     OFFLINE="--offline"
 # else
 #     OFFLINE=""
