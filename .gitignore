@@ -8,9 +8,3 @@ WSAGAScript/.git
 
 /src/*/.github
 /src/.github
-
-bin/
-obj/
-/packages/
-riderModule.iml
-/_ReSharper.Caches/

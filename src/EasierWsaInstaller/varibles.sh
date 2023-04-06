@@ -101,7 +101,7 @@ function function_regex_getfolder1() {
 com
 
 function requirePackages() {
-DownloadPackage=""
+DownloadPackage="wget curl git"
 
 if [[ $MagiskWSA == true ]]; then
 if ! [ -x "$(command -v lsb_release)" ]; then
@@ -115,140 +115,12 @@ fi
 distroselect=$(lsb_release -d | awk -F"\t" '{print $2}')
 distrocodename=$(lsb_release -c | awk -F"\t" '{print $2}')
 
-if ! [ -x "$(command -v xz)" ]; then
-echo $"$green I found a missing package, I'm installing it... (xz-utils) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage xz-utils"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage xz"
-fi
-fi
-#
-if ! [ -x "$(command -v lzip)" ]; then
-echo $"$green I found a missing package, I'm installing it... (lzip) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage lzip"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage lzip"
-fi
-fi
-#
-if ! [ -x "$(command -v seinfo)" ]; then
-echo $"$green I found a missing package, I'm installing it... (setools) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage setools"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage setools-console"
-fi
-fi
-#
-if ! [ -x "$(command -v whiptail)" ]; then
-echo $"$green I found a missing package, I'm installing it... (whiptail) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage whiptail"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage newt dialog"
-fi
-fi
-#
-if ! [ -x "$(command -v wine64)" ]; then
-echo $"$green I found a missing package, I'm installing it... (wine) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage wine"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage wine"
-fi
-fi
-#
-if ! [ -x "$(command -v winetricks)" ]; then
-echo $"$green I found a missing package, I'm installing it... (winetricks) $white"
-if [ -x "$(command -v apt)" ]; then
-sudo apt-add-repository contrib
-sudo apt update
-DownloadPackage=" $DownloadPackage winetricks"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage winetricks"
-fi
-fi
-#
-if ! [ -x "$(command -v patchelf)" ]; then
-echo $"$green I found a missing package, I'm installing it... (patchelf) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage patchelf"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage patchelf"
-fi
-fi
-#
-if ! [ -x "$(command -v e2fsck)" ]; then
-echo $"$green I found a missing package, I'm installing it... (e2fsprogs) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage e2fsprogs"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage e2fsprogs"
-fi
-fi
-#
-if ! [ -x "$(command -v aria2c)" ]; then
-echo $"$green I found a missing package, I'm installing it... (aria2) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage aria2"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage aria2"
-fi
-fi
-#
-if ! [ -x "$(command -v 7z)" ]; then
-echo $"$green I found a missing package, I'm installing it... (p7zip-full) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage p7zip-full"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage 7zip"
-fi
-fi
-#
-if ! [ -x "$(command -v pip)" ]; then
-echo $"$green I found a missing package, I'm installing it... (python3-pip) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage python3-pip"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage python310 python310-pip"
-fi
-fi
-#
-if ! [ -x "$(command -v git)" ]; then
-echo $"$green I found a missing package, I'm installing it... (git) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage git"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage git"
-fi
-fi
-#
-if ! [ -x "$(command -v wget)" ]; then
-echo $"$green I found a missing package, I'm installing it... (wget) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage wget"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage wget"
-fi
-fi
-#
-if ! [ -x "$(command -v setfattr)" ]; then
-echo $"$green I found a missing package, I'm installing it... (attr) $white"
-if [ -x "$(command -v apt)" ]; then
-DownloadPackage=" $DownloadPackage attr"
-elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage attr"
-fi
-fi
-#
 sleepwait 1
 if [ ! -z "$DownloadPackage" ]; then
 if [ -x "$(command -v apt)" ]; then
-sudo apt update && sudo apt install -y $DownloadPackage
+sudo apt update && sudo apt install -y $DownloadPackage lzip patchelf e2fsprogs python3 python3-pip aria2 p7zip-full attr unzip whiptail qemu-utils
 elif [ -x "$(command -v zypper)" ]; then
-sudo zypper refresh && sudo zypper install -y -l $DownloadPackage
+sudo zypper refresh && sudo zypper install -y -l $DownloadPackage lzip patchelf e2fsprogs python3 python3-pip aria2 p7zip-full attr unzip dialog qemu-tools
 else
 scriptabort
 fi
