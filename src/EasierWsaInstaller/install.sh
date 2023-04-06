@@ -14,11 +14,8 @@ n=$(echo $1 | tr '[:upper:]' '[:lower:]')
 
 ###HELP
 if [[ $n == "--help" ]] || [[ $n == "-h" ]]; then
-echo -e $"
+echo -e "
 "$yellow"those selected by default are marked with [*]
-
-"$green"Language:
-    "$cyan"[*]en-US
 
 "$green"Arch:
     "$yellow"--arch=x86_64
@@ -83,19 +80,6 @@ msarch=x64
 mskernel=x86_64
 #x64 FINISH
 
-################################language SELECT#####################################
-elif [[ $n == "--lang=en" ]] || [[ $n == "--lang=en-us" ]]; then
-Language=en_US
-#GetMessage
-#elif [[ $n == "--lang=tr" ]] || [[ $n == "--lang=tr-tr" ]]; then
-#Language=tr_TR
-#GetMessage
-elif [[ $n == "--lang="* ]]; then
-echo "$red invalid value(language). English selected $white"
-Language=en_US
-#GetMessage
-################################language FINISH#####################################
-
 ################################GAPPS##########################################
 elif [[ $n == "--gapps=opengapps" ]]; then
 gappsSelect="OpenGApps"
@@ -132,7 +116,7 @@ WSARelease=rp
 elif [[ $n == "--wsarelease=retail" ]]; then
 WSARelease=retail
 elif [[ $n == "--wsarelease"* ]]; then
-echo $"$yellow invalid value(wsa release). retail selected $white"
+echo "$yellow invalid value(wsa release). retail selected $white"
 WSARelease=retail
 ################################WSA RELEASE SELECT FINISH#####################################
 
@@ -148,7 +132,7 @@ MagiskVersion=debug
 elif [[ $n == "--magiskversion=release" ]]; then
 MagiskVersion=release
 elif [[ $n == "--magiskversion"* ]]; then
-echo $"$yellow invalid value(magisk version). stable has been selected $white"
+echo "$yellow invalid value(magisk version). stable has been selected $white"
 MagiskVersion=stable
 ################################MAGISK VERSION SELECT FINISH#####################################
 
@@ -158,7 +142,7 @@ WSAAmazonRemove=true
 elif [[ $n == "--amazonstore=no" ]]; then
 WSAAmazonRemove=false
 elif [[ $n == "--amazonstore"* ]]; then
-echo $"$yellow invalid value (amazon store). Not Uninstall selected $white"
+echo "$yellow invalid value (amazon store). Not Uninstall selected $white"
 WSAAmazonRemove=false
 ################################Amazon store SELECT FINISH#####################################+
 
@@ -168,13 +152,13 @@ WSATools=true
 elif [[ $n == "--wsatools=no" ]]; then
 WSATools=false
 elif [[ $n == "--wsatools"* ]]; then
-echo $"$red invalid value(wsatools). Keep Not Installed selected $white"
+echo "$red invalid value(wsatools). Keep Not Installed selected $white"
 WSATools=false
 ################################WSATOOL SELECT FINISH#####################################
 
 ################################PRODUCT NAME SELECT#####################################
 elif [[ $n == "--productname" ]]; then
-echo $"$yellow invalid value(product name). value: redfin $white"
+echo "$yellow invalid value(product name). value: redfin $white"
 WSAProductName=redfin
 elif [[ $n == "--productname="* ]]; then
 WSAProductName1=$(equalcommand $1)
@@ -197,25 +181,25 @@ gappsvariant=nano
 elif [[ $n == "--variant=pico" ]]; then
 gappsvariant=pico
 elif [[ $n == "--variant"* ]]; then
-echo $"$yellow invalid value(variant). Pico selected $white"
+echo "$yellow invalid value(variant). Pico selected $white"
 gappsvariant=pico
 ################################GAPPS SELECT FINISH #####################################
 elif [[ $n == "--pc" ]]; then
 NotWSL=true
 if [ "$(echo $(cat /proc/cpuinfo | grep -m1 microcode | cut -f2 -d:))" != "0xffffffff" ]; then
 
-echo $"You have removed WSL Lock with this command. In this way, the script will run. However, you should know that this script was written according to WSL."
+echo "You have removed WSL Lock with this command. In this way, the script will run. However, you should know that this script was written according to WSL."
 fi
     else
-    echo $"$red Invalid argument-$i: $n $white";
+    echo "$red Invalid argument-$i: $n $white";
     fi
     i=$((i + 1));
     shift 1;
 done
 
 function scriptabort(){
-echo $"$red An error has occurred, the transaction has been cancelled, Please check your last step. Automatically the process will be terminated in 30 seconds $white"
-sleepwait 30
+echo "$red An error has occurred, the transaction has been cancelled, Please check your last step. Automatically the process will be terminated in 60 seconds $white"
+sleepwait 60
 exit 1
 }
 if [ $NotWSL == false ]; then 
@@ -223,81 +207,49 @@ wslcheck
 fi
 
 
-
-echo "$green"HOST_WSL_ARCH: "$red"$HOST_WSL_ARCH
-if [[ $MagiskWSA == true ]]; then
-echo "$green"gappsSelect: "$red""$gappsSelect"
-fi
-if [[ $MagiskWSA == true ]] || [[ $WSAGAScript == true ]]; then
-echo "$green"gappsarch: "$red""$gappsarch"
-echo "$green"gappsvariant: "$red""$gappsvariant"
-fi
-echo "$green"msarch: "$red""$msarch"
-echo "$green"mskernel: "$red""$mskernel"
-echo "$green"OnlyWSA: "$red""$onlywsa"
-echo "$green"WSAGAScript: "$red""$WSAGAScript"
-echo "$green"MagiskWSA: "$red""$MagiskWSA"
-echo "$green"WSATools: "$red""$WSATools"
-if [[ $MagiskWSA == true ]] || [[ $WSAGAScript == true ]]; then
-echo "$green"WSAProductName: "$red""$WSAProductName"
-echo "$green"WSAAmazonRemove: "$red""$WSAAmazonRemove"
-fi
-echo "$green"WSARelease: "$red""$WSARelease"
-if [[ $MagiskWSA == true ]]; then
-echo "$green"MagiskVersion: "$red""$MagiskVersion"
-fi
-echo "$green"Language: "$red""$Language"
-echo "$green"NotWSL: "$cyan""$NotWSL $white"
-
-############
-sleepwait 5
-echo "$red""Version: "$magenta"""$SCRIPTVERSION""$white"
-sleepwait 1
-############
-
 function scriptpip(){
     if [[ -x "$(command -v pip3)" ]]; then
-echo $"$yellow""Downloading necessary pip packages. $white"
+echo "$yellow""Downloading necessary pip packages. $white"
 sleepwait 0.5
 python3 -m pip install requests
 python3 -m pip install BeautifulSoup4
 python3 -m pip install lxml
 python3 -m pip install wget
 else
-echo $"$red pip3 Not Found. The operation is being cancelled. $white"
+echo "$red pip3 Not Found. The operation is being cancelled. $white"
 exit 1
 fi
 }
 function WSLFolder() {
-if [ -d /root/easierwsainstaller-project ]; then
+if [ -d /root/wsainstaller-files ]; then
 
-echo $"$yellow WSLFolder found. $white"
-cd /root && cd easierwsainstaller-project
-echo $"$yellow I am deleting all the files in it. $white"
-sudo rm -rf /root/easierwsainstaller-project/*
+echo "$yellow WSLFolder found. $white"
+cd /root && cd wsainstaller-files
+echo "$yellow I am deleting all the files in it. $white"
+sudo rm -rf /root/wsainstaller-files/*
 else
-echo $"$green The necessary folder for the linux(wsl) part has been created. $white"
-cd /root/ && mkdir easierwsainstaller-project && cd easierwsainstaller-project || scriptabort
+echo "$green The necessary folder for the linux(wsl) part has been created. $white"
+cd /root/ && mkdir wsainstaller-files && cd wsainstaller-files || scriptabort
 fi
 sleepwait 5
 
 }
 
 function WindowsFolder() {
-    if [ -d /mnt/c/easierwsainstaller-project ]; then
-echo $"$yellow WindowsFolder found. $white"
-cd /mnt/c/ && cd easierwsainstaller-project
-echo $"$yellow I am deleting all the files in it. $white"
-sudo rm -rf /mnt/c/easierwsainstaller-project/*
+    if [ -d /mnt/c/wsainstaller-files ]; then
+echo "$yellow WindowsFolder found. $white"
+cd /mnt/c/ && cd wsainstaller-files
+echo "$yellow I am deleting all the files in it. $white"
+sudo rm -rf /mnt/c/wsainstaller-files/*
 else
-echo $"$green The necessary folder for the windows part has been created. $white"
-cd /mnt/c/ && mkdir easierwsainstaller-project && cd easierwsainstaller-project || scriptabort
+echo "$green The necessary folder for the windows part has been created. $white"
+cd /mnt/c/ && mkdir wsainstaller-files && cd wsainstaller-files || scriptabort
 fi
 sleepwait 5
 }
 
 function Get_WSLFolder() {
-cd /root/ && cd easierwsainstaller-project || scriptabort
+cd /root/ && cd wsainstaller-files || scriptabort
 }
 
 function Get_WSLFolderBashScript() {
@@ -314,44 +266,44 @@ cd /root/ && cd easierwsainstaller && cd src || scriptabort
 }
 
 function Get_WindowsFolder() {
-echo $"$yellow I go into the Get_WindowsFolder folder. $white"
-cd /mnt/c/ && cd easierwsainstaller-project || scriptabort
-echo $"$yellow I went into the Get_WindowsFolder folder. $white" 
+echo "$yellow I go into the Get_WindowsFolder folder. $white"
+cd /mnt/c/ && cd wsainstaller-files || scriptabort
+echo "$yellow I went into the Get_WindowsFolder folder. $white" 
 }
 function wsapy() {
         if [[ -x "$(command -v python3)" ]]; then
-        echo $"$magenta""I will install WSA $white"
+        echo "$magenta""I will install WSA $white"
     python3 ./wsa.py -r $wsarelease
-    echo echo $"$green Download completed, moving to required location $white"
-sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/easierwsainstaller-project/
+    echo echo "$green Download completed, moving to required location $white"
+sudo mv Microsoft*WindowsSubsystemForAndroid*.msixbundle /mnt/c/wsainstaller-files/
     else 
-echo $"$red python3 Not Found. The operation is being cancelled. $white"
+echo "$red python3 Not Found. The operation is being cancelled. $white"
 exit 1
 fi
 }
 
 function wsatoolspy() {
     if [[ -x "$(command -v python3)" ]]; then
-    echo $"$blue""I will install WSATools $white"
+    echo "$blue""I will install WSATools $white"
     python3 ./wsatools.py
- echo echo $"$green Download completed, moving to required location $white"
-sudo rm -rf /mnt/c/easierwsainstaller-project/54406Simizfo.WSATools*.msixbundle
+ echo echo "$green Download completed, moving to required location $white"
+sudo rm -rf /mnt/c/wsainstaller-files/54406Simizfo.WSATools*.msixbundle
 sleepwait 2
-sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/easierwsainstaller-project/WSATools.msixbundle
+sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsainstaller-files/WSATools.msixbundle
 else 
-echo $"$red python3 Not Found. The operation is being cancelled. $white"
+echo "$red python3 Not Found. The operation is being cancelled. $white"
 exit 1
 fi
 }
 
 function opengappspy() {
     if [[ -x "$(command -v python3)" ]]; then
-    echo $"$green""I will install OpenGAPPS $white"
+    echo "$green""I will install OpenGAPPS $white"
 python3 ./opengapps.py -a $gappsarch -va $gappsvariant
- echo echo $"$green Download completed, moving to required location $white"
-sudo mv open_gapps-$gappsarch-*.zip /mnt/c/easierwsainstaller-project/
+ echo echo "$green Download completed, moving to required location $white"
+sudo mv open_gapps-$gappsarch-*.zip /mnt/c/wsainstaller-files/
     else 
-echo $"$red python3 Not Found. The operation is being cancelled. $white"
+echo "$red python3 Not Found. The operation is being cancelled. $white"
 exit 1
     fi
 }

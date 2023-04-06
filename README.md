@@ -67,9 +67,6 @@ ___The ARM version is still beta, please give feedback when you encounter an err
 ```
 those selected by default are marked with [*]
 
-Language:
-    [*]en-US
-
 Arch:
     --arch=x86_64
     [*]x86_64, arm
@@ -126,22 +123,17 @@ Example:
 - `lsb-release`
 - `sudo`
 - `lzip`
-- `unzip`
-- `setools`
-- `whiptail`
-- `wine`
-- `winetricks`
 - `patchelf`
 - `e2fsprogs`
-- `aria2`
-- `p7zip-full`
 - `python3`
 - `python3-pip`
-- `git`
-- `wget`
+- `python3`
+- `aria2`
+- `p7zip-full`
 - `attr`
-- `xz-utils`
 - `unzip`
+- `whiptail`
+- `qemu-utils`
 
 ### onlywsa and WSAGAScript
 
@@ -156,31 +148,20 @@ Example:
 - `python3-pip`
 
 # Example Install
-## Ubuntu & AMD64 & MagiskOnWSALocal
+## AMD64 & MagiskOnWSALocal
 
 ```bash 
 sudo sh -c "cd ~; sudo rm -rf /root/easierwsainstaller; sudo rm -rf /root/easierwsainstaller-project; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget unzip python3 python3-pip; cd /root/; wget https://github.com/herrwinfried/EasierWsaInstaller/archive/refs/heads/main.zip -O easierwsainstaller.zip; unzip easierwsainstaller.zip -d /root/easierwsainstaller; cd /root/easierwsainstaller; mv /root/easierwsainstaller/EasierWsaInstaller*/* /root/easierwsainstaller; cd src; cd EasierWsaInstaller; chmod +x ./*.sh && ./install.sh --arch=amd64 --method=magiskonwsalocal --gapps=mindthegapps --variant=pico --wsatools=no --productname=winfried --amazonstore=no --wsarelease=retail --magiskversion=stable"
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
-## openSUSE Tumbleweed & AMD64 & MagiskOnWSALocal
-```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/easierwsainstaller; sudo rm -rf /root/easierwsainstaller-project; sudo apt update && sudo apt upgrade -y; sudo zypper dup -l -y; sudo zypper install -l -y git curl wget unzip python310 python310-pip; cd /root/; wget https://github.com/herrwinfried/EasierWsaInstaller/archive/refs/heads/main.zip -O easierwsainstaller.zip; unzip easierwsainstaller.zip -d /root/easierwsainstaller; cd /root/easierwsainstaller; mv /root/easierwsainstaller/EasierWsaInstaller*/* /root/easierwsainstaller; cd src; cd EasierWsaInstaller; chmod +x ./*.sh && ./install.sh --arch=amd64 --method=magiskonwsalocal --gapps=mindthegapps --variant=pico --wsatools=no --productname=winfried --amazonstore=no --wsarelease=retail --magiskversion=stable"
-```
 
-[Go To "What to do after installation"](#what-to-do-after-installation)
-## Ubuntu & ARM64 & MagiskOnWSALocal
+## ARM64 & MagiskOnWSALocal
 ```bash 
 sudo sh -c "cd ~; sudo rm -rf /root/easierwsainstaller; sudo rm -rf /root/easierwsainstaller-project; sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget unzip python3 python3-pip; cd /root/; wget https://github.com/herrwinfried/EasierWsaInstaller/archive/refs/heads/main.zip -O easierwsainstaller.zip; unzip easierwsainstaller.zip -d /root/easierwsainstaller; cd /root/easierwsainstaller; mv /root/easierwsainstaller/EasierWsaInstaller*/* /root/easierwsainstaller; cd src; cd EasierWsaInstaller; chmod +x ./*.sh && ./install.sh --arch=arm64 --method=magiskonwsalocal --gapps=mindthegapps --variant=pico --wsatools=no --productname=winfried --amazonstore=no --wsarelease=retail --magiskversion=stable"
 
 ```
 [Go To "What to do after installation"](#what-to-do-after-installation)
 
-## openSUSE Tumbleweed & ARM64 & MagiskOnWSALocal
-```bash 
-sudo sh -c "cd ~; sudo rm -rf /root/easierwsainstaller; sudo rm -rf /root/easierwsainstaller-project; sudo apt update && sudo apt upgrade -y; sudo zypper dup -l -y; sudo zypper install -l -y git curl wget unzip python310 python310-pip; cd /root/; wget https://github.com/herrwinfried/EasierWsaInstaller/archive/refs/heads/main.zip -O easierwsainstaller.zip; unzip easierwsainstaller.zip -d /root/easierwsainstaller; cd /root/easierwsainstaller; mv /root/easierwsainstaller/EasierWsaInstaller*/* /root/easierwsainstaller; cd src; cd EasierWsaInstaller; chmod +x ./*.sh && ./install.sh --arch=arm64 --method=magiskonwsalocal --gapps=mindthegapps --variant=pico --wsatools=no --productname=winfried --amazonstore=no --wsarelease=retail --magiskversion=stable"
-```
-
-[Go To "What to do after installation"](#what-to-do-after-installation)
 
 # What to do after installation
 

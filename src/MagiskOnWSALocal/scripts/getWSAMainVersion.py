@@ -26,14 +26,15 @@ from pathlib import Path
 arch = sys.argv[1]
 
 zip_name = ""
-wsa_zip_path= Path(sys.argv[2]).resolve()
+wsa_zip_path= Path(sys.argv[2])
 
 with zipfile.ZipFile(wsa_zip_path) as zip:
     for f in zip.filelist:
         if arch in f.filename.lower():
             zip_name = f.filename
-            ver_no = zip_name.split("_")
-            long_ver = ver_no[1]
-            ver = long_ver.split(".")
-            main_ver = ver[0]
-            print(main_ver)
+            break
+ver_no = zip_name.split("_")
+long_ver = ver_no[1]
+ver = long_ver.split(".")
+main_ver = ver[0]
+print(main_ver)

@@ -29,8 +29,8 @@ from pathlib import Path
 arch = sys.argv[1]
 brand = sys.argv[2]
 variant = sys.argv[3]
-download_dir = Path.cwd().parent / \
-    "download" if sys.argv[4] == "" else Path(sys.argv[4]).resolve()
+arg4 = sys.argv[4]
+download_dir = Path.cwd().parent / "download" if arg4 == "" else Path(arg4)
 tempScript = sys.argv[5]
 android_api = sys.argv[6]
 file_name = sys.argv[7]
@@ -68,7 +68,7 @@ elif brand == "MindTheGapps":
         if res.status_code == 200:
             assets = json_data["assets"]
             for asset in assets:
-                if re.match(f'.*{release}.*{abi_map[arch]}.*\.zip$', asset["name"]) and asset["content_type"] == "application/x-zip-compressed":
+                if re.match(f'.*{release}.*{abi_map[arch]}.*\.zip$', asset["name"]) and asset["content_type"] == "application/zip":
                     link = asset["browser_download_url"]
                     break
         elif res.status_code == 403 and x_ratelimit_remaining == '0':
