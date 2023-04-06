@@ -147,7 +147,7 @@ echo $"$green I found a missing package, I'm installing it... (whiptail) $white"
 if [ -x "$(command -v apt)" ]; then
 DownloadPackage=" $DownloadPackage whiptail"
 elif [ -x "$(command -v zypper)" ]; then
-DownloadPackage=" $DownloadPackage newt"
+DownloadPackage=" $DownloadPackage newt dialog"
 fi
 fi
 #
@@ -307,6 +307,15 @@ if [ -x "$(command -v apt)" ]; then
 DownloadPackage=" $DownloadPackage python3-pip"
 elif [ -x "$(command -v zypper)" ]; then
 DownloadPackage=" $DownloadPackage python310 python310-pip"
+fi
+fi
+#
+if ! [ -x "$(command -v qemu-img)" ]; then
+echo $"$green I found a missing package, I'm installing it... (qemu-img) $white"
+if [ -x "$(command -v apt)" ]; then
+DownloadPackage=" $DownloadPackage qemu-utils"
+elif [ -x "$(command -v zypper)" ]; then
+DownloadPackage=" $DownloadPackage qemu-tools"
 fi
 fi
 #
