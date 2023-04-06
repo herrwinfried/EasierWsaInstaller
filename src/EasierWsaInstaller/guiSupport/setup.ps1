@@ -237,7 +237,7 @@ $preCommand = "LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 "
 
 $preCommand = "cd ~; sudo rm -rf /root/easierwsainstaller; sudo rm -rf /root/easierwsainstaller-project; " 
 $preCommand = $preCommand + "$([string](prepackage)) cd /root/; "
-$preCommand = $preCommand + "wget https://github.com/herrwinfried/EasierWsaInstaller/archive/refs/heads/main.zip -O easierwsainstaller.zip; " 
+$preCommand = $preCommand + "wget https://github.com/herrwinfried/EasierWsaInstaller/archive/refs/heads/alpha.zip -O easierwsainstaller.zip; " 
 $preCommand = $preCommand + "unzip easierwsainstaller.zip -d /root/easierwsainstaller; "
 $preCommand = $preCommand + "cd /root/easierwsainstaller; mv /root/easierwsainstaller/EasierWsaInstaller*/* /root/easierwsainstaller; "
 $preCommand = $preCommand + "cd src; cd EasierWsaInstaller; chmod +x ./*.sh "
