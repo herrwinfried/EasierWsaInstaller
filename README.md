@@ -1,3 +1,6 @@
+# ⚠️ Hi! ⚠️
+## 🔒 I don't think this project has any value anymore and Bluestacks vs. It makes sense to use software. Archived indefinitely. If you are determined to install, check out the [MagiskOnWsaLocal](https://github.com/LSPosed/MagiskOnWSALocal) project. 🫡
+
 # Warning
 
 1. **Due to the intensity of my real life, the development and updating phase of the project has slowed down.**

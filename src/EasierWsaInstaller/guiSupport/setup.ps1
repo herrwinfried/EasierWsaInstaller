@@ -213,13 +213,13 @@ $bashPrep2 = '"'
 
 function prepackage {
 if ($distro -eq "Ubuntu") {
-return "sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget unzip python3 python3-pip; "
+return "sudo apt update && sudo apt upgrade -y; sudo apt install -y lzip patchelf e2fsprogs python3 python3-pip aria2 p7zip-full attr unzip whiptail qemu-utils sudo git curl wget; lsb-release"
 }
 elseif ( $distro -eq "openSUSE-Tumbleweed") {
-return "sudo zypper dup -l -y; sudo zypper install -l -y git curl wget unzip python310 python310-pip; "
+return "sudo zypper dup -l -y; sudo zypper install -l -y lzip patchelf e2fsprogs python3 python3-pip aria2 p7zip-full attr unzip dialog qemu-tools sudo git curl wget lsb-release; "
 }
 elseif ( $distro -eq "Debian") {
-return "sudo apt update && sudo apt upgrade -y; sudo apt install -y git curl wget unzip python3 python3-pip; "    
+return "sudo apt update && sudo apt upgrade -y; sudo apt install -y lzip patchelf e2fsprogs python3 python3-pip aria2 p7zip-full attr unzip whiptail qemu-utils sudo git curl wget lsb-release; "    
 }
 else {
     return " echo 'I hope you downloaded the packages.'; "
