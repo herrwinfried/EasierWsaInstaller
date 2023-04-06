@@ -2,66 +2,52 @@
 function onlywsa_s {
 
 
-mkdir -p ~/EasierWsaInstallerLog
-File="$(date +%Y_%m_%d-%H_%M_%S)_onlywsa"
-touch ~/EasierWsaInstallerLog/$File
-GetFile=~/EasierWsaInstallerLog/$File
-echo $"FOLDER: $( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+LogFile_Create onlywsa
 
-" >> $GetFile
-timedatectl >> $GetFile
-echo $"" >> $GetFile
-
-echo "$magenta checking the package $white"
-
-echo $"$(date +%H:%M:%S): checking the package." >> $GetFile
-requirePackages || scriptabort
-echo $"$(date +%H:%M:%S): package check finished." >> $GetFile
-
-echo $"$(date +%H:%M:%S): [START] WSLFolder function" >> $GetFile
+LogFile_input_start "WSLFolder function" # LOGGER
 WSLFolder || scriptabort
-echo $"$(date +%H:%M:%S): [FINISH] WSLFolder function" >> $GetFile
+LogFile_input_finish "WSLFolder function" # LOGGER
 
-echo $"$(date +%H:%M:%S): [START] WindowsFolder function" >> $GetFile
+LogFile_input_start "WindowsFolder function" # LOGGER
 WindowsFolder || scriptabort
-echo $"$(date +%H:%M:%S): [FINISH] WindowsFolder function" >> $GetFile
+LogFile_input_finish "WindowsFolder function" # LOGGER
 
-echo $"$(date +%H:%M:%S): [START] scriptpip function" >> $GetFile
+LogFile_input_start "scriptpip function" # LOGGER
 scriptpip || scriptabort
-echo $"$(date +%H:%M:%S): [FINISH] scriptpip function" >> $GetFile
+LogFile_input_finish "scriptpip function" # LOGGER
 
-echo $"$(date +%H:%M:%S): [START] Get_WSLFolderScripts function" >> $GetFile
+LogFile_input_start "Get_WSLFolderScripts function" # LOGGER
 Get_WSLFolderScripts || scriptabort
-echo $"$(date +%H:%M:%S): [FINISH] Get_WSLFolderScripts function" >> $GetFile
+LogFile_input_finish "Get_WSLFolderScripts function" # LOGGER
 
-echo $"$(date +%H:%M:%S): [START] Go to EasierWsaInstaller" >> $GetFile
+LogFile_input_start "Go to EasierWsaInstaller" # LOGGER
 cd EasierWsaInstaller
-echo $"$(date +%H:%M:%S): [FINISH] Go to EasierWsaInstaller" >> $GetFile
+LogFile_input_finish "Go to EasierWsaInstaller" # LOGGER
 
-echo $"$(date +%H:%M:%S): [START] wsapy function" >> $GetFile
+LogFile_input_start "wsapy function" # LOGGER
 wsapy || scriptabort
-echo $"$(date +%H:%M:%S): [FINISH] wsapy function" >> $GetFile
+LogFile_input_finish "wsapy function" # LOGGER
 
-echo $"$(date +%H:%M:%S): [IF] WSATools" >> $GetFile
+LogFile_input_if_start "WSATools" # LOGGER
 if [[ $WSATools == true ]]; then
-echo $"$(date +%H:%M:%S): [START] wsatoolspy function" >> $GetFile
+LogFile_input_start "wsatoolspy function" # LOGGER
 wsatoolspy || scriptabort
-echo $"$(date +%H:%M:%S): [FINISH] wsatoolspy function" >> $GetFile
+LogFile_input_finish "wsatoolspy function" # LOGGER
 fi
 
-echo $"$(date +%H:%M:%S): [IF] WSATools FINISH" >> $GetFile
+LogFile_input_if_finish "WSATools" # LOGGER
 
-echo $"$(date +%H:%M:%S): Quit Message" >> $GetFile
-echo $"$yellow All transactions are finished. Please check the files in C: > wsaproject(/mnt/c/wsaproject) before deleting. $white" >> $GetFile
-echo $"$(date +%H:%M:%S): Wait... 90" >> $GetFile
-sleepwait 90
-echo $"$(date +%H:%M:%S): Wait... 1" >> $GetFile
-sleepwait 1
-echo $"$(date +%H:%M:%S): [FORCE DELETE] /root/easierwsainstaller-project [?]" >> $GetFile
-sudo rm -rf /root/easierwsainstaller-project
-echo $"$(date +%H:%M:%S): Wait... 10" >> $GetFile
-sleepwait 10
-echo $"$(date +%H:%M:%S): [CLEAR & CLEAR]" >> $GetFile
+LogFile_input "Quit Message" # LOGGER
+echo "$yellow""All transactions are finished. Please check the files in C: > wsaproject(/mnt/c/wsaproject) before deleting.""$yellow"
+LogFile_input "Wait... 90" # LOGGER
+sleep 90
+LogFile_input "Wait... 1" # LOGGER
+sleep 1
+LogFile_input "[FORCE DELETE] /root/wsainstaller-files [?]" # LOGGER
+sudo rm -rf /root/wsainstaller-files
+LogFile_input "Wait... 10" # LOGGER
+sleep 10
+LogFile_input "[CLEAR & CLEAR]" # LOGGER
 clear & clear
 }
 
