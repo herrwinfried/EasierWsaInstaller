@@ -206,6 +206,7 @@ if [ $NotWSL == false ]; then
 wslcheck
 fi
 
+Information_script
 
 function scriptpip(){
     if [[ -x "$(command -v pip3)" ]]; then
