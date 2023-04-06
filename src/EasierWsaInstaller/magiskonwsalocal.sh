@@ -3,14 +3,6 @@ function magiskonwsalocal_s {
 
 LogFile_Create "magiskonwsalocal"
 
-
-
-echo "$magenta checking the package $white"
-
-LogFile_input_start "checking the package." # LOGGER
-requirePackages
-LogFile_input_finish "package check finished." # LOGGER
-
 LogFile_input "[PIP] checking the package." # LOGGER
 pip list --disable-pip-version-check | grep -E "^requests " >/dev/null 2>&1 || python3 -m pip install requests
 LogFile_input "[PIP] package check finished." # LOGGER

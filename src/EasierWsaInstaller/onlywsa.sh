@@ -4,14 +4,6 @@ function onlywsa_s {
 
 LogFile_Create onlywsa
 
-echo "$magenta checking the package $white"
-
-LogFile_input_start "checking the package."
-
-requirePackages || scriptabort
-
-LogFile_input_finish "package check finished."
-
 LogFile_input_start "WSLFolder function" # LOGGER
 WSLFolder || scriptabort
 LogFile_input_finish "WSLFolder function" # LOGGER

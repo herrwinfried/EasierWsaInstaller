@@ -3,11 +3,6 @@ function wsagascript_s {
 
 LogFile_Create "wsagascript"
 
-echo "$magenta checking the package $white"
-LogFile_input_start "checking the package." # LOGGER
-requirePackages
-LogFile_input_finish "package check finished." # LOGGER
-
 LogFile_input_start "WSLFolder function" # LOGGER
 WSLFolder
 LogFile_input_finish "WSLFolder function" # LOGGER
