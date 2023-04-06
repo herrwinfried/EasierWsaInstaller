@@ -40,13 +40,13 @@ LogFile_input_if_finish "WSATools" # LOGGER
 LogFile_input "Quit Message" # LOGGER
 echo "$yellow""All transactions are finished. Please check the files in C: > wsaproject(/mnt/c/wsaproject) before deleting.""$yellow"
 LogFile_input "Wait... 90" # LOGGER
-sleepwait 90
+sleep 90
 LogFile_input "Wait... 1" # LOGGER
-sleepwait 1
+sleep 1
 LogFile_input "[FORCE DELETE] /root/wsainstaller-files [?]" # LOGGER
 sudo rm -rf /root/wsainstaller-files
 LogFile_input "Wait... 10" # LOGGER
-sleepwait 10
+sleep 10
 LogFile_input "[CLEAR & CLEAR]" # LOGGER
 clear & clear
 }

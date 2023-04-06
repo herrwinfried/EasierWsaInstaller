@@ -199,7 +199,7 @@ done
 
 function scriptabort(){
 echo "$red An error has occurred, the transaction has been cancelled, Please check your last step. Automatically the process will be terminated in 60 seconds $white"
-sleepwait 60
+sleep 60
 exit 1
 }
 if [ $NotWSL == false ]; then 
@@ -210,7 +210,7 @@ fi
 function scriptpip(){
     if [[ -x "$(command -v pip3)" ]]; then
 echo "$yellow""Downloading necessary pip packages. $white"
-sleepwait 0.5
+sleep 0.5
 python3 -m pip install requests
 python3 -m pip install BeautifulSoup4
 python3 -m pip install lxml
@@ -229,9 +229,9 @@ echo "$yellow I am deleting all the files in it. $white"
 sudo rm -rf /root/wsainstaller-files/*
 else
 echo "$green The necessary folder for the linux(wsl) part has been created. $white"
-cd /root/ && mkdir wsainstaller-files && cd wsainstaller-files || scriptabort
+cd /root/ && mkdir wsainstaller-files && cd wsainstaller-files
 fi
-sleepwait 5
+sleep 5
 
 }
 
@@ -245,7 +245,7 @@ else
 echo "$green The necessary folder for the windows part has been created. $white"
 cd /mnt/c/ && mkdir wsainstaller-files && cd wsainstaller-files || scriptabort
 fi
-sleepwait 5
+sleep 5
 }
 
 function Get_WSLFolder() {
@@ -288,7 +288,7 @@ function wsatoolspy() {
     python3 ./wsatools.py
  echo echo "$green Download completed, moving to required location $white"
 sudo rm -rf /mnt/c/wsainstaller-files/54406Simizfo.WSATools*.msixbundle
-sleepwait 2
+sleep 2
 sudo mv 54406Simizfo.WSATools*.msixbundle /mnt/c/wsainstaller-files/WSATools.msixbundle
 else 
 echo "$red python3 Not Found. The operation is being cancelled. $white"

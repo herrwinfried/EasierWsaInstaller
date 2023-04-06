@@ -130,10 +130,10 @@ LogFile_input_finish "CUSTOMERS CHANGE SCRIPT" # LOGGER
 
 echo "$yellow Everything seems ready. After this stage, the control will now be in the magiskonwsalocal project. When the process is finished, I will perform the migration. $white"
 LogFile_input "Wait... 3" # LOGGER
-sleepwait 3
+sleep 3
 echo "COMMAND_LINE=${COMMAND_LINE[*]}"
 LogFile_input "Wait... 2" # LOGGER
-sleepwait 2
+sleep 2
 LogFile_input_start "./build.sh ${COMMAND_LINE[@]}" # LOGGER
 ./build.sh "${COMMAND_LINE[@]}" || scriptabort
 LogFile_input_finish "./build.sh ${COMMAND_LINE[@]}" # LOGGER
@@ -175,17 +175,17 @@ LogFile_input_start "[FIN] Script Copy [PS1]" # LOGGER
 sudo cp guiSupport.ps1 /mnt/c/wsa/wsamagisk/ || scriptabort
 LogFile_input_finish "[FIN] Script Copy [PS1]" # LOGGER
 
-echo "$(date +%H:%M:%S): Quit Message" # LOGGER
+LogFile_input "Quit Message" # LOGGER
 
 echo "$yellow" "All transactions are finished. Please check the files in C: > wsa(/mnt/c/wsa) before deleting." "$white"
 echo "$yellow" "Please check the folder mentioned above. If you have magisk installed, the name of the folder will be different. You can start it by entering the folder and double-clicking on the file named install." "$white"
 
 LogFile_input "Wait... 1" # LOGGER
-sleepwait 1
+sleep 1
 LogFile_input "[FORCE DELETE] /root/wsainstaller-files [?]" # LOGGER
 sudo rm -rf /root/wsainstaller-files
 LogFile_input "Wait... 10" # LOGGER
-sleepwait 10
+sleep 10
 LogFile_input "[CLEAR & CLEAR]" # LOGGER
 clear & clear 
 }

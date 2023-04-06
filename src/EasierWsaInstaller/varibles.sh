@@ -91,9 +91,9 @@ echo "$green"MagiskVersion: "$red""$MagiskVersion"
 fi
 echo "$green"NotWSL: "$cyan""$NotWSL $white"
 ############
-sleepwait 5
+sleep 5
 echo "$red""Version: "$magenta"""$SCRIPTVERSION""$white"
-sleepwait 1
+sleep 1
 ############
 }
 

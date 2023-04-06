@@ -52,7 +52,7 @@ unzip -o "WsaPackage_*_$msarch_*.msix" -d wsa || scriptabort
 LogFile_input_finish " [WSA.ARCH] UNZIP & cd wsa" # LOGGER
 
 LogFile_input "Wait... 0.5" # LOGGER
-sleepwait 0.5
+sleep 0.5
 
 LogFile_input_start "I'm clearing out unnecessary files" # LOGGER
 find . -maxdepth 1 ! -name WsaPackage_*_\$msarch_*.msix ! -name "wsa" ! -name . -exec rm -r {} \;
@@ -171,11 +171,11 @@ echo "$yellow" "Please check the folder mentioned above. If you have magisk inst
 
 
 LogFile_input "Wait... 1" # LOGGER
-sleepwait 1
+sleep 1
 LogFile_input "[FORCE DELETE] /root/wsainstaller-files [?]" # LOGGER
 sudo rm -rf /root/wsainstaller-files
 LogFile_input "Wait... 10" # LOGGER
-sleepwait 10
+sleep 10
 LogFile_input "[CLEAR & CLEAR]" # LOGGER
 clear & clear
 }
